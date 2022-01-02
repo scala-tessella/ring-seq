@@ -13,5 +13,5 @@ jobs:
       with:
         distribution: temurin
         java-version: 8
-    - name: Compile
-      run: sbt -v +compile
+    - name: Build and Test
+      run: sbt -v +test
