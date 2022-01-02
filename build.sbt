@@ -1,4 +1,6 @@
-val scalatest = "org.scalatest" % "scalatest" %​ ​"​3.2.9​"​ ​%​ ​"​test​"
+
+val scalatest =
+ "org.scalatest" % "scalatest" %​ ​"​3.2.9​"​ ​%​ ​"​test​"
 
 ThisBuild / organization := "com.edugenia"
 ThisBuild / version := "0.1"
