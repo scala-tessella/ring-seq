@@ -62,11 +62,6 @@ trait RingVector:
       val exactFoldsDesc = size +: (size / 2 to 2 by -1).filter(size % _ == 0)
       exactFoldsDesc.find(areFoldsSymmetrical).getOrElse(1)
 
-    def rotationalSymmetryTiling: Int =
-      val size = ring.size
-      val tilingFoldsDesc = size :: List(12, 6, 4, 3, 2).filter(fold => fold < size && size % fold == 0)
-      tilingFoldsDesc.find(areFoldsSymmetrical).getOrElse(1)
-
     private def greaterHalfSize: Int =
       Math.ceil(ring.size / 2.0).toInt
 
