@@ -1,3 +1,6 @@
+import org.scalacheck.Gen
+import org.scalacheck.Prop.forAll
+import org.scalacheck.Test.check
 import org.scalatest.*
 import org.scalatest.flatspec.*
 import org.scalatest.matchers.*
@@ -12,6 +15,12 @@ class RingVectorSpec extends AnyFlatSpec with RingVector with should.Matchers {
 
   it must "always have an element after another one" in {
     v.applyO(5) shouldBe 1
+  }
+
+  it must "return an element for any index" in {
+    check(forAll(Gen.choose(-1000, 1000))(
+      i => v.contains(v.applyO(i))
+    ))
   }
 
   "A RingVector" can "be rotated one step to the right" in {
