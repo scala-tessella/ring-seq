@@ -18,4 +18,21 @@ class RingVectorSpec extends AnyFlatSpec with RingVector with should.Matchers {
     v.reflectAt() shouldBe Vector(1, 5, 4, 3, 2)
   }
 
+  it can "be slided with circular windows" in {
+    v.slidingO(2).toList shouldBe List(
+      Vector(1, 2),
+      Vector(2, 3),
+      Vector(3, 4),
+      Vector(4, 5),
+      Vector(5, 1)
+    )
+    v.slidingO(2, 2).toList shouldBe List(
+      Vector(1, 2),
+      Vector(3, 4),
+      Vector(5, 1),
+      Vector(2, 3),
+      Vector(4, 5)
+    )
+  }
+
 }
