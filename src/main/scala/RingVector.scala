@@ -25,6 +25,9 @@ trait RingVector:
     def reflectAt(i: IndexO = 0): Vector[A] =
       startAt(i + 1).reverse
 
+    def segmentLengthO(p: A => Boolean, from: IndexO = 0): Int =
+      startAt(from).segmentLength(p)
+
     def multiply(times: Int): Vector[A] =
       List.fill(times)(ring).toVector.flatten
 
