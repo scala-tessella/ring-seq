@@ -38,6 +38,12 @@ trait RingVector:
     def slidingO(size: Int): Iterator[Vector[A]] =
       sliceO(0, ring.size + size - 1).sliding(size)
 
+    def slidingO(size: Int, step: Int): Iterator[Vector[A]] =
+      ring.indices.iterator.map(j =>
+        val i: IndexO = j * step
+        sliceO(i, i + size)
+      )
+
     def allRotations: Iterator[Vector[A]] =
       slidingO(ring.size)
 
