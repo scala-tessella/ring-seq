@@ -53,14 +53,15 @@ trait RingVector:
     def lastIndexOfSliceO(slice: Vector[A], end: Index): Index =
       enlarge(slice.size - 1).lastIndexOfSlice(slice, end)
 
-    def slidingO(size: Int): Iterator[Vector[A]] =
-      enlarge(size - 1).sliding(size)
+ //   def slidingO(size: Int): Iterator[Vector[A]] =
+ //     enlarge(size - 1).sliding(size)
 
-    def slidingO(size: Int, step: Int): Iterator[Vector[A]] =
-      ring.indices.iterator.map(j =>
-        val i: IndexO = j * step
-        sliceO(i, i + size)
-      )
+    def slidingO(size: Int, step: Int = 1): Iterator[Vector[A]] =
+      sliceO(0, step * (ring.size - 1) + size).sliding(size, step)
+ //     ring.indices.iterator.map(j =>
+ //       val i: IndexO = j * step
+ //       sliceO(i, i + size)
+ //     )
 
     def allRotations: Iterator[Vector[A]] =
       slidingO(ring.size)
