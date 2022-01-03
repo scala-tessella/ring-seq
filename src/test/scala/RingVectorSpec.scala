@@ -6,6 +6,14 @@ class RingVectorSpec extends AnyFlatSpec with RingVector with should.Matchers {
 
   val v = Vector(1, 2, 3, 4, 5)
 
+  "A Vector considered as a ring" must "always have an element before another one" in {
+    v.applyO(-1) shouldBe 5
+  }
+
+  it must "always have an element after another one" in {
+    v.applyO(5) shouldBe 1
+  }
+
   "A RingVector" can "be rotated one step to the right" in {
     v.rotateRight(1) shouldBe Vector(5, 1, 2, 3, 4)
   }
