@@ -22,7 +22,15 @@ class RingVectorSpec extends AnyFlatSpec with RingVector with should.Matchers {
     v.sliceO(-1, 6) shouldBe Vector(5, 1, 2, 3, 4, 5, 1)
   }
 
-  it can "be slided with circular windows" in {
+  it can "contain a circular slice" in {
+    v.containsSlice(Vector(5, 1)) shouldBe true
+  }
+
+  it can "return the index of a contained circular slice" in {
+    v.indexOfSlice(Vector(4, 5, 1)) shouldBe 3
+  }
+  
+  it can "be slided to circular windows" in {
     v.slidingO(2).toList shouldBe List(
       Vector(1, 2),
       Vector(2, 3),
