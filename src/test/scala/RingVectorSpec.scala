@@ -56,7 +56,8 @@ class RingVectorSpec extends AnyFlatSpec with RingVector with should.Matchers {
     )
     v.sliding(2, 2).toList shouldBe List(
       Vector(1, 2),
-      Vector(3, 4)
+      Vector(3, 4),
+      Vector(5)
     )
   }
 
