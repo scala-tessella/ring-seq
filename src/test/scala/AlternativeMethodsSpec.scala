@@ -75,7 +75,7 @@ class AlternativeMethodsSpec extends AnyFlatSpec with RingVector with should.Mat
     w.lastIndexOfSliceO(circularSlice) shouldBe 6
   }
   
-  it can "return the last index of a contained circular slice" in {
+  it can "return the last index of a contained circular slice before end" in {
     w.lastIndexOfSlice(circularSlice, 7) shouldBe 3
     w.lastIndexOfSliceO(circularSlice, 7) shouldBe 3
   }
