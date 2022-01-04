@@ -30,11 +30,11 @@ They are (see [test cases](/src/test/scala/AlternativeMethodsSpec.scala)):
 * `slidingO`
 
 ### Rotation and reflection
-Rotate and reflect circular `Vector`
+Rotate and reflect a circular `Vector`
 (see [test cases](/src/test/scala/RotationsReflectionsSpec.scala))
 
 ### Symmetry
-Dealing with rotational and reflectional symmetries 
+Calculate rotational and reflectional symmetries of a circular `Vector`
 (see [test cases](/src/test/scala/SymmetriesSpec.scala))
 
 
