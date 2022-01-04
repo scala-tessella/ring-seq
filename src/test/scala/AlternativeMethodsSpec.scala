@@ -24,7 +24,7 @@ class AlternativeMethodsSpec extends AnyFlatSpec with RingVector with should.Mat
   }
 
   "An empty Vector" must "have no indexed elements" in {
-    assertThrows[ArithmeticException] {
+    assertThrows[IndexOutOfBoundsException] {
       Vector.empty.apply(0)
     }
     assertThrows[ArithmeticException] {
