@@ -20,7 +20,7 @@ so a [Scala3 `extension`](https://docs.scala-lang.org/scala3/reference/contextua
 Named as their plain non-circular `Vector` versions,
 but with an `O` suffix (meaning _ring_).
 
-They are:
+They are (see [test cases](blob/main/src/test/scala/AlternativeMethodsSpec.scala):
 * `applyO`
 * `segmentLengthO`
 * `sliceO`
