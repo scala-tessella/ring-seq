@@ -38,20 +38,20 @@ trait RingVector:
         val times = Math.ceil(length / ring.size).toInt + 1
         startAt(from).multiply(times).take(length)
  
-    private def enlarge(growth: Int): Vector[A] =
+    private def growBy(growth: Int): Vector[A] =
       sliceO(0, ring.size + growth)
 
     def containsSliceO(slice: Vector[A]): Boolean =
-      enlarge(slice.size - 1).containsSlice(slice)
+      growBy(slice.size - 1).containsSlice(slice)
 
     def indexOfSliceO(slice: Vector[A]): Index =
-      enlarge(slice.size - 1).indexOfSlice(slice)
+      growBy(slice.size - 1).indexOfSlice(slice)
 
     def lastIndexOfSliceO(slice: Vector[A]): Index =
-      enlarge(slice.size - 1).lastIndexOfSlice(slice)
+      growBy(slice.size - 1).lastIndexOfSlice(slice)
 
     def lastIndexOfSliceO(slice: Vector[A], end: Index): Index =
-      enlarge(slice.size - 1).lastIndexOfSlice(slice, end)
+      growBy(slice.size - 1).lastIndexOfSlice(slice, end)
 
     def slidingO(size: Int, step: Int = 1): Iterator[Vector[A]] =
       sliceO(0, step * (ring.size - 1) + size).sliding(size, step)
