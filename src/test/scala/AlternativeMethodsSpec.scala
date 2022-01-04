@@ -44,7 +44,13 @@ class AlternativeMethodsSpec extends AnyFlatSpec with RingVector with should.Mat
     )
   }
 
-  "A Vector considered as a ring" can "be sliced to a circular slice" in {
+  "A Vector considered as a ring" can "contain a circular segment" in {
+    def isOdd: Int => Boolean = _ % 2 == 1
+    v.segmentLength(isOdd, 4) shouldEqual 1
+    v.segmentLengthO(isOdd, 4) shouldEqual 2
+  }
+
+  it can "be sliced to a circular slice" in {
     val (from, to) = (-1, 6)
     v.slice(from, to) shouldBe Vector(1, 2, 3, 4, 5)
     v.sliceO(from, to) shouldBe Vector(5, 1, 2, 3, 4, 5, 1)
