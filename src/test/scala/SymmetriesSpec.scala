@@ -35,7 +35,10 @@ class SymmetriesSpec extends AnyFlatSpec with RingVector with should.Matchers {
   it can "return the indices closer to the axes of reflectional symmetry" in {
     spin3.symmetryIndices shouldBe Nil
     eptagon.symmetryIndices shouldBe List(0, 1, 2, 3, 4, 5, 6) 
-    squaroid.symmetryIndices shouldBe List(1, 4, 7, 10) 
+    squaroid.symmetryIndices shouldBe List(1, 4, 7, 10)
+    axisOnElement.symmetryIndices shouldBe List(0)
+    axisOffElement.symmetryIndices shouldBe List(0)
+    axisOnOffElement.symmetryIndices shouldBe List(0)
   }
 
 }
