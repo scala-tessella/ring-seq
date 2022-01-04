@@ -45,10 +45,9 @@ class AlternativeMethodsSpec extends AnyFlatSpec with RingVector with should.Mat
   }
 
   "A Vector considered as a ring" can "be sliced to a circular slice" in {
-    assertThrows[IndexOutOfBoundsException] {
-      v.slice(-1, 6)
-    }
-    v.sliceO(-1, 6) shouldBe Vector(5, 1, 2, 3, 4, 5, 1)
+    val (from, to) = (-1, 6)
+    v.slice(from, to) shouldBe Vector(1, 2, 3, 4, 5)
+    v.sliceO(from, to) shouldBe Vector(5, 1, 2, 3, 4, 5, 1)
   }
 
   val circularSlice = Vector(5, 1)
