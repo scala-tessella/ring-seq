@@ -37,47 +37,53 @@ class AlternativeMethodsSpec extends AnyFlatSpec with RingVector with should.Mat
     val gen: Gen[(Vector[Int], IndexO)] =
       for
         list <- Gen.nonEmptyContainerOf[List, Int](Gen.oneOf(1, 3, 5))
-        i <- arbitrary[Int]
+        i <- arbitrary[IndexO]
       yield (list.toVector, i)
-
     check(
       forAll(gen)((vector, i) => List(1, 3, 5).contains(vector.applyO(i)))
     )
   }
 
-  it can "be sliced to a circular slice" in {
+  "A Vector considered as a ring" can "be sliced to a circular slice" in {
+    assertThrows[IndexOutOfBoundsException] {
+      v.slice(-1, 6)
+    }
     v.sliceO(-1, 6) shouldBe Vector(5, 1, 2, 3, 4, 5, 1)
   }
 
+  val circularSlice = Vector(5, 1)
+
   it can "contain a circular slice" in {
-    v.containsSliceO(Vector(5, 1)) shouldBe true
+    v.containsSlice(circularSlice) shouldBe false
+    v.containsSliceO(circularSlice) shouldBe true
   }
 
   it can "return the index of a contained circular slice" in {
-    v.indexOfSliceO(Vector(4, 5, 1)) shouldBe 3
+    v.indexOfSlice(circularSlice) shouldBe -1
+    v.indexOfSliceO(circularSlice) shouldBe 4
   }
   
-  it can "be ordinarily slided" in {
+  it can "be slided circularly by one step" in {
     v.sliding(2).toList shouldBe List(
       Vector(1, 2),
       Vector(2, 3),
       Vector(3, 4),
       Vector(4, 5)
     )
-    v.sliding(2, 2).toList shouldBe List(
-      Vector(1, 2),
-      Vector(3, 4),
-      Vector(5)
-    )
-  }
-
-  it can "be slided to circular windows" in {
     v.slidingO(2).toList shouldBe List(
       Vector(1, 2),
       Vector(2, 3),
       Vector(3, 4),
       Vector(4, 5),
       Vector(5, 1)
+    )
+  }
+
+  it can "be slided circularly by two steps" in {
+    v.sliding(2, 2).toList shouldBe List(
+      Vector(1, 2),
+      Vector(3, 4),
+      Vector(5)
     )
     v.slidingO(2, 2).toList shouldBe List(
       Vector(1, 2),
