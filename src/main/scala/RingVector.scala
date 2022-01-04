@@ -28,7 +28,7 @@ trait RingVector:
     def segmentLengthO(p: A => Boolean, from: IndexO = 0): Int =
       startAt(from).segmentLength(p)
 
-    def multiply(times: Int): Vector[A] =
+    private def multiply(times: Int): Vector[A] =
       List.fill(times)(ring).toVector.flatten
 
     def sliceO(from: IndexO, to: IndexO): Vector[A] =
@@ -38,7 +38,7 @@ trait RingVector:
         val times = Math.ceil(length / ring.size).toInt + 1
         startAt(from).multiply(times).take(length)
  
-    def enlarge(growth: Int): Vector[A] =
+    private def enlarge(growth: Int): Vector[A] =
       sliceO(0, ring.size + growth)
 
     def containsSliceO(slice: Vector[A]): Boolean =
