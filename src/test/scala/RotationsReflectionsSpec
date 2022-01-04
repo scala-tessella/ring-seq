@@ -25,4 +25,19 @@ class SymmetriesSpec extends AnyFlatSpec with RingVector with should.Matchers {
     v.reflectAt(2) shouldBe Vector(3, 2, 1, 5, 4)
   }
 
+  it can "iterate on all rotations" in {
+    v.allRotations.toList shouldBe List(
+      v,
+      Vector(2, 3, 4, 5, 1),
+      Vector(3, 4, 5, 1, 2),
+      Vector(4, 5, 1, 2, 3),
+      Vector(5, 1, 2, 3, 4)
+    )
+  }
+
+  it can "return the sorted minimum rotation" in {
+    val w = Vector(1, 2, 3, 4, 1)
+    w.minRotation shouldBe Vector(1, 1, 2, 3, 4)
+  }
+
 }
