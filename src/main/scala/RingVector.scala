@@ -92,7 +92,7 @@ trait RingVector:
     private def hasAxisBetweenHeadAndNext: Boolean =
       checkReflectionAxis(0)
 
-    def findReflectionSymmetry: Option[Index] =
+    private def findReflectionSymmetry: Option[Index] =
       (0 until greaterHalfSize).find(j =>
         val rotation = startAt(j)
         rotation.hasHeadOnAxis || rotation.hasAxisBetweenHeadAndNext
