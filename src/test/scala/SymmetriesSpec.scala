@@ -10,17 +10,26 @@ class SymmetriesSpec extends AnyFlatSpec with RingVector with should.Matchers {
   val spin3 = Vector(1, 2, 3, 1, 2, 3, 1, 2, 3)
   val eptagon = Vector(6, 6, 6, 6, 6, 6, 6)
   val squaroid = Vector(2, 1, 2, 2, 1, 2, 2, 1, 2, 2, 1, 2)
+  val axisOnElement = Vector(1, 2, 3, 4, 3, 2)
+  val axisOffElement = Vector(1, 2, 3, 4, 4, 3, 2, 1)
+  val axisOnOffElement = Vector(1, 2, 3, 4, 4, 3, 2)
 
   "A Vector considered as a ring" can "have n-fold rotational symmetry" in {
     spin3.rotationalSymmetry shouldBe 3
     eptagon.rotationalSymmetry shouldBe 7
     squaroid.rotationalSymmetry shouldBe 4
+    axisOnElement.rotationalSymmetry shouldBe 1
+    axisOffElement.rotationalSymmetry shouldBe 1
+    axisOnOffElement.rotationalSymmetry shouldBe 1
   }
 
   it can "have axes of reflectional symmetry" in {
     spin3.symmetry shouldBe 0
     eptagon.symmetry shouldBe 7
     squaroid.symmetry shouldBe 4
+    axisOnElement.symmetry shouldBe 1
+    axisOffElement.symmetry shouldBe 1
+    axisOnOffElement.symmetry shouldBe 1
   }
 
   it can "return the indices closer to the axes of reflectional symmetry" in {
