@@ -1,6 +1,7 @@
 import org.scalacheck.Gen
 import org.scalacheck.Prop.forAll
 import org.scalacheck.Test.check
+import org.scalacheck.Arbitrary.arbitrary
 import org.scalatest.*
 import org.scalatest.flatspec.*
 import org.scalatest.matchers.*
@@ -36,7 +37,7 @@ class AlternativeMethodsSpec extends AnyFlatSpec with RingVector with should.Mat
     val gen: Gen[(Vector[Int], IndexO)] =
       for
         list <- Gen.nonEmptyContainerOf[List, Int](Gen.oneOf(1, 3, 5))
-        i <- Gen.choose(-1000, 1000)
+        i <- arbitrary[Int]
       yield (list.toVector, i)
 
     check(
