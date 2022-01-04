@@ -5,6 +5,9 @@ Extends Scala3 [`immutable.Vector`](https://dotty.epfl.ch/api/scala/collection/i
 "RING".toVector.rotateRight(1) // Vector(G,R,I,N))
 ```
 
+## How to use
+Use the `RingVector` trait to extend the classes or objects containing circular `Vector`s.
+
 ## Need
 Whenever data are structured in a circular sequence,
 chances are you don't want to locally reinvent the wheel 😉.
