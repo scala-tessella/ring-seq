@@ -39,6 +39,10 @@ class AlternativeMethodsSpec extends AnyFlatSpec with RingVector with should.Mat
         i <- Gen.choose(-1000, 1000)
       yield (list.toVector, i)
 
+    check(
+      forAll(gen)((ve, i) => List(1, 3, 5).contains(ve.applyO(i)))
+    )
+
     check(forAll { (i: Int) => v.contains(v.applyO(i)) })
   }
 
