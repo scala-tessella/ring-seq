@@ -18,9 +18,7 @@ class AlternativeMethodsSpec extends AnyFlatSpec with RingVector with should.Mat
   }
 
   it must "return an element for any index" in {
-    check(forAll(Gen.choose(-1000, 1000))(
-      i => v.contains(v.applyO(i))
-    ))
+    check(forAll { i: Int => v.contains(v.applyO(i)) })
   }
 
   it can "be sliced to a circular slice" in {
