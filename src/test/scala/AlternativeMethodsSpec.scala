@@ -10,6 +10,9 @@ class AlternativeMethodsSpec extends AnyFlatSpec with RingVector with should.Mat
   val v = Vector(1, 2, 3, 4, 5)
 
   "A Vector considered as a ring" must "always have an element before another one" in {
+    assertThrows[IndexOutOfBoundsException] { // Result type: Assertion
+      v.apply(-1)
+    }
     v.applyO(-1) shouldBe 5
   }
 
