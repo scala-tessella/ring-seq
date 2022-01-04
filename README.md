@@ -1,5 +1,5 @@
 # **RingVector**
-Extends [`immutable.Vector`](https://dotty.epfl.ch/api/scala/collection/immutable/Vector.html) with ring (circular) methods.
+Extends Scala3 [`immutable.Vector`](https://dotty.epfl.ch/api/scala/collection/immutable/Vector.html) with ring (circular) methods.
 
 ```
 "RING".toVector.rotateRight(1) // Vector(G,R,I,N))
