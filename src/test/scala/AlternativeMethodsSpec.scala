@@ -32,18 +32,16 @@ class AlternativeMethodsSpec extends AnyFlatSpec with RingVector with should.Mat
     }
   }
 
-  "Any non empty Vector" must "return an element for any index " in {
-    val gen: Gen[(Vector[Int], Int)] =
+  "Any non empty Vector" must "return an element for any index" in {
+    val gen: Gen[(Vector[Int], IndexO)] =
       for
-        list <- Gen.nonEmptyContainerOf[List,Int](Gen.oneOf(1, 3, 5))
+        list <- Gen.nonEmptyContainerOf[List, Int](Gen.oneOf(1, 3, 5))
         i <- Gen.choose(-1000, 1000)
       yield (list.toVector, i)
 
     check(
-      forAll(gen)((ve, i) => List(1, 3, 5).contains(ve.applyO(i)))
+      forAll(gen)((vector, i) => List(1, 3, 5).contains(vector.applyO(i)))
     )
-
-    check(forAll { (i: Int) => v.contains(v.applyO(i)) })
   }
 
   it can "be sliced to a circular slice" in {
