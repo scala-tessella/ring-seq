@@ -7,22 +7,10 @@ import org.scalatest.matchers.*
 
 class SymmetriesSpec extends AnyFlatSpec with RingVector with should.Matchers {
 
-  val v = Vector(1, 2, 3, 4, 5)
+  val v = Vector(1, 2, 3, 1, 2, 3, 1, 2, 3)
 
-  "A Vector considered as a ring" can "be rotated one step to the right" in {
-    v.rotateRight(1) shouldBe Vector(5, 1, 2, 3, 4)
-  }
-
-  it can "be rotated one step to the left, to start where index 1 was" in {
-    v.startAt(1) shouldBe Vector(2, 3, 4, 5, 1)
-  }
-
-  it can "be reflected" in {
-    v.reflectAt() shouldBe Vector(1, 5, 4, 3, 2)
-  }
-
-  it can "be reflected at a given index" in {
-    v.reflectAt(2) shouldBe Vector(3, 2, 1, 5, 4)
+  "A Vector considered as a ring" can "have n-fold rotational symmetry" in {
+    v.rotationalSymmetry shouldBe 3
   }
 
 }
