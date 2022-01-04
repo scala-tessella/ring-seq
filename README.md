@@ -1,5 +1,5 @@
 # `ring-vector`
-Extends immutable `Vector` with ring (circular) methods.
+Extends [`immutable.Vector`](https://dotty.epfl.ch/api/scala/collection/immutable/Vector.html) with ring (circular) methods.
 
 ## Need
 Whenever data are better described by a circular collection,
