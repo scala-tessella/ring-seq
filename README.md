@@ -1,12 +1,16 @@
 # **RingVector**
 Extends [`immutable.Vector`](https://dotty.epfl.ch/api/scala/collection/immutable/Vector.html) with ring (circular) methods.
 
+```
+"RING".toVector.rotateRight(1) // Vector(G,R,I,N))
+```
+
 ## Need
 Whenever data are structured in a circular sequence,
 chances are you don't want to locally reinvent the wheel 😉.
 
 ## Solution
-**RingVector** is a small, self-contained library,
+**RingVector** is a small, purely functional, self-contained library,
 where most of the circular use cases are already solved
 and building blocks provided for the others.
 
