@@ -12,7 +12,7 @@ and building blocks provided for the others.
 
 One possible idea has been to create a dedicated collection.
 But the differences with `Vector` are few,
-so a [Scala3 `extension`](https://docs.scala-lang.org/scala3/reference/contextual/extension-methods.html) seems a better fit.
+so a Scala3 [`extension`](https://docs.scala-lang.org/scala3/reference/contextual/extension-methods.html) seems a better fit.
 
 ## Methods
 
@@ -20,7 +20,7 @@ so a [Scala3 `extension`](https://docs.scala-lang.org/scala3/reference/contextua
 Named as their plain non-circular `Vector` versions,
 but with an `O` suffix (meaning _ring_).
 
-They are (see [test cases](blob/main/src/test/scala/AlternativeMethodsSpec.scala):
+They are (see [test cases](/src/test/scala/AlternativeMethodsSpec.scala)):
 * `applyO`
 * `segmentLengthO`
 * `sliceO`
@@ -30,7 +30,11 @@ They are (see [test cases](blob/main/src/test/scala/AlternativeMethodsSpec.scala
 * `slidingO`
 
 ### Rotation and reflection
+Rotate and reflect circular `Vector`
+(see [test cases](/src/test/scala/RotationsReflectionsSpec.scala))
 
-### Symmetry 
+### Symmetry
+Dealing with rotational and reflectional symmetries 
+(see [test cases](/src/test/scala/SymmetriesSpec.scala))
 
 
