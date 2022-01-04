@@ -67,6 +67,18 @@ class AlternativeMethodsSpec extends AnyFlatSpec with RingVector with should.Mat
     v.indexOfSlice(circularSlice) shouldBe -1
     v.indexOfSliceO(circularSlice) shouldBe 4
   }
+
+  val w = Vector(1, 2, 3, 5, 1, 4, 5)
+
+  it can "return the last index of a contained circular slice" in {
+    w.lastIndexOfSlice(circularSlice) shouldBe 3
+    w.lastIndexOfSliceO(circularSlice) shouldBe 6
+  }
+  
+  it can "return the last index of a contained circular slice" in {
+    w.lastIndexOfSlice(circularSlice, 7) shouldBe 3
+    w.lastIndexOfSliceO(circularSlice, 7) shouldBe 3
+  }
   
   it can "be slided circularly by one step" in {
     v.sliding(2).toList shouldBe List(
