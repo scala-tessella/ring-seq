@@ -10,13 +10,19 @@ import math.Ordering.Implicits.seqOrdering
 class RotationsReflectionsSpec extends AnyFlatSpec with RingVector with should.Matchers {
 
   val v = Vector(1, 2, 3, 4, 5)
+  val oneLeft = Vector(2, 3, 4, 5, 1)
 
   "A Vector considered as a ring" can "be rotated one step to the right" in {
     v.rotateRight(1) shouldBe Vector(5, 1, 2, 3, 4)
   }
 
-  it can "be rotated one step to the left, to start where index 1 was" in {
-    v.startAt(1) shouldBe Vector(2, 3, 4, 5, 1)
+  it can "be rotated one step to the left" in {
+    v.rotateLeft(1) shouldBe oneLeft
+    v.rotateRight(-1) shouldBe oneLeft
+  }
+
+  it can "be rotated to start where index 1 is" in {
+    v.startAt(1) shouldBe oneLeft
   }
 
   it can "be reflected" in {
@@ -30,7 +36,7 @@ class RotationsReflectionsSpec extends AnyFlatSpec with RingVector with should.M
   it can "iterate on all rotations" in {
     v.allRotations.toList shouldBe List(
       v,
-      Vector(2, 3, 4, 5, 1),
+      oneLeft,
       Vector(3, 4, 5, 1, 2),
       Vector(4, 5, 1, 2, 3),
       Vector(5, 1, 2, 3, 4)
