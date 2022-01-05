@@ -80,8 +80,10 @@ trait RingVector:
 
     def rotationalSymmetry: Int =
       val size = ring.size
-      val exactFoldsDesc = size +: (size / 2 to 2 by -1).filter(size % _ == 0)
-      exactFoldsDesc.find(areFoldsSymmetrical).getOrElse(1)
+      if size < 2 then 1
+      else
+        val exactFoldsDesc = size +: (size / 2 to 2 by -1).filter(size % _ == 0)
+        exactFoldsDesc.find(areFoldsSymmetrical).getOrElse(1)
 
     private def greaterHalfSize: Int =
       Math.ceil(ring.size / 2.0).toInt
@@ -102,11 +104,13 @@ trait RingVector:
       )
    
     def symmetryIndices: List[Index] =
-      val folds = rotationalSymmetry
-      val foldSize = ring.size / folds
-      ring.take(foldSize).findReflectionSymmetry match
-        case None => Nil
-        case Some(j) => (0 until folds).toList.map(_ * foldSize + j)
+      if ring.isEmpty then Nil
+      else
+        val folds = rotationalSymmetry
+        val foldSize = ring.size / folds
+        ring.take(foldSize).findReflectionSymmetry match
+          case None => Nil
+          case Some(j) => (0 until folds).toList.map(_ * foldSize + j)
 
     def symmetry: Int =
       symmetryIndices.size
