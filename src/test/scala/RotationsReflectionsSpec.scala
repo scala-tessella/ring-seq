@@ -44,8 +44,7 @@ class RotationsReflectionsSpec extends AnyFlatSpec with RingVector with should.M
   }
 
   it can "return the sorted minimum rotation" in {
-    val w = Vector(1, 2, 3, 4, 1)
-    w.minRotation shouldBe Vector(1, 1, 2, 3, 4)
+    Vector(1, 2, 3, 4, 1).minRotation shouldBe Vector(1, 1, 2, 3, 4)
   }
 
   it can "be the rotation of another Vector" in {
