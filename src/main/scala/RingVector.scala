@@ -20,7 +20,7 @@ trait RingVector:
         ring.drop(j) ++ ring.take(j)
 
     def rotateLeft(step: Int): Vector[A] =
-      rotateRight(-i)
+      rotateRight(-step)
 
     def startAt(i: IndexO): Vector[A] =
       rotateLeft(i)
