@@ -18,8 +18,8 @@ chances are you don't want to locally reinvent the wheel (pun intended).
 where most of the circular use cases are already solved
 and building blocks provided for the others.
 
-One possible idea has been to create a dedicated collection.
-But the differences with `Vector` are few,
+One early idea was to create a dedicated collection.
+But differences with `Vector` are few,
 so a Scala3 [`extension`](https://docs.scala-lang.org/scala3/reference/contextual/extension-methods.html) seems a better fit.
 
 ## Methods
