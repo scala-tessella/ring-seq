@@ -1,3 +1,6 @@
+import org.scalacheck.Gen
+import org.scalacheck.Prop.forAll
+import org.scalacheck.Test.check
 import org.scalatest.*
 import org.scalatest.flatspec.*
 import org.scalatest.matchers.*
