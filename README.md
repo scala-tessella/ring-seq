@@ -28,7 +28,7 @@ so a Scala3 [`extension`](https://docs.scala-lang.org/scala3/reference/contextua
 Named as their plain non-circular `Vector` versions,
 but with an `O` suffix (meaning _ring_).
 
-They are (see [test cases](/src/test/scala/AlternativeMethodsSpec.scala)):
+They are (see [test cases](/src/test/scala/OMethodsSpec.scala)):
 * `applyO`
 * `segmentLengthO`
 * `sliceO`
