@@ -11,7 +11,7 @@ where a `Vector` has to be considered circular.
 
 ## Need
 Whenever data are structured in a circular sequence,
-chances are you don't want to locally reinvent the wheel 😉.
+chances are you don't want to locally reinvent the wheel (pun intended).
 
 ## Solution
 **RingVector** is a small, purely functional, self-contained library,
