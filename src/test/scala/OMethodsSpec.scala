@@ -6,7 +6,7 @@ import org.scalatest.*
 import org.scalatest.flatspec.*
 import org.scalatest.matchers.*
 
-class AlternativeMethodsSpec extends AnyFlatSpec with RingVector with should.Matchers {
+class OMethodsSpec extends AnyFlatSpec with RingVector with should.Matchers {
 
   val v = Vector(1, 2, 3, 4, 5)
 
