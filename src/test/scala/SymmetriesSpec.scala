@@ -8,7 +8,7 @@ import org.scalatest.matchers.*
 class SymmetriesSpec extends AnyFlatSpec with RingVector with should.Matchers {
 
   val v = Vector(1, 2, 3, 4, 5)
-  val empty = Vector.empty
+  val e = Vector.empty
   val spin3 = Vector(1, 2, 3, 1, 2, 3, 1, 2, 3)
   val eptagon = Vector(6, 6, 6, 6, 6, 6, 6)
   val squaroid = Vector(2, 1, 2, 2, 1, 2, 2, 1, 2, 2, 1, 2)
@@ -18,7 +18,7 @@ class SymmetriesSpec extends AnyFlatSpec with RingVector with should.Matchers {
 
   "A Vector considered as a ring" can "have n-fold rotational symmetry" in {
     v.rotationalSymmetry shouldBe 1
-    empty.rotationalSymmetry shouldBe 1
+    e.rotationalSymmetry shouldBe 1
     spin3.rotationalSymmetry shouldBe 3
     eptagon.rotationalSymmetry shouldBe 7
     squaroid.rotationalSymmetry shouldBe 4
@@ -29,7 +29,7 @@ class SymmetriesSpec extends AnyFlatSpec with RingVector with should.Matchers {
 
   it can "have axes of reflectional symmetry" in {
     v.symmetry shouldBe 0
-    empty.symmetry shouldBe 0
+    e.symmetry shouldBe 0
     spin3.symmetry shouldBe 0
     eptagon.symmetry shouldBe 7
     squaroid.symmetry shouldBe 4
@@ -40,7 +40,7 @@ class SymmetriesSpec extends AnyFlatSpec with RingVector with should.Matchers {
 
   it can "return the indices closer to the axes of reflectional symmetry" in {
     v.symmetryIndices shouldBe Nil
-    empty.symmetryIndices shouldBe Nil
+    e.symmetryIndices shouldBe Nil
     spin3.symmetryIndices shouldBe Nil
     eptagon.symmetryIndices shouldBe List(0, 1, 2, 3, 4, 5, 6) 
     squaroid.symmetryIndices shouldBe List(1, 4, 7, 10)
