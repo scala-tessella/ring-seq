@@ -2,7 +2,11 @@ import Ordering.Implicits.*
 
 trait RingVector:
 
+  
+  /* for improved readability, a Vector index */
   type Index = Int
+
+  /* and a RingVector index, any value is valid */
   type IndexO = Int
 
   extension[A](ring: Vector[A])
