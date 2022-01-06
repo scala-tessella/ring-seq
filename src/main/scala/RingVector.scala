@@ -69,10 +69,10 @@ trait RingVector:
       allRotations.min(ordering)
 
     def isRotationOf(other: Vector[A]): Boolean =
-      allRotations.exists(_ == other)
+      allRotations.contains(other)
 
     def isReflectionOf(other: Vector[A]): Boolean =
-      ring.reflectAt() == other
+      ring == other || ring.reflectAt() == other
 
     def isRotationOrReflectionOf(other: Vector[A]): Boolean =
       val reflected = other.reverse

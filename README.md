@@ -6,7 +6,7 @@ Extends Scala3 [`immutable.Vector`](https://dotty.epfl.ch/api/scala/collection/i
 ```
 
 ## How to use
-Use the [`RingVector`](/src/main/scala/RingVector.scala) trait to extend the classes or objects
+Use the [`RingVector`](/src/main/scala/RingVector.scala) trait to extend classes or objects
 where a `Vector` has to be considered circular.
 
 ## Need
@@ -18,7 +18,7 @@ chances are you don't want to locally reinvent the wheel (pun intended).
 where most of the circular use cases are already solved
 and building blocks provided for the others.
 
-One early idea was to create a dedicated collection.
+One early approach was to create a dedicated collection.
 But differences with `Vector` are few,
 so a Scala3 [`extension`](https://docs.scala-lang.org/scala3/reference/contextual/extension-methods.html) seems a better fit.
 
