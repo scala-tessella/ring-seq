@@ -1,7 +1,6 @@
 import Ordering.Implicits.*
 
 trait RingVector:
-
   
   /* for improved readability, a Vector index */
   type Index = Int
