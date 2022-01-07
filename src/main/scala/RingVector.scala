@@ -35,7 +35,7 @@ trait RingVector:
       startAt(from).segmentLength(p)
 
     private def multiply(times: Int): Vector[A] =
-      List.fill(times)(ring).toVector.flatten
+      Vector.fill(times)(ring).flatten
 
     def sliceO(from: IndexO, to: IndexO): Vector[A] =
       if from >= to || ring.isEmpty then ring
