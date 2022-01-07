@@ -44,5 +44,3 @@ Rotate and reflect a circular `Vector`
 ### Symmetry
 Calculate rotational and reflectional symmetries of a circular `Vector`
 (see [test cases](/src/test/scala/SymmetriesSpec.scala))
-
-
