@@ -2,7 +2,7 @@
 Extends Scala3 [`immutable.Vector`](https://dotty.epfl.ch/api/scala/collection/immutable/Vector.html) with ring (circular) methods.
 
 ```scala
-"RING".toVector.rotateRight(1) // Vector(G,R,I,N))
+"RING".toVector.rotateRight(1) // Vector(G,R,I,N)
 ```
 
 ## How to use
