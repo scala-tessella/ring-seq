@@ -38,7 +38,7 @@ trait RingVector:
       Vector.fill(times)(ring).flatten
 
     def sliceO(from: IndexO, to: IndexO): Vector[A] =
-      if from >= to || ring.isEmpty then ring
+      if from >= to || ring.isEmpty then Vector.empty
       else
         val length = to - from
         val times = Math.ceil(length / ring.size).toInt + 1

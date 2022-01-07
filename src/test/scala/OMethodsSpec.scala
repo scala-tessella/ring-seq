@@ -57,6 +57,18 @@ class OMethodsSpec extends AnyFlatSpec with RingVector with should.Matchers {
     v.sliceO(from, to) shouldBe Vector(5, 1, 2, 3, 4, 5, 1)
   }
 
+  it can "NOT be sliced to an empty circular slice" in {
+    val (from, to) = (3, 3)
+    v.slice(from, to) shouldBe Vector.empty
+    v.sliceO(from, to) shouldBe Vector.empty
+  }
+
+  it can "NOT be sliced to a negative circular slice" in {
+    val (from, to) = (4, 3)
+    v.slice(from, to) shouldBe Vector.empty
+    v.sliceO(from, to) shouldBe Vector.empty
+  }
+
   val circularSlice = Vector(5, 1)
 
   it can "contain a circular slice" in {
