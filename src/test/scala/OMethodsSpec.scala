@@ -34,13 +34,14 @@ class OMethodsSpec extends AnyFlatSpec with RingVector with should.Matchers {
   }
 
   "Any non empty Vector" must "return an element for any index" in {
+    val elems = Set(1, 3, 5)
     val gen: Gen[(Vector[Int], IndexO)] =
       for
-        list <- Gen.nonEmptyContainerOf[List, Int](Gen.oneOf(1, 3, 5))
+        list <- Gen.nonEmptyContainerOf[List, Int](Gen.oneOf(elems))
         i <- arbitrary[IndexO]
       yield (list.toVector, i)
     check(
-      forAll(gen)((vector, i) => List(1, 3, 5).contains(vector.applyO(i)))
+      forAll(gen)((vector, i) => elems.contains(vector.applyO(i)))
     )
   }
 
