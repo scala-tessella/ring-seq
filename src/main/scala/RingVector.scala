@@ -65,6 +65,9 @@ trait RingVector:
     def allRotations: Iterator[Vector[A]] =
       slidingO(ring.size)
 
+    def allRotationsAndReflections: Iterator[Vector[A]] =
+      allRotations ++ ring.reverse.allRotations
+
     def minRotation(implicit ordering: Ordering[Vector[A]]): Vector[A] =
       allRotations.min(ordering)
 
