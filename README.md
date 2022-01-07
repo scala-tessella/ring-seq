@@ -1,7 +1,7 @@
 # **RingVector**
 Extends Scala3 [`immutable.Vector`](https://dotty.epfl.ch/api/scala/collection/immutable/Vector.html) with ring (circular) methods.
 
-```
+```scala
 "RING".toVector.rotateRight(1) // Vector(G,R,I,N))
 ```
 
@@ -25,7 +25,7 @@ so a Scala3 [`extension`](https://docs.scala-lang.org/scala3/reference/contextua
 ## Methods
 
 ### Circular version of existing ones
-Named as their plain non-circular `Vector` versions,
+Named as their standard non-circular `Vector` alternatives,
 but with an `O` suffix (meaning _ring_).
 
 They are (see [test cases](/src/test/scala/OMethodsSpec.scala)):
