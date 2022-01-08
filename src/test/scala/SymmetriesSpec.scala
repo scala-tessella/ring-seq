@@ -1,9 +1,8 @@
 import org.scalacheck.Gen
 import org.scalacheck.Prop.forAll
 import org.scalacheck.Test.check
-import org.scalatest.*
-import org.scalatest.flatspec.*
-import org.scalatest.matchers.*
+import org.scalatest.flatspec._
+import org.scalatest.matchers._
 
 class SymmetriesSpec extends AnyFlatSpec with RingVector with should.Matchers {
 
@@ -51,12 +50,12 @@ class SymmetriesSpec extends AnyFlatSpec with RingVector with should.Matchers {
 
   "Any Vector" must "have rotational higher or equal than reflectional symmetry" in {
     val gen: Gen[Vector[Int]] =
-      for
+      for {
         list <- Gen.containerOf[List, Int](Gen.oneOf(1, 3, 5))
-      yield list.toVector
+      } yield list.toVector
     check(
       forAll(gen)(vector => vector.rotationalSymmetry >= vector.symmetry)
-    )
+    )(_)
   }
 
 }

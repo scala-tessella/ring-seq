@@ -2,9 +2,8 @@ import org.scalacheck.Gen
 import org.scalacheck.Prop.forAll
 import org.scalacheck.Test.check
 import org.scalacheck.Arbitrary.arbitrary
-import org.scalatest.*
-import org.scalatest.flatspec.*
-import org.scalatest.matchers.*
+import org.scalatest.flatspec._
+import org.scalatest.matchers._
 
 class OMethodsSpec extends AnyFlatSpec with RingVector with should.Matchers {
 
@@ -36,13 +35,13 @@ class OMethodsSpec extends AnyFlatSpec with RingVector with should.Matchers {
   "Any non empty Vector" must "return an element for any index" in {
     val elems = Set(1, 3, 5)
     val gen: Gen[(Vector[Int], IndexO)] =
-      for
+      for {
         list <- Gen.nonEmptyContainerOf[List, Int](Gen.oneOf(elems))
         i <- arbitrary[IndexO]
-      yield (list.toVector, i)
+      } yield (list.toVector, i)
     check(
-      forAll(gen)((vector, i) => elems.contains(vector.applyO(i)))
-    )
+      forAll(gen)({ case (vector, i) => elems.contains(vector.applyO(i)) })
+    )(_)
   }
 
   "A Vector considered as a ring" can "contain a circular segment" in {

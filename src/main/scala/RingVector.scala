@@ -1,26 +1,25 @@
-import Ordering.Implicits.*
+trait RingVector {
 
-trait RingVector:
-  
   /* for improved readability, a Vector index */
   type Index = Int
 
   /* and a RingVector index, any value is valid */
   type IndexO = Int
 
-  extension[A](ring: Vector[A])
-  
+  implicit class Ringed[A](ring: Vector[A]) {
+
     private def index(i: IndexO): Index =
       java.lang.Math.floorMod(i, ring.size)
 
     def applyO(i: IndexO): A =
       ring(index(i))
 
-    def rotateRight(step: Int): Vector[A] = 
-      if ring.isEmpty then ring
-      else
-        val j: Index = ring.size - index(step) 
+    def rotateRight(step: Int): Vector[A] =
+      if (ring.isEmpty) ring
+      else {
+        val j: Index = ring.size - index(step)
         ring.drop(j) ++ ring.take(j)
+      }
 
     def rotateLeft(step: Int): Vector[A] =
       rotateRight(-step)
@@ -34,16 +33,17 @@ trait RingVector:
     def segmentLengthO(p: A => Boolean, from: IndexO = 0): Int =
       startAt(from).segmentLength(p)
 
-    private def multiply(times: Int): Vector[A] =
+    protected def multiply(times: Int): Vector[A] =
       Vector.fill(times)(ring).flatten
 
     def sliceO(from: IndexO, to: IndexO): Vector[A] =
-      if from >= to || ring.isEmpty then Vector.empty
-      else
+      if (from >= to || ring.isEmpty) Vector.empty
+      else {
         val length = to - from
         val times = Math.ceil(length / ring.size).toInt + 1
         startAt(from).multiply(times).take(length)
- 
+      }
+
     private def growBy(growth: Int): Vector[A] =
       sliceO(0, ring.size + growth)
 
@@ -77,19 +77,22 @@ trait RingVector:
     def isReflectionOf(other: Vector[A]): Boolean =
       ring == other || ring.reflectAt() == other
 
-    def isRotationOrReflectionOf(other: Vector[A]): Boolean =
+    def isRotationOrReflectionOf(other: Vector[A]): Boolean = {
       val reflected = other.reverse
       allRotations.exists(r => r == other || r == reflected)
+    }
 
     private def areFoldsSymmetrical: Int => Boolean =
       n => rotateRight(ring.size / n) == ring
 
-    def rotationalSymmetry: Int =
+    def rotationalSymmetry: Int = {
       val size = ring.size
-      if size < 2 then 1
-      else
+      if (size < 2) 1
+      else {
         val exactFoldsDesc = size +: (size / 2 to 2 by -1).filter(size % _ == 0)
         exactFoldsDesc.find(areFoldsSymmetrical).getOrElse(1)
+      }
+    }
 
     private def greaterHalfSize: Int =
       Math.ceil(ring.size / 2.0).toInt
@@ -97,26 +100,32 @@ trait RingVector:
     private def checkReflectionAxis(gap: Int): Boolean =
       (0 until greaterHalfSize).forall(j => applyO(j + 1) == applyO(-(j + gap)))
 
-    private def hasHeadOnAxis: Boolean =
+    protected def hasHeadOnAxis: Boolean =
       checkReflectionAxis(1)
 
-    private def hasAxisBetweenHeadAndNext: Boolean =
+    protected def hasAxisBetweenHeadAndNext: Boolean =
       checkReflectionAxis(0)
 
-    private def findReflectionSymmetry: Option[Index] =
-      (0 until greaterHalfSize).find(j =>
+    protected def findReflectionSymmetry: Option[Index] =
+      (0 until greaterHalfSize).find(j => {
         val rotation = startAt(j)
         rotation.hasHeadOnAxis || rotation.hasAxisBetweenHeadAndNext
-      )
-   
+      })
+
     def symmetryIndices: List[Index] =
-      if ring.isEmpty then Nil
-      else
+      if (ring.isEmpty) Nil
+      else {
         val folds = rotationalSymmetry
         val foldSize = ring.size / folds
-        ring.take(foldSize).findReflectionSymmetry match
+        ring.take(foldSize).findReflectionSymmetry match {
           case None => Nil
           case Some(j) => (0 until folds).toList.map(_ * foldSize + j)
+        }
+      }
 
     def symmetry: Int =
       symmetryIndices.size
+
+  }
+
+}

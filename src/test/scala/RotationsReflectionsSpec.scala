@@ -1,6 +1,6 @@
-import org.scalatest.*
-import org.scalatest.flatspec.*
-import org.scalatest.matchers.*
+import org.scalatest._
+import org.scalatest.flatspec._
+import org.scalatest.matchers._
 
 import math.Ordering.Implicits.seqOrdering
 
