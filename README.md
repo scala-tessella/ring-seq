@@ -1,5 +1,5 @@
 # **RingVector**
-Extends Scala3 [`immutable.Vector`](https://dotty.epfl.ch/api/scala/collection/immutable/Vector.html) with ring (circular) methods.
+Extends Scala2 [`immutable.Vector`](https://www.scala-lang.org/api/current/scala/collection/immutable/Vector.html) with ring (circular) methods.
 
 ```scala
 "RING".toVector.rotateRight(1) // Vector(G,R,I,N)
@@ -20,7 +20,7 @@ and building blocks provided for the others.
 
 One early approach was to create a dedicated collection.
 But differences with `Vector` are few,
-so a Scala3 [`extension`](https://docs.scala-lang.org/scala3/reference/contextual/extension-methods.html) seems a better fit.
+so a Scala2 [`implicit class`](https://docs.scala-lang.org/overviews/core/implicit-classes.html) seems a better fit.
 
 ## Methods
 
