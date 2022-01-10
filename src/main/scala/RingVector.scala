@@ -72,15 +72,13 @@ trait RingVector {
       allRotations.min(ordering)
 
     def isRotationOf(other: Vector[A]): Boolean =
-      allRotations.contains(other)
+      ring == other || allRotations.drop(1).contains(other)
 
     def isReflectionOf(other: Vector[A]): Boolean =
       ring == other || ring.reflectAt() == other
 
-    def isRotationOrReflectionOf(other: Vector[A]): Boolean = {
-      val reflected = other.reverse
-      allRotations.exists(r => r == other || r == reflected)
-    }
+    def isRotationOrReflectionOf(other: Vector[A]): Boolean =
+      ring == other || allRotationsAndReflections.drop(1).contains(other)
 
     private def areFoldsSymmetrical: Int => Boolean =
       n => rotateRight(ring.size / n) == ring

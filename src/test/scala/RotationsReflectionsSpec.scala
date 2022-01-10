@@ -60,8 +60,10 @@ class RotationsReflectionsSpec extends AnyFlatSpec with RingVector with should.M
   }
 
   it can "be the rotation of another Vector" in {
+    Vector.empty.isRotationOf(Vector.empty) shouldBe true
     v.isRotationOf(v) shouldBe true
     v.isRotationOf(Vector(3, 4, 5, 1, 2)) shouldBe true
+    v.allRotations.forall(v.isRotationOf) shouldBe true
   }
 
   it can "be the reflection of another Vector" in {
@@ -70,7 +72,9 @@ class RotationsReflectionsSpec extends AnyFlatSpec with RingVector with should.M
   }
 
   it can "be the rotation or reflection of another Vector" in {
+    Vector.empty.isRotationOrReflectionOf(Vector.empty) shouldBe true
     v.isRotationOrReflectionOf(v) shouldBe true
     v.isRotationOrReflectionOf(Vector(3, 2, 1, 5, 4)) shouldBe true
+    v.allRotationsAndReflections.forall(v.isRotationOrReflectionOf) shouldBe true
   }
 }
