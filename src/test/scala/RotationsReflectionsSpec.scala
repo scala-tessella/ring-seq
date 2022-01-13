@@ -1,4 +1,6 @@
-import org.scalatest._
+import org.scalacheck.Prop.forAll
+import org.scalacheck.Test.check
+import org.scalacheck.Arbitrary.arbitrary
 import org.scalatest.flatspec._
 import org.scalatest.matchers._
 
@@ -60,21 +62,41 @@ class RotationsReflectionsSpec extends AnyFlatSpec with RingVector with should.M
   }
 
   it can "be the rotation of another Vector" in {
-    Vector.empty.isRotationOf(Vector.empty) shouldBe true
-    v.isRotationOf(v) shouldBe true
     v.isRotationOf(Vector(3, 4, 5, 1, 2)) shouldBe true
     v.allRotations.forall(v.isRotationOf) shouldBe true
   }
 
   it can "be the reflection of another Vector" in {
-    v.isReflectionOf(v) shouldBe true
     v.isReflectionOf(Vector(1, 5, 4, 3, 2)) shouldBe true
   }
 
   it can "be the rotation or reflection of another Vector" in {
-    Vector.empty.isRotationOrReflectionOf(Vector.empty) shouldBe true
-    v.isRotationOrReflectionOf(v) shouldBe true
     v.isRotationOrReflectionOf(Vector(3, 2, 1, 5, 4)) shouldBe true
     v.allRotationsAndReflections.forall(v.isRotationOrReflectionOf) shouldBe true
   }
+
+  "All rotations of a Vector" must "contain itself" in {
+    check(
+      forAll(arbitrary[Vector[Int]])(vector => vector.allRotations.contains(vector))
+    )(_)
+  }
+
+  "All rotations and reflections of a Vector" must "contain itself" in {
+    check(
+      forAll(arbitrary[Vector[Int]])(vector => vector.allRotationsAndReflections.contains(vector))
+    )(_)
+  }
+
+  "A Vector" must "always be the rotation of itself" in {
+    check(
+      forAll(arbitrary[Vector[Int]])(vector => vector.isRotationOf(vector))
+    )(_)
+  }
+
+  it must "always be the rotation or reflection of itself" in {
+    check(
+      forAll(arbitrary[Vector[Int]])(vector => vector.isRotationOrReflectionOf(vector))
+    )(_)
+  }
+
 }
