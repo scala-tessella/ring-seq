@@ -36,9 +36,9 @@ class OMethodsSpec extends AnyFlatSpec with RingVector with should.Matchers {
     val elems = Set(1, 3, 5)
     val gen: Gen[(Vector[Int], IndexO)] =
       for {
-        list <- Gen.nonEmptyContainerOf[List, Int](Gen.oneOf(elems))
+        vector <- Gen.nonEmptyContainerOf[Vector, Int](Gen.oneOf(elems))
         i <- arbitrary[IndexO]
-      } yield (list.toVector, i)
+      } yield (vector, i)
     check(
       forAll(gen)({ case (vector, i) => elems.contains(vector.applyO(i)) })
     )(_)
