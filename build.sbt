@@ -3,7 +3,7 @@ val scalacheck = "org.scalacheck" %% "scalacheck" % "1.15.4" % "test"
 
 ThisBuild / organization := "com.tbd"
 ThisBuild / version := "0.1"
-ThisBuild / scalaVersion := "2.13.7"
+ThisBuild / scalaVersion := "2.13.8"
 
 lazy val root = (project in file("."))
   .settings(
