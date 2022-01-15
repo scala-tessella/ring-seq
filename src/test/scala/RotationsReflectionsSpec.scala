@@ -32,8 +32,12 @@ class RotationsReflectionsSpec extends AnyFlatSpec with RingVector with should.M
     v.reflectAt(2) shouldBe Vector(3, 2, 1, 5, 4)
   }
 
+  it can "be reflected as reversed" in {
+    v.reflectAt(-1) shouldBe v.reverse
+  }
+
   it can "iterate on all rotations" in {
-    v.allRotations.toList shouldBe List(
+    v.rotations.toList shouldBe List(
       v,
       oneLeft,
       Vector(3, 4, 5, 1, 2),
@@ -42,8 +46,22 @@ class RotationsReflectionsSpec extends AnyFlatSpec with RingVector with should.M
     )
   }
 
+  it can "iterate on all reflections" in {
+    v.reflections.toList shouldBe List(
+      v,
+      Vector(1, 5, 4, 3, 2)
+    )
+  }
+
+  it can "iterate on all reversions" in {
+    v.reversions.toList shouldBe List(
+      v,
+      v.reverse
+    )
+  }
+
   it can "iterate on all rotations and reflections" in {
-    v.allRotationsAndReflections.toList shouldBe List(
+    v.rotationsAndReflections.toList shouldBe List(
       v,
       oneLeft,
       Vector(3, 4, 5, 1, 2),
@@ -63,7 +81,7 @@ class RotationsReflectionsSpec extends AnyFlatSpec with RingVector with should.M
 
   it can "be the rotation of another Vector" in {
     v.isRotationOf(Vector(3, 4, 5, 1, 2)) shouldBe true
-    v.allRotations.forall(v.isRotationOf) shouldBe true
+    v.rotations.forall(v.isRotationOf) shouldBe true
   }
 
   it can "be the reflection of another Vector" in {
@@ -72,18 +90,18 @@ class RotationsReflectionsSpec extends AnyFlatSpec with RingVector with should.M
 
   it can "be the rotation or reflection of another Vector" in {
     v.isRotationOrReflectionOf(Vector(3, 2, 1, 5, 4)) shouldBe true
-    v.allRotationsAndReflections.forall(v.isRotationOrReflectionOf) shouldBe true
+    v.rotationsAndReflections.forall(v.isRotationOrReflectionOf) shouldBe true
   }
 
   "All rotations of a Vector" must "contain itself" in {
     check(
-      forAll(arbitrary[Vector[Int]])(vector => vector.allRotations.contains(vector))
+      forAll(arbitrary[Vector[Int]])(vector => vector.rotations.contains(vector))
     )(_)
   }
 
   "All rotations and reflections of a Vector" must "contain itself" in {
     check(
-      forAll(arbitrary[Vector[Int]])(vector => vector.allRotationsAndReflections.contains(vector))
+      forAll(arbitrary[Vector[Int]])(vector => vector.rotationsAndReflections.contains(vector))
     )(_)
   }
 

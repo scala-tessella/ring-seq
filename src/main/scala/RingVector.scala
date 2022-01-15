@@ -62,25 +62,31 @@ trait RingVector {
     def slidingO(size: Int, step: Int = 1): Iterator[Vector[A]] =
       sliceO(0, step * (ring.size - 1) + size).sliding(size, step)
 
-    def allRotations: Iterator[Vector[A]] =
+    def rotations: Iterator[Vector[A]] =
       if (ring.isEmpty) Iterator(ring)
       else slidingO(ring.size)
 
-    def allRotationsAndReflections: Iterator[Vector[A]] =
+    def reflections: Iterator[Vector[A]] =
+      List(ring, ring.reflectAt()).iterator
+
+    def reversions: Iterator[Vector[A]] =
+      List(ring, ring.reverse).iterator
+
+    def rotationsAndReflections: Iterator[Vector[A]] =
       if (ring.isEmpty) Iterator(ring)
-      else allRotations ++ ring.reverse.allRotations
+      else rotations ++ ring.reverse.rotations
 
     def minRotation(implicit ordering: Ordering[Vector[A]]): Vector[A] =
-      allRotations.min(ordering)
+      rotations.min(ordering)
 
     def isRotationOf(other: Vector[A]): Boolean =
-      allRotations.contains(other)
+      rotations.contains(other)
 
     def isReflectionOf(other: Vector[A]): Boolean =
       ring == other || ring.reflectAt() == other
 
     def isRotationOrReflectionOf(other: Vector[A]): Boolean =
-      allRotationsAndReflections.contains(other)
+      rotationsAndReflections.contains(other)
 
     private def areFoldsSymmetrical: Int => Boolean =
       n => rotateRight(ring.size / n) == ring
