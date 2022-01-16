@@ -67,10 +67,12 @@ trait RingVector {
       else slidingO(ring.size)
 
     def reflections: Iterator[Vector[A]] =
-      List(ring, ring.reflectAt()).iterator
+      if (ring.isEmpty) Iterator(ring)
+      else List(ring, ring.reflectAt()).iterator
 
     def reversions: Iterator[Vector[A]] =
-      List(ring, ring.reverse).iterator
+      if (ring.isEmpty) Iterator(ring)
+      else List(ring, ring.reverse).iterator
 
     def rotationsAndReflections: Iterator[Vector[A]] =
       if (ring.isEmpty) Iterator(ring)
