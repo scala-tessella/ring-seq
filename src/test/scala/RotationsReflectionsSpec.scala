@@ -67,11 +67,11 @@ class RotationsReflectionsSpec extends AnyFlatSpec with RingVector with should.M
       Vector(3, 4, 5, 1, 2),
       Vector(4, 5, 1, 2, 3),
       Vector(5, 1, 2, 3, 4),
+      Vector(1, 5, 4, 3, 2),
       Vector(5, 4, 3, 2, 1),
       Vector(4, 3, 2, 1, 5),
       Vector(3, 2, 1, 5, 4),
-      Vector(2, 1, 5, 4, 3),
-      Vector(1, 5, 4, 3, 2)
+      Vector(2, 1, 5, 4, 3)
     )
   }
 

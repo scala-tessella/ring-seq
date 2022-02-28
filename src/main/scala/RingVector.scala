@@ -75,7 +75,7 @@ trait RingVector {
       transformations(r => List(r, r.reverse).iterator)
 
     def rotationsAndReflections: Iterator[Vector[A]] =
-      transformations(r => r.rotations ++ r.reverse.rotations)
+      transformations(_.reflections.flatMap(_.rotations))
 
     def minRotation(implicit ordering: Ordering[Vector[A]]): Vector[A] =
       rotations.min(ordering)
