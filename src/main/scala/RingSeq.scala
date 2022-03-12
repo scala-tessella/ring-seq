@@ -1,4 +1,4 @@
-trait RingVector {
+trait RingSeq {
 
   /* for improved readability, a Vector index */
   type Index = Int
@@ -6,7 +6,7 @@ trait RingVector {
   /* and a RingVector index, any value is valid */
   type IndexO = Int
 
-  implicit class Ringed[A](ring: Vector[A]) {
+  implicit class Ringed[A](ring: Seq[A]) {
 
     private def index(i: IndexO): Index =
       java.lang.Math.floorMod(i, ring.size)
@@ -14,29 +14,29 @@ trait RingVector {
     def applyO(i: IndexO): A =
       ring(index(i))
 
-    def rotateRight(step: Int): Vector[A] =
+    def rotateRight(step: Int): Seq[A] =
       if (ring.isEmpty) ring
       else {
         val j: Index = ring.size - index(step)
         ring.drop(j) ++ ring.take(j)
       }
 
-    def rotateLeft(step: Int): Vector[A] =
+    def rotateLeft(step: Int): Seq[A] =
       rotateRight(-step)
 
-    def startAt(i: IndexO): Vector[A] =
+    def startAt(i: IndexO): Seq[A] =
       rotateLeft(i)
 
-    def reflectAt(i: IndexO = 0): Vector[A] =
+    def reflectAt(i: IndexO = 0): Seq[A] =
       startAt(i + 1).reverse
 
     def segmentLengthO(p: A => Boolean, from: IndexO = 0): Int =
       startAt(from).segmentLength(p)
 
-    protected def multiply(times: Int): Vector[A] =
+    protected def multiply(times: Int): Seq[A] =
       Vector.fill(times)(ring).flatten
 
-    def sliceO(from: IndexO, to: IndexO): Vector[A] =
+    def sliceO(from: IndexO, to: IndexO): Seq[A] =
       if (from >= to || ring.isEmpty) Vector.empty
       else {
         val length = to - from
@@ -44,52 +44,52 @@ trait RingVector {
         startAt(from).multiply(times).take(length)
       }
 
-    private def growBy(growth: Int): Vector[A] =
+    private def growBy(growth: Int): Seq[A] =
       sliceO(0, ring.size + growth)
 
-    def containsSliceO(slice: Vector[A]): Boolean =
+    def containsSliceO(slice: Seq[A]): Boolean =
       growBy(slice.size - 1).containsSlice(slice)
 
-    def indexOfSliceO(slice: Vector[A]): Index =
+    def indexOfSliceO(slice: Seq[A]): Index =
       growBy(slice.size - 1).indexOfSlice(slice)
 
-    def lastIndexOfSliceO(slice: Vector[A]): Index =
+    def lastIndexOfSliceO(slice: Seq[A]): Index =
       growBy(slice.size - 1).lastIndexOfSlice(slice)
 
-    def lastIndexOfSliceO(slice: Vector[A], end: Index): Index =
+    def lastIndexOfSliceO(slice: Seq[A], end: Index): Index =
       growBy(slice.size - 1).lastIndexOfSlice(slice, end)
 
-    def slidingO(size: Int, step: Int = 1): Iterator[Vector[A]] =
+    def slidingO(size: Int, step: Int = 1): Iterator[Seq[A]] =
       sliceO(0, step * (ring.size - 1) + size).sliding(size, step)
 
-    private def transformations(f: Vector[A] => Iterator[Vector[A]]): Iterator[Vector[A]] =
+    private def transformations(f: Seq[A] => Iterator[Seq[A]]): Iterator[Seq[A]] =
       if (ring.isEmpty) Iterator(ring) else f(ring)
 
-    def rotations: Iterator[Vector[A]] =
+    def rotations: Iterator[Seq[A]] =
       transformations(r => slidingO(r.size))
 
-    def reflections: Iterator[Vector[A]] =
+    def reflections: Iterator[Seq[A]] =
       transformations(r => List(r, r.reflectAt()).iterator)
 
-    def reversions: Iterator[Vector[A]] =
+    def reversions: Iterator[Seq[A]] =
       transformations(r => List(r, r.reverse).iterator)
 
-    def rotationsAndReflections: Iterator[Vector[A]] =
+    def rotationsAndReflections: Iterator[Seq[A]] =
       transformations(_.reflections.flatMap(_.rotations))
 
-    def minRotation(implicit ordering: Ordering[Vector[A]]): Vector[A] =
+    def minRotation(implicit ordering: Ordering[Seq[A]]): Seq[A] =
       rotations.min(ordering)
 
-    private def isTransformationOf(other: Vector[A], f: Vector[A] => Iterator[Vector[A]]): Boolean =
+    private def isTransformationOf(other: Seq[A], f: Seq[A] => Iterator[Seq[A]]): Boolean =
       ring.sizeCompare(other) == 0 && f(ring).contains(other)
 
-    def isRotationOf(other: Vector[A]): Boolean =
+    def isRotationOf(other: Seq[A]): Boolean =
       isTransformationOf(other, _.rotations)
 
-    def isReflectionOf(other: Vector[A]): Boolean =
+    def isReflectionOf(other: Seq[A]): Boolean =
       isTransformationOf(other, _.reflections)
 
-    def isRotationOrReflectionOf(other: Vector[A]): Boolean =
+    def isRotationOrReflectionOf(other: Seq[A]): Boolean =
       isTransformationOf(other, _.rotationsAndReflections)
 
     private def areFoldsSymmetrical: Int => Boolean =
