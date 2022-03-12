@@ -5,11 +5,19 @@ import org.scalatest.flatspec._
 import org.scalatest.matchers._
 
 import math.Ordering.Implicits.seqOrdering
+import scala.collection.immutable.Queue
 
 class RotationsReflectionsSpec extends AnyFlatSpec with RingSeq with should.Matchers {
 
   val s = Seq(1, 2, 3, 4, 5)
   val oneLeft = Seq(2, 3, 4, 5, 1)
+
+  "Any Seq subtype" can "be rotated" in {
+//    "SCALA".rotateRight(2).mkString shouldEqual "LASCA"
+    s.toList.rotateRight(2) shouldBe List(4, 5, 1, 2, 3)
+    s.toVector.rotateRight(2) shouldBe Vector(4, 5, 1, 2, 3)
+    Queue(1, 2, 3, 4, 5).rotateRight(2) shouldBe Queue(4, 5, 1, 2, 3)
+  }
 
   "A Seq considered as a ring" can "be rotated one step to the right" in {
     s.rotateRight(1) shouldBe Seq(5, 1, 2, 3, 4)
@@ -91,14 +99,6 @@ class RotationsReflectionsSpec extends AnyFlatSpec with RingSeq with should.Matc
   it can "be the rotation or reflection of another Vector" in {
     s.isRotationOrReflectionOf(Seq(3, 2, 1, 5, 4)) shouldBe true
     s.rotationsAndReflections.forall(s.isRotationOrReflectionOf) shouldBe true
-  }
-
-  "A List considered as a ring" can "be rotated one step to the right" in {
-    s.toList.rotateRight(1) shouldBe List(5, 1, 2, 3, 4)
-  }
-
-  "A Vector considered as a ring" can "be rotated one step to the right" in {
-    s.toVector.rotateRight(1) shouldBe Vector(5, 1, 2, 3, 4)
   }
 
   "All rotations of a Seq" must "contain itself" in {
