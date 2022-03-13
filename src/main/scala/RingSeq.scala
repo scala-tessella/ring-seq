@@ -140,7 +140,7 @@ trait RingSeq {
 
   implicit class RingStringEnrichment(s: String) {
 
-    private val ring = s.toIndexedSeq
+    private def ring: IndexedSeq[Char] = s.toIndexedSeq
 
     def applyO(i: IndexO): Char =
       ring.applyO(i)
