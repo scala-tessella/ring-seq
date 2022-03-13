@@ -13,7 +13,7 @@ class RotationsReflectionsSpec extends AnyFlatSpec with RingSeq with should.Matc
   val oneLeft = Seq(2, 3, 4, 5, 1)
 
   "Any Seq subtype" can "be rotated" in {
-    new WrappedString("SCALA").rotateRight(2).mkString shouldEqual "LASCA"
+    "SCALA".rotateRight(2).mkString shouldEqual "LASCA"
     s.toList.rotateRight(2) shouldBe List(4, 5, 1, 2, 3)
     s.toVector.rotateRight(2) shouldBe Vector(4, 5, 1, 2, 3)
     Queue(1, 2, 3, 4, 5).rotateRight(2) shouldBe Queue(4, 5, 1, 2, 3)

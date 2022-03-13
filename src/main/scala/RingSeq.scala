@@ -6,7 +6,7 @@ trait RingSeq {
   /* and a RingVector index, any value is valid */
   type IndexO = Int
 
-  implicit class Ringed[A](ring: Seq[A]) {
+  implicit class RingSeqEnrichment[A](ring: Seq[A]) {
 
     private def index(i: IndexO): Index =
       java.lang.Math.floorMod(i, ring.size)
@@ -34,10 +34,10 @@ trait RingSeq {
       startAt(from).segmentLength(p)
 
     protected def multiply(times: Int): Seq[A] =
-      Vector.fill(times)(ring).flatten
+      Seq.fill(times)(ring).flatten
 
     def sliceO(from: IndexO, to: IndexO): Seq[A] =
-      if (from >= to || ring.isEmpty) Vector.empty
+      if (from >= to || ring.isEmpty) Seq.empty
       else {
         val length = to - from
         val times = Math.ceil(length / ring.size).toInt + 1
@@ -135,6 +135,81 @@ trait RingSeq {
 
     def symmetry: Int =
       symmetryIndices.size
+
+  }
+
+  implicit class RingStringEnrichment(s: String) {
+
+    private val ring = s.toIndexedSeq
+
+    def applyO(i: IndexO): Char =
+      ring.applyO(i)
+
+    def rotateRight(step: Int): String =
+      ring.rotateRight(step).mkString
+
+    def rotateLeft(step: Int): String =
+      ring.rotateLeft(step).mkString
+
+    def startAt(i: IndexO): String =
+      ring.startAt(i).mkString
+
+    def reflectAt(i: IndexO = 0): String =
+      ring.reflectAt(i).mkString
+
+    def segmentLengthO(p: Char => Boolean, from: IndexO = 0): Int =
+      ring.segmentLengthO(p, from)
+
+    def sliceO(from: IndexO, to: IndexO): String =
+      ring.sliceO(from, to).mkString
+
+    def containsSliceO(slice: String): Boolean =
+      ring.containsSliceO(slice.toIndexedSeq)
+
+    def indexOfSliceO(slice: String): Index =
+      ring.indexOfSliceO(slice.toIndexedSeq)
+
+    def lastIndexOfSliceO(slice: String): Index =
+      ring.lastIndexOfSliceO(slice.toIndexedSeq)
+
+    def lastIndexOfSliceO(slice: String, end: Index): Index =
+      ring.lastIndexOfSliceO(slice.toIndexedSeq, end)
+
+    def slidingO(size: Int, step: Int = 1): Iterator[String] =
+      ring.slidingO(size, step).map(_.mkString)
+
+    def rotations: Iterator[String] =
+      ring.rotations.map(_.mkString)
+
+    def reflections: Iterator[String] =
+      ring.reflections.map(_.mkString)
+
+    def reversions: Iterator[String] =
+      ring.reversions.map(_.mkString)
+
+    def rotationsAndReflections: Iterator[String] =
+      ring.rotationsAndReflections.map(_.mkString)
+
+    def minRotation(implicit ordering: Ordering[Seq[Char]]): String =
+      ring.minRotation(ordering).mkString
+
+    def isRotationOf(other: String): Boolean =
+      ring.isRotationOf(other.toIndexedSeq)
+
+    def isReflectionOf(other: String): Boolean =
+      ring.isReflectionOf(other.toIndexedSeq)
+
+    def isRotationOrReflectionOf(other: String): Boolean =
+      ring.isRotationOrReflectionOf(other.toIndexedSeq)
+
+    def rotationalSymmetry: Int =
+      ring.rotationalSymmetry
+
+    def symmetryIndices: List[Index] =
+      ring.symmetryIndices
+
+    def symmetry: Int =
+      ring.symmetry
 
   }
 
