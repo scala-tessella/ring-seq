@@ -2,7 +2,7 @@
 Extends Scala2 [`immutable.Seq`](https://www.scala-lang.org/api/current/scala/collection/immutable/Seq.html) with ring (circular) methods.
 
 ```scala
-"RING".toVector.rotateRight(1) // Vector(G,R,I,N)
+"RING".rotateRight(1) // GRIN
 List(0, 1, 2, 3).startAt(2) // List(2, 3, 0, 1)
 ```
 
