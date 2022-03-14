@@ -37,7 +37,7 @@ object RingSeq {
       ring.take(0)
 
     protected def multiply(times: Int): Seq[A] =
-      Seq.fill(times)(ring).flatten
+      (0 until times).foldLeft(emptied)((acc, _) => acc ++ ring)
 
     def sliceO(from: IndexO, to: IndexO): Seq[A] = {
       if (ring.isEmpty) ring
