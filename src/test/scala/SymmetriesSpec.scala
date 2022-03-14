@@ -1,10 +1,12 @@
+import RingSeq._
+
 import org.scalacheck.Gen
 import org.scalacheck.Prop.forAll
 import org.scalacheck.Test.check
 import org.scalatest.flatspec._
 import org.scalatest.matchers._
 
-class SymmetriesSpec extends AnyFlatSpec with RingSeq with should.Matchers {
+class SymmetriesSpec extends AnyFlatSpec with should.Matchers {
 
   val s = Seq(1, 2, 3, 4, 5)
   val e = Seq.empty

@@ -214,3 +214,5 @@ trait RingSeq {
   }
 
 }
+
+object RingSeq extends RingSeq {}
