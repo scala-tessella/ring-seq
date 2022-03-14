@@ -33,16 +33,21 @@ object RingSeq {
     def segmentLengthO(p: A => Boolean, from: IndexO = 0): Int =
       startAt(from).segmentLength(p)
 
+    private def emptied: Seq[A] =
+      ring.take(0)
+
     protected def multiply(times: Int): Seq[A] =
       Seq.fill(times)(ring).flatten
 
-    def sliceO(from: IndexO, to: IndexO): Seq[A] =
-      if (from >= to || ring.isEmpty) Seq.empty
+    def sliceO(from: IndexO, to: IndexO): Seq[A] = {
+      if (ring.isEmpty) ring
+      else if (from >= to) emptied
       else {
         val length = to - from
         val times = Math.ceil(length / ring.size).toInt + 1
         startAt(from).multiply(times).take(length)
       }
+    }
 
     private def growBy(growth: Int): Seq[A] =
       sliceO(0, ring.size + growth)
@@ -140,7 +145,8 @@ object RingSeq {
 
   implicit class RingStringEnrichment(s: String) {
 
-    private def ring: IndexedSeq[Char] = s.toIndexedSeq
+    private def ring: IndexedSeq[Char] =
+      s.toIndexedSeq
 
     def applyO(i: IndexO): Char =
       ring.applyO(i)
