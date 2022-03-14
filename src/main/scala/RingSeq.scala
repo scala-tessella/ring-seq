@@ -1,4 +1,4 @@
-trait RingSeq {
+object RingSeq {
 
   /* for improved readability, a Vector index */
   type Index = Int
@@ -214,5 +214,3 @@ trait RingSeq {
   }
 
 }
-
-object RingSeq extends RingSeq {}
