@@ -1,9 +1,19 @@
+/**
+ * Adds methods to [[https://www.scala-lang.org/api/current/scala/collection/immutable/Seq.html scala.collection.immutable.Seq]]
+ * (and subtypes) when considered circular, its elements forming a ring network.
+ * @author Mario Callisto
+ */
 object RingSeq {
 
-  /* for improved readability, a Vector index */
+  /**
+   * For improved readability, the index of a `Seq`.
+   */
   type Index = Int
 
-  /* and a RingVector index, any value is valid */
+  /**
+   * For improved readability, the index of a circular `Seq`.
+   * @note any value is valid, provided the `Seq` is not empty
+   */
   type IndexO = Int
 
   private def emptied[A](seq: Seq[A]): Seq[A] =
@@ -30,14 +40,36 @@ object RingSeq {
       hasHeadOnAxis(rotation) || hasAxisBetweenHeadAndNext(rotation)
     })
 
+  /**
+   * Decorators for a `Seq` considered circular.
+   */
   implicit class RingSeqEnrichment[A](ring: Seq[A]) {
 
     private def index(i: IndexO): Index =
       java.lang.Math.floorMod(i, ring.size)
 
+    /**
+     * Get the element at circular index ''i''.
+     * @param i [[IndexO]]
+     * @throws java.lang.ArithmeticException if `Seq` is empty
+     * @example
+     *  {{{
+     *  Seq(0, 1, 2).applyO(3) // 1
+     *  }}}
+     */
     def applyO(i: IndexO): A =
       ring(index(i))
 
+    /**
+     * Rotate the sequence to the right by ''step'' places.
+     * @param step Int
+     * @return an immutable sequence consisting of all elements rotated to the right by ''step'' places.
+     *         If ''step'' is negative the rotation happens to the left.
+     * @example
+     *  {{{
+     *  Seq(0, 1, 2).rotateRight(1) // Seq(2, 0, 1)
+     *  }}}
+     */
     def rotateRight(step: Int): Seq[A] =
       if (ring.isEmpty) ring
       else {
@@ -45,12 +77,41 @@ object RingSeq {
         ring.drop(j) ++ ring.take(j)
       }
 
+    /**
+     * Rotate the sequence to the left by ''step'' places.
+     * @param step Int
+     * @return an immutable sequence consisting of all elements rotated to the left by ''step'' places.
+     *         If ''step'' is negative the rotation happens to the right.
+     * @example
+     *  {{{
+     *  Seq(0, 1, 2).rotateLeft(1) // Seq(1, 2, 0)
+     *  }}}
+     */
     def rotateLeft(step: Int): Seq[A] =
       rotateRight(-step)
 
+    /**
+     * Rotate the sequence to start at circular index ''i''.
+     * @param i [[IndexO]]
+     * @return an immutable sequence consisting of all elements rotated to start at circular index ''i''.
+     *         It is equivalent to [[rotateLeft]].
+     * @example
+     *  {{{
+     *  Seq(0, 1, 2).startAt(1) // Seq(1, 2, 0)
+     *  }}}
+     */
     def startAt(i: IndexO): Seq[A] =
       rotateLeft(i)
 
+    /**
+     * Reflect the sequence to start at circular index ''i''.
+     * @param i [[IndexO]]
+     * @return an immutable sequence consisting of all elements reversed and rotated to start at circular index ''i''.
+     * @example
+     *  {{{
+     *  Seq(0, 1, 2).reflectAt() // Seq(0, 2, 1)
+     *  }}}
+     */
     def reflectAt(i: IndexO = 0): Seq[A] =
       startAt(i + 1).reverse
 
@@ -143,23 +204,74 @@ object RingSeq {
 
   }
 
+  /**
+   * Decorators for a String considered circular.
+   */
   implicit class RingStringEnrichment(s: String) {
 
     private def ring: IndexedSeq[Char] =
       s.toIndexedSeq
 
+    /**
+     * Get the char at circular index ''i''.
+     * @param i [[IndexO]]
+     * @throws java.lang.ArithmeticException if `String` is empty
+     * @example
+     *  {{{
+     *  "ABC".applyO(3) // 'A'
+     *  }}}
+     */
     def applyO(i: IndexO): Char =
       ring.applyO(i)
 
+    /**
+     * Rotate the string to the right by ''step'' places.
+     * @param step Int
+     * @return a string consisting of all chars rotated to the right by ''step'' places.
+     *         If ''step'' is negative the rotation happens to the left.
+     * @example
+     *  {{{
+     *  "ABC".rotateRight(1) // "CAB"
+     *  }}}
+     */
     def rotateRight(step: Int): String =
       ring.rotateRight(step).mkString
 
+    /**
+     * Rotate the string to the left by ''step'' places.
+     * @param step Int
+     * @return a string consisting of all chars rotated to the left by ''step'' places.
+     *         If ''step'' is negative the rotation happens to the right.
+     * @example
+     *  {{{
+     *  "ABC".rotateLeft(1) // "BCA"
+     *  }}}
+     */
     def rotateLeft(step: Int): String =
       ring.rotateLeft(step).mkString
 
+    /**
+     * Rotate the string to start at circular index ''i''.
+     * @param i [[IndexO]]
+     * @return a string consisting of all chars rotated to start at circular index ''i''.
+     *         It is equivalent to [[rotateLeft]].
+     * @example
+     *  {{{
+     *  "ABC".startAt(1) // "BCA"
+     *  }}}
+     */
     def startAt(i: IndexO): String =
       ring.startAt(i).mkString
 
+    /**
+     * Reflect the string to start at circular index ''i''.
+     * @param i [[IndexO]]
+     * @return a string consisting of all chars reversed and rotated to start at circular index ''i''.
+     * @example
+     *  {{{
+     *  "ABC".reflectAt() // "ACB"
+     *  }}}
+     */
     def reflectAt(i: IndexO = 0): String =
       ring.reflectAt(i).mkString
 
