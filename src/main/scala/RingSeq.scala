@@ -49,7 +49,7 @@ object RingSeq {
       java.lang.Math.floorMod(i, ring.size)
 
     /**
-     * Get the element at circular index ''i''.
+     * Get the element at some circular index.
      * @param i [[IndexO]]
      * @throws java.lang.ArithmeticException if `Seq` is empty
      * @example
@@ -61,7 +61,7 @@ object RingSeq {
       ring(index(i))
 
     /**
-     * Rotate the sequence to the right by ''step'' places.
+     * Rotate the sequence to the right by some steps.
      * @param step Int
      * @return an immutable sequence consisting of all elements rotated to the right by ''step'' places.
      *         If ''step'' is negative the rotation happens to the left.
@@ -78,7 +78,7 @@ object RingSeq {
       }
 
     /**
-     * Rotate the sequence to the left by ''step'' places.
+     * Rotate the sequence to the left by some steps.
      * @param step Int
      * @return an immutable sequence consisting of all elements rotated to the left by ''step'' places.
      *         If ''step'' is negative the rotation happens to the right.
@@ -91,7 +91,7 @@ object RingSeq {
       rotateRight(-step)
 
     /**
-     * Rotate the sequence to start at circular index ''i''.
+     * Rotate the sequence to start at some circular index.
      * @param i [[IndexO]]
      * @return an immutable sequence consisting of all elements rotated to start at circular index ''i''.
      *         It is equivalent to [[rotateLeft]].
@@ -104,7 +104,7 @@ object RingSeq {
       rotateLeft(i)
 
     /**
-     * Reflect the sequence to start at circular index ''i''.
+     * Reflect the sequence to start at some circular index.
      * @param i [[IndexO]]
      * @return an immutable sequence consisting of all elements reversed and rotated to start at circular index ''i''.
      * @example
@@ -115,14 +115,37 @@ object RingSeq {
     def reflectAt(i: IndexO = 0): Seq[A] =
       startAt(i + 1).reverse
 
+    /**
+     * Computes the length of the longest segment that starts from some circular index
+     * and whose elements all satisfy some predicate.
+     * @param p the predicate used to test elements
+     * @param from [[IndexO]]
+     * @return the length of the longest segment of this immutable sequence starting from circular index ''from''
+     *         such that every element of the segment satisfies the predicate ''p''
+     * @example
+     *  {{{
+     *  Seq(0, 1, 2).segmentLengthO(_ % 2 == 0, 2) // Seq(2, 0)
+     *  }}}
+     */
     def segmentLengthO(p: A => Boolean, from: IndexO = 0): Int =
       startAt(from).segmentLength(p)
 
-    def sliceO(from: IndexO, to: IndexO): Seq[A] = {
+    /**
+     * Selects an interval of elements.
+     * @param from [[IndexO]]
+     * @param until [[IndexO]]
+     * @return an immutable sequence containing the elements greater than or equal to circular index ''from''
+     *         extending up to (but not including) circular index ''until'' of this immutable sequence.
+     * @example
+     *  {{{
+     *  Seq(0, 1, 2).sliceO(-1, 4) // Seq(2, 0, 1, 2, 0)
+     *  }}}
+     */
+    def sliceO(from: IndexO, until: IndexO): Seq[A] = {
       if (ring.isEmpty) ring
-      else if (from >= to) emptied(ring)
+      else if (from >= until) emptied(ring)
       else {
-        val length = to - from
+        val length = until - from
         val times = Math.ceil(length / ring.size).toInt + 1
         multiply(startAt(from), times).take(length)
       }
@@ -213,7 +236,7 @@ object RingSeq {
       s.toIndexedSeq
 
     /**
-     * Get the char at circular index ''i''.
+     * Get the char at some circular index.
      * @param i [[IndexO]]
      * @throws java.lang.ArithmeticException if `String` is empty
      * @example
@@ -225,7 +248,7 @@ object RingSeq {
       ring.applyO(i)
 
     /**
-     * Rotate the string to the right by ''step'' places.
+     * Rotate the string to the right by some steps.
      * @param step Int
      * @return a string consisting of all chars rotated to the right by ''step'' places.
      *         If ''step'' is negative the rotation happens to the left.
@@ -238,7 +261,7 @@ object RingSeq {
       ring.rotateRight(step).mkString
 
     /**
-     * Rotate the string to the left by ''step'' places.
+     * Rotate the string to the left by some steps.
      * @param step Int
      * @return a string consisting of all chars rotated to the left by ''step'' places.
      *         If ''step'' is negative the rotation happens to the right.
@@ -251,7 +274,7 @@ object RingSeq {
       ring.rotateLeft(step).mkString
 
     /**
-     * Rotate the string to start at circular index ''i''.
+     * Rotate the string to start at some circular index.
      * @param i [[IndexO]]
      * @return a string consisting of all chars rotated to start at circular index ''i''.
      *         It is equivalent to [[rotateLeft]].
@@ -264,7 +287,7 @@ object RingSeq {
       ring.startAt(i).mkString
 
     /**
-     * Reflect the string to start at circular index ''i''.
+     * Reflect the string to start at some circular index.
      * @param i [[IndexO]]
      * @return a string consisting of all chars reversed and rotated to start at circular index ''i''.
      * @example
@@ -275,11 +298,34 @@ object RingSeq {
     def reflectAt(i: IndexO = 0): String =
       ring.reflectAt(i).mkString
 
+    /**
+     * Computes the length of the longest segment that starts from some circular index
+     * and whose chars all satisfy some predicate.
+     * @param p the predicate used to test chars
+     * @param from [[IndexO]]
+     * @return the length of the longest segment of this string starting from circular index ''from''
+     *         such that every char of the segment satisfies the predicate ''p''
+     * @example
+     *  {{{
+     *  "ABA".segmentLengthO(_ == 'A', 2) // "AA"
+     *  }}}
+     */
     def segmentLengthO(p: Char => Boolean, from: IndexO = 0): Int =
       ring.segmentLengthO(p, from)
 
-    def sliceO(from: IndexO, to: IndexO): String =
-      ring.sliceO(from, to).mkString
+    /**
+     * Selects an interval of chars.
+     * @param from [[IndexO]]
+     * @param until [[IndexO]]
+     * @return a string containing the chars greater than or equal to circular index ''from''
+     *         extending up to (but not including) circular index ''until'' of this string.
+     * @example
+     *  {{{
+     *  "ABC".sliceO(-1, 4) // "CABCA"
+     *  }}}
+     */
+    def sliceO(from: IndexO, until: IndexO): String =
+      ring.sliceO(from, until).mkString
 
     def containsSliceO(slice: String): Boolean =
       ring.containsSliceO(slice.toIndexedSeq)
