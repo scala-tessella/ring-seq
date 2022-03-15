@@ -54,7 +54,7 @@ object RingSeq {
      * @throws java.lang.ArithmeticException if `Seq` is empty
      * @example
      *  {{{
-     *  Seq(0, 1, 2).applyO(3) // 1
+     *  Seq(0, 1, 2).applyO(3) // 0
      *  }}}
      */
     def applyO(i: IndexO): A =
@@ -124,7 +124,7 @@ object RingSeq {
      *         such that every element of the segment satisfies the predicate ''p''
      * @example
      *  {{{
-     *  Seq(0, 1, 2).segmentLengthO(_ % 2 == 0, 2) // Seq(2, 0)
+     *  Seq(0, 1, 2).segmentLengthO(_ % 2 == 0, 2) // 2
      *  }}}
      */
     def segmentLengthO(p: A => Boolean, from: IndexO = 0): Int =
@@ -161,7 +161,7 @@ object RingSeq {
      * @return true if this immutable circular sequence contains a slice with the same elements as that, otherwise false.
      * @example
      *  {{{
-     *  Seq(0, 1, 2).containsSliceO(Seq(2, 0)) // true
+     *  Seq(0, 1, 2).containsSliceO(Seq(2, 0, 1, 2, 0)) // true
      *  }}}
      */
     def containsSliceO(that: Seq[A]): Boolean =
@@ -317,7 +317,7 @@ object RingSeq {
      *         such that every char of the segment satisfies the predicate ''p''
      * @example
      *  {{{
-     *  "ABA".segmentLengthO(_ == 'A', 2) // "AA"
+     *  "ABA".segmentLengthO(_ == 'A', 2) // 2
      *  }}}
      */
     def segmentLengthO(p: Char => Boolean, from: IndexO = 0): Int =
@@ -344,7 +344,7 @@ object RingSeq {
      * @return true if this circular string contains a string with the same chars as that, otherwise false.
      * @example
      *  {{{
-     *   "ABC".containsSliceO("CA") // true
+     *   "ABC".containsSliceO("CABCA") // true
      *  }}}
      */
     def containsSliceO(that: String): Boolean =
