@@ -1,7 +1,7 @@
 /**
  * Adds methods to [[https://www.scala-lang.org/api/current/scala/collection/immutable/Seq.html scala.collection.immutable.Seq]]
  * (and subtypes) when considered circular, its elements forming a ring network.
- * @author Mario Callisto
+ * @author Mario Càllisto
  */
 object RingSeq {
 
@@ -22,11 +22,11 @@ object RingSeq {
   private def multiply[A](seq: Seq[A], times: Int): Seq[A] =
     (0 until times).foldLeft(emptied(seq))((acc, _) => acc ++ seq)
 
-  private def greaterHalfSize(size: Int): Int =
-    Math.ceil(size / 2.0).toInt
+  private def greaterHalfRange(size: Int): Range =
+    0 until Math.ceil(size / 2.0).toInt
 
   private def checkReflectionAxis[A](seq: Seq[A], gap: Int): Boolean =
-    (0 until greaterHalfSize(seq.size)).forall(j => seq.applyO(j + 1) == seq.applyO(-(j + gap)))
+    greaterHalfRange(seq.size).forall(j => seq.applyO(j + 1) == seq.applyO(-(j + gap)))
 
   private def hasHeadOnAxis[A](seq: Seq[A]): Boolean =
     checkReflectionAxis(seq, 1)
@@ -35,7 +35,7 @@ object RingSeq {
     checkReflectionAxis(seq, 0)
 
   private def findReflectionSymmetry[A](seq: Seq[A]): Option[Index] =
-    (0 until greaterHalfSize(seq.size)).find(j => {
+    greaterHalfRange(seq.size).find(j => {
       val rotation = seq.startAt(j)
       hasHeadOnAxis(rotation) || hasAxisBetweenHeadAndNext(rotation)
     })
