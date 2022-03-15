@@ -115,7 +115,7 @@ class RotationsReflectionsSpec extends AnyFlatSpec with should.Matchers {
     )(_)
   }
 
-  "A Vector" must "always be the rotation of itself" in {
+  "A Seq" must "always be the rotation of itself" in {
     check(
       forAll(arbitrary[Seq[Int]])(seq => seq.isRotationOf(seq))
     )(_)
