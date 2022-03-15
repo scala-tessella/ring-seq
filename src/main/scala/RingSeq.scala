@@ -136,6 +136,7 @@ object RingSeq {
      * @param until [[IndexO]]
      * @return an immutable sequence containing the elements greater than or equal to circular index ''from''
      *         extending up to (but not including) circular index ''until'' of this immutable sequence.
+     * @note a slice of a circular sequence can be bigger than the size of the elements in the sequence.
      * @example
      *  {{{
      *  Seq(0, 1, 2).sliceO(-1, 4) // Seq(2, 0, 1, 2, 0)
@@ -166,14 +167,14 @@ object RingSeq {
     def containsSliceO(that: Seq[A]): Boolean =
       growBy(that.size - 1).containsSlice(that)
 
-    def indexOfSliceO(slice: Seq[A]): Index =
-      growBy(slice.size - 1).indexOfSlice(slice)
+    def indexOfSliceO(that: Seq[A]): Index =
+      growBy(that.size - 1).indexOfSlice(that)
 
-    def lastIndexOfSliceO(slice: Seq[A]): Index =
-      growBy(slice.size - 1).lastIndexOfSlice(slice)
+    def lastIndexOfSliceO(that: Seq[A]): Index =
+      growBy(that.size - 1).lastIndexOfSlice(that)
 
-    def lastIndexOfSliceO(slice: Seq[A], end: Index): Index =
-      growBy(slice.size - 1).lastIndexOfSlice(slice, end)
+    def lastIndexOfSliceO(that: Seq[A], end: Index): Index =
+      growBy(that.size - 1).lastIndexOfSlice(that, end)
 
     def slidingO(size: Int, step: Int = 1): Iterator[Seq[A]] =
       sliceO(0, step * (ring.size - 1) + size).sliding(size, step)
@@ -328,6 +329,7 @@ object RingSeq {
      * @param until [[IndexO]]
      * @return a string containing the chars greater than or equal to circular index ''from''
      *         extending up to (but not including) circular index ''until'' of this string.
+     * @note a slice of a circular string can be bigger than the size of the elements in the string.
      * @example
      *  {{{
      *  "ABC".sliceO(-1, 4) // "CABCA"
@@ -345,17 +347,17 @@ object RingSeq {
      *   "ABC".containsSliceO("CA") // true
      *  }}}
      */
-    def containsSliceO(slice: String): Boolean =
-      ring.containsSliceO(slice.toIndexedSeq)
+    def containsSliceO(that: String): Boolean =
+      ring.containsSliceO(that.toIndexedSeq)
 
-    def indexOfSliceO(slice: String): Index =
-      ring.indexOfSliceO(slice.toIndexedSeq)
+    def indexOfSliceO(that: String): Index =
+      ring.indexOfSliceO(that.toIndexedSeq)
 
-    def lastIndexOfSliceO(slice: String): Index =
-      ring.lastIndexOfSliceO(slice.toIndexedSeq)
+    def lastIndexOfSliceO(that: String): Index =
+      ring.lastIndexOfSliceO(that.toIndexedSeq)
 
-    def lastIndexOfSliceO(slice: String, end: Index): Index =
-      ring.lastIndexOfSliceO(slice.toIndexedSeq, end)
+    def lastIndexOfSliceO(that: String, end: Index): Index =
+      ring.lastIndexOfSliceO(that.toIndexedSeq, end)
 
     def slidingO(size: Int, step: Int = 1): Iterator[String] =
       ring.slidingO(size, step).map(_.mkString)
