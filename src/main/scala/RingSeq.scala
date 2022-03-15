@@ -49,7 +49,7 @@ object RingSeq {
       java.lang.Math.floorMod(i, ring.size)
 
     /**
-     * Get the element at some circular index.
+     * Gets the element at some circular index.
      * @param i [[IndexO]]
      * @throws java.lang.ArithmeticException if `Seq` is empty
      * @example
@@ -78,7 +78,7 @@ object RingSeq {
       }
 
     /**
-     * Rotate the sequence to the left by some steps.
+     * Rotates the sequence to the left by some steps.
      * @param step Int
      * @return an immutable sequence consisting of all elements rotated to the left by ''step'' places.
      *         If ''step'' is negative the rotation happens to the right.
@@ -91,7 +91,7 @@ object RingSeq {
       rotateRight(-step)
 
     /**
-     * Rotate the sequence to start at some circular index.
+     * Rotates the sequence to start at some circular index.
      * @param i [[IndexO]]
      * @return an immutable sequence consisting of all elements rotated to start at circular index ''i''.
      *         It is equivalent to [[rotateLeft]].
@@ -104,7 +104,7 @@ object RingSeq {
       rotateLeft(i)
 
     /**
-     * Reflect the sequence to start at some circular index.
+     * Reflects the sequence to start at some circular index.
      * @param i [[IndexO]]
      * @return an immutable sequence consisting of all elements reversed and rotated to start at circular index ''i''.
      * @example
@@ -154,8 +154,17 @@ object RingSeq {
     private def growBy(growth: Int): Seq[A] =
       sliceO(0, ring.size + growth)
 
-    def containsSliceO(slice: Seq[A]): Boolean =
-      growBy(slice.size - 1).containsSlice(slice)
+    /**
+     * Tests whether this immutable circular sequence contains a given sequence as a slice.
+     * @param that the sequence to test
+     * @return true if this immutable circular sequence contains a slice with the same elements as that, otherwise false.
+     * @example
+     *  {{{
+     *  Seq(0, 1, 2).containsSliceO(Seq(2, 0)) // true
+     *  }}}
+     */
+    def containsSliceO(that: Seq[A]): Boolean =
+      growBy(that.size - 1).containsSlice(that)
 
     def indexOfSliceO(slice: Seq[A]): Index =
       growBy(slice.size - 1).indexOfSlice(slice)
@@ -236,7 +245,7 @@ object RingSeq {
       s.toIndexedSeq
 
     /**
-     * Get the char at some circular index.
+     * Gets the char at some circular index.
      * @param i [[IndexO]]
      * @throws java.lang.ArithmeticException if `String` is empty
      * @example
@@ -248,7 +257,7 @@ object RingSeq {
       ring.applyO(i)
 
     /**
-     * Rotate the string to the right by some steps.
+     * Rotates the string to the right by some steps.
      * @param step Int
      * @return a string consisting of all chars rotated to the right by ''step'' places.
      *         If ''step'' is negative the rotation happens to the left.
@@ -261,7 +270,7 @@ object RingSeq {
       ring.rotateRight(step).mkString
 
     /**
-     * Rotate the string to the left by some steps.
+     * Rotates the string to the left by some steps.
      * @param step Int
      * @return a string consisting of all chars rotated to the left by ''step'' places.
      *         If ''step'' is negative the rotation happens to the right.
@@ -274,7 +283,7 @@ object RingSeq {
       ring.rotateLeft(step).mkString
 
     /**
-     * Rotate the string to start at some circular index.
+     * Rotates the string to start at some circular index.
      * @param i [[IndexO]]
      * @return a string consisting of all chars rotated to start at circular index ''i''.
      *         It is equivalent to [[rotateLeft]].
@@ -287,7 +296,7 @@ object RingSeq {
       ring.startAt(i).mkString
 
     /**
-     * Reflect the string to start at some circular index.
+     * Reflects the string to start at some circular index.
      * @param i [[IndexO]]
      * @return a string consisting of all chars reversed and rotated to start at circular index ''i''.
      * @example
@@ -327,6 +336,15 @@ object RingSeq {
     def sliceO(from: IndexO, until: IndexO): String =
       ring.sliceO(from, until).mkString
 
+    /**
+     * Tests whether this circular string contains a given string as a slice.
+     * @param that the string to test
+     * @return true if this circular string contains a string with the same chars as that, otherwise false.
+     * @example
+     *  {{{
+     *   "ABC".containsSliceO("CA") // true
+     *  }}}
+     */
     def containsSliceO(slice: String): Boolean =
       ring.containsSliceO(slice.toIndexedSeq)
 
