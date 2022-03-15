@@ -27,10 +27,10 @@ class OMethodsSpec extends AnyFlatSpec with should.Matchers {
 
   "An empty Seq" must "have no indexed elements" in {
     assertThrows[IndexOutOfBoundsException] {
-      Vector.empty.apply(0)
+      Seq.empty.apply(0)
     }
     assertThrows[ArithmeticException] {
-      Vector.empty.applyO(0)
+      Seq.empty.applyO(0)
     }
   }
 
