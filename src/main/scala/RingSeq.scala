@@ -6,6 +6,30 @@ object RingSeq {
   /* and a RingVector index, any value is valid */
   type IndexO = Int
 
+  private def emptied[A](seq: Seq[A]): Seq[A] =
+    seq.take(0)
+
+  private def multiply[A](seq: Seq[A], times: Int): Seq[A] =
+    (0 until times).foldLeft(emptied(seq))((acc, _) => acc ++ seq)
+
+  private def greaterHalfSize(size: Int): Int =
+    Math.ceil(size / 2.0).toInt
+
+  private def checkReflectionAxis[A](seq: Seq[A], gap: Int): Boolean =
+    (0 until greaterHalfSize(seq.size)).forall(j => seq.applyO(j + 1) == seq.applyO(-(j + gap)))
+
+  private def hasHeadOnAxis[A](seq: Seq[A]): Boolean =
+    checkReflectionAxis(seq, 1)
+
+  private def hasAxisBetweenHeadAndNext[A](seq: Seq[A]): Boolean =
+    checkReflectionAxis(seq, 0)
+
+  private def findReflectionSymmetry[A](seq: Seq[A]): Option[Index] =
+    (0 until greaterHalfSize(seq.size)).find(j => {
+      val rotation = seq.startAt(j)
+      hasHeadOnAxis(rotation) || hasAxisBetweenHeadAndNext(rotation)
+    })
+
   implicit class RingSeqEnrichment[A](ring: Seq[A]) {
 
     private def index(i: IndexO): Index =
@@ -33,19 +57,13 @@ object RingSeq {
     def segmentLengthO(p: A => Boolean, from: IndexO = 0): Int =
       startAt(from).segmentLength(p)
 
-    private def emptied: Seq[A] =
-      ring.take(0)
-
-    protected def multiply(times: Int): Seq[A] =
-      (0 until times).foldLeft(emptied)((acc, _) => acc ++ ring)
-
     def sliceO(from: IndexO, to: IndexO): Seq[A] = {
       if (ring.isEmpty) ring
-      else if (from >= to) emptied
+      else if (from >= to) emptied(ring)
       else {
         val length = to - from
         val times = Math.ceil(length / ring.size).toInt + 1
-        startAt(from).multiply(times).take(length)
+        multiply(startAt(from), times).take(length)
       }
     }
 
@@ -109,30 +127,12 @@ object RingSeq {
       }
     }
 
-    private def greaterHalfSize: Int =
-      Math.ceil(ring.size / 2.0).toInt
-
-    private def checkReflectionAxis(gap: Int): Boolean =
-      (0 until greaterHalfSize).forall(j => applyO(j + 1) == applyO(-(j + gap)))
-
-    protected def hasHeadOnAxis: Boolean =
-      checkReflectionAxis(1)
-
-    protected def hasAxisBetweenHeadAndNext: Boolean =
-      checkReflectionAxis(0)
-
-    protected def findReflectionSymmetry: Option[Index] =
-      (0 until greaterHalfSize).find(j => {
-        val rotation = startAt(j)
-        rotation.hasHeadOnAxis || rotation.hasAxisBetweenHeadAndNext
-      })
-
     def symmetryIndices: List[Index] =
       if (ring.isEmpty) Nil
       else {
         val folds = rotationalSymmetry
         val foldSize = ring.size / folds
-        ring.take(foldSize).findReflectionSymmetry match {
+        findReflectionSymmetry(ring.take(foldSize)) match {
           case None => Nil
           case Some(j) => (0 until folds).toList.map(_ * foldSize + j)
         }
