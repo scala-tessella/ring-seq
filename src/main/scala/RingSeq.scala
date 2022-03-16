@@ -258,7 +258,7 @@ object RingSeq {
      * @param that the sequence to test
      * @return true if this circular sequence is a reversion of ''that'',
      *         otherwise false.
-     * @example {{{Seq(0, 1, 2).isReflectionOf(Seq(2, 1, 0)) // true}}}
+     * @example {{{Seq(0, 1, 2).isReversionOf(Seq(2, 1, 0)) // true}}}
      */
     def isReversionOf(that: Seq[A]): Boolean =
       isTransformationOf(that, _.reversions)
@@ -268,7 +268,7 @@ object RingSeq {
      * @param that the sequence to test
      * @return true if this circular sequence is a rotation or a reflection of ''that'',
      *         otherwise false.
-     * @example {{{Seq(0, 1, 2).isReflectionOf(Seq(2, 0, 1)) // true}}}
+     * @example {{{Seq(0, 1, 2).isRotationOrReflectionOf(Seq(2, 0, 1)) // true}}}
      */
     def isRotationOrReflectionOf(that: Seq[A]): Boolean =
       isTransformationOf(that, _.rotationsAndReflections)
@@ -276,6 +276,11 @@ object RingSeq {
     private def areFoldsSymmetrical: Int => Boolean =
       n => rotateRight(ring.size / n) == ring
 
+    /**
+     * Computes the order of rotational symmetry possessed by this circular sequence.
+     * @return the number >= 1 of rotations in which this circular sequence looks exactly the same.
+     * @example {{{Seq(0, 1, 2, 0, 1, 2).rotationalSymmetry // 2}}}
+     */
     def rotationalSymmetry: Int = {
       val size = ring.size
       if (size < 2) 1
@@ -285,6 +290,12 @@ object RingSeq {
       }
     }
 
+    /**
+     * Finds the indices of each element of this circular sequence closer to an axis of reflectional symmetry.
+     * @return the indices of each element of this circular sequence closer to an axis of reflectional symmetry,
+     *         that is a line of symmetry that splits the sequence in two identical halves.
+     * @example {{{Seq(2, 1, 2, 2, 1, 2, 2, 1, 2, 2, 1, 2).symmetryIndices // List(1, 4, 7, 10)}}}
+     */
     def symmetryIndices: List[Index] =
       if (ring.isEmpty) Nil
       else {
@@ -296,8 +307,15 @@ object RingSeq {
         }
       }
 
+    /**
+     * Computes the order of reflectional (mirror) symmetry possessed by this circular sequence.
+     * @return the number >= 0 of reflections in which this circular sequence looks exactly the same.
+     * @example {{{Seq(2, 1, 2, 2, 1, 2, 2, 1, 2, 2, 1, 2).symmetry // 4}}}
+     */
     def symmetry: Int =
-      symmetryIndices.size  }
+      symmetryIndices.size
+
+  }
 
   /**
    * Provides methods for a generic `Seq` considered circular.
