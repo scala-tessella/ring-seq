@@ -1,5 +1,5 @@
-/** Adds methods to [[https://www.scala-lang.org/api/current/scala/collection/immutable/Seq.html scala.collection.immutable.Seq]]
- * (and subtypes) when considered circular, its elements forming a ring network.
+/** Adds implicit methods to [[https://www.scala-lang.org/api/current/scala/collection/immutable/Seq.html scala.collection.immutable.Seq]]
+ * (and subtypes) for when a sequence needs to be considered '''circular''', its elements forming a ring network.
  *
  * @author Mario Càllisto
  */
@@ -10,7 +10,7 @@ object RingSeq {
 
   /** For improved readability, the index of a circular `Seq`.
    *
-   * @note any value is valid, provided the `Seq` is not empty
+   * @note any value is a valid index, provided that `Seq` is not empty
    */
   type IndexO = Int
 
@@ -44,6 +44,7 @@ object RingSeq {
   /** Decorators for a `Seq` considered circular. */
   trait RingDecorators[A] extends Any {
 
+    /** The circular sequence */
     def ring: Seq[A]
 
     private def index(i: IndexO): Index =
@@ -319,6 +320,10 @@ object RingSeq {
   /** Provides methods for a String considered circular. */
   implicit class RingStringEnrichment(val s: String) extends AnyVal with RingDecorators[Char] {
 
+    /** Converts this string into a circular 'Seq'.
+     *
+     * @return the string as a sequence of ''Char''.
+     */
     def ring: Seq[Char] = s.toSeq
 
   }
