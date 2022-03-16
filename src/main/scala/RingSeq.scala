@@ -167,7 +167,7 @@ object RingSeq {
      * Finds last index before or at a given end index where this circular sequence contains a given sequence as a slice.
      * @param that the sequence to test
      * @param end [[IndexO]]
-     * @return the last index <= ''end'' such that the elements of this immutable sequence starting at this index
+     * @return the last index <= ''end'' such that the elements of this circular sequence starting at this index
      *         match the elements of sequence ''that'',
      *         or -1 if no such subsequence exists.
      * @example {{{Seq(0, 1, 2, 0, 1, 2).lastIndexOfSliceO(Seq(2, 0)) // 5}}}
@@ -190,15 +190,43 @@ object RingSeq {
     private def transformations(f: Seq[A] => Iterator[Seq[A]]): Iterator[Seq[A]] =
       if (ring.isEmpty) Iterator(ring) else f(ring)
 
+    /**
+     * Computes all the rotations of this circular sequence
+     * @return An iterator producing all the sequences obtained by rotating this circular sequence,
+     *         starting from itself and moving one rotation step to the right,
+     *         or just itself if empty.
+     * @example {{{Seq(0, 1, 2).rotations // Iterator(Seq(0, 1, 2), Seq(1, 2, 0), Seq(2, 0, 1))}}}
+     */
     def rotations: Iterator[Seq[A]] =
       transformations(r => slidingO(r.size))
 
+    /**
+     * Computes all the reflections of this circular sequence
+     * @return An iterator producing the 2 sequences obtained by reflecting this circular sequence,
+     *         starting from itself,
+     *         or just itself if empty.
+     * @example {{{Seq(0, 1, 2).reflections // Iterator(Seq(0, 1, 2), Seq(0, 2, 1))}}}
+     */
     def reflections: Iterator[Seq[A]] =
       transformations(r => List(r, r.reflectAt()).iterator)
 
+    /**
+     * Computes all the reversions of this circular sequence
+     * @return An iterator producing the 2 sequences obtained by reversing this circular sequence,
+     *         starting from itself,
+     *         or just itself if empty.
+     * @example {{{Seq(0, 1, 2).reversions // Iterator(Seq(0, 1, 2), Seq(2, 1, 0))}}}
+     */
     def reversions: Iterator[Seq[A]] =
       transformations(r => List(r, r.reverse).iterator)
 
+    /**
+     * Computes all the rotations and reflections of this circular sequence
+     * @return An iterator producing all the sequences obtained by rotating and reflecting this circular sequence,
+     *         starting from itself and moving one rotation step to the right, then reflecting and doing the same,
+     *         or just itself if empty.
+     * @example {{{Seq(0, 1, 2).rotations // Iterator(Seq(0, 1, 2), Seq(1, 2, 0), Seq(2, 0, 1), Seq(0, 2, 1), Seq(2, 1, 0), Seq(1, 0, 2))}}}
+     */
     def rotationsAndReflections: Iterator[Seq[A]] =
       transformations(_.reflections.flatMap(_.rotations))
 

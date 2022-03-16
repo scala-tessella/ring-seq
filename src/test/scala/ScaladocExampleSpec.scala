@@ -17,6 +17,11 @@ class ScaladocExampleSpec extends AnyFlatSpec with should.Matchers {
     Seq(0, 1, 2).indexOfSliceO(Seq(2, 0, 1, 2, 0)) shouldBe 2
     Seq(0, 1, 2, 0, 1, 2).lastIndexOfSliceO(Seq(2, 0)) shouldBe 5
     Seq(0, 1, 2).slidingO(2).toList shouldBe List(Seq(0, 1), Seq(1, 2), Seq(2, 0))
+    Seq(0, 1, 2).rotations.toList shouldBe List(Seq(0, 1, 2), Seq(1, 2, 0), Seq(2, 0, 1))
+    Seq(0, 1, 2).reflections.toList shouldBe List(Seq(0, 1, 2), Seq(0, 2, 1))
+    Seq(0, 1, 2).reversions.toList shouldBe List(Seq(0, 1, 2), Seq(2, 1, 0))
+    Seq(0, 1, 2).rotationsAndReflections.toList shouldBe List(Seq(0, 1, 2), Seq(1, 2, 0), Seq(2, 0, 1), Seq(0, 2, 1), Seq(2, 1, 0), Seq(1, 0, 2))
+
   }
 
 }
