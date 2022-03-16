@@ -65,7 +65,7 @@ object RingSeq {
     /**
      * Rotate the sequence to the right by some steps.
      * @param step Int
-     * @return an sequence consisting of all elements rotated to the right by ''step'' places.
+     * @return a sequence consisting of all elements rotated to the right by ''step'' places.
      *         If ''step'' is negative the rotation happens to the left.
      * @example {{{Seq(0, 1, 2).rotateRight(1) // Seq(2, 0, 1)}}}
      */
@@ -79,7 +79,7 @@ object RingSeq {
     /**
      * Rotates the sequence to the left by some steps.
      * @param step Int
-     * @return an sequence consisting of all elements rotated to the left by ''step'' places.
+     * @return a sequence consisting of all elements rotated to the left by ''step'' places.
      *         If ''step'' is negative the rotation happens to the right.
      * @example {{{Seq(0, 1, 2).rotateLeft(1) // Seq(1, 2, 0)}}}
      */
@@ -89,7 +89,7 @@ object RingSeq {
     /**
      * Rotates the sequence to start at some circular index.
      * @param i [[IndexO]]
-     * @return an sequence consisting of all elements rotated to start at circular index ''i''.
+     * @return a sequence consisting of all elements rotated to start at circular index ''i''.
      *         It is equivalent to [[rotateLeft]].
      * @example {{{Seq(0, 1, 2).startAt(1) // Seq(1, 2, 0)}}}
      */
@@ -99,7 +99,7 @@ object RingSeq {
     /**
      * Reflects the sequence to start at some circular index.
      * @param i [[IndexO]]
-     * @return an sequence consisting of all elements reversed and rotated to start at circular index ''i''.
+     * @return a sequence consisting of all elements reversed and rotated to start at circular index ''i''.
      * @example {{{Seq(0, 1, 2).reflectAt() // Seq(0, 2, 1)}}}
      */
     def reflectAt(i: IndexO = 0): Seq[A] =
@@ -121,7 +121,7 @@ object RingSeq {
      * Selects an interval of elements.
      * @param from [[IndexO]]
      * @param until [[IndexO]]
-     * @return an sequence containing the elements greater than or equal to circular index ''from''
+     * @return a sequence containing the elements greater than or equal to circular index ''from''
      *         extending up to (but not including) circular index ''until'' of this sequence.
      * @note a slice of a circular sequence can be bigger than the size of the elements in the sequence.
      * @example {{{Seq(0, 1, 2).sliceO(-1, 4) // Seq(2, 0, 1, 2, 0)}}}
