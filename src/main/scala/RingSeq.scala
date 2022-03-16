@@ -230,9 +230,6 @@ object RingSeq {
     def rotationsAndReflections: Iterator[Seq[A]] =
       transformations(_.reflections.flatMap(_.rotations))
 
-    def minRotation(implicit ordering: Ordering[Seq[A]]): Seq[A] =
-      rotations.min(ordering)
-
     private def isTransformationOf(other: Seq[A], f: Seq[A] => Iterator[Seq[A]]): Boolean =
       ring.sizeCompare(other) == 0 && f(ring).contains(other)
 
@@ -241,6 +238,9 @@ object RingSeq {
 
     def isReflectionOf(other: Seq[A]): Boolean =
       isTransformationOf(other, _.reflections)
+
+    def isReversionOf(other: Seq[A]): Boolean =
+      isTransformationOf(other, _.reversions)
 
     def isRotationOrReflectionOf(other: Seq[A]): Boolean =
       isTransformationOf(other, _.rotationsAndReflections)

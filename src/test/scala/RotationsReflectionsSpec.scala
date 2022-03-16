@@ -6,7 +6,6 @@ import org.scalacheck.Arbitrary.arbitrary
 import org.scalatest.flatspec._
 import org.scalatest.matchers._
 
-import math.Ordering.Implicits.seqOrdering
 import scala.collection.immutable.Queue
 
 class RotationsReflectionsSpec extends AnyFlatSpec with should.Matchers {
@@ -35,11 +34,11 @@ class RotationsReflectionsSpec extends AnyFlatSpec with should.Matchers {
   }
 
   it can "be reflected" in {
-    s.reflectAt() shouldBe Vector(1, 5, 4, 3, 2)
+    s.reflectAt() shouldBe Seq(1, 5, 4, 3, 2)
   }
 
   it can "be reflected at a given index" in {
-    s.reflectAt(2) shouldBe Vector(3, 2, 1, 5, 4)
+    s.reflectAt(2) shouldBe Seq(3, 2, 1, 5, 4)
   }
 
   it can "be reflected as reversed" in {
@@ -85,20 +84,20 @@ class RotationsReflectionsSpec extends AnyFlatSpec with should.Matchers {
     )
   }
 
-  it can "return the sorted minimum rotation" in {
-    Seq(1, 2, 3, 4, 1).minRotation shouldBe Seq(1, 1, 2, 3, 4)
-  }
-
-  it can "be the rotation of another Vector" in {
+  it can "be the rotation of another Seq" in {
     s.isRotationOf(Seq(3, 4, 5, 1, 2)) shouldBe true
     s.rotations.forall(s.isRotationOf) shouldBe true
   }
 
-  it can "be the reflection of another Vector" in {
+  it can "be the reflection of another Seq" in {
     s.isReflectionOf(Seq(1, 5, 4, 3, 2)) shouldBe true
   }
 
-  it can "be the rotation or reflection of another Vector" in {
+  it can "be the reversion of another Seq" in {
+    s.isReversionOf(Seq(5, 4, 3, 2, 1)) shouldBe true
+  }
+
+  it can "be the rotation or reflection of another Seq" in {
     s.isRotationOrReflectionOf(Seq(3, 2, 1, 5, 4)) shouldBe true
     s.rotationsAndReflections.forall(s.isRotationOrReflectionOf) shouldBe true
   }
@@ -109,7 +108,7 @@ class RotationsReflectionsSpec extends AnyFlatSpec with should.Matchers {
     )(_)
   }
 
-  "All rotations and reflections of a Vector" must "contain itself" in {
+  "All rotations and reflections of a Seq" must "contain itself" in {
     check(
       forAll(arbitrary[Seq[Int]])(seq => seq.rotationsAndReflections.contains(seq))
     )(_)
