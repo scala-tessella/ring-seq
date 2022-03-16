@@ -1,17 +1,15 @@
-/**
- * Adds methods to [[https://www.scala-lang.org/api/current/scala/collection/immutable/Seq.html scala.collection.immutable.Seq]]
+/** Adds methods to [[https://www.scala-lang.org/api/current/scala/collection/immutable/Seq.html scala.collection.immutable.Seq]]
  * (and subtypes) when considered circular, its elements forming a ring network.
+ *
  * @author Mario Càllisto
  */
 object RingSeq {
 
-  /**
-   * For improved readability, the index of a `Seq`.
-   */
+  /** For improved readability, the index of a `Seq`. */
   type Index = Int
 
-  /**
-   * For improved readability, the index of a circular `Seq`.
+  /** For improved readability, the index of a circular `Seq`.
+   *
    * @note any value is valid, provided the `Seq` is not empty
    */
   type IndexO = Int
@@ -43,9 +41,7 @@ object RingSeq {
       hasHeadOnAxis(rotation) || hasAxisBetweenHeadAndNext(rotation)
     })
 
-  /**
-   * Decorators for a `Seq` considered circular.
-   */
+  /** Decorators for a `Seq` considered circular. */
   trait RingDecorators[A] extends Any {
 
     def ring: Seq[A]
@@ -53,8 +49,8 @@ object RingSeq {
     private def index(i: IndexO): Index =
       floor(i, ring.size)
 
-    /**
-     * Gets the element at some circular index.
+    /** Gets the element at some circular index.
+     *
      * @param i [[IndexO]]
      * @throws java.lang.ArithmeticException if `Seq` is empty
      * @example {{{Seq(0, 1, 2).applyO(3) // 0}}}
@@ -62,8 +58,8 @@ object RingSeq {
     def applyO(i: IndexO): A =
       ring(index(i))
 
-    /**
-     * Rotate the sequence to the right by some steps.
+    /** Rotate the sequence to the right by some steps.
+     *
      * @param step Int
      * @return a sequence consisting of all elements rotated to the right by ''step'' places.
      *         If ''step'' is negative the rotation happens to the left.
@@ -76,8 +72,8 @@ object RingSeq {
         ring.drop(j) ++ ring.take(j)
       }
 
-    /**
-     * Rotates the sequence to the left by some steps.
+    /** Rotates the sequence to the left by some steps.
+     *
      * @param step Int
      * @return a sequence consisting of all elements rotated to the left by ''step'' places.
      *         If ''step'' is negative the rotation happens to the right.
@@ -86,8 +82,8 @@ object RingSeq {
     def rotateLeft(step: Int): Seq[A] =
       rotateRight(-step)
 
-    /**
-     * Rotates the sequence to start at some circular index.
+    /** Rotates the sequence to start at some circular index.
+     *
      * @param i [[IndexO]]
      * @return a sequence consisting of all elements rotated to start at circular index ''i''.
      *         It is equivalent to [[rotateLeft]].
@@ -96,8 +92,8 @@ object RingSeq {
     def startAt(i: IndexO): Seq[A] =
       rotateLeft(i)
 
-    /**
-     * Reflects the sequence to start at some circular index.
+    /** Reflects the sequence to start at some circular index.
+     *
      * @param i [[IndexO]]
      * @return a sequence consisting of all elements reversed and rotated to start at circular index ''i''.
      * @example {{{Seq(0, 1, 2).reflectAt() // Seq(0, 2, 1)}}}
@@ -105,10 +101,10 @@ object RingSeq {
     def reflectAt(i: IndexO = 0): Seq[A] =
       startAt(i + 1).reverse
 
-    /**
-     * Computes the length of the longest segment that starts from some circular index
+    /** Computes the length of the longest segment that starts from some circular index
      * and whose elements all satisfy some predicate.
-     * @param p the predicate used to test elements
+     *
+     * @param p    the predicate used to test elements
      * @param from [[IndexO]]
      * @return the length of the longest segment of this sequence starting from circular index ''from''
      *         such that every element of the segment satisfies the predicate ''p''
@@ -117,9 +113,9 @@ object RingSeq {
     def segmentLengthO(p: A => Boolean, from: IndexO = 0): Int =
       startAt(from).segmentLength(p)
 
-    /**
-     * Selects an interval of elements.
-     * @param from [[IndexO]]
+    /** Selects an interval of elements.
+     *
+     * @param from  [[IndexO]]
      * @param until [[IndexO]]
      * @return a sequence containing the elements greater than or equal to circular index ''from''
      *         extending up to (but not including) circular index ''until'' of this sequence.
@@ -139,8 +135,8 @@ object RingSeq {
     private def growBy(growth: Int): Seq[A] =
       sliceO(0, ring.size + growth)
 
-    /**
-     * Tests whether this circular sequence contains a given sequence as a slice.
+    /** Tests whether this circular sequence contains a given sequence as a slice.
+     *
      * @param that the sequence to test
      * @return true if this circular sequence contains a slice with the same elements as ''that'',
      *         otherwise false.
@@ -149,8 +145,8 @@ object RingSeq {
     def containsSliceO(that: Seq[A]): Boolean =
       growBy(that.size - 1).containsSlice(that)
 
-    /**
-     * Finds first index after or at a start index where this circular sequence contains a given sequence as a slice.
+    /** Finds first index after or at a start index where this circular sequence contains a given sequence as a slice.
+     *
      * @param that the sequence to test
      * @param from [[IndexO]]
      * @return the first index >= ''from'' such that the elements of this circular sequence starting at this index
@@ -163,10 +159,10 @@ object RingSeq {
       grown.indexOfSlice(that, floor(from, grown.size))
     }
 
-    /**
-     * Finds last index before or at a given end index where this circular sequence contains a given sequence as a slice.
+    /** Finds last index before or at a given end index where this circular sequence contains a given sequence as a slice.
+     *
      * @param that the sequence to test
-     * @param end [[IndexO]]
+     * @param end  [[IndexO]]
      * @return the last index <= ''end'' such that the elements of this circular sequence starting at this index
      *         match the elements of sequence ''that'',
      *         or -1 if no such subsequence exists.
@@ -177,8 +173,8 @@ object RingSeq {
       grown.lastIndexOfSlice(that, floor(end, grown.size))
     }
 
-    /**
-     * Groups elements in fixed size blocks by passing a "sliding window" over them
+    /** Groups elements in fixed size blocks by passing a "sliding window" over them
+     *
      * @param size the number of elements per group
      * @param step the distance between the first elements of successive groups
      * @return An iterator producing sequences of size ''size''.
@@ -190,8 +186,8 @@ object RingSeq {
     private def transformations(f: Seq[A] => Iterator[Seq[A]]): Iterator[Seq[A]] =
       if (ring.isEmpty) Iterator(ring) else f(ring)
 
-    /**
-     * Computes all the rotations of this circular sequence
+    /** Computes all the rotations of this circular sequence
+     *
      * @return An iterator producing all the sequences obtained by rotating this circular sequence,
      *         starting from itself and moving one rotation step to the right,
      *         or just itself if empty.
@@ -200,8 +196,8 @@ object RingSeq {
     def rotations: Iterator[Seq[A]] =
       transformations(r => slidingO(r.size))
 
-    /**
-     * Computes all the reflections of this circular sequence
+    /** Computes all the reflections of this circular sequence
+     *
      * @return An iterator producing the 2 sequences obtained by reflecting this circular sequence,
      *         starting from itself,
      *         or just itself if empty.
@@ -210,8 +206,8 @@ object RingSeq {
     def reflections: Iterator[Seq[A]] =
       transformations(r => List(r, r.reflectAt()).iterator)
 
-    /**
-     * Computes all the reversions of this circular sequence
+    /** Computes all the reversions of this circular sequence
+     *
      * @return An iterator producing the 2 sequences obtained by reversing this circular sequence,
      *         starting from itself,
      *         or just itself if empty.
@@ -220,8 +216,8 @@ object RingSeq {
     def reversions: Iterator[Seq[A]] =
       transformations(r => List(r, r.reverse).iterator)
 
-    /**
-     * Computes all the rotations and reflections of this circular sequence
+    /** Computes all the rotations and reflections of this circular sequence
+     *
      * @return An iterator producing all the sequences obtained by rotating and reflecting this circular sequence,
      *         starting from itself and moving one rotation step to the right, then reflecting and doing the same,
      *         or just itself if empty.
@@ -233,8 +229,8 @@ object RingSeq {
     private def isTransformationOf(that: Seq[A], f: Seq[A] => Iterator[Seq[A]]): Boolean =
       ring.sizeCompare(that) == 0 && f(ring).contains(that)
 
-    /**
-     * Tests whether this circular sequence is a rotation of a given sequence.
+    /** Tests whether this circular sequence is a rotation of a given sequence.
+     *
      * @param that the sequence to test
      * @return true if this circular sequence is a rotation of ''that'',
      *         otherwise false.
@@ -243,8 +239,8 @@ object RingSeq {
     def isRotationOf(that: Seq[A]): Boolean =
       isTransformationOf(that, _.rotations)
 
-    /**
-     * Tests whether this circular sequence is a reflection of a given sequence.
+    /** Tests whether this circular sequence is a reflection of a given sequence.
+     *
      * @param that the sequence to test
      * @return true if this circular sequence is a reflection of ''that'',
      *         otherwise false.
@@ -253,8 +249,8 @@ object RingSeq {
     def isReflectionOf(that: Seq[A]): Boolean =
       isTransformationOf(that, _.reflections)
 
-    /**
-     * Tests whether this circular sequence is a reversion of a given sequence.
+    /** Tests whether this circular sequence is a reversion of a given sequence.
+     *
      * @param that the sequence to test
      * @return true if this circular sequence is a reversion of ''that'',
      *         otherwise false.
@@ -263,8 +259,8 @@ object RingSeq {
     def isReversionOf(that: Seq[A]): Boolean =
       isTransformationOf(that, _.reversions)
 
-    /**
-     * Tests whether this circular sequence is a rotation or a reflection of a given sequence.
+    /** Tests whether this circular sequence is a rotation or a reflection of a given sequence.
+     *
      * @param that the sequence to test
      * @return true if this circular sequence is a rotation or a reflection of ''that'',
      *         otherwise false.
@@ -276,8 +272,8 @@ object RingSeq {
     private def areFoldsSymmetrical: Int => Boolean =
       n => rotateRight(ring.size / n) == ring
 
-    /**
-     * Computes the order of rotational symmetry possessed by this circular sequence.
+    /** Computes the order of rotational symmetry possessed by this circular sequence.
+     *
      * @return the number >= 1 of rotations in which this circular sequence looks exactly the same.
      * @example {{{Seq(0, 1, 2, 0, 1, 2).rotationalSymmetry // 2}}}
      */
@@ -290,8 +286,8 @@ object RingSeq {
       }
     }
 
-    /**
-     * Finds the indices of each element of this circular sequence closer to an axis of reflectional symmetry.
+    /** Finds the indices of each element of this circular sequence closer to an axis of reflectional symmetry.
+     *
      * @return the indices of each element of this circular sequence closer to an axis of reflectional symmetry,
      *         that is a line of symmetry that splits the sequence in two identical halves.
      * @example {{{Seq(2, 1, 2, 2, 1, 2, 2, 1, 2, 2, 1, 2).symmetryIndices // List(1, 4, 7, 10)}}}
@@ -307,8 +303,8 @@ object RingSeq {
         }
       }
 
-    /**
-     * Computes the order of reflectional (mirror) symmetry possessed by this circular sequence.
+    /** Computes the order of reflectional (mirror) symmetry possessed by this circular sequence.
+     *
      * @return the number >= 0 of reflections in which this circular sequence looks exactly the same.
      * @example {{{Seq(2, 1, 2, 2, 1, 2, 2, 1, 2, 2, 1, 2).symmetry // 4}}}
      */
@@ -317,14 +313,10 @@ object RingSeq {
 
   }
 
-  /**
-   * Provides methods for a generic `Seq` considered circular.
-   */
+  /** Provides methods for a generic `Seq` considered circular. */
   implicit class RingSeqEnrichment[A](val ring: Seq[A]) extends AnyVal with RingDecorators[A]
 
-  /**
-   * Provides methods for a String considered circular.
-   */
+  /** Provides methods for a String considered circular. */
   implicit class RingStringEnrichment(val s: String) extends AnyVal with RingDecorators[Char] {
 
     def ring: Seq[Char] = s.toSeq
