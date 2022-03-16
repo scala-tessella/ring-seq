@@ -1,4 +1,4 @@
-/** Adds implicit methods to [[https://www.scala-lang.org/api/current/scala/collection/immutable/Seq.html scala.collection.immutable.Seq]]
+/** Adds implicit methods to `[[https://www.scala-lang.org/api/current/scala/collection/immutable/Seq.html immutable.Seq]]`
  * (and subtypes) for when a sequence needs to be considered '''circular''', its elements forming a ring network.
  *
  * @author Mario Càllisto
@@ -317,7 +317,7 @@ object RingSeq {
   /** Provides methods for a generic `Seq` considered circular. */
   implicit class RingSeqEnrichment[A](val ring: Seq[A]) extends AnyVal with RingDecorators[A]
 
-  /** Provides methods for a String considered circular. */
+  /** Provides methods for a `String` considered circular. */
   implicit class RingStringEnrichment(val s: String) extends AnyVal with RingDecorators[Char] {
 
     /** Converts this string into a circular 'Seq'.
