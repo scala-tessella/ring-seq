@@ -230,20 +230,48 @@ object RingSeq {
     def rotationsAndReflections: Iterator[Seq[A]] =
       transformations(_.reflections.flatMap(_.rotations))
 
-    private def isTransformationOf(other: Seq[A], f: Seq[A] => Iterator[Seq[A]]): Boolean =
-      ring.sizeCompare(other) == 0 && f(ring).contains(other)
+    private def isTransformationOf(that: Seq[A], f: Seq[A] => Iterator[Seq[A]]): Boolean =
+      ring.sizeCompare(that) == 0 && f(ring).contains(that)
 
-    def isRotationOf(other: Seq[A]): Boolean =
-      isTransformationOf(other, _.rotations)
+    /**
+     * Tests whether this circular sequence is a rotation of a given sequence.
+     * @param that the sequence to test
+     * @return true if this circular sequence is a rotation of ''that'',
+     *         otherwise false.
+     * @example {{{Seq(0, 1, 2).isRotationOf(Seq(1, 2, 0)) // true}}}
+     */
+    def isRotationOf(that: Seq[A]): Boolean =
+      isTransformationOf(that, _.rotations)
 
-    def isReflectionOf(other: Seq[A]): Boolean =
-      isTransformationOf(other, _.reflections)
+    /**
+     * Tests whether this circular sequence is a reflection of a given sequence.
+     * @param that the sequence to test
+     * @return true if this circular sequence is a reflection of ''that'',
+     *         otherwise false.
+     * @example {{{Seq(0, 1, 2).isReflectionOf(Seq(0, 2, 1)) // true}}}
+     */
+    def isReflectionOf(that: Seq[A]): Boolean =
+      isTransformationOf(that, _.reflections)
 
-    def isReversionOf(other: Seq[A]): Boolean =
-      isTransformationOf(other, _.reversions)
+    /**
+     * Tests whether this circular sequence is a reversion of a given sequence.
+     * @param that the sequence to test
+     * @return true if this circular sequence is a reversion of ''that'',
+     *         otherwise false.
+     * @example {{{Seq(0, 1, 2).isReflectionOf(Seq(2, 1, 0)) // true}}}
+     */
+    def isReversionOf(that: Seq[A]): Boolean =
+      isTransformationOf(that, _.reversions)
 
-    def isRotationOrReflectionOf(other: Seq[A]): Boolean =
-      isTransformationOf(other, _.rotationsAndReflections)
+    /**
+     * Tests whether this circular sequence is a rotation or a reflection of a given sequence.
+     * @param that the sequence to test
+     * @return true if this circular sequence is a rotation or a reflection of ''that'',
+     *         otherwise false.
+     * @example {{{Seq(0, 1, 2).isReflectionOf(Seq(2, 0, 1)) // true}}}
+     */
+    def isRotationOrReflectionOf(that: Seq[A]): Boolean =
+      isTransformationOf(that, _.rotationsAndReflections)
 
     private def areFoldsSymmetrical: Int => Boolean =
       n => rotateRight(ring.size / n) == ring

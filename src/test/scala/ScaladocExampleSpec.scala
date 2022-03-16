@@ -5,7 +5,7 @@ import org.scalatest.matchers._
 
 class ScaladocExampleSpec extends AnyFlatSpec with should.Matchers {
 
-  "The Seq examples in Scaladoc" must "be correct" in {
+  "The examples in Scaladoc" must "be correct" in {
     Seq(0, 1, 2).applyO(3) shouldBe 0
     Seq(0, 1, 2).rotateRight(1) shouldBe Seq(2, 0, 1)
     Seq(0, 1, 2).rotateLeft(1) shouldBe Seq(1, 2, 0)
@@ -21,7 +21,10 @@ class ScaladocExampleSpec extends AnyFlatSpec with should.Matchers {
     Seq(0, 1, 2).reflections.toList shouldBe List(Seq(0, 1, 2), Seq(0, 2, 1))
     Seq(0, 1, 2).reversions.toList shouldBe List(Seq(0, 1, 2), Seq(2, 1, 0))
     Seq(0, 1, 2).rotationsAndReflections.toList shouldBe List(Seq(0, 1, 2), Seq(1, 2, 0), Seq(2, 0, 1), Seq(0, 2, 1), Seq(2, 1, 0), Seq(1, 0, 2))
-
+    Seq(0, 1, 2).isRotationOf(Seq(1, 2, 0)) shouldBe true
+    Seq(0, 1, 2).isReflectionOf(Seq(0, 2, 1)) shouldBe true
+    Seq(0, 1, 2).isReversionOf(Seq(2, 1, 0)) shouldBe true
+    Seq(0, 1, 2).isRotationOrReflectionOf(Seq(2, 0, 1)) shouldBe true
   }
 
 }
