@@ -19,18 +19,4 @@ class ScaladocExampleSpec extends AnyFlatSpec with should.Matchers {
     Seq(0, 1, 2).slidingO(2).toList shouldBe List(Seq(0, 1), Seq(1, 2), Seq(2, 0))
   }
 
-  "The String examples in Scaladoc" must "be correct" in {
-    "ABC".applyO(3) shouldBe 'A'
-    "ABC".rotateRight(1) shouldBe "CAB"
-    "ABC".rotateLeft(1) shouldBe "BCA"
-    "ABC".startAt(1) shouldBe "BCA"
-    "ABC".reflectAt() shouldBe "ACB"
-    "ABA".segmentLengthO(_ == 'A', 2) shouldBe 2
-    "ABC".sliceO(-1, 4) shouldBe "CABCA"
-    "ABC".containsSliceO("CABCA") shouldBe true
-    "ABC".indexOfSliceO("CABCA") shouldBe 2
-    "ABCABC".lastIndexOfSliceO("CA") shouldBe 5
-    "ABC".slidingO(2).toList shouldBe List("AB", "BC", "CA")
-  }
-
 }

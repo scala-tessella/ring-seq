@@ -46,7 +46,9 @@ object RingSeq {
   /**
    * Decorators for a `Seq` considered circular.
    */
-  implicit class RingSeqEnrichment[A](ring: Seq[A]) {
+  trait RingDecorators[A] extends Any {
+
+    def ring: Seq[A]
 
     private def index(i: IndexO): Index =
       floor(i, ring.size)
@@ -239,166 +241,19 @@ object RingSeq {
       }
 
     def symmetry: Int =
-      symmetryIndices.size
-
-  }
+      symmetryIndices.size  }
 
   /**
-   * Decorators for a String considered circular.
+   * Provides methods for a generic `Seq` considered circular.
    */
-  implicit class RingStringEnrichment(s: String) {
+  implicit class RingSeqEnrichment[A](val ring: Seq[A]) extends AnyVal with RingDecorators[A]
 
-    private def ring: IndexedSeq[Char] =
-      s.toIndexedSeq
+  /**
+   * Provides methods for a String considered circular.
+   */
+  implicit class RingStringEnrichment(val s: String) extends AnyVal with RingDecorators[Char] {
 
-    /**
-     * Gets the char at some circular index.
-     * @param i [[IndexO]]
-     * @throws java.lang.ArithmeticException if `String` is empty
-     * @example {{{"ABC".applyO(3) // 'A'}}}
-     */
-    def applyO(i: IndexO): Char =
-      ring.applyO(i)
-
-    /**
-     * Rotates the string to the right by some steps.
-     * @param step Int
-     * @return a string consisting of all chars rotated to the right by ''step'' places.
-     *         If ''step'' is negative the rotation happens to the left.
-     * @example {{{"ABC".rotateRight(1) // "CAB"}}}
-     */
-    def rotateRight(step: Int): String =
-      ring.rotateRight(step).mkString
-
-    /**
-     * Rotates the string to the left by some steps.
-     * @param step Int
-     * @return a string consisting of all chars rotated to the left by ''step'' places.
-     *         If ''step'' is negative the rotation happens to the right.
-     * @example {{{"ABC".rotateLeft(1) // "BCA"}}}
-     */
-    def rotateLeft(step: Int): String =
-      ring.rotateLeft(step).mkString
-
-    /**
-     * Rotates the string to start at some circular index.
-     * @param i [[IndexO]]
-     * @return a string consisting of all chars rotated to start at circular index ''i''.
-     *         It is equivalent to [[rotateLeft]].
-     * @example {{{"ABC".startAt(1) // "BCA"}}}
-     */
-    def startAt(i: IndexO): String =
-      ring.startAt(i).mkString
-
-    /**
-     * Reflects the string to start at some circular index.
-     * @param i [[IndexO]]
-     * @return a string consisting of all chars reversed and rotated to start at circular index ''i''.
-     * @example {{{"ABC".reflectAt() // "ACB"}}}
-     */
-    def reflectAt(i: IndexO = 0): String =
-      ring.reflectAt(i).mkString
-
-    /**
-     * Computes the length of the longest segment that starts from some circular index
-     * and whose chars all satisfy some predicate.
-     * @param p the predicate used to test chars
-     * @param from [[IndexO]]
-     * @return the length of the longest segment of this string starting from circular index ''from''
-     *         such that every char of the segment satisfies the predicate ''p''
-     * @example {{{"ABA".segmentLengthO(_ == 'A', 2) // 2}}}
-     */
-    def segmentLengthO(p: Char => Boolean, from: IndexO = 0): Int =
-      ring.segmentLengthO(p, from)
-
-    /**
-     * Selects an interval of chars.
-     * @param from [[IndexO]]
-     * @param until [[IndexO]]
-     * @return a string containing the chars greater than or equal to circular index ''from''
-     *         extending up to (but not including) circular index ''until'' of this string.
-     * @note a slice of a circular string can be bigger than the size of the elements in the string.
-     * @example {{{"ABC".sliceO(-1, 4) // "CABCA"}}}
-     */
-    def sliceO(from: IndexO, until: IndexO): String =
-      ring.sliceO(from, until).mkString
-
-    /**
-     * Tests whether this circular string contains a given string as a slice.
-     * @param that the string to test
-     * @return true if this circular string contains a string with the same chars as ''that'',
-     *         otherwise false.
-     * @example {{{"ABC".containsSliceO("CABCA") // true}}}
-     */
-    def containsSliceO(that: String): Boolean =
-      ring.containsSliceO(that.toIndexedSeq)
-
-    /**
-     * Finds first index after or at a start index where this circular string contains a given string as a slice.
-     * @param that the string to test
-     * @param from [[IndexO]]
-     * @return the first index >= ''from'' such that the chars of this circular string starting at this index
-     *         match the elements of string ''that'',
-     *         or -1 if no such string exists.
-     * @example {{{"ABC".indexOfSliceO("CABCA") // 2}}}
-     */
-    def indexOfSliceO(that: String, from: IndexO = 0): Index =
-      ring.indexOfSliceO(that.toIndexedSeq)
-
-    /**
-     * Finds last index before or at a given end index where this circular string contains a given string as a slice.
-     * @param that the string to test
-     * @param end [[IndexO]]
-     * @return the last index <= ''end'' such that the chars of this circular string starting at this index
-     *         match the elements of string ''that'',
-     *         or -1 if no such string exists.
-     * @example {{{"ABCABC".lastIndexOfSliceO("CA") // 5}}}
-     */
-    def lastIndexOfSliceO(that: String, end: IndexO = -1): Index =
-      ring.lastIndexOfSliceO(that.toIndexedSeq, end)
-
-    /**
-     * Groups chars in fixed size strings by passing a "sliding window" over them
-     * @param size the number of chars per group
-     * @param step the distance between the first chars of successive groups
-     * @return An iterator producing strings of size ''size''.
-     * @example {{{"ABC".slidingO(2).toList // Iterator("AB", "BC", "CA")}}}
-     */
-    def slidingO(size: Int, step: Int = 1): Iterator[String] =
-      ring.slidingO(size, step).map(_.mkString)
-
-    def rotations: Iterator[String] =
-      ring.rotations.map(_.mkString)
-
-    def reflections: Iterator[String] =
-      ring.reflections.map(_.mkString)
-
-    def reversions: Iterator[String] =
-      ring.reversions.map(_.mkString)
-
-    def rotationsAndReflections: Iterator[String] =
-      ring.rotationsAndReflections.map(_.mkString)
-
-    def minRotation(implicit ordering: Ordering[Seq[Char]]): String =
-      ring.minRotation(ordering).mkString
-
-    def isRotationOf(other: String): Boolean =
-      ring.isRotationOf(other.toIndexedSeq)
-
-    def isReflectionOf(other: String): Boolean =
-      ring.isReflectionOf(other.toIndexedSeq)
-
-    def isRotationOrReflectionOf(other: String): Boolean =
-      ring.isRotationOrReflectionOf(other.toIndexedSeq)
-
-    def rotationalSymmetry: Int =
-      ring.rotationalSymmetry
-
-    def symmetryIndices: List[Index] =
-      ring.symmetryIndices
-
-    def symmetry: Int =
-      ring.symmetry
+    def ring: Seq[Char] = s.toSeq
 
   }
 

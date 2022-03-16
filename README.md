@@ -6,7 +6,7 @@ Extends Scala2 [`immutable.Seq`](https://www.scala-lang.org/api/current/scala/co
 ```scala
 import RingSeq._
 
-"RING".rotateRight(1) // GRIN
+"RING".rotateRight(1).mkString // GRIN
 List(0, 1, 2, 3).startAt(2) // List(2, 3, 0, 1)
 ```
 
