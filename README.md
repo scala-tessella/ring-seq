@@ -11,7 +11,7 @@ List(0, 1, 2, 3).startAt(2) // List(2, 3, 0, 1)
 ```
 
 ## How to use
-Just import the [`RingSeq`](/src/main/scala/RingSeq.scala) object, any collection under `Seq`
+Just import the [`RingSeq`](/src/main/scala/ringseq/RingSeq.scala) object, any collection under `Seq`
 will access the new methods.
 
 ## Need
@@ -31,13 +31,13 @@ providing new circular methods to any collection under `Seq`.
 
 ### Transformations
 Rotate and reflect a circular `Seq`
-(see [test cases](/src/test/scala/ringseq.RotationsReflectionsSpec.scala)).
+(see [test cases](/src/test/scala/ringseq/RotationsReflectionsSpec.scala)).
 
 ### Circular version of existing ones
 Named as their standard non-circular `Seq` alternatives,
 but with an `O` suffix (meaning _ring_).
 
-They are (see [test cases](/src/test/scala/ringseq.OMethodsSpec.scala)):
+They are (see [test cases](/src/test/scala/ringseq/OMethodsSpec.scala)):
 * `applyO`
 * `segmentLengthO`
 * `sliceO`
@@ -48,4 +48,4 @@ They are (see [test cases](/src/test/scala/ringseq.OMethodsSpec.scala)):
 
 ### Symmetry
 Calculate rotational and reflectional symmetries of a circular `Seq`
-(see [test cases](/src/test/scala/ringseq.SymmetriesSpec.scala)).
+(see [test cases](/src/test/scala/ringseq/SymmetriesSpec.scala)).
