@@ -24,7 +24,7 @@ class Ring[A](underlying: Seq[A]) {
 
   def current: Seq[A] =
     if (isReversed) underlying.reflectAt(headIndex)
-    else underlying.rotateLeft(headIndex)
+    else underlying.startAt(headIndex)
 
 }
 
