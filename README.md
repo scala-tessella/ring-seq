@@ -11,8 +11,8 @@ List(0, 1, 2, 3).startAt(2) // List(2, 3, 0, 1)
 ```
 
 ## How to use
-Import the [`RingSeq`](/src/main/scala/RingSeq.scala) object
-where a `Seq` has to be considered circular.
+Just import the [`RingSeq`](/src/main/scala/RingSeq.scala) object, any collection under `Seq`
+will access the new methods.
 
 ## Need
 Whenever data are structured in a circular sequence,
