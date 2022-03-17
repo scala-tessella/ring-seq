@@ -1,11 +1,12 @@
-import RingSeq._
+package ringseq
 
+import org.scalacheck.Arbitrary.arbitrary
 import org.scalacheck.Gen
 import org.scalacheck.Prop.forAll
 import org.scalacheck.Test.check
-import org.scalacheck.Arbitrary.arbitrary
 import org.scalatest.flatspec._
 import org.scalatest.matchers._
+import ringseq.RingSeq._
 
 class OMethodsSpec extends AnyFlatSpec with should.Matchers {
 

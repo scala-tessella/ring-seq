@@ -1,10 +1,11 @@
-import RingSeq._
+package ringseq
 
 import org.scalacheck.Gen
 import org.scalacheck.Prop.forAll
 import org.scalacheck.Test.check
 import org.scalatest.flatspec._
 import org.scalatest.matchers._
+import ringseq.RingSeq._
 
 class SymmetriesSpec extends AnyFlatSpec with should.Matchers {
 

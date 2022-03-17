@@ -4,7 +4,7 @@
 Adds implicit methods to Scala 2 [`immutable.Seq`](https://www.scala-lang.org/api/current/scala/collection/immutable/Seq.html) (and subtypes) for when a sequence needs to be considered **circular**, its elements forming a ring.
 
 ```scala
-import RingSeq._
+import ringseq.RingSeq._
 
 "RING".rotateRight(1).mkString // GRIN
 List(0, 1, 2, 3).startAt(2) // List(2, 3, 0, 1)
@@ -31,13 +31,13 @@ providing new circular methods to any collection under `Seq`.
 
 ### Transformations
 Rotate and reflect a circular `Seq`
-(see [test cases](/src/test/scala/RotationsReflectionsSpec.scala)).
+(see [test cases](/src/test/scala/ringseq.RotationsReflectionsSpec.scala)).
 
 ### Circular version of existing ones
 Named as their standard non-circular `Seq` alternatives,
 but with an `O` suffix (meaning _ring_).
 
-They are (see [test cases](/src/test/scala/OMethodsSpec.scala)):
+They are (see [test cases](/src/test/scala/ringseq.OMethodsSpec.scala)):
 * `applyO`
 * `segmentLengthO`
 * `sliceO`
@@ -48,4 +48,4 @@ They are (see [test cases](/src/test/scala/OMethodsSpec.scala)):
 
 ### Symmetry
 Calculate rotational and reflectional symmetries of a circular `Seq`
-(see [test cases](/src/test/scala/SymmetriesSpec.scala)).
+(see [test cases](/src/test/scala/ringseq.SymmetriesSpec.scala)).

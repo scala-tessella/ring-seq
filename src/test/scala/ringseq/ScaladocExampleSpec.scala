@@ -1,7 +1,8 @@
-import RingSeq._
+package ringseq
 
 import org.scalatest.flatspec._
 import org.scalatest.matchers._
+import ringseq.RingSeq._
 
 class ScaladocExampleSpec extends AnyFlatSpec with should.Matchers {
 

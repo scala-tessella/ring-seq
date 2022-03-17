@@ -1,3 +1,5 @@
+package ringseq
+
 /** Adds implicit methods to `[[https://www.scala-lang.org/api/current/scala/collection/immutable/Seq.html immutable.Seq]]`
  * (and subtypes) for when a sequence needs to be considered '''circular''', its elements forming a ring.
  *

@@ -1,10 +1,11 @@
-import RingSeq._
+package ringseq
 
+import org.scalacheck.Arbitrary.arbitrary
 import org.scalacheck.Prop.forAll
 import org.scalacheck.Test.check
-import org.scalacheck.Arbitrary.arbitrary
 import org.scalatest.flatspec._
 import org.scalatest.matchers._
+import ringseq.RingSeq._
 
 import scala.collection.immutable.Queue
 
