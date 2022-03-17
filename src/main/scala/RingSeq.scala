@@ -320,9 +320,9 @@ object RingSeq {
   /** Provides methods for a `String` considered circular. */
   implicit class RingStringEnrichment(private val s: String) extends AnyVal with RingDecorators[Char] {
 
-    /** Converts this string into a circular 'Seq'.
+    /** Converts this string into a circular `Seq`.
      *
-     * @return the string as a sequence of ''Char''.
+     * @return the string as a sequence of `Char`.
      */
     def ring: Seq[Char] = s.toSeq
 
