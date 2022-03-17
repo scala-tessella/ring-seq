@@ -3,8 +3,6 @@
 
 Adds implicit methods to Scala 2 [`immutable.Seq`](https://www.scala-lang.org/api/current/scala/collection/immutable/Seq.html) (and subtypes) for when a sequence needs to be considered **circular**, its elements forming a ring.
 
-Extends Scala2 [`immutable.Seq`](https://www.scala-lang.org/api/current/scala/collection/immutable/Seq.html) with ring (circular) methods.
-
 ```scala
 import RingSeq._
 
