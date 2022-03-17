@@ -43,7 +43,7 @@ object RingSeq {
       hasHeadOnAxis(rotation) || hasAxisBetweenHeadAndNext(rotation)
     })
 
-  /** Decorators for a `Seq` considered circular. */
+  /** Universal trait providing decorators for a `Seq` considered circular. */
   trait RingDecorators[A] extends Any {
 
     /** The circular sequence */
@@ -316,10 +316,10 @@ object RingSeq {
 
   }
 
-  /** Provides methods for a generic `Seq` considered circular. */
+  /** Value class providing methods for a generic `Seq` considered circular. */
   implicit class RingSeqEnrichment[A](val ring: Seq[A]) extends AnyVal with RingDecorators[A]
 
-  /** Provides methods for a `String` considered circular. */
+  /** Value class providing methods for a `String` considered circular. */
   implicit class RingStringEnrichment(private val s: String) extends AnyVal with RingDecorators[Char] {
 
     /** Converts this string into a circular `Seq`.
