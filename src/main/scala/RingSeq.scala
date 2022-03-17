@@ -318,7 +318,7 @@ object RingSeq {
   implicit class RingSeqEnrichment[A](val ring: Seq[A]) extends AnyVal with RingDecorators[A]
 
   /** Provides methods for a `String` considered circular. */
-  implicit class RingStringEnrichment(val s: String) extends AnyVal with RingDecorators[Char] {
+  implicit class RingStringEnrichment(private val s: String) extends AnyVal with RingDecorators[Char] {
 
     /** Converts this string into a circular 'Seq'.
      *
