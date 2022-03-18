@@ -11,14 +11,14 @@ class RingSpec extends AnyFlatSpec with should.Matchers {
   "An instance of an examples.Ring class" must "be created with no rotation and no reversion" in {
     ring.currentHead shouldBe 1
     ring.headIndex shouldBe 0
-    ring.isReversed shouldBe false
+    ring.isReflected shouldBe false
     ring.current shouldBe underlying
   }
 
   it can "be then rotated by 1 step to the right" in {
     ring.rotateR()
     ring.headIndex shouldBe -1
-    ring.isReversed shouldBe false
+    ring.isReflected shouldBe false
     ring.currentHead shouldBe 4
     ring.current shouldBe List(4, 1, 2, 3)
   }
@@ -26,15 +26,15 @@ class RingSpec extends AnyFlatSpec with should.Matchers {
   it can "be then rotated back by 1 step to the left" in {
     ring.rotateL()
     ring.headIndex shouldBe 0
-    ring.isReversed shouldBe false
+    ring.isReflected shouldBe false
     ring.currentHead shouldBe 1
     ring.current shouldBe underlying
   }
 
   it can "be then reversed" in {
-    ring.reverse()
+    ring.reflect()
     ring.headIndex shouldBe 0
-    ring.isReversed shouldBe true
+    ring.isReflected shouldBe true
     ring.currentHead shouldBe 1
     ring.current shouldBe List(1, 4, 3, 2)
   }
@@ -42,15 +42,15 @@ class RingSpec extends AnyFlatSpec with should.Matchers {
   it can "be then rotated while reversed by 1 step to the right" in {
     ring.rotateR(1)
     ring.headIndex shouldBe 1
-    ring.isReversed shouldBe true
+    ring.isReflected shouldBe true
     ring.currentHead shouldBe 2
     ring.current shouldBe List(2, 1, 4, 3)
   }
 
   it can "be then reversed again" in {
-    ring.reverse()
+    ring.reflect()
     ring.headIndex shouldBe 1
-    ring.isReversed shouldBe false
+    ring.isReflected shouldBe false
     ring.currentHead shouldBe 2
     ring.current shouldBe List(2, 3, 4, 1)
   }
@@ -58,7 +58,7 @@ class RingSpec extends AnyFlatSpec with should.Matchers {
   it can "be then rotated back by 1 step to the right" in {
     ring.rotateR(1)
     ring.headIndex shouldBe 0
-    ring.isReversed shouldBe false
+    ring.isReflected shouldBe false
     ring.currentHead shouldBe 1
     ring.current shouldBe underlying
   }
