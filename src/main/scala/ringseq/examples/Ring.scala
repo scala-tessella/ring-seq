@@ -8,22 +8,22 @@ class Ring[A](underlying: Seq[A]) {
 
   var headIndex: IndexO = 0
 
-  var isReversed: Boolean = false
+  var isReflected: Boolean = false
 
   def rotateR(step: Int = 1): Unit =
-    headIndex += step * isReversed.toDirection
+    headIndex += step * isReflected.toDirection
 
   def rotateL(step: Int = 1): Unit =
     rotateR(-step)
 
-  def reverse(): Unit =
-    isReversed = !isReversed
+  def reflect(): Unit =
+    isReflected = !isReflected
 
   def currentHead: A =
     underlying.applyO(headIndex)
 
   def current: Seq[A] =
-    if (isReversed) underlying.reflectAt(headIndex) else underlying.startAt(headIndex)
+    if (isReflected) underlying.reflectAt(headIndex) else underlying.startAt(headIndex)
 
 }
 
