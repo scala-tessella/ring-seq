@@ -2,9 +2,11 @@ package ringseq.examples
 
 import ringseq.RingSeq._
 
-/** An example class wrapping an immutable sequence and keeping a mutable state of rotation and reflection
+import scala.collection.Seq
+
+/** An example class wrapping a sequence and keeping a mutable state of rotation and reflection
  *
- * @param underlying the wrapped immutable sequence
+ * @param underlying the wrapped sequence
  * @param headIndex mutable state of rotation, a circular index of the sequence head
  * @param isReflected mutable state of reflection
  * @tparam A the type of the elements in the sequence
