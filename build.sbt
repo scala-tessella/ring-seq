@@ -19,5 +19,6 @@ lazy val root = (project in file("."))
     sonatypeCredentialHost := "s01.oss.sonatype.org",
     publishTo := sonatypePublishToBundle.value,
     libraryDependencies ++= Seq(scalatest, scalacheck),
+    coverageEnabled := true,
     scalacOptions += "-Wunused:imports" // required by `RemoveUnused` rule
   )
