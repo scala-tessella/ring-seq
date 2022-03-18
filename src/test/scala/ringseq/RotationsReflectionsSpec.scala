@@ -14,6 +14,7 @@ import scala.collection.mutable.{Buffer, ListBuffer, StringBuilder, Queue => Mut
 class RotationsReflectionsSpec extends AnyFlatSpec with should.Matchers {
 
   val s = Seq(1, 2, 3, 4, 5)
+  val e = Seq.empty
   val oneLeft = Seq(2, 3, 4, 5, 1)
 
   "Any immutable Seq subtype" can "be rotated" in {
@@ -33,6 +34,7 @@ class RotationsReflectionsSpec extends AnyFlatSpec with should.Matchers {
 
   "A Seq considered as a ring" can "be rotated one step to the right" in {
     s.rotateRight(1) shouldBe Seq(5, 1, 2, 3, 4)
+    e.rotateRight(1) shouldBe e
   }
 
   it can "be rotated one step to the left" in {
@@ -64,6 +66,7 @@ class RotationsReflectionsSpec extends AnyFlatSpec with should.Matchers {
       Seq(4, 5, 1, 2, 3),
       Seq(5, 1, 2, 3, 4)
     )
+    e.rotations.toList shouldBe List(e)
   }
 
   it can "iterate on all reflections" in {

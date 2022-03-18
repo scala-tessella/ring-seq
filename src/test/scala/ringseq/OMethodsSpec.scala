@@ -13,6 +13,7 @@ import scala.collection.Seq
 class OMethodsSpec extends AnyFlatSpec with should.Matchers {
 
   val s = Seq(1, 2, 3, 4, 5)
+  val e = Seq.empty
 
   "A Seq considered as a ring" must "always have an element indexed before another one" in {
     assertThrows[IndexOutOfBoundsException] {
@@ -59,18 +60,19 @@ class OMethodsSpec extends AnyFlatSpec with should.Matchers {
     val (from, to) = (-1, 6)
     s.slice(from, to) shouldBe Seq(1, 2, 3, 4, 5)
     s.sliceO(from, to) shouldBe Seq(5, 1, 2, 3, 4, 5, 1)
+    e.sliceO(from, to)
   }
 
   it can "NOT be sliced to an empty circular slice" in {
     val (from, to) = (3, 3)
-    s.slice(from, to) shouldBe Seq.empty
-    s.sliceO(from, to) shouldBe Seq.empty
+    s.slice(from, to) shouldBe e
+    s.sliceO(from, to) shouldBe e
   }
 
   it can "NOT be sliced to a negative circular slice" in {
     val (from, to) = (4, 3)
-    s.slice(from, to) shouldBe Seq.empty
-    s.sliceO(from, to) shouldBe Seq.empty
+    s.slice(from, to) shouldBe e
+    s.sliceO(from, to) shouldBe e
   }
 
   val circularSlice = Seq(5, 1)
