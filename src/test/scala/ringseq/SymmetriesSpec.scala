@@ -7,6 +7,8 @@ import org.scalatest.flatspec._
 import org.scalatest.matchers._
 import ringseq.RingSeq._
 
+import scala.collection.Seq
+
 class SymmetriesSpec extends AnyFlatSpec with should.Matchers {
 
   val s = Seq(1, 2, 3, 4, 5)

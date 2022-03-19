@@ -4,6 +4,8 @@ import org.scalatest.flatspec._
 import org.scalatest.matchers._
 import ringseq.RingSeq._
 
+import scala.collection.Seq
+
 class ScaladocExampleSpec extends AnyFlatSpec with should.Matchers {
 
   "The examples in Scaladoc" must "be correct" in {
