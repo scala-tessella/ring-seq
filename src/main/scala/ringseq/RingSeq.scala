@@ -116,7 +116,7 @@ object RingSeq {
      * @example {{{Seq(0, 1, 2).segmentLengthO(_ % 2 == 0, 2) // 2}}}
      */
     def segmentLengthO(p: A => Boolean, from: IndexO = 0): Int =
-      startAt(from).segmentLength(p)
+      startAt(from).segmentLength(p, 0)
 
     /** Selects an interval of elements.
      *
@@ -232,7 +232,7 @@ object RingSeq {
       transformations(_.reflections.flatMap(_.rotations))
 
     private def isTransformationOf(that: Seq[A], f: Seq[A] => Iterator[Seq[A]]): Boolean =
-      ring.sizeCompare(that) == 0 && f(ring).contains(that)
+      ring.size == that.size && f(ring).contains(that)
 
     /** Tests whether this circular sequence is a rotation of a given sequence.
      *

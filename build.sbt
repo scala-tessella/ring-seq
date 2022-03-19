@@ -6,7 +6,8 @@ val scalacheck = "org.scalacheck" %% "scalacheck" % "1.15.4" % "test"
 enablePlugins(SiteScaladocPlugin)
 
 ThisBuild / organization := "io.github.scala-tessella"
-ThisBuild / scalaVersion := "2.13.8"
+ThisBuild / crossScalaVersions := Seq("2.13.8", "2.12.15")
+ThisBuild / scalaVersion := crossScalaVersions.value.head
 ThisBuild / semanticdbEnabled := true
 ThisBuild / semanticdbVersion := scalafixSemanticdb.revision
 
@@ -20,5 +21,10 @@ lazy val root = (project in file("."))
     publishTo := sonatypePublishToBundle.value,
     libraryDependencies ++= Seq(scalatest, scalacheck),
     coverageEnabled := true,
-    scalacOptions += "-Wunused:imports" // required by `RemoveUnused` rule
+    Compile / scalacOptions ++= {
+      CrossVersion.partialVersion(scalaVersion.value) match {
+        case Some((2, n)) if n <= 12 => List("-Ywarn-unused:imports")
+        case _ => List("-Wunused:imports")
+      }
+    }
   )
