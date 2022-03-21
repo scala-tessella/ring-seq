@@ -1,11 +1,11 @@
-package ringseq
+package io.github.scala_tessella.ring_seq
 
 import org.scalacheck.Gen
 import org.scalacheck.Prop.forAll
 import org.scalacheck.Test.check
 import org.scalatest.flatspec._
 import org.scalatest.matchers._
-import ringseq.RingSeq._
+import RingSeq._
 
 import scala.collection.Seq
 

@@ -1,6 +1,6 @@
-package ringseq.examples
+package io.github.scala_tessella.ring_seq.examples
 
-import ringseq.RingSeq._
+import io.github.scala_tessella.ring_seq.RingSeq._
 
 import scala.collection.Seq
 

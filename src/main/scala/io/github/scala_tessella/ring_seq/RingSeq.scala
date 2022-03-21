@@ -1,4 +1,4 @@
-package ringseq
+package io.github.scala_tessella.ring_seq
 
 import scala.collection.Seq
 

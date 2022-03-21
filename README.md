@@ -10,14 +10,14 @@ Adds implicit methods to Scala [`Seq`](https://www.scala-lang.org/api/current/sc
 
 Add the following dependency to your `build.sbt` file:
 ```scala
-libraryDependencies += "io.github.scala-tessella" %% "ring-seq" % "0.1.1"
+libraryDependencies += "io.github.scala-tessella" %% "ring-seq" % "0.1.2"
 ```
 
-Then just import the [`RingSeq`](/src/main/scala/ringseq/RingSeq.scala) object, any collection under `Seq`
+Then just import the [`RingSeq`](/src/main/scala/io/github/scala_tessella/ring_seq/RingSeq.scala) object, any collection under `Seq`
 will access the new methods.
 
 ```scala
-import ringseq.RingSeq._
+import io.github.scala_tessella.ring_seq.RingSeq._
 
 "RING".rotateRight(1).mkString // GRIN
 List(0, 1, 2, 3).startAt(2) // List(2, 3, 0, 1)
@@ -41,13 +41,13 @@ providing new circular methods to any collection under `Seq`.
 
 ### Transformations
 Rotate and reflect a circular `Seq`
-(see [test cases](/src/test/scala/ringseq/RotationsReflectionsSpec.scala)).
+(see [test cases](/src/test/scala/io/github/scala_tessella/ring_seq/RotationsReflectionsSpec.scala)).
 
 ### Circular version of existing ones
 Named as their standard non-circular `Seq` alternatives,
 but with an `O` suffix (meaning _ring_).
 
-They are (see [test cases](/src/test/scala/ringseq/OMethodsSpec.scala)):
+They are (see [test cases](/src/test/scala/io/github/scala_tessella/ring_seq/OMethodsSpec.scala)):
 * `applyO`
 * `segmentLengthO`
 * `sliceO`
@@ -58,4 +58,4 @@ They are (see [test cases](/src/test/scala/ringseq/OMethodsSpec.scala)):
 
 ### Symmetry
 Calculate rotational and reflectional symmetries of a circular `Seq`
-(see [test cases](/src/test/scala/ringseq/SymmetriesSpec.scala)).
+(see [test cases](/src/test/scala/io/github/scala_tessella/ring_seq/SymmetriesSpec.scala)).
