@@ -4,7 +4,11 @@
 
 [//]: # ([![Maven Central]&#40;https://img.shields.io/maven-central/v/io.github.scala-tessella/ring-seq_2.13.svg?label=Maven%20Central&#41;]&#40;https://search.maven.org/search?q=g:%io.github.scala-tessella%22%20AND%20a:%22ring-seq_2.13%22&#41;)
 
-Adds implicit methods to Scala [`Seq`](https://www.scala-lang.org/api/current/scala/collection/Seq.html) (immutable / mutable and subtypes) for when a sequence needs to be considered **circular**, its elements forming a ring.
+A library that adds implicit methods to Scala `Seq` for when a sequence needs to be considered **circular**, its elements forming a ring.
+
+It works on any immutable / mutable `Seq` and sub-types.
+
+Available for Scala `3.1.1`, Scala `2.13.8` and `2.12.15`.
 
 ## Setup
 
@@ -52,8 +56,6 @@ They are (see [test cases](/src/test/scala/io/github/scala_tessella/ring_seq/OMe
 * `segmentLengthO`
 * `sliceO`
 * `containsSliceO`
-* `indexOfSliceO`
-* `lastIndexOfSliceO`
 * `slidingO`
 
 ### Symmetry
