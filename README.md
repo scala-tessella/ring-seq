@@ -4,7 +4,7 @@
 
 [//]: # ([![Maven Central]&#40;https://img.shields.io/maven-central/v/io.github.scala-tessella/ring-seq_2.13.svg?label=Maven%20Central&#41;]&#40;https://search.maven.org/search?q=g:%io.github.scala-tessella%22%20AND%20a:%22ring-seq_2.13%22&#41;)
 
-A library that adds implicit methods to Scala `Seq` for when a sequence needs to be considered **circular**, its elements forming a ring.
+A library that adds new operations to Scala `Seq` for when a sequence needs to be considered **circular**, its elements forming a ring.
 
 It works on any immutable / mutable `Seq` and sub-types.
 
