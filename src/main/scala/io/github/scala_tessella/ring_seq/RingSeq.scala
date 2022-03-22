@@ -66,7 +66,7 @@ object RingSeq {
 
     /** Rotate the sequence to the right by some steps.
      *
-     * @param step Int
+     * @param step the circular distance between each new and old position
      * @return a sequence consisting of all elements rotated to the right by ''step'' places.
      *         If ''step'' is negative the rotation happens to the left.
      * @example {{{Seq(0, 1, 2).rotateRight(1) // Seq(2, 0, 1)}}}
@@ -80,7 +80,7 @@ object RingSeq {
 
     /** Rotates the sequence to the left by some steps.
      *
-     * @param step Int
+     * @param step the circular distance between each old and new position
      * @return a sequence consisting of all elements rotated to the left by ''step'' places.
      *         If ''step'' is negative the rotation happens to the right.
      * @example {{{Seq(0, 1, 2).rotateLeft(1) // Seq(1, 2, 0)}}}
