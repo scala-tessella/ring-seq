@@ -16,7 +16,7 @@ libraryDependencies += "io.github.scala-tessella" %% "ring-seq_2.13" % "$project
 ~~~
 @@@
 
-[//]: # (Browse the @scaladoc[API documentation]&#40;www.google.com&#41; for more information.)
+Browse the @scaladoc[API documentation](io.github.scala_tessella.ring_seq.RingSeq$) for more information.
 
 ## What is a circular sequence
 
