@@ -56,6 +56,8 @@ They are (see [test cases](/src/test/scala/io/github/scala_tessella/ring_seq/OMe
 * `segmentLengthO`
 * `sliceO`
 * `containsSliceO`
+* `indexOfSliceO`
+* `lastIndexOfSliceO`
 * `slidingO`
 
 ### Symmetry
