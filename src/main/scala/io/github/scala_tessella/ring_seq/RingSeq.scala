@@ -1,6 +1,7 @@
 package io.github.scala_tessella.ring_seq
 
 import scala.collection.Seq
+import utils.Comparisons.areSameSize
 
 /** Adds implicit methods to `[[https://www.scala-lang.org/api/current/scala/collection/Seq.html Seq]]`
  * (immutable / mutable and subtypes) for when a sequence needs to be considered '''circular''', its elements forming a ring.
@@ -232,7 +233,7 @@ object RingSeq {
       transformations(_.reflections.flatMap(_.rotations))
 
     private def isTransformationOf(that: Seq[A], f: Seq[A] => Iterator[Seq[A]]): Boolean =
-      ring.size == that.size && f(ring).contains(that)
+      areSameSize(ring, that) && f(ring).contains(that)
 
     /** Tests whether this circular sequence is a rotation of a given sequence.
      *
