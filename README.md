@@ -32,6 +32,28 @@ ListBuffer(1, 3, 5, 7, 9).reflectAt(3) // ListBuffer(7, 5, 3, 1, 9)
 Whenever data are structured in a circular sequence,
 chances are you don't want to locally reinvent the wheel (pun intended).
 
+### What is a circular sequence
+
+For our purposes, a circular sequence is a sequence composed by a finite number of elements.
+
+But being circular, the first element of the sequence can be considered as also placed just after the last element
+
+```scala
+Seq(0, 1, 2).applyO(3) // 0
+```
+
+(and the last just before the first).
+
+```scala
+Seq(0, 1, 2).applyO(-1) // 2
+```
+
+So the "unrolling" of a circular sequence, both forth and backwards, can be assumed as theoretically infinite.
+
+```scala
+Seq(0, 1, 2).applyO(30001) // 1
+```
+
 ## Solution
 **RingSeq** is a small, purely functional, self-contained library,
 where most of the circular use cases are already solved
