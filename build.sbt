@@ -3,7 +3,10 @@ import xerial.sbt.Sonatype._
 val scalatest = "org.scalatest" %% "scalatest" % "3.2.11" % "test"
 val scalacheck = "org.scalacheck" %% "scalacheck" % "1.15.4" % "test"
 
+enablePlugins(ParadoxPlugin, ParadoxSitePlugin)
 enablePlugins(SiteScaladocPlugin)
+SiteScaladoc / siteSubdirName := "api"
+paradoxProperties += ("scaladoc.base_url" -> "api")
 
 ThisBuild / organization := "io.github.scala-tessella"
 ThisBuild / crossScalaVersions := Seq("2.13.8", "2.12.15", "3.1.1")
