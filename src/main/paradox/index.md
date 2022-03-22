@@ -1,6 +1,6 @@
 # Ring Seq
 
-A library that adds implicit methods to Scala `Seq` for when a sequence needs to be considered **circular**, its elements forming a ring.
+A library that adds new operations to Scala to Scala `Seq` for when a sequence needs to be considered **circular**, its elements forming a ring.
 
 It works on any immutable / mutable `Seq` and sub-types.
 
@@ -16,62 +16,19 @@ libraryDependencies += "io.github.scala-tessella" %% "ring-seq_2.13" % "$project
 ~~~
 @@@
 
-Browse the @scaladoc[API documentation](io.github.scala_tessella.ring_seq.RingSeq$) for more information.
+Then just import the [`RingSeq`](https://github.com/scala-tessella/ring-seq/blob/master/src/main/scala/io/github/scala_tessella/ring_seq/RingSeq.scala) object, any collection under `Seq`
+will access the new methods.
 
-## What is a circular sequence
+```scala
+import io.github.scala_tessella.ring_seq.RingSeq._
 
-For our purposes, a circular sequence is a sequence composed by a finite number of elements.
+"RING".rotateRight(1).mkString // GRIN
+List(0, 1, 2, 3).startAt(2) // List(2, 3, 0, 1)
+ListBuffer(1, 3, 5, 7, 9).reflectAt(3) // ListBuffer(7, 5, 3, 1, 9)
+```
 
-But being circular, the first element of the sequence can be considered as also placed just after the last element
-(and the last just before the first).
 
-So the "unrolling" of a circular sequence, both forth and backwards, can be assumed as theoretically infinite.
-
-## Methods
-
-For dealing with a circular sequence, **Ring Seq** adds
-
-1. new operations (methods).
-2. alternative versions of some operations already existing for `Seq`,
-   identified by an `O` suffix (meaning _ring_).
-   (For example `applyO` is the circular version of `apply`).
-
-They fall into the following categories:
-
-### Indexing
-
-* `applyO`
-
-### Index search
-
-* `indexOfSliceO`
-* `lastIndexOfSliceO`
-* `segmentLengthO`
-
-### Slicing
-
-* `sliceO`
-* `slidingO`
-
-### Rotation and reflection
-* `rotateRight`
-* `rotateLeft`
-* `startsAt`
-* `reflectAt`
-* `rotations`
-* `reversions`
-* `reflections`
-* `rotationsAndReflections`
-
-### Comparisons
-* `containsSliceO`
-* `isReflection`
-* `isReversion`
-* `isRotation`
-* `isRotationOrReflection`
-
-### Symmetry
-
-* `reflectionalSymmetry`
-* `simmetryIndices`
-* `simmetry`
+@@@ index
+* [What is a circular sequence](what-is.md)
+* [Reference](reference.md)
+@@@
