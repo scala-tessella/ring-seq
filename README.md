@@ -1,8 +1,7 @@
 # **RingSeq**
 [![Scala Steward badge](https://img.shields.io/badge/Scala_Steward-helping-blue.svg?style=flat&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAQCAMAAAARSr4IAAAAVFBMVEUAAACHjojlOy5NWlrKzcYRKjGFjIbp293YycuLa3pYY2LSqql4f3pCUFTgSjNodYRmcXUsPD/NTTbjRS+2jomhgnzNc223cGvZS0HaSD0XLjbaSjElhIr+AAAAAXRSTlMAQObYZgAAAHlJREFUCNdNyosOwyAIhWHAQS1Vt7a77/3fcxxdmv0xwmckutAR1nkm4ggbyEcg/wWmlGLDAA3oL50xi6fk5ffZ3E2E3QfZDCcCN2YtbEWZt+Drc6u6rlqv7Uk0LdKqqr5rk2UCRXOk0vmQKGfc94nOJyQjouF9H/wCc9gECEYfONoAAAAASUVORK5CYII=)](https://scala-steward.org)
 [![CI](https://github.com/scala-tessella/ring-seq/actions/workflows/ci.yml/badge.svg)](https://github.com/scala-tessella/ring-seq/actions/workflows/ci.yml)
-
-[//]: # ([![Maven Central]&#40;https://img.shields.io/maven-central/v/io.github.scala-tessella/ring-seq_2.13.svg?label=Maven%20Central&#41;]&#40;https://search.maven.org/search?q=g:%io.github.scala-tessella%22%20AND%20a:%22ring-seq_2.13%22&#41;)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.scala-tessella/ring-seq_2.13.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22io.github.scala-tessella%22%20AND%20a:%22ring-seq_2.13%22)
 
 A library that adds new operations to Scala `Seq` for when a sequence needs to be considered **circular**, its elements forming a ring.
 
@@ -14,7 +13,7 @@ Available for Scala `3.1.1`, Scala `2.13.8` and `2.12.15`.
 
 Add the following dependency to your `build.sbt` file:
 ```scala
-libraryDependencies += "io.github.scala-tessella" %% "ring-seq" % "0.1.2"
+libraryDependencies += "io.github.scala-tessella" %% "ring-seq" % "0.1.2+1-1449b9d8"
 ```
 
 Then just import the [`RingSeq`](/src/main/scala/io/github/scala_tessella/ring_seq/RingSeq.scala) object, any collection under `Seq`
