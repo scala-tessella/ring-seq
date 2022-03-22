@@ -2,11 +2,11 @@
 <html class="no-js" lang="en">
 
 <head>
-<title>Ring Seq</title>
+<title>Reference · Ring Seq</title>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="description" content='Extends Scala Seq with ring (circular) methods'/>
-<link rel="canonical" href="https://github.com/scala-tessella/ring-seqindex.html"/>
+<link rel="canonical" href="https://github.com/scala-tessella/ring-seqreference.html"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:100normal,100italic,300normal,300italic,400normal,400italic,500normal,500italic,700normal,700italic,900normal,900italicc" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="lib/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="js/page.js"></script>
@@ -28,7 +28,7 @@
 <div class="off-canvas position-left" id="off-canvas-menu" data-off-canvas>
 <nav class="off-canvas-nav">
 <div class="nav-home">
-<a href="index.html" class="active">
+<a href="index.html" >
 <span class="home-icon">⌂</span>Ring Seq
 </a>
 <div class="version-number">
@@ -38,7 +38,7 @@
 <div class="nav-toc">
 <ul>
   <li><a href="what-is.html" class="page">What is a circular sequence</a></li>
-  <li><a href="reference.html" class="page">Reference</a>
+  <li><a href="reference.html" class="active page">Reference</a>
   <ul>
     <li><a href="categories/indexing.html" class="page">Indexing</a></li>
     <li><a href="categories/slicing.html" class="page">Slicing</a></li>
@@ -61,7 +61,7 @@
 H3.6C3.048,13,3,13.447,3,14c0,0.553,0.048,1,0.6,1H16.4c0.552,0,0.6-0.447,0.6-1C17,13.447,16.952,13,16.4,13z M3.6,7H16.4
 C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.048,7,3.6,7z"/></svg>
 </a>
-<div class="title"><a href="index.html" class="active">Ring Seq</a></div>
+<div class="title"><a href="index.html">Ring Seq</a></div>
 
 <!--
 <a href="https://www.example.com" class="logo show-for-medium">logo</a>
@@ -74,7 +74,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="medium-3 large-2 show-for-medium column">
 <nav class="site-nav">
 <div class="nav-home">
-<a href="index.html" class="active">
+<a href="index.html" >
 <span class="home-icon">⌂</span>Ring Seq
 </a>
 <div class="version-number">
@@ -84,7 +84,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="nav-toc">
 <ul>
   <li><a href="what-is.html" class="page">What is a circular sequence</a></li>
-  <li><a href="reference.html" class="page">Reference</a>
+  <li><a href="reference.html" class="active page">Reference</a>
   <ul>
     <li><a href="categories/indexing.html" class="page">Indexing</a></li>
     <li><a href="categories/slicing.html" class="page">Slicing</a></li>
@@ -106,32 +106,74 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 
 <div class="page-header row">
 <div class="medium-12 show-for-medium column">
+<div class="nav-breadcrumbs">
+<ul>
+  <li><a href="index.html">Ring Seq</a></li>
+  <li>Reference</li>
+</ul>
+</div>
 </div>
 </div>
 
 <div class="page-content row">
 <div class="small-12 large-9 column" id="docs">
-<h1><a href="#ring-seq" name="ring-seq" class="anchor"><span class="anchor-link"></span></a>Ring Seq</h1>
-<p>A library that adds new operations to Scala to Scala <code>Seq</code> for when a sequence needs to be considered <strong>circular</strong>, its elements forming a ring.</p>
-<p>It works on any immutable / mutable <code>Seq</code> and sub-types.</p>
-<p>Available for Scala <code>3.1.1</code>, Scala <code>2.13.8</code> and <code>2.12.15</code>.</p>
-<h2><a href="#setup" name="setup" class="anchor"><span class="anchor-link"></span></a>Setup</h2>
-<p>Add the following dependency to your <code>build.sbt</code> file:</p>
-<pre class="prettyprint"><code class="language-scala">libraryDependencies += &quot;io.github.scala-tessella&quot; %% &quot;ring-seq_2.13&quot; % &quot;0.0.0+1-c6b4a279&quot;
-</code></pre>
-<p>Then just import the <a href="https://github.com/scala-tessella/ring-seq/blob/master/src/main/scala/io/github/scala_tessella/ring_seq/RingSeq.scala"><code>RingSeq</code></a> object, any collection under <code>Seq</code> will access the new methods.</p>
-<pre class="prettyprint"><code class="language-scala">import io.github.scala_tessella.ring_seq.RingSeq._
-
-&quot;RING&quot;.rotateRight(1).mkString // GRIN
-List(0, 1, 2, 3).startAt(2) // List(2, 3, 0, 1)
-ListBuffer(1, 3, 5, 7, 9).reflectAt(3) // ListBuffer(7, 5, 3, 1, 9)
-</code></pre>
+<h1><a href="#reference" name="reference" class="anchor"><span class="anchor-link"></span></a>Reference</h1>
+<p>This page shows all the features provided by the library.</p>
+<h2><a href="#scaladoc" name="scaladoc" class="anchor"><span class="anchor-link"></span></a>Scaladoc</h2>
+<p>Browse the <a href="api/io/github/scala_tessella/ring_seq/RingSeq$.html" title="io.github.scala_tessella.ring_seq.RingSeq"><code>API documentation</code></a> for detailed information.</p>
+<h2><a href="#methods" name="methods" class="anchor"><span class="anchor-link"></span></a>Methods</h2>
+<p>For dealing with a circular sequence, <strong>Ring Seq</strong> adds</p>
+<ol>
+  <li>new operations.</li>
+  <li>alternative versions of some operations already existing for <code>Seq</code>,  identified by an <code>O</code> suffix (meaning <em>ring</em>).  (For example <code>applyO</code> is the circular version of <code>apply</code>).</li>
+</ol>
+<p>They fall into the following categories:</p>
+<h3><a href="#" name="" class="anchor"><span class="anchor-link"></span></a><a href="categories/indexing.html">Indexing</a></h3>
+<ul>
+  <li><a href="categories/indexing.html#applyo"><code>applyO</code></a></li>
+</ul>
+<h3><a href="#slicing" name="slicing" class="anchor"><span class="anchor-link"></span></a>Slicing</h3>
+<ul>
+  <li><code>sliceO</code></li>
+  <li><code>slidingO</code></li>
+</ul>
+<h3><a href="#index-search" name="index-search" class="anchor"><span class="anchor-link"></span></a>Index search</h3>
+<ul>
+  <li><code>indexOfSliceO</code></li>
+  <li><code>lastIndexOfSliceO</code></li>
+  <li><code>segmentLengthO</code></li>
+</ul>
+<h3><a href="#rotation-and-reflection" name="rotation-and-reflection" class="anchor"><span class="anchor-link"></span></a>Rotation and reflection</h3>
+<ul>
+  <li><code>rotateRight</code></li>
+  <li><code>rotateLeft</code></li>
+  <li><code>startsAt</code></li>
+  <li><code>reflectAt</code></li>
+  <li><code>rotations</code></li>
+  <li><code>reversions</code></li>
+  <li><code>reflections</code></li>
+  <li><code>rotationsAndReflections</code></li>
+</ul>
+<h3><a href="#comparisons" name="comparisons" class="anchor"><span class="anchor-link"></span></a>Comparisons</h3>
+<ul>
+  <li><code>containsSliceO</code></li>
+  <li><code>isReflection</code></li>
+  <li><code>isReversion</code></li>
+  <li><code>isRotation</code></li>
+  <li><code>isRotationOrReflection</code></li>
+</ul>
+<h3><a href="#symmetry" name="symmetry" class="anchor"><span class="anchor-link"></span></a>Symmetry</h3>
+<ul>
+  <li><code>reflectionalSymmetry</code></li>
+  <li><code>simmetryIndices</code></li>
+  <li><code>simmetry</code></li>
+</ul>
 <div class="source-github">
-The source code for this page can be found <a href="https://github.com/scala-tessella/ring-seq/tree/master/src/main/paradox/index.md">here</a>.
+The source code for this page can be found <a href="https://github.com/scala-tessella/ring-seq/tree/master/src/main/paradox/reference.md">here</a>.
 </div>
 
 <div class="nav-next">
-<p><strong>Next:</strong> <a href="what-is.html">What is a circular sequence</a></p>
+<p><strong>Next:</strong> <a href="categories/indexing.html">Indexing</a></p>
 </div>
 </div>
 <div class="large-3 show-for-large column" data-sticky-container>
@@ -140,9 +182,10 @@ The source code for this page can be found <a href="https://github.com/scala-tes
 <div class="nav-title">On this page:</div>
 <div class="nav-toc">
 <ul>
-  <li><a href="index.html#ring-seq" class="header">Ring Seq</a>
+  <li><a href="reference.html#reference" class="header">Reference</a>
   <ul>
-    <li><a href="index.html#setup" class="header">Setup</a></li>
+    <li><a href="reference.html#scaladoc" class="header">Scaladoc</a></li>
+    <li><a href="reference.html#methods" class="header">Methods</a></li>
   </ul></li>
 </ul>
 </div>
