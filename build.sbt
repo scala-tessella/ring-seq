@@ -3,7 +3,9 @@ import xerial.sbt.Sonatype._
 val scalatest = "org.scalatest" %% "scalatest" % "3.2.11" % "test"
 val scalacheck = "org.scalacheck" %% "scalacheck" % "1.15.4" % "test"
 
+enablePlugins(ParadoxPlugin, ParadoxSitePlugin)
 enablePlugins(SiteScaladocPlugin)
+enablePlugins(GhpagesPlugin)
 
 ThisBuild / organization := "io.github.scala-tessella"
 ThisBuild / crossScalaVersions := Seq("2.13.8", "2.12.15", "3.1.1")
@@ -19,6 +21,10 @@ lazy val root = (project in file("."))
     sonatypeProjectHosting := Some(GitHubHosting("scala-tessella", "ring-seq", "mario.callisto@gmail.com")),
     sonatypeCredentialHost := "s01.oss.sonatype.org",
     publishTo := sonatypePublishToBundle.value,
+    SiteScaladoc / siteSubdirName := "api",
+    paradoxProperties += ("scaladoc.base_url" -> "api"),
+    git.remoteRepo := sonatypeProjectHosting.value.get.scmUrl,
+    ghpagesNoJekyll := true,
     libraryDependencies ++= Seq(scalatest, scalacheck),
     coverageEnabled := true,
     Compile / scalacOptions ++= {
