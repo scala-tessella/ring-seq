@@ -1,4 +1,0 @@
-# Slicing
-
-## `sliceO`
-## `slidingO`

@@ -227,7 +227,7 @@ object RingSeq {
      * @return An iterator producing all the sequences obtained by rotating and reflecting this circular sequence,
      *         starting from itself and moving one rotation step to the right, then reflecting and doing the same,
      *         or just itself if empty.
-     * @example {{{Seq(0, 1, 2).rotations // Iterator(Seq(0, 1, 2), Seq(1, 2, 0), Seq(2, 0, 1), Seq(0, 2, 1), Seq(2, 1, 0), Seq(1, 0, 2))}}}
+     * @example {{{Seq(0, 1, 2).rotationsAndReflections // Iterator(Seq(0, 1, 2), Seq(1, 2, 0), Seq(2, 0, 1), Seq(0, 2, 1), Seq(2, 1, 0), Seq(1, 0, 2))}}}
      */
     def rotationsAndReflections: Iterator[Seq[A]] =
       transformations(_.reflections.flatMap(_.rotations))
@@ -292,9 +292,9 @@ object RingSeq {
       }
     }
 
-    /** Finds the indices of each element of this circular sequence closer to an axis of reflectional symmetry.
+    /** Finds the indices of each element of this circular sequence close to an axis of reflectional symmetry.
      *
-     * @return the indices of each element of this circular sequence closer to an axis of reflectional symmetry,
+     * @return the indices of each element of this circular sequence close to an axis of reflectional symmetry,
      *         that is a line of symmetry that splits the sequence in two identical halves.
      * @example {{{Seq(2, 1, 2, 2, 1, 2, 2, 1, 2, 2, 1, 2).symmetryIndices // List(1, 4, 7, 10)}}}
      */
