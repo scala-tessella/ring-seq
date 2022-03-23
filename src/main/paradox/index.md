@@ -51,3 +51,16 @@ ListBuffer(1, 3, 5, 7, 9).reflectAt(3) // ListBuffer(7, 5, 3, 1, 9)
 * [What is a circular sequence](what-is.md)
 * [Reference](reference.md)
 @@@
+
+## Need
+Whenever data are structured in a circular sequence,
+chances are you don't want to locally reinvent the wheel (pun intended).
+
+## Solution
+**RingSeq** is a small, purely functional, self-contained library,
+where most of the circular use cases are already solved
+and building blocks provided for the others.
+
+Leveraging Scala [`implicit class`](https://docs.scala-lang.org/overviews/core/implicit-classes.html),
+it acts like a _decorator_,
+providing new circular methods to any collection under `Seq`.
