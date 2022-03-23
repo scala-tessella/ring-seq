@@ -32,7 +32,7 @@
 <span class="home-icon">⌂</span>Ring Seq
 </a>
 <div class="version-number">
-0.0.0+1-c6b4a279
+0.0.0+1-035320da
 </div>
 </div>
 <div class="nav-toc">
@@ -41,9 +41,9 @@
   <li><a href="../reference.html" class="page">Reference</a>
   <ul>
     <li><a href="../categories/indexing.html" class="page">Indexing</a></li>
-    <li><a href="../categories/slicing.html" class="page">Slicing</a></li>
     <li><a href="../categories/index-search.html" class="active page">Index search</a></li>
     <li><a href="../categories/rotation-reflection.html" class="page">Rotation and reflection</a></li>
+    <li><a href="../categories/iterators.html" class="page">Iterators</a></li>
     <li><a href="../categories/comparisons.html" class="page">Comparisons</a></li>
     <li><a href="../categories/symmetry.html" class="page">Symmetry</a></li>
   </ul></li>
@@ -78,7 +78,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <span class="home-icon">⌂</span>Ring Seq
 </a>
 <div class="version-number">
-0.0.0+1-c6b4a279
+0.0.0+1-035320da
 </div>
 </div>
 <div class="nav-toc">
@@ -87,9 +87,9 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
   <li><a href="../reference.html" class="page">Reference</a>
   <ul>
     <li><a href="../categories/indexing.html" class="page">Indexing</a></li>
-    <li><a href="../categories/slicing.html" class="page">Slicing</a></li>
     <li><a href="../categories/index-search.html" class="active page">Index search</a></li>
     <li><a href="../categories/rotation-reflection.html" class="page">Rotation and reflection</a></li>
+    <li><a href="../categories/iterators.html" class="page">Iterators</a></li>
     <li><a href="../categories/comparisons.html" class="page">Comparisons</a></li>
     <li><a href="../categories/symmetry.html" class="page">Symmetry</a></li>
   </ul></li>
@@ -120,8 +120,33 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="small-12 large-9 column" id="docs">
 <h1><a href="#index-search" name="index-search" class="anchor"><span class="anchor-link"></span></a>Index search</h1>
 <h2><a href="#indexofsliceo" name="indexofsliceo" class="anchor"><span class="anchor-link"></span></a><code>indexOfSliceO</code></h2>
+<p>The circular equivalent of <code>indexOfSlice</code>.</p>
+<p><em>Note:</em> given the <a href="../what-is.html">definition of circular sequence</a>, a slice can contain more elements than the sequence itself.</p>
+<h3><a href="#example" name="example" class="anchor"><span class="anchor-link"></span></a>Example</h3>
+<pre class="prettyprint"><code class="language-scala">Seq(0, 1, 2).indexOfSliceO(Seq(2, 0, 1, 2, 0)) // 2
+</code></pre>
+<h3><a href="#compared-to-standard" name="compared-to-standard" class="anchor"><span class="anchor-link"></span></a>Compared to standard</h3>
+<p>In the same example the standard version behaves differently, cannot find the &ldquo;unrolled&rdquo; slice.</p>
+<pre class="prettyprint"><code class="language-scala">Seq(0, 1, 2).indexOfSlice(Seq(2, 0, 1, 2, 0)) // -1
+</code></pre>
 <h2><a href="#lastindexofsliceo" name="lastindexofsliceo" class="anchor"><span class="anchor-link"></span></a><code>lastIndexOfSliceO</code></h2>
+<p>The circular equivalent of <code>lastIndexOfSlice</code>.</p>
+<h3><a href="#example" name="example" class="anchor"><span class="anchor-link"></span></a>Example</h3>
+<pre class="prettyprint"><code class="language-scala">Seq(0, 1, 2, 0, 1, 2).lastIndexOfSliceO(Seq(2, 0)) // 5
+</code></pre>
+<h3><a href="#compared-to-standard" name="compared-to-standard" class="anchor"><span class="anchor-link"></span></a>Compared to standard</h3>
+<p>In the same example the standard version behaves differently, does not find the slice containing the last and first elements.</p>
+<pre class="prettyprint"><code class="language-scala">Seq(0, 1, 2, 0, 1, 2).lastIndexOfSlice(Seq(2, 0)) // 2
+</code></pre>
 <h2><a href="#segmentlengtho" name="segmentlengtho" class="anchor"><span class="anchor-link"></span></a><code>segmentLengthO</code></h2>
+<p>The circular equivalent of <code>segmentLength</code>.</p>
+<h3><a href="#example" name="example" class="anchor"><span class="anchor-link"></span></a>Example</h3>
+<pre class="prettyprint"><code class="language-scala">Seq(0, 1, 2).segmentLengthO(_ % 2 == 0, 2) // 2
+</code></pre>
+<h3><a href="#compared-to-standard" name="compared-to-standard" class="anchor"><span class="anchor-link"></span></a>Compared to standard</h3>
+<p>In the same example the standard version behaves differently, does not find the segment containing the last and first elements.</p>
+<pre class="prettyprint"><code class="language-scala">Seq(0, 1, 2).segmentLength(_ % 2 == 0, 2) // 1
+</code></pre>
 <div class="source-github">
 The source code for this page can be found <a href="https://github.com/scala-tessella/ring-seq/tree/master/src/main/paradox/categories/index-search.md">here</a>.
 </div>
@@ -208,7 +233,7 @@ The source code for this page can be found <a href="https://github.com/scala-tes
 <script type="text/javascript" src="../lib/prettify/prettify.js"></script>
 <script type="text/javascript" src="../lib/prettify/lang-scala.js"></script>
 <script type="text/javascript">jQuery(function(){window.prettyPrint && prettyPrint()});</script>
-<script type="text/javascript">jQuery(function(jq){initOldVersionWarnings(jq, '0.0.0+1-c6b4a279', 'https://github.com/scala-tessella/ring-seq')});</script>
+<script type="text/javascript">jQuery(function(jq){initOldVersionWarnings(jq, '0.0.0+1-035320da', 'https://github.com/scala-tessella/ring-seq')});</script>
 
 
 </html>

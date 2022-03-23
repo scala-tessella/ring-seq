@@ -32,7 +32,7 @@
 <span class="home-icon">⌂</span>Ring Seq
 </a>
 <div class="version-number">
-0.0.0+1-c6b4a279
+0.0.0+1-035320da
 </div>
 </div>
 <div class="nav-toc">
@@ -41,9 +41,9 @@
   <li><a href="../reference.html" class="page">Reference</a>
   <ul>
     <li><a href="../categories/indexing.html" class="page">Indexing</a></li>
-    <li><a href="../categories/slicing.html" class="page">Slicing</a></li>
     <li><a href="../categories/index-search.html" class="page">Index search</a></li>
     <li><a href="../categories/rotation-reflection.html" class="active page">Rotation and reflection</a></li>
+    <li><a href="../categories/iterators.html" class="page">Iterators</a></li>
     <li><a href="../categories/comparisons.html" class="page">Comparisons</a></li>
     <li><a href="../categories/symmetry.html" class="page">Symmetry</a></li>
   </ul></li>
@@ -78,7 +78,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <span class="home-icon">⌂</span>Ring Seq
 </a>
 <div class="version-number">
-0.0.0+1-c6b4a279
+0.0.0+1-035320da
 </div>
 </div>
 <div class="nav-toc">
@@ -87,9 +87,9 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
   <li><a href="../reference.html" class="page">Reference</a>
   <ul>
     <li><a href="../categories/indexing.html" class="page">Indexing</a></li>
-    <li><a href="../categories/slicing.html" class="page">Slicing</a></li>
     <li><a href="../categories/index-search.html" class="page">Index search</a></li>
     <li><a href="../categories/rotation-reflection.html" class="active page">Rotation and reflection</a></li>
+    <li><a href="../categories/iterators.html" class="page">Iterators</a></li>
     <li><a href="../categories/comparisons.html" class="page">Comparisons</a></li>
     <li><a href="../categories/symmetry.html" class="page">Symmetry</a></li>
   </ul></li>
@@ -120,19 +120,33 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="small-12 large-9 column" id="docs">
 <h1><a href="#rotation-and-reflection" name="rotation-and-reflection" class="anchor"><span class="anchor-link"></span></a>Rotation and reflection</h1>
 <h2><a href="#rotateright" name="rotateright" class="anchor"><span class="anchor-link"></span></a><code>rotateRight</code></h2>
+<p>Returns a sequence rotated to the right.</p>
+<h3><a href="#example" name="example" class="anchor"><span class="anchor-link"></span></a>Example</h3>
+<pre class="prettyprint"><code class="language-scala">Seq(0, 1, 2).rotateRight(1) // Seq(2, 0, 1)
+</code></pre>
 <h2><a href="#rotateleft" name="rotateleft" class="anchor"><span class="anchor-link"></span></a><code>rotateLeft</code></h2>
-<h2><a href="#startsat" name="startsat" class="anchor"><span class="anchor-link"></span></a><code>startsAt</code></h2>
+<p>Returns a sequence rotated to the left.</p>
+<h3><a href="#example" name="example" class="anchor"><span class="anchor-link"></span></a>Example</h3>
+<pre class="prettyprint"><code class="language-scala">Seq(0, 1, 2).rotateLeft(1) // Seq(1, 2, 0)
+</code></pre>
+<h2><a href="#startat" name="startat" class="anchor"><span class="anchor-link"></span></a><code>startAt</code></h2>
+<p>Returns a sequence rotated to start at circular index.</p>
+<p><em>Note:</em> is equivalent to <a href="rotation-reflection.html#rotateleft"><code>rotateLeft</code></a>.</p>
+<h3><a href="#example" name="example" class="anchor"><span class="anchor-link"></span></a>Example</h3>
+<pre class="prettyprint"><code class="language-scala">Seq(0, 1, 2).startAt(1) // Seq(1, 2, 0)
+</code></pre>
 <h2><a href="#reflectat" name="reflectat" class="anchor"><span class="anchor-link"></span></a><code>reflectAt</code></h2>
-<h2><a href="#rotations" name="rotations" class="anchor"><span class="anchor-link"></span></a><code>rotations</code></h2>
-<h2><a href="#reversions" name="reversions" class="anchor"><span class="anchor-link"></span></a><code>reversions</code></h2>
-<h2><a href="#reflections" name="reflections" class="anchor"><span class="anchor-link"></span></a><code>reflections</code></h2>
-<h2><a href="#rotationsandreflections" name="rotationsandreflections" class="anchor"><span class="anchor-link"></span></a><code>rotationsAndReflections</code></h2>
+<p>Returns a sequence reversed and rotated to start at circular index.</p>
+<p><em>Note:</em> <code>reflectAt(-1)</code> is equivalent to <code>reverse</code>.</p>
+<h3><a href="#example" name="example" class="anchor"><span class="anchor-link"></span></a>Example</h3>
+<pre class="prettyprint"><code class="language-scala">Seq(0, 1, 2).reflectAt() // Seq(0, 2, 1)
+</code></pre>
 <div class="source-github">
 The source code for this page can be found <a href="https://github.com/scala-tessella/ring-seq/tree/master/src/main/paradox/categories/rotation-reflection.md">here</a>.
 </div>
 
 <div class="nav-next">
-<p><strong>Next:</strong> <a href="../categories/comparisons.html">Comparisons</a></p>
+<p><strong>Next:</strong> <a href="../categories/iterators.html">Iterators</a></p>
 </div>
 </div>
 <div class="large-3 show-for-large column" data-sticky-container>
@@ -145,12 +159,8 @@ The source code for this page can be found <a href="https://github.com/scala-tes
   <ul>
     <li><a href="../categories/rotation-reflection.html#rotateright" class="header"><code>rotateRight</code></a></li>
     <li><a href="../categories/rotation-reflection.html#rotateleft" class="header"><code>rotateLeft</code></a></li>
-    <li><a href="../categories/rotation-reflection.html#startsat" class="header"><code>startsAt</code></a></li>
+    <li><a href="../categories/rotation-reflection.html#startat" class="header"><code>startAt</code></a></li>
     <li><a href="../categories/rotation-reflection.html#reflectat" class="header"><code>reflectAt</code></a></li>
-    <li><a href="../categories/rotation-reflection.html#rotations" class="header"><code>rotations</code></a></li>
-    <li><a href="../categories/rotation-reflection.html#reversions" class="header"><code>reversions</code></a></li>
-    <li><a href="../categories/rotation-reflection.html#reflections" class="header"><code>reflections</code></a></li>
-    <li><a href="../categories/rotation-reflection.html#rotationsandreflections" class="header"><code>rotationsAndReflections</code></a></li>
   </ul></li>
 </ul>
 </div>
@@ -218,7 +228,7 @@ The source code for this page can be found <a href="https://github.com/scala-tes
 <script type="text/javascript" src="../lib/prettify/prettify.js"></script>
 <script type="text/javascript" src="../lib/prettify/lang-scala.js"></script>
 <script type="text/javascript">jQuery(function(){window.prettyPrint && prettyPrint()});</script>
-<script type="text/javascript">jQuery(function(jq){initOldVersionWarnings(jq, '0.0.0+1-c6b4a279', 'https://github.com/scala-tessella/ring-seq')});</script>
+<script type="text/javascript">jQuery(function(jq){initOldVersionWarnings(jq, '0.0.0+1-035320da', 'https://github.com/scala-tessella/ring-seq')});</script>
 
 
 </html>

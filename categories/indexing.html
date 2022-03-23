@@ -32,7 +32,7 @@
 <span class="home-icon">⌂</span>Ring Seq
 </a>
 <div class="version-number">
-0.0.0+1-c6b4a279
+0.0.0+1-035320da
 </div>
 </div>
 <div class="nav-toc">
@@ -41,9 +41,9 @@
   <li><a href="../reference.html" class="page">Reference</a>
   <ul>
     <li><a href="../categories/indexing.html" class="active page">Indexing</a></li>
-    <li><a href="../categories/slicing.html" class="page">Slicing</a></li>
     <li><a href="../categories/index-search.html" class="page">Index search</a></li>
     <li><a href="../categories/rotation-reflection.html" class="page">Rotation and reflection</a></li>
+    <li><a href="../categories/iterators.html" class="page">Iterators</a></li>
     <li><a href="../categories/comparisons.html" class="page">Comparisons</a></li>
     <li><a href="../categories/symmetry.html" class="page">Symmetry</a></li>
   </ul></li>
@@ -78,7 +78,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <span class="home-icon">⌂</span>Ring Seq
 </a>
 <div class="version-number">
-0.0.0+1-c6b4a279
+0.0.0+1-035320da
 </div>
 </div>
 <div class="nav-toc">
@@ -87,9 +87,9 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
   <li><a href="../reference.html" class="page">Reference</a>
   <ul>
     <li><a href="../categories/indexing.html" class="active page">Indexing</a></li>
-    <li><a href="../categories/slicing.html" class="page">Slicing</a></li>
     <li><a href="../categories/index-search.html" class="page">Index search</a></li>
     <li><a href="../categories/rotation-reflection.html" class="page">Rotation and reflection</a></li>
+    <li><a href="../categories/iterators.html" class="page">Iterators</a></li>
     <li><a href="../categories/comparisons.html" class="page">Comparisons</a></li>
     <li><a href="../categories/symmetry.html" class="page">Symmetry</a></li>
   </ul></li>
@@ -120,12 +120,35 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="small-12 large-9 column" id="docs">
 <h1><a href="#indexing" name="indexing" class="anchor"><span class="anchor-link"></span></a>Indexing</h1>
 <h2><a href="#applyo" name="applyo" class="anchor"><span class="anchor-link"></span></a><code>applyO</code></h2>
+<p>The circular equivalent of <code>apply</code>.</p>
+<p><em>Note:</em> given the <a href="../what-is.html">definition of circular sequence</a>, it returns an element for any possible integer.</p>
+<h3><a href="#example" name="example" class="anchor"><span class="anchor-link"></span></a>Example</h3>
+<pre class="prettyprint"><code class="language-scala">Seq(0, 1, 2).applyO(3) // 0
+</code></pre>
+<h3><a href="#compared-to-standard" name="compared-to-standard" class="anchor"><span class="anchor-link"></span></a>Compared to standard</h3>
+<p>In the same example the standard version behaves differently, does not return an element, it throws.</p>
+<pre class="prettyprint"><code class="language-scala">Seq(0, 1, 2).apply(3) // IndexOutOfBoundsException
+</code></pre>
+<h3><a href="#not-a-total-function" name="not-a-total-function" class="anchor"><span class="anchor-link"></span></a>Not a total function</h3>
+<p>It does not return a value for an empty sequence.</p>
+<pre class="prettyprint"><code class="language-scala">Seq.empty.applyO(0) // ArithmeticException
+</code></pre>
+<h2><a href="#sliceo" name="sliceo" class="anchor"><span class="anchor-link"></span></a><code>sliceO</code></h2>
+<p>The circular equivalent of <code>slice</code>.</p>
+<p><em>Note:</em> given the <a href="../what-is.html">definition of circular sequence</a>, a slice can contain more elements than the sequence itself.</p>
+<h3><a href="#example" name="example" class="anchor"><span class="anchor-link"></span></a>Example</h3>
+<pre class="prettyprint"><code class="language-scala">Seq(0, 1, 2).sliceO(-1, 4) // Seq(2, 0, 1, 2, 0)
+</code></pre>
+<h3><a href="#compared-to-standard" name="compared-to-standard" class="anchor"><span class="anchor-link"></span></a>Compared to standard</h3>
+<p>In the same example the standard version behaves differently, it is equivalent to <code>slice(0, 2)</code>, does not return the &ldquo;unrolled&rdquo; slice.</p>
+<pre class="prettyprint"><code class="language-scala">Seq(0, 1, 2).slice(-1, 4) // Seq(0, 1, 2)
+</code></pre>
 <div class="source-github">
 The source code for this page can be found <a href="https://github.com/scala-tessella/ring-seq/tree/master/src/main/paradox/categories/indexing.md">here</a>.
 </div>
 
 <div class="nav-next">
-<p><strong>Next:</strong> <a href="../categories/slicing.html">Slicing</a></p>
+<p><strong>Next:</strong> <a href="../categories/index-search.html">Index search</a></p>
 </div>
 </div>
 <div class="large-3 show-for-large column" data-sticky-container>
@@ -137,6 +160,7 @@ The source code for this page can be found <a href="https://github.com/scala-tes
   <li><a href="../categories/indexing.html#indexing" class="header">Indexing</a>
   <ul>
     <li><a href="../categories/indexing.html#applyo" class="header"><code>applyO</code></a></li>
+    <li><a href="../categories/indexing.html#sliceo" class="header"><code>sliceO</code></a></li>
   </ul></li>
 </ul>
 </div>
@@ -204,7 +228,7 @@ The source code for this page can be found <a href="https://github.com/scala-tes
 <script type="text/javascript" src="../lib/prettify/prettify.js"></script>
 <script type="text/javascript" src="../lib/prettify/lang-scala.js"></script>
 <script type="text/javascript">jQuery(function(){window.prettyPrint && prettyPrint()});</script>
-<script type="text/javascript">jQuery(function(jq){initOldVersionWarnings(jq, '0.0.0+1-c6b4a279', 'https://github.com/scala-tessella/ring-seq')});</script>
+<script type="text/javascript">jQuery(function(jq){initOldVersionWarnings(jq, '0.0.0+1-035320da', 'https://github.com/scala-tessella/ring-seq')});</script>
 
 
 </html>

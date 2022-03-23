@@ -32,7 +32,7 @@
 <span class="home-icon">⌂</span>Ring Seq
 </a>
 <div class="version-number">
-0.0.0+1-c6b4a279
+0.0.0+1-035320da
 </div>
 </div>
 <div class="nav-toc">
@@ -41,9 +41,9 @@
   <li><a href="../reference.html" class="page">Reference</a>
   <ul>
     <li><a href="../categories/indexing.html" class="page">Indexing</a></li>
-    <li><a href="../categories/slicing.html" class="page">Slicing</a></li>
     <li><a href="../categories/index-search.html" class="page">Index search</a></li>
     <li><a href="../categories/rotation-reflection.html" class="page">Rotation and reflection</a></li>
+    <li><a href="../categories/iterators.html" class="page">Iterators</a></li>
     <li><a href="../categories/comparisons.html" class="page">Comparisons</a></li>
     <li><a href="../categories/symmetry.html" class="active page">Symmetry</a></li>
   </ul></li>
@@ -78,7 +78,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <span class="home-icon">⌂</span>Ring Seq
 </a>
 <div class="version-number">
-0.0.0+1-c6b4a279
+0.0.0+1-035320da
 </div>
 </div>
 <div class="nav-toc">
@@ -87,9 +87,9 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
   <li><a href="../reference.html" class="page">Reference</a>
   <ul>
     <li><a href="../categories/indexing.html" class="page">Indexing</a></li>
-    <li><a href="../categories/slicing.html" class="page">Slicing</a></li>
     <li><a href="../categories/index-search.html" class="page">Index search</a></li>
     <li><a href="../categories/rotation-reflection.html" class="page">Rotation and reflection</a></li>
+    <li><a href="../categories/iterators.html" class="page">Iterators</a></li>
     <li><a href="../categories/comparisons.html" class="page">Comparisons</a></li>
     <li><a href="../categories/symmetry.html" class="active page">Symmetry</a></li>
   </ul></li>
@@ -119,9 +119,22 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="page-content row">
 <div class="small-12 large-9 column" id="docs">
 <h1><a href="#symmetry" name="symmetry" class="anchor"><span class="anchor-link"></span></a>Symmetry</h1>
-<h2><a href="#reflectionalsymmetry" name="reflectionalsymmetry" class="anchor"><span class="anchor-link"></span></a><code>reflectionalSymmetry</code></h2>
-<h2><a href="#simmetryindices" name="simmetryindices" class="anchor"><span class="anchor-link"></span></a><code>simmetryIndices</code></h2>
-<h2><a href="#simmetry" name="simmetry" class="anchor"><span class="anchor-link"></span></a><code>simmetry</code></h2>
+<h2><a href="#rotationalsymmetry" name="rotationalsymmetry" class="anchor"><span class="anchor-link"></span></a><code>rotationalSymmetry</code></h2>
+<p>Computes the order of rotational symmetry, the number &gt;= 1 of rotations in which the sequence looks exactly the same.</p>
+<h3><a href="#example" name="example" class="anchor"><span class="anchor-link"></span></a>Example</h3>
+<pre class="prettyprint"><code class="language-scala">Seq(0, 1, 2, 0, 1, 2).rotationalSymmetry // 2
+</code></pre>
+<h2><a href="#symmetryindices" name="symmetryindices" class="anchor"><span class="anchor-link"></span></a><code>symmetryIndices</code></h2>
+<p>Finds the indices of each element of this circular sequence close to an axis of reflectional symmetry, that is a line of symmetry that splits the sequence in two identical halves.</p>
+<h3><a href="#example" name="example" class="anchor"><span class="anchor-link"></span></a>Example</h3>
+<pre class="prettyprint"><code class="language-scala">Seq(2, 1, 2, 2, 1, 2, 2, 1, 2, 2, 1, 2).symmetryIndices // List(1, 4, 7, 10)
+</code></pre>
+<h2><a href="#symmetry" name="symmetry" class="anchor"><span class="anchor-link"></span></a><code>symmetry</code></h2>
+<p>Computes the order of reflectional (mirror) symmetry, the number &gt;= 0 of reflections in which this circular sequence looks exactly the same.</p>
+<p><em>Note:</em> rotational symmetry is always higher or equal than reflectional symmetry</p>
+<h3><a href="#example" name="example" class="anchor"><span class="anchor-link"></span></a>Example</h3>
+<pre class="prettyprint"><code class="language-scala">Seq(2, 1, 2, 2, 1, 2, 2, 1, 2, 2, 1, 2).symmetry // 4
+</code></pre>
 <div class="source-github">
 The source code for this page can be found <a href="https://github.com/scala-tessella/ring-seq/tree/master/src/main/paradox/categories/symmetry.md">here</a>.
 </div>
@@ -135,9 +148,9 @@ The source code for this page can be found <a href="https://github.com/scala-tes
 <ul>
   <li><a href="../categories/symmetry.html#symmetry" class="header">Symmetry</a>
   <ul>
-    <li><a href="../categories/symmetry.html#reflectionalsymmetry" class="header"><code>reflectionalSymmetry</code></a></li>
-    <li><a href="../categories/symmetry.html#simmetryindices" class="header"><code>simmetryIndices</code></a></li>
-    <li><a href="../categories/symmetry.html#simmetry" class="header"><code>simmetry</code></a></li>
+    <li><a href="../categories/symmetry.html#rotationalsymmetry" class="header"><code>rotationalSymmetry</code></a></li>
+    <li><a href="../categories/symmetry.html#symmetryindices" class="header"><code>symmetryIndices</code></a></li>
+    <li><a href="../categories/symmetry.html#symmetry" class="header"><code>symmetry</code></a></li>
   </ul></li>
 </ul>
 </div>
@@ -205,7 +218,7 @@ The source code for this page can be found <a href="https://github.com/scala-tes
 <script type="text/javascript" src="../lib/prettify/prettify.js"></script>
 <script type="text/javascript" src="../lib/prettify/lang-scala.js"></script>
 <script type="text/javascript">jQuery(function(){window.prettyPrint && prettyPrint()});</script>
-<script type="text/javascript">jQuery(function(jq){initOldVersionWarnings(jq, '0.0.0+1-c6b4a279', 'https://github.com/scala-tessella/ring-seq')});</script>
+<script type="text/javascript">jQuery(function(jq){initOldVersionWarnings(jq, '0.0.0+1-035320da', 'https://github.com/scala-tessella/ring-seq')});</script>
 
 
 </html>
