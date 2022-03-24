@@ -1,7 +1,10 @@
-package ringseq
+package io.github.scala_tessella.ring_seq
 
-/** Adds implicit methods to `[[https://www.scala-lang.org/api/current/scala/collection/immutable/Seq.html immutable.Seq]]`
- * (and subtypes) for when a sequence needs to be considered '''circular''', its elements forming a ring.
+import scala.collection.Seq
+import utils.Comparisons.areSameSize
+
+/** Adds implicit methods to `[[https://www.scala-lang.org/api/current/scala/collection/Seq.html Seq]]`
+ * (immutable / mutable and subtypes) for when a sequence needs to be considered '''circular''', its elements forming a ring.
  *
  * @author Mario Càllisto
  */
@@ -63,7 +66,7 @@ object RingSeq {
 
     /** Rotate the sequence to the right by some steps.
      *
-     * @param step Int
+     * @param step the circular distance between each new and old position
      * @return a sequence consisting of all elements rotated to the right by ''step'' places.
      *         If ''step'' is negative the rotation happens to the left.
      * @example {{{Seq(0, 1, 2).rotateRight(1) // Seq(2, 0, 1)}}}
@@ -77,7 +80,7 @@ object RingSeq {
 
     /** Rotates the sequence to the left by some steps.
      *
-     * @param step Int
+     * @param step the circular distance between each old and new position
      * @return a sequence consisting of all elements rotated to the left by ''step'' places.
      *         If ''step'' is negative the rotation happens to the right.
      * @example {{{Seq(0, 1, 2).rotateLeft(1) // Seq(1, 2, 0)}}}
@@ -114,7 +117,7 @@ object RingSeq {
      * @example {{{Seq(0, 1, 2).segmentLengthO(_ % 2 == 0, 2) // 2}}}
      */
     def segmentLengthO(p: A => Boolean, from: IndexO = 0): Int =
-      startAt(from).segmentLength(p)
+      startAt(from).segmentLength(p, 0)
 
     /** Selects an interval of elements.
      *
@@ -224,13 +227,13 @@ object RingSeq {
      * @return An iterator producing all the sequences obtained by rotating and reflecting this circular sequence,
      *         starting from itself and moving one rotation step to the right, then reflecting and doing the same,
      *         or just itself if empty.
-     * @example {{{Seq(0, 1, 2).rotations // Iterator(Seq(0, 1, 2), Seq(1, 2, 0), Seq(2, 0, 1), Seq(0, 2, 1), Seq(2, 1, 0), Seq(1, 0, 2))}}}
+     * @example {{{Seq(0, 1, 2).rotationsAndReflections // Iterator(Seq(0, 1, 2), Seq(1, 2, 0), Seq(2, 0, 1), Seq(0, 2, 1), Seq(2, 1, 0), Seq(1, 0, 2))}}}
      */
     def rotationsAndReflections: Iterator[Seq[A]] =
       transformations(_.reflections.flatMap(_.rotations))
 
     private def isTransformationOf(that: Seq[A], f: Seq[A] => Iterator[Seq[A]]): Boolean =
-      ring.sizeCompare(that) == 0 && f(ring).contains(that)
+      areSameSize(ring, that) && f(ring).contains(that)
 
     /** Tests whether this circular sequence is a rotation of a given sequence.
      *
@@ -289,9 +292,9 @@ object RingSeq {
       }
     }
 
-    /** Finds the indices of each element of this circular sequence closer to an axis of reflectional symmetry.
+    /** Finds the indices of each element of this circular sequence close to an axis of reflectional symmetry.
      *
-     * @return the indices of each element of this circular sequence closer to an axis of reflectional symmetry,
+     * @return the indices of each element of this circular sequence close to an axis of reflectional symmetry,
      *         that is a line of symmetry that splits the sequence in two identical halves.
      * @example {{{Seq(2, 1, 2, 2, 1, 2, 2, 1, 2, 2, 1, 2).symmetryIndices // List(1, 4, 7, 10)}}}
      */

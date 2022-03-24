@@ -1,19 +1,17 @@
-package ringseq.examples
+package io.github.scala_tessella.ring_seq.examples
 
-import ringseq.RingSeq._
+import io.github.scala_tessella.ring_seq.RingSeq._
 
-/** An example class wrapping an immutable sequence and keeping a mutable state of rotation and reflection
+import scala.collection.Seq
+
+/** An example class wrapping a sequence and keeping a mutable state of rotation and reflection
  *
- * @param underlying the wrapped immutable sequence
+ * @param underlying the wrapped sequence
+ * @param headIndex mutable state of rotation, a circular index of the sequence head
+ * @param isReflected mutable state of reflection
  * @tparam A the type of the elements in the sequence
  */
-class Ring[A](underlying: Seq[A]) {
-
-  /** Mutable circular index of the sequence head. */
-  var headIndex: IndexO = 0
-
-  /** Mutable state of the reflection. */
-  var isReflected: Boolean = false
+class Ring[A](underlying: Seq[A], var headIndex: IndexO = 0, var isReflected: Boolean = false ) {
 
   private def directionMultiplier: Int =
     if (isReflected) 1 else -1

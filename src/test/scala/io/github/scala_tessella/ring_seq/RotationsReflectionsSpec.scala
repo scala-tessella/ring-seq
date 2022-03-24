@@ -1,78 +1,89 @@
-package ringseq
+package io.github.scala_tessella.ring_seq
 
 import org.scalacheck.Arbitrary.arbitrary
 import org.scalacheck.Prop.forAll
 import org.scalacheck.Test.check
 import org.scalatest.flatspec._
 import org.scalatest.matchers._
-import ringseq.RingSeq._
+import RingSeq._
 
+import scala.collection.Seq
 import scala.collection.immutable.Queue
+import scala.collection.mutable.{Buffer, ListBuffer, StringBuilder, Queue => MutableQueue}
 
-class RotationsReflectionsSpec extends AnyFlatSpec with should.Matchers {
+class RotationsReflectionsSpec extends AnyFlatSpec with TestHelper with should.Matchers {
 
-  val s = Seq(1, 2, 3, 4, 5)
-  val oneLeft = Seq(2, 3, 4, 5, 1)
+  val oneLeft: Seq[Int] = Seq(2, 3, 4, 5, 1)
 
-  "Any Seq subtype" can "be rotated" in {
+  "Any immutable Seq subtype" can "be rotated" in {
     "SCALA".rotateRight(2).mkString shouldEqual "LASCA"
-    s.toList.rotateRight(2) shouldBe List(4, 5, 1, 2, 3)
-    s.toVector.rotateRight(2) shouldBe Vector(4, 5, 1, 2, 3)
+    s12345.toList.rotateRight(2) shouldBe List(4, 5, 1, 2, 3)
+    s12345.toVector.rotateRight(2) shouldBe Vector(4, 5, 1, 2, 3)
     Queue(1, 2, 3, 4, 5).rotateRight(2) shouldBe Queue(4, 5, 1, 2, 3)
   }
 
+  "Any mutable Seq subtype" can "be rotated" in {
+    s12345.toBuffer.rotateRight(2) shouldBe Buffer(4, 5, 1, 2, 3)
+    ListBuffer(1, 2, 3, 4, 5).rotateRight(2) shouldBe ListBuffer(4, 5, 1, 2, 3)
+    val sb = new StringBuilder("abcde")
+    sb.rotateRight(2).toList shouldBe List('d', 'e', 'a', 'b', 'c')
+    MutableQueue(1, 2, 3, 4, 5).rotateRight(2) shouldBe MutableQueue(4, 5, 1, 2, 3)
+  }
+
   "A Seq considered as a ring" can "be rotated one step to the right" in {
-    s.rotateRight(1) shouldBe Seq(5, 1, 2, 3, 4)
+    s12345.rotateRight(1) shouldBe Seq(5, 1, 2, 3, 4)
+    e.rotateRight(1) shouldBe e
   }
 
   it can "be rotated one step to the left" in {
-    s.rotateLeft(1) shouldBe oneLeft
-    s.rotateRight(-1) shouldBe oneLeft
+    s12345.rotateLeft(1) shouldBe oneLeft
+    s12345.rotateRight(-1) shouldBe oneLeft
   }
 
   it can "be rotated to start where index 1 is" in {
-    s.startAt(1) shouldBe oneLeft
+    s12345.startAt(1) shouldBe oneLeft
   }
 
   it can "be reflected" in {
-    s.reflectAt() shouldBe Seq(1, 5, 4, 3, 2)
+    s12345.reflectAt() shouldBe Seq(1, 5, 4, 3, 2)
   }
 
   it can "be reflected at a given index" in {
-    s.reflectAt(2) shouldBe Seq(3, 2, 1, 5, 4)
+    s12345.reflectAt(2) shouldBe Seq(3, 2, 1, 5, 4)
   }
 
   it can "be reflected as reversed" in {
-    s.reflectAt(-1) shouldBe s.reverse
+    s12345.reflectAt(-1) shouldBe s12345.reverse
   }
 
   it can "iterate on all rotations" in {
-    s.rotations.toList shouldBe List(
-      s,
+    s12345.rotations.toList shouldBe List(
+      s12345,
       oneLeft,
       Seq(3, 4, 5, 1, 2),
       Seq(4, 5, 1, 2, 3),
       Seq(5, 1, 2, 3, 4)
     )
+    e.rotations.toList shouldBe List(e)
   }
 
   it can "iterate on all reflections" in {
-    s.reflections.toList shouldBe List(
-      s,
+    s12345.reflections.toList shouldBe List(
+      s12345,
       Seq(1, 5, 4, 3, 2)
     )
   }
 
   it can "iterate on all reversions" in {
-    s.reversions.toList shouldBe List(
-      s,
-      s.reverse
+    s12345.reversions.toList shouldBe List(
+      s12345,
+      s12345.reverse
     )
   }
 
   it can "iterate on all rotations and reflections" in {
-    s.rotationsAndReflections.toList shouldBe List(
-      s,
+    s12345.rotationsAndReflections.toList shouldBe List(
+      s12345,
       oneLeft,
       Seq(3, 4, 5, 1, 2),
       Seq(4, 5, 1, 2, 3),
@@ -86,21 +97,21 @@ class RotationsReflectionsSpec extends AnyFlatSpec with should.Matchers {
   }
 
   it can "be the rotation of another Seq" in {
-    s.isRotationOf(Seq(3, 4, 5, 1, 2)) shouldBe true
-    s.rotations.forall(s.isRotationOf) shouldBe true
+    s12345.isRotationOf(Seq(3, 4, 5, 1, 2)) shouldBe true
+    s12345.rotations.forall(s12345.isRotationOf) shouldBe true
   }
 
   it can "be the reflection of another Seq" in {
-    s.isReflectionOf(Seq(1, 5, 4, 3, 2)) shouldBe true
+    s12345.isReflectionOf(Seq(1, 5, 4, 3, 2)) shouldBe true
   }
 
   it can "be the reversion of another Seq" in {
-    s.isReversionOf(Seq(5, 4, 3, 2, 1)) shouldBe true
+    s12345.isReversionOf(Seq(5, 4, 3, 2, 1)) shouldBe true
   }
 
   it can "be the rotation or reflection of another Seq" in {
-    s.isRotationOrReflectionOf(Seq(3, 2, 1, 5, 4)) shouldBe true
-    s.rotationsAndReflections.forall(s.isRotationOrReflectionOf) shouldBe true
+    s12345.isRotationOrReflectionOf(Seq(3, 2, 1, 5, 4)) shouldBe true
+    s12345.rotationsAndReflections.forall(s12345.isRotationOrReflectionOf) shouldBe true
   }
 
   "All rotations of a Seq" must "contain itself" in {

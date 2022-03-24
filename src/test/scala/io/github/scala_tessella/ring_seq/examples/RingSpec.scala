@@ -1,4 +1,4 @@
-package ringseq.examples
+package io.github.scala_tessella.ring_seq.examples
 
 import org.scalatest.flatspec._
 import org.scalatest.matchers._

@@ -1,8 +1,10 @@
-package ringseq
+package io.github.scala_tessella.ring_seq
 
 import org.scalatest.flatspec._
 import org.scalatest.matchers._
-import ringseq.RingSeq._
+import RingSeq._
+
+import scala.collection.Seq
 
 class ScaladocExampleSpec extends AnyFlatSpec with should.Matchers {
 

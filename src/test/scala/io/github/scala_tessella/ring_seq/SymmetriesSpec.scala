@@ -1,25 +1,25 @@
-package ringseq
+package io.github.scala_tessella.ring_seq
 
 import org.scalacheck.Gen
 import org.scalacheck.Prop.forAll
 import org.scalacheck.Test.check
 import org.scalatest.flatspec._
 import org.scalatest.matchers._
-import ringseq.RingSeq._
+import RingSeq._
 
-class SymmetriesSpec extends AnyFlatSpec with should.Matchers {
+import scala.collection.Seq
 
-  val s = Seq(1, 2, 3, 4, 5)
-  val e = Seq.empty
-  val spin3 = Seq(1, 2, 3, 1, 2, 3, 1, 2, 3)
-  val eptagon = Seq(6, 6, 6, 6, 6, 6, 6)
-  val squaroid = Seq(2, 1, 2, 2, 1, 2, 2, 1, 2, 2, 1, 2)
-  val axisOnElement = Seq(1, 2, 3, 4, 3, 2)
-  val axisOffElement = Seq(1, 2, 3, 4, 4, 3, 2, 1)
-  val axisOnOffElement = Seq(1, 2, 3, 4, 4, 3, 2)
+class SymmetriesSpec extends AnyFlatSpec with TestHelper with should.Matchers {
+
+  val spin3: Seq[Int] = Seq(1, 2, 3, 1, 2, 3, 1, 2, 3)
+  val eptagon: Seq[Int] = Seq(6, 6, 6, 6, 6, 6, 6)
+  val squaroid: Seq[Int] = Seq(2, 1, 2, 2, 1, 2, 2, 1, 2, 2, 1, 2)
+  val axisOnElement: Seq[Int] = Seq(1, 2, 3, 4, 3, 2)
+  val axisOffElement: Seq[Int] = Seq(1, 2, 3, 4, 4, 3, 2, 1)
+  val axisOnOffElement: Seq[Int] = Seq(1, 2, 3, 4, 4, 3, 2)
 
   "A Vector considered as a ring" can "have n-fold rotational symmetry" in {
-    s.rotationalSymmetry shouldBe 1
+    s12345.rotationalSymmetry shouldBe 1
     e.rotationalSymmetry shouldBe 1
     spin3.rotationalSymmetry shouldBe 3
     eptagon.rotationalSymmetry shouldBe 7
@@ -30,7 +30,7 @@ class SymmetriesSpec extends AnyFlatSpec with should.Matchers {
   }
 
   it can "have axes of reflectional symmetry" in {
-    s.symmetry shouldBe 0
+    s12345.symmetry shouldBe 0
     e.symmetry shouldBe 0
     spin3.symmetry shouldBe 0
     eptagon.symmetry shouldBe 7
@@ -41,7 +41,7 @@ class SymmetriesSpec extends AnyFlatSpec with should.Matchers {
   }
 
   it can "return the indices closer to the axes of reflectional symmetry" in {
-    s.symmetryIndices shouldBe Nil
+    s12345.symmetryIndices shouldBe Nil
     e.symmetryIndices shouldBe Nil
     spin3.symmetryIndices shouldBe Nil
     eptagon.symmetryIndices shouldBe List(0, 1, 2, 3, 4, 5, 6) 
