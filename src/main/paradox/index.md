@@ -49,6 +49,7 @@ ListBuffer(1, 3, 5, 7, 9).reflectAt(3) // ListBuffer(7, 5, 3, 1, 9)
 
 @@@ index
 * [What is a circular sequence](what-is.md)
+* [Usage examples](usage.md)
 * [Reference](reference.md)
 @@@
 

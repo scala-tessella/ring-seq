@@ -2,6 +2,7 @@ name: Continuous site publication
 on:
   push:
     tags: [v*]
+    branches: ['**']
 
 jobs:
   publishSite:
