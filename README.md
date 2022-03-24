@@ -37,6 +37,10 @@ ListBuffer(1, 3, 5, 7, 9).reflectAt(3) // ListBuffer(7, 5, 3, 1, 9)
 
 ## Documentation
 
+### Usage
+
+One usage example is provided and documented [here](https://scala-tessella.github.io/ring-seq/usage.html).
+
 ### Scaladoc
 
 The Scaladoc API documentation for 2.13 (valid for the other Scala versions too)
