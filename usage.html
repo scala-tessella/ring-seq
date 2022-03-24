@@ -2,11 +2,11 @@
 <html class="no-js" lang="en">
 
 <head>
-<title>Ring Seq</title>
+<title>Usage examples · Ring Seq</title>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="description" content='Extends Scala Seq with ring (circular) methods'/>
-<link rel="canonical" href="https://github.com/scala-tessella/ring-seqindex.html"/>
+<link rel="canonical" href="https://github.com/scala-tessella/ring-sequsage.html"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:100normal,100italic,300normal,300italic,400normal,400italic,500normal,500italic,700normal,700italic,900normal,900italicc" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="lib/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="js/page.js"></script>
@@ -28,7 +28,7 @@
 <div class="off-canvas position-left" id="off-canvas-menu" data-off-canvas>
 <nav class="off-canvas-nav">
 <div class="nav-home">
-<a href="index.html" class="active">
+<a href="index.html" >
 <span class="home-icon">⌂</span>Ring Seq
 </a>
 <div class="version-number">
@@ -38,7 +38,7 @@
 <div class="nav-toc">
 <ul>
   <li><a href="what-is.html" class="page">What is a circular sequence</a></li>
-  <li><a href="usage.html" class="page">Usage examples</a></li>
+  <li><a href="usage.html" class="active page">Usage examples</a></li>
   <li><a href="reference.html" class="page">Reference</a>
   <ul>
     <li><a href="categories/indexing.html" class="page">Indexing</a></li>
@@ -62,7 +62,7 @@
 H3.6C3.048,13,3,13.447,3,14c0,0.553,0.048,1,0.6,1H16.4c0.552,0,0.6-0.447,0.6-1C17,13.447,16.952,13,16.4,13z M3.6,7H16.4
 C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.048,7,3.6,7z"/></svg>
 </a>
-<div class="title"><a href="index.html" class="active">Ring Seq</a></div>
+<div class="title"><a href="index.html">Ring Seq</a></div>
 
 <!--
 <a href="https://www.example.com" class="logo show-for-medium">logo</a>
@@ -75,7 +75,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="medium-3 large-2 show-for-medium column">
 <nav class="site-nav">
 <div class="nav-home">
-<a href="index.html" class="active">
+<a href="index.html" >
 <span class="home-icon">⌂</span>Ring Seq
 </a>
 <div class="version-number">
@@ -85,7 +85,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="nav-toc">
 <ul>
   <li><a href="what-is.html" class="page">What is a circular sequence</a></li>
-  <li><a href="usage.html" class="page">Usage examples</a></li>
+  <li><a href="usage.html" class="active page">Usage examples</a></li>
   <li><a href="reference.html" class="page">Reference</a>
   <ul>
     <li><a href="categories/indexing.html" class="page">Indexing</a></li>
@@ -108,43 +108,55 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 
 <div class="page-header row">
 <div class="medium-12 show-for-medium column">
+<div class="nav-breadcrumbs">
+<ul>
+  <li><a href="index.html">Ring Seq</a></li>
+  <li>Usage examples</li>
+</ul>
+</div>
 </div>
 </div>
 
 <div class="page-content row">
 <div class="small-12 large-9 column" id="docs">
-<h1><a href="#ring-seq" name="ring-seq" class="anchor"><span class="anchor-link"></span></a>Ring Seq</h1>
-<p>A library that adds new operations to Scala <code>Seq</code> for when a sequence needs to be considered <a href="what-is.html"><strong>circular</strong></a>, its elements forming a ring.</p>
-<p>It works on any immutable / mutable <code>Seq</code> and sub-types.</p>
-<p>Available for Scala <code>3.1.1</code>, Scala <code>2.13.8</code> and <code>2.12.15</code>.</p>
-<h2><a href="#setup" name="setup" class="anchor"><span class="anchor-link"></span></a>Setup</h2>
-<p>According to your Scala version, add one of the following dependencies to your <code>build.sbt</code> file:</p>
-<pre class="prettyprint"><code class="language-scala">libraryDependencies += &quot;io.github.scala-tessella&quot; %% &quot;ring-seq_3&quot; % &quot;0.0.0+1-1582d171&quot;
+<h1><a href="#usage-examples" name="usage-examples" class="anchor"><span class="anchor-link"></span></a>Usage examples</h1>
+<p>This page shows examples of how the library can be used.</p>
+<h2><a href="#ring-a-class" name="ring-a-class" class="anchor"><span class="anchor-link"></span></a><code>Ring[A]</code> class</h2>
+<p>An example class wrapping a sequence and keeping a mutable state of rotation and reflection.</p>
+<p>Thanks to the primitives available, it can be built in few lines of code:</p>
+<pre class="prettyprint"><code class="language-scala">// using type IndexO to signal a circular index
+class Ring[A](underlying: Seq[A], var headIndex: IndexO = 0, var isReflected: Boolean = false ) {
+
+  private def directionMultiplier: Int =
+    if (isReflected) 1 else -1
+
+  def rotateR(step: Int = 1): Unit =
+    headIndex += step * directionMultiplier
+
+  def rotateL(step: Int = 1): Unit =
+    rotateR(-step)
+
+  def reflect(): Unit =
+    isReflected = !isReflected
+
+  // using applyO
+  def currentHead: A =
+    underlying.applyO(headIndex)
+
+   // using startAt and reflectAt
+  def current: Seq[A] =
+    if (isReflected) underlying.reflectAt(headIndex) else underlying.startAt(headIndex)
+
+}
+
 </code></pre>
-<pre class="prettyprint"><code class="language-scala">libraryDependencies += &quot;io.github.scala-tessella&quot; %% &quot;ring-seq_2.13&quot; % &quot;0.0.0+1-1582d171&quot;
-</code></pre>
-<pre class="prettyprint"><code class="language-scala">libraryDependencies += &quot;io.github.scala-tessella&quot; %% &quot;ring-seq_2.12&quot; % &quot;0.0.0+1-1582d171&quot;
-</code></pre>
-<h2><a href="#getting-started" name="getting-started" class="anchor"><span class="anchor-link"></span></a>Getting started</h2>
-<p>First, start with the following import:</p>
-<pre class="prettyprint"><code class="language-scala">import io.github.scala_tessella.ring_seq.RingSeq._
-</code></pre>
-<p>Where the <a href="https://github.com/scala-tessella/ring-seq/blob/master/src/main/scala/io/github/scala_tessella/ring_seq/RingSeq.scala"><code>RingSeq</code></a> object is imported, any collection under <code>Seq</code> will access the new methods. You can write something like:</p>
-<pre class="prettyprint"><code class="language-scala">&quot;RING&quot;.rotateRight(1).mkString // GRIN
-List(0, 1, 2, 3).startAt(2) // List(2, 3, 0, 1)
-ListBuffer(1, 3, 5, 7, 9).reflectAt(3) // ListBuffer(7, 5, 3, 1, 9)
-</code></pre>
-<h2><a href="#need" name="need" class="anchor"><span class="anchor-link"></span></a>Need</h2>
-<p>Whenever data are structured in a circular sequence, chances are you don&rsquo;t want to locally reinvent the wheel (pun intended).</p>
-<h2><a href="#solution" name="solution" class="anchor"><span class="anchor-link"></span></a>Solution</h2>
-<p><strong>RingSeq</strong> is a small, purely functional, self-contained library, where most of the circular use cases are already solved and building blocks provided for the others.</p>
-<p>Leveraging Scala <a href="https://docs.scala-lang.org/overviews/core/implicit-classes.html"><code>implicit class</code></a>, it acts like a <em>decorator</em>, providing new circular methods to any collection under <code>Seq</code>.</p>
+<p>Check the <a href="api/io/github/scala_tessella/ring_seq/examples/Ring.html" title="io.github.scala_tessella.ring_seq.examples.Ring"><code>API documentation for Ring class</code></a> for detailed information.</p>
 <div class="source-github">
-The source code for this page can be found <a href="https://github.com/scala-tessella/ring-seq/tree/master/src/main/paradox/index.md">here</a>.
+The source code for this page can be found <a href="https://github.com/scala-tessella/ring-seq/tree/master/src/main/paradox/usage.md">here</a>.
 </div>
 
 <div class="nav-next">
-<p><strong>Next:</strong> <a href="what-is.html">What is a circular sequence</a></p>
+<p><strong>Next:</strong> <a href="reference.html">Reference</a></p>
 </div>
 </div>
 <div class="large-3 show-for-large column" data-sticky-container>
@@ -153,12 +165,9 @@ The source code for this page can be found <a href="https://github.com/scala-tes
 <div class="nav-title">On this page:</div>
 <div class="nav-toc">
 <ul>
-  <li><a href="index.html#ring-seq" class="header">Ring Seq</a>
+  <li><a href="usage.html#usage-examples" class="header">Usage examples</a>
   <ul>
-    <li><a href="index.html#setup" class="header">Setup</a></li>
-    <li><a href="index.html#getting-started" class="header">Getting started</a></li>
-    <li><a href="index.html#need" class="header">Need</a></li>
-    <li><a href="index.html#solution" class="header">Solution</a></li>
+    <li><a href="usage.html#ring-a-class" class="header"><code>Ring[A]</code> class</a></li>
   </ul></li>
 </ul>
 </div>
