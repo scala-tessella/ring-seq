@@ -4,7 +4,11 @@
 
 The circular equivalent of `indexOfSlice`.
 
-_Note:_ given the [definition of circular sequence](../what-is.html), a slice can contain more elements than the sequence itself.
+@@@ note
+
+Given the [definition of circular sequence](../what-is.html), a slice can contain more elements than the sequence itself.
+
+@@@
 
 ### Example
 

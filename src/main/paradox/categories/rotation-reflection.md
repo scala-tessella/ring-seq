@@ -24,7 +24,11 @@ Seq(0, 1, 2).rotateLeft(1) // Seq(1, 2, 0)
 
 Returns a sequence rotated to start at circular index.
 
-_Note:_ is equivalent to [`rotateLeft`](rotation-reflection.html#rotateleft).
+@@@ note
+
+Is equivalent to [`rotateLeft`](rotation-reflection.html#rotateleft).
+
+@@@
 
 ### Example
 
@@ -36,7 +40,11 @@ Seq(0, 1, 2).startAt(1) // Seq(1, 2, 0)
 
 Returns a sequence reversed and rotated to start at circular index.
 
-_Note:_ `reflectAt(-1)` is equivalent to `reverse`.
+@@@ note
+
+`reflectAt(-1)` is equivalent to `reverse`.
+
+@@@
 
 ### Example
 

@@ -27,7 +27,11 @@ Seq(2, 1, 2, 2, 1, 2, 2, 1, 2, 2, 1, 2).symmetryIndices // List(1, 4, 7, 10)
 Computes the order of reflectional (mirror) symmetry,
 the number >= 0 of reflections in which this circular sequence looks exactly the same.
 
-_Note:_ rotational symmetry is always higher or equal than reflectional symmetry
+@@@ note
+
+Rotational symmetry is always higher or equal than reflectional symmetry.
+
+@@@
 
 ### Example
 

@@ -4,7 +4,11 @@
 
 The circular equivalent of `containsSlice`.
 
-_Note:_ given the [definition of circular sequence](../what-is.html), a slice can contain more elements than the sequence itself.
+@@@ note
+
+Given the [definition of circular sequence](../what-is.html), a slice can contain more elements than the sequence itself.
+
+@@@
 
 ### Example
 
@@ -25,7 +29,11 @@ Seq(0, 1, 2).containsSlice(Seq(2, 0, 1, 2, 0)) // false
 
 Tests if a sequence is a reflection of another one.
 
-_Note:_ a sequence is always a reflection of itself.
+@@@ note
+
+A sequence is always a reflection of itself.
+
+@@@
 
 ### Example
 
@@ -37,7 +45,11 @@ Seq(0, 1, 2).isReflectionOf(Seq(0, 2, 1)) // true
 
 Tests if a sequence is a reversion of another one.
 
-_Note:_ a sequence is always a reversion of itself.
+@@@ note
+
+A sequence is always a reversion of itself.
+
+@@@
 
 ### Example
 
@@ -49,7 +61,11 @@ Seq(0, 1, 2).isReversionOf(Seq(2, 1, 0)) // true
 
 Tests if a sequence is a rotation of another one.
 
-_Note:_ a sequence is always a rotation of itself.
+@@@ note
+
+A sequence is always a rotation of itself.
+
+@@@
 
 ### Example
 
@@ -61,7 +77,11 @@ Seq(0, 1, 2).isRotationOf(Seq(1, 2, 0)) // true
 
 Tests if a sequence is a rotation or a reflection of another one.
 
-_Note:_ a sequence is always a rotation and a reflection of itself.
+@@@ note
+
+A sequence is always a rotation and a reflection of itself.
+
+@@@
 
 ### Example
 

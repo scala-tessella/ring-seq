@@ -23,7 +23,11 @@ Seq(0, 1, 2).sliding(2) // Iterator(Seq(0, 1), Seq(1, 2))```
 
 All possible rotations.
 
-_Note:_ Starting from itself and moving one rotation step to the right.
+@@@ note
+
+Starting from itself and moving one rotation step to the right.
+
+@@@
 
 ### Example
 
@@ -79,7 +83,11 @@ Seq.empty.reflections // Iterator(Seq())
 
 All possible rotations and reflections.
 
-_Note:_ Starting from itself and moving one rotation step to the right, then reversing and doing the same.
+@@@ note
+
+Starting from itself and moving one rotation step to the right, then reversing and doing the same.
+
+@@@
 
 ### Example
 

@@ -4,7 +4,11 @@
 
 The circular equivalent of `apply`.
 
-_Note:_ given the [definition of circular sequence](../what-is.html), it returns an element for any possible integer.
+@@@ note
+
+Given the [definition of circular sequence](../what-is.html), it returns an element for any possible integer.
+
+@@@
 
 ### Example
 
@@ -33,7 +37,11 @@ Seq.empty.applyO(0) // ArithmeticException
 
 The circular equivalent of `slice`.
 
-_Note:_ given the [definition of circular sequence](../what-is.html), a slice can contain more elements than the sequence itself.
+@@@ note
+
+Given the [definition of circular sequence](../what-is.html), a slice can contain more elements than the sequence itself.
+
+@@@
 
 ### Example
 
