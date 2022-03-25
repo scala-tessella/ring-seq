@@ -2,6 +2,8 @@
 
 For our purposes, a circular sequence is a sequence composed by a finite number of elements forming a ring.
 
+![circular](circular_plain.svg)
+
 Being circular, the first element of the sequence can be considered as also placed just after the last element.
 
 ```scala
