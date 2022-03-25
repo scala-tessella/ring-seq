@@ -10,23 +10,11 @@ Available for Scala `3.1.1`, Scala `2.13.8` and `2.12.15`.
 
 ## Setup
 
-According to your Scala version, add one of the following dependencies to your `build.sbt` file:
+Add the following dependency to your `build.sbt` file:
 
 @@@vars
 ~~~ scala
-libraryDependencies += "io.github.scala-tessella" %% "ring-seq_3" % "$project.version$"
-~~~
-@@@
-
-@@@vars
-~~~ scala
-libraryDependencies += "io.github.scala-tessella" %% "ring-seq_2.13" % "$project.version$"
-~~~
-@@@
-
-@@@vars
-~~~ scala
-libraryDependencies += "io.github.scala-tessella" %% "ring-seq_2.12" % "$project.version$"
+libraryDependencies += "io.github.scala-tessella" %% "ring-seq" % "$project.version$"
 ~~~
 @@@
 
