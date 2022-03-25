@@ -14,15 +14,9 @@ Available for Scala `3.1.1`, Scala `2.13.8` and `2.12.15`.
 
 ## Setup
 
-According to your Scala version, add one of the following dependencies to your `build.sbt` file:
+Add the following dependency to your `build.sbt` file:
 ```scala
-libraryDependencies += "io.github.scala-tessella" %% "ring-seq_3" % "0.1.3"
-```
-```scala
-libraryDependencies += "io.github.scala-tessella" %% "ring-seq_2.13" % "0.1.3"
-```
-```scala
-libraryDependencies += "io.github.scala-tessella" %% "ring-seq_2.12" % "0.1.3"
+libraryDependencies += "io.github.scala-tessella" %% "ring-seq" % "0.1.3"
 ```
 
 Then just import the [`RingSeq`](/src/main/scala/io/github/scala_tessella/ring_seq/RingSeq.scala) object, any collection under `Seq`
