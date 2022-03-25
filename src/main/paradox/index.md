@@ -1,4 +1,4 @@
-# Ring Seq
+# RingSeq
 
 A library that adds new operations to Scala `Seq`
 for when a sequence needs to be considered [**circular**](what-is.html),
