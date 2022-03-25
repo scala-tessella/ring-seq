@@ -8,12 +8,18 @@ Browse the @scaladoc[API documentation](io.github.scala_tessella.ring_seq.RingSe
 
 ## Methods
 
-For dealing with a circular sequence, **Ring Seq** adds
+For dealing with a circular sequence, **Ring Seq** adds:
 
 1. new operations.
-2. alternative versions of some operations already existing for `Seq`,
-   identified by an `O` suffix (meaning _ring_).
-   (For example `applyO` is the circular version of `apply`).
+2. alternative versions of some operations already existing for `Seq`.
+
+@@@ note
+
+The alternative circular versions maintain the same name,
+but with an additional `O` suffix, meaning _ring_.
+(For example `applyO` is the circular version of `apply`).
+
+@@@
 
 They fall into the following categories:
 
