@@ -8,7 +8,7 @@ Browse the @scaladoc[API documentation](io.github.scala_tessella.ring_seq.RingSe
 
 ## Methods
 
-For dealing with a circular sequence, **Ring Seq** adds:
+For dealing with a circular sequence, **RingSeq** adds:
 
 1. new operations.
 2. alternative versions of some operations already existing for `Seq`.
