@@ -17,8 +17,14 @@ class RotationsReflectionsSpec extends AnyFlatSpec with TestHelper with should.M
 
   "Any immutable Seq subtype" can "be rotated" in {
     "SCALA".rotateRight(2).mkString shouldEqual "LASCA"
-    s12345.toList.rotateRight(2) shouldBe List(4, 5, 1, 2, 3)
-    s12345.toVector.rotateRight(2) shouldBe Vector(4, 5, 1, 2, 3)
+    val asList = s12345.toList
+    asList.rotateRight(2) shouldBe List(4, 5, 1, 2, 3)
+    asList.rotateRight(2) shouldBe a [List[_]]
+    asList.rotateRight(2) should not be a [Vector[_]]
+    val asVector = s12345.toVector
+    asVector.rotateRight(2) shouldBe Vector(4, 5, 1, 2, 3)
+    asVector.rotateRight(2) shouldBe a [Vector[_]]
+    asVector.rotateRight(2) should not be a [List[_]]
     Queue(1, 2, 3, 4, 5).rotateRight(2) shouldBe Queue(4, 5, 1, 2, 3)
   }
 
