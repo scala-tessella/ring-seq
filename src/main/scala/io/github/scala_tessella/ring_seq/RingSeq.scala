@@ -233,7 +233,7 @@ object RingSeq {
       transformations(_.reflections.flatMap(_.rotations))
 
     private def isTransformationOf(that: B[A], f: B[A] => Iterator[B[A]]): Boolean = {
-      ring.size == that.size && f(ring).contains(that)
+      ring.sizeCompare(that.size) == 0 && f(ring).contains(that)
     }
 
     /** Tests whether this circular sequence is a rotation of a given sequence.
