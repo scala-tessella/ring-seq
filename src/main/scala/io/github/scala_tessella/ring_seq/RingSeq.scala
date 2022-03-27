@@ -328,7 +328,7 @@ object RingSeq {
     /** Converts this string into a circular `Seq`.
      *
      * @return the string as a sequence of `Char`.
-    */
+     */
     def ring: Seq[Char] = s.toSeq
 
   }
