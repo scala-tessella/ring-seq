@@ -10,7 +10,7 @@ its elements forming a ring.
 
 It works on any immutable / mutable `Seq` and sub-types.
 
-Available for Scala `3.1.1`, Scala `2.13.8` and `2.12.15`.
+Available for Scala `3.1.1` and `2.13.8`.
 
 ## Setup
 
@@ -38,7 +38,7 @@ One usage example is provided and documented [here](https://scala-tessella.githu
 
 ### Scaladoc
 
-The Scaladoc API documentation for 2.13 (valid for the other Scala versions too)
+The Scaladoc API documentation for 2.13 (valid for Scala 3.1 too)
 can be browsed and searched [here](https://scala-tessella.github.io/ring-seq/api/io/github/scala_tessella/ring_seq/RingSeq$.html).
 
 ### Website
