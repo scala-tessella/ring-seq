@@ -334,4 +334,15 @@ object RingSeq {
 
   }
 
+  /** Value class providing methods for a `StringBuilder` considered circular. */
+  implicit class RingStringBuilderEnrichment(private val sb: StringBuilder) extends AnyVal with RingDecorators[Char, Seq] {
+
+    /** Converts this string builder into a circular `Seq`.
+     *
+     * @return the string builder as a sequence of `Char`.
+     */
+    def ring: Seq[Char] = sb.toSeq
+
+  }
+
 }
