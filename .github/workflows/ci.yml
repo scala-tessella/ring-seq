@@ -2,18 +2,19 @@ name: CI
 on:
   pull_request:
   push:
+
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-    - name: Setup JDK
-      uses: actions/setup-java@v2
-      with:
-        distribution: temurin
-        java-version: 8
-    - name: Build and Test
-      run: sbt -v +test
-    - name: Scalafix
-      run: sbt -v +"scalafixAll --check"
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: temurin
+          java-version: 8
+      - name: Build and Test
+        run: sbt -v +test
+      - name: Scalafix
+        run: sbt -v +"scalafixAll --check"
