@@ -21,35 +21,35 @@ object RingSeq {
   private def floor(i: IndexO, size: Int): Index =
     java.lang.Math.floorMod(i, size)
 
-  private def emptied[A, B[A] <: SeqOps[A, B, B[A]]](seq: B[A]): B[A] =
+  private def emptied[A, CC[B] <: SeqOps[B, CC, CC[B]]](seq: CC[A]): CC[A] =
     seq.take(0)
 
-  private def multiply[A, B[A] <: SeqOps[A, B, B[A]]](seq: B[A], times: Int): B[A] =
+  private def multiply[A, CC[B] <: SeqOps[B, CC, CC[B]]](seq: CC[A], times: Int): CC[A] =
     (0 until times).foldLeft(emptied(seq))((acc, _) => acc ++ seq)
 
   private def greaterHalfRange(size: Int): Range =
     0 until Math.ceil(size / 2.0).toInt
 
-  private def checkReflectionAxis[A, B[A] <: SeqOps[A, B, B[A]]](seq: B[A], gap: Int): Boolean =
+  private def checkReflectionAxis[A, CC[B] <: SeqOps[B, CC, CC[B]]](seq: CC[A], gap: Int): Boolean =
     greaterHalfRange(seq.size).forall(j => seq.applyO(j + 1) == seq.applyO(-(j + gap)))
 
-  private def hasHeadOnAxis[A, B[A] <: SeqOps[A, B, B[A]]](seq: B[A]): Boolean =
+  private def hasHeadOnAxis[A, CC[B] <: SeqOps[B, CC, CC[B]]](seq: CC[A]): Boolean =
     checkReflectionAxis(seq, 1)
 
-  private def hasAxisBetweenHeadAndNext[A, B[A] <: SeqOps[A, B, B[A]]](seq: B[A]): Boolean =
+  private def hasAxisBetweenHeadAndNext[A, CC[B] <: SeqOps[B, CC, CC[B]]](seq: CC[A]): Boolean =
     checkReflectionAxis(seq, 0)
 
-  private def findReflectionSymmetry[A, B[A] <: SeqOps[A, B, B[A]]](seq: B[A]): Option[Index] =
+  private def findReflectionSymmetry[A, CC[B] <: SeqOps[B, CC, CC[B]]](seq: CC[A]): Option[Index] =
     greaterHalfRange(seq.size).find(j => {
       val rotation = seq.startAt(j)
       hasHeadOnAxis(rotation) || hasAxisBetweenHeadAndNext(rotation)
     })
 
   /** Universal trait providing decorators for a `Seq` considered circular. */
-  trait RingDecorators[A, B[A] <: SeqOps[A, B, B[A]]] extends Any {
+  trait RingDecorators[A, CC[B] <: SeqOps[B, CC, CC[B]]] extends Any {
 
     /** The circular sequence */
-    def ring: B[A]
+    def ring: CC[A]
 
     private def index(i: IndexO): Index =
       floor(i, ring.size)
@@ -70,7 +70,7 @@ object RingSeq {
      *         If ''step'' is negative the rotation happens to the left.
      * @example {{{Seq(0, 1, 2).rotateRight(1) // Seq(2, 0, 1)}}}
      */
-    def rotateRight(step: Int): B[A] =
+    def rotateRight(step: Int): CC[A] =
       if (ring.isEmpty) ring
       else {
         val j: Index = ring.size - index(step)
@@ -84,7 +84,7 @@ object RingSeq {
      *         If ''step'' is negative the rotation happens to the right.
      * @example {{{Seq(0, 1, 2).rotateLeft(1) // Seq(1, 2, 0)}}}
      */
-    def rotateLeft(step: Int): B[A] =
+    def rotateLeft(step: Int): CC[A] =
       rotateRight(-step)
 
     /** Rotates the sequence to start at some circular index.
@@ -94,7 +94,7 @@ object RingSeq {
      *         It is equivalent to [[rotateLeft]].
      * @example {{{Seq(0, 1, 2).startAt(1) // Seq(1, 2, 0)}}}
      */
-    def startAt(i: IndexO): B[A] =
+    def startAt(i: IndexO): CC[A] =
       rotateLeft(i)
 
     /** Reflects the sequence to start at some circular index.
@@ -103,7 +103,7 @@ object RingSeq {
      * @return a sequence consisting of all elements reversed and rotated to start at circular index ''i''.
      * @example {{{Seq(0, 1, 2).reflectAt() // Seq(0, 2, 1)}}}
      */
-    def reflectAt(i: IndexO = 0): B[A] =
+    def reflectAt(i: IndexO = 0): CC[A] =
       startAt(i + 1).reverse
 
     /** Computes the length of the longest segment that starts from some circular index
@@ -127,7 +127,7 @@ object RingSeq {
      * @note a slice of a circular sequence can be bigger than the size of the elements in the sequence.
      * @example {{{Seq(0, 1, 2).sliceO(-1, 4) // Seq(2, 0, 1, 2, 0)}}}
      */
-    def sliceO(from: IndexO, until: IndexO): B[A] = {
+    def sliceO(from: IndexO, until: IndexO): CC[A] = {
       if (ring.isEmpty) ring
       else if (from >= until) emptied(ring)
       else {
@@ -137,7 +137,7 @@ object RingSeq {
       }
     }
 
-    private def growBy(growth: Int): B[A] =
+    private def growBy(growth: Int): CC[A] =
       sliceO(0, ring.size + growth)
 
     /** Tests whether this circular sequence contains a given sequence as a slice.
@@ -185,10 +185,10 @@ object RingSeq {
      * @return An iterator producing sequences of size ''size''.
      * @example {{{Seq(0, 1, 2).slidingO(2) // Iterator(Seq(0, 1), Seq(1, 2), Seq(2, 0))}}}
      */
-    def slidingO(size: Int, step: Int = 1): Iterator[B[A]] =
+    def slidingO(size: Int, step: Int = 1): Iterator[CC[A]] =
       sliceO(0, step * (ring.size - 1) + size).sliding(size, step)
 
-    private def transformations(f: B[A] => Iterator[B[A]]): Iterator[B[A]] =
+    private def transformations(f: CC[A] => Iterator[CC[A]]): Iterator[CC[A]] =
       if (ring.isEmpty) Iterator(ring) else f(ring)
 
     /** Computes all the rotations of this circular sequence
@@ -198,7 +198,7 @@ object RingSeq {
      *         or just itself if empty.
      * @example {{{Seq(0, 1, 2).rotations // Iterator(Seq(0, 1, 2), Seq(1, 2, 0), Seq(2, 0, 1))}}}
      */
-    def rotations: Iterator[B[A]] =
+    def rotations: Iterator[CC[A]] =
       transformations(r => slidingO(r.size))
 
     /** Computes all the reflections of this circular sequence
@@ -208,7 +208,7 @@ object RingSeq {
      *         or just itself if empty.
      * @example {{{Seq(0, 1, 2).reflections // Iterator(Seq(0, 1, 2), Seq(0, 2, 1))}}}
      */
-    def reflections: Iterator[B[A]] =
+    def reflections: Iterator[CC[A]] =
       transformations(r => List(r, r.reflectAt()).iterator)
 
     /** Computes all the reversions of this circular sequence
@@ -218,7 +218,7 @@ object RingSeq {
      *         or just itself if empty.
      * @example {{{Seq(0, 1, 2).reversions // Iterator(Seq(0, 1, 2), Seq(2, 1, 0))}}}
      */
-    def reversions: Iterator[B[A]] =
+    def reversions: Iterator[CC[A]] =
       transformations(r => List(r, r.reverse).iterator)
 
     /** Computes all the rotations and reflections of this circular sequence
@@ -228,10 +228,10 @@ object RingSeq {
      *         or just itself if empty.
      * @example {{{Seq(0, 1, 2).rotationsAndReflections // Iterator(Seq(0, 1, 2), Seq(1, 2, 0), Seq(2, 0, 1), Seq(0, 2, 1), Seq(2, 1, 0), Seq(1, 0, 2))}}}
      */
-    def rotationsAndReflections: Iterator[B[A]] =
+    def rotationsAndReflections: Iterator[CC[A]] =
       transformations(_.reflections.flatMap(_.rotations))
 
-    private def isTransformationOf(that: B[A], f: B[A] => Iterator[B[A]]): Boolean = {
+    private def isTransformationOf(that: CC[A], f: CC[A] => Iterator[CC[A]]): Boolean = {
       ring.sizeCompare(that.size) == 0 && f(ring).contains(that)
     }
 
@@ -242,7 +242,7 @@ object RingSeq {
      *         otherwise false.
      * @example {{{Seq(0, 1, 2).isRotationOf(Seq(1, 2, 0)) // true}}}
      */
-    def isRotationOf(that: B[A]): Boolean =
+    def isRotationOf(that: CC[A]): Boolean =
       isTransformationOf(that, _.rotations)
 
     /** Tests whether this circular sequence is a reflection of a given sequence.
@@ -252,7 +252,7 @@ object RingSeq {
      *         otherwise false.
      * @example {{{Seq(0, 1, 2).isReflectionOf(Seq(0, 2, 1)) // true}}}
      */
-    def isReflectionOf(that: B[A]): Boolean =
+    def isReflectionOf(that: CC[A]): Boolean =
       isTransformationOf(that, _.reflections)
 
     /** Tests whether this circular sequence is a reversion of a given sequence.
@@ -262,7 +262,7 @@ object RingSeq {
      *         otherwise false.
      * @example {{{Seq(0, 1, 2).isReversionOf(Seq(2, 1, 0)) // true}}}
      */
-    def isReversionOf(that: B[A]): Boolean =
+    def isReversionOf(that: CC[A]): Boolean =
       isTransformationOf(that, _.reversions)
 
     /** Tests whether this circular sequence is a rotation or a reflection of a given sequence.
@@ -272,7 +272,7 @@ object RingSeq {
      *         otherwise false.
      * @example {{{Seq(0, 1, 2).isRotationOrReflectionOf(Seq(2, 0, 1)) // true}}}
      */
-    def isRotationOrReflectionOf(that: B[A]): Boolean =
+    def isRotationOrReflectionOf(that: CC[A]): Boolean =
       isTransformationOf(that, _.rotationsAndReflections)
 
     private def areFoldsSymmetrical: Int => Boolean =
@@ -320,7 +320,7 @@ object RingSeq {
   }
 
   /** Value class providing methods for a generic `Seq` considered circular. */
-  implicit class RingSeqEnrichment[A, B[A] <: SeqOps[A, B, B[A]]](val ring: B[A]) extends AnyVal with RingDecorators[A, B]
+  implicit class RingSeqEnrichment[A, CC[B] <: SeqOps[B, CC, CC[B]]](val ring: CC[A]) extends AnyVal with RingDecorators[A, CC]
 
   /** Value class providing methods for a `String` considered circular. */
   implicit class RingStringEnrichment(private val s: String) extends AnyVal with RingDecorators[Char, Seq] {
