@@ -7,8 +7,13 @@ jobs:
   publishSite:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: olafurpg/setup-scala@v12
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: temurin
+          java-version: 8
       - name: Generate site
         run: sbt makeSite
       - uses: JamesIves/github-pages-deploy-action@4.1.3
