@@ -1,6 +1,7 @@
 name: Continuous site publication
 on:
   push:
+    branches: ['**']
     tags: [v*]
 
 jobs:
