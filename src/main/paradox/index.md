@@ -52,6 +52,7 @@ chances are you don't want to locally reinvent the wheel (pun intended).
 where most of the circular use cases are already solved
 and building blocks provided for the others.
 
-Leveraging Scala [`implicit class`](https://docs.scala-lang.org/overviews/core/implicit-classes.html),
+Leveraging Scala 3 [`extension`](https://docs.scala-lang.org/scala3/book/ca-extension-methods.html)
+or Scala 2 [`implicit class`](https://docs.scala-lang.org/overviews/core/implicit-classes.html),
 it acts like a _decorator_,
 providing new circular methods to any collection under `Seq`.
