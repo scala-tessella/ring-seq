@@ -16,7 +16,7 @@ Available for Scala `3.1.1` and `2.13.8`.
 
 Add the following dependency to your `build.sbt` file:
 ```scala
-libraryDependencies += "io.github.scala-tessella" %% "ring-seq" % "0.2.1"
+libraryDependencies += "io.github.scala-tessella" %% "ring-seq" % "0.3.0"
 ```
 
 Then just import the [`RingSeq`](/src/main/scala/io/github/scala_tessella/ring_seq/RingSeq.scala) object, any collection under `Seq`
@@ -38,7 +38,7 @@ One usage example is provided and documented [here](https://scala-tessella.githu
 
 ### Scaladoc
 
-The Scaladoc API documentation for 2.13 (valid for Scala 3.1 too)
+The Scaladoc API documentation for Scala 3 (valid for Scala 2.13 as well)
 can be browsed and searched [here](https://scala-tessella.github.io/ring-seq/api/io/github/scala_tessella/ring_seq/RingSeq$.html).
 
 ### Website
