@@ -19,7 +19,7 @@ Add the following dependency to your `build.sbt` file:
 libraryDependencies += "io.github.scala-tessella" %% "ring-seq" % "0.3.0"
 ```
 
-Then just import the [`RingSeq`](/src/main/scala/io/github/scala_tessella/ring_seq/RingSeq.scala) object, any collection under `Seq`
+Then just import the [`RingSeq`](/src/main/scala-3/io/github/scala_tessella/ring_seq/RingSeq.scala) object, any collection under `Seq`
 will access the new methods.
 
 ```scala
