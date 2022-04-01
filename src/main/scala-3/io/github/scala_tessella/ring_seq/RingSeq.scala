@@ -18,14 +18,11 @@ object RingSeq:
    */
   type IndexO = Int
 
-  private def floor(i: IndexO, size: Int): Index =
-    java.lang.Math.floorMod(i, size)
-
   /** Extension providing decorators for a `Seq` considered circular. */
   extension[A, CC[B] <: SeqOps[B, CC, CC[B]]](ring: CC[A])
 
-    private def index(i: IndexO): Index =
-      floor(i, ring.size)
+    private def indexFrom(i: IndexO): Index =
+      java.lang.Math.floorMod(i, ring.size)
 
     /** Gets the element at some circular index.
      *
@@ -34,7 +31,7 @@ object RingSeq:
      * @example {{{Seq(0, 1, 2).applyO(3) // 0}}}
      */
     def applyO(i: IndexO): A =
-      ring(index(i))
+      ring(indexFrom(i))
 
     /** Rotate the sequence to the right by some steps.
      *
@@ -46,7 +43,7 @@ object RingSeq:
     def rotateRight(step: Int): CC[A] =
       if ring.isEmpty then ring
       else
-        val j: Index = ring.size - index(step)
+        val j: Index = ring.size - indexFrom(step)
         ring.drop(j) ++ ring.take(j)
 
     /** Rotates the sequence to the left by some steps.
@@ -137,7 +134,7 @@ object RingSeq:
      */
     def indexOfSliceO(that: Seq[A], from: IndexO = 0): Index =
       val grown = growBy(that.size - 1)
-      grown.indexOfSlice(that, floor(from, grown.size))
+      grown.indexOfSlice(that, grown.indexFrom(from))
 
     /** Finds last index before or at a given end index where this circular sequence contains a given sequence as a slice.
      *
@@ -150,7 +147,7 @@ object RingSeq:
      */
     def lastIndexOfSliceO(that: Seq[A], end: IndexO = -1): Index =
       val grown = growBy(that.size - 1)
-      grown.lastIndexOfSlice(that, floor(end, grown.size))
+      grown.lastIndexOfSlice(that, grown.indexFrom(end))
 
     /** Groups elements in fixed size blocks by passing a "sliding window" over them
      *

@@ -51,7 +51,7 @@ object RingSeq {
     /** The circular sequence */
     def ring: CC[A]
 
-    private def index(i: IndexO): Index =
+    private def indexFrom(i: IndexO): Index =
       floor(i, ring.size)
 
     /** Gets the element at some circular index.
@@ -61,7 +61,7 @@ object RingSeq {
      * @example {{{Seq(0, 1, 2).applyO(3) // 0}}}
      */
     def applyO(i: IndexO): A =
-      ring(index(i))
+      ring(indexFrom(i))
 
     /** Rotate the sequence to the right by some steps.
      *
@@ -73,7 +73,7 @@ object RingSeq {
     def rotateRight(step: Int): CC[A] =
       if (ring.isEmpty) ring
       else {
-        val j: Index = ring.size - index(step)
+        val j: Index = ring.size - indexFrom(step)
         ring.drop(j) ++ ring.take(j)
       }
 
