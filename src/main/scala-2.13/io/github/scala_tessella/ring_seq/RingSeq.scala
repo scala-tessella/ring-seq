@@ -18,15 +18,6 @@ object RingSeq {
    */
   type IndexO = Int
 
-  private def floor(i: IndexO, size: Int): Index =
-    java.lang.Math.floorMod(i, size)
-
-  private def emptied[A, CC[B] <: SeqOps[B, CC, CC[B]]](seq: CC[A]): CC[A] =
-    seq.take(0)
-
-  private def multiply[A, CC[B] <: SeqOps[B, CC, CC[B]]](seq: CC[A], times: Int): CC[A] =
-    (0 until times).foldLeft(emptied(seq))((acc, _) => acc ++ seq)
-
   private def greaterHalfRange(size: Int): Range =
     0 until Math.ceil(size / 2.0).toInt
 
@@ -46,96 +37,7 @@ object RingSeq {
     })
 
   /** Universal trait providing decorators for a `Seq` considered circular. */
-  trait RingDecorators[A, CC[B] <: SeqOps[B, CC, CC[B]]] extends Any {
-
-    /** The circular sequence */
-    def ring: CC[A]
-
-    private def indexFrom(i: IndexO): Index =
-      floor(i, ring.size)
-
-    /** Gets the element at some circular index.
-     *
-     * @param i [[IndexO]]
-     * @throws java.lang.ArithmeticException if `Seq` is empty
-     * @example {{{Seq(0, 1, 2).applyO(3) // 0}}}
-     */
-    def applyO(i: IndexO): A =
-      ring(indexFrom(i))
-
-    /** Rotate the sequence to the right by some steps.
-     *
-     * @param step the circular distance between each new and old position
-     * @return a sequence consisting of all elements rotated to the right by ''step'' places.
-     *         If ''step'' is negative the rotation happens to the left.
-     * @example {{{Seq(0, 1, 2).rotateRight(1) // Seq(2, 0, 1)}}}
-     */
-    def rotateRight(step: Int): CC[A] =
-      if (ring.isEmpty) ring
-      else {
-        val j: Index = ring.size - indexFrom(step)
-        ring.drop(j) ++ ring.take(j)
-      }
-
-    /** Rotates the sequence to the left by some steps.
-     *
-     * @param step the circular distance between each old and new position
-     * @return a sequence consisting of all elements rotated to the left by ''step'' places.
-     *         If ''step'' is negative the rotation happens to the right.
-     * @example {{{Seq(0, 1, 2).rotateLeft(1) // Seq(1, 2, 0)}}}
-     */
-    def rotateLeft(step: Int): CC[A] =
-      rotateRight(-step)
-
-    /** Rotates the sequence to start at some circular index.
-     *
-     * @param i [[IndexO]]
-     * @return a sequence consisting of all elements rotated to start at circular index ''i''.
-     *         It is equivalent to [[rotateLeft]].
-     * @example {{{Seq(0, 1, 2).startAt(1) // Seq(1, 2, 0)}}}
-     */
-    def startAt(i: IndexO): CC[A] =
-      rotateLeft(i)
-
-    /** Reflects the sequence to start at some circular index.
-     *
-     * @param i [[IndexO]]
-     * @return a sequence consisting of all elements reversed and rotated to start at circular index ''i''.
-     * @example {{{Seq(0, 1, 2).reflectAt() // Seq(0, 2, 1)}}}
-     */
-    def reflectAt(i: IndexO = 0): CC[A] =
-      startAt(i + 1).reverse
-
-    /** Computes the length of the longest segment that starts from some circular index
-     * and whose elements all satisfy some predicate.
-     *
-     * @param p    the predicate used to test elements
-     * @param from [[IndexO]]
-     * @return the length of the longest segment of this sequence starting from circular index ''from''
-     *         such that every element of the segment satisfies the predicate ''p''
-     * @example {{{Seq(0, 1, 2).segmentLengthO(_ % 2 == 0, 2) // 2}}}
-     */
-    def segmentLengthO(p: A => Boolean, from: IndexO = 0): Int =
-      startAt(from).segmentLength(p, 0)
-
-    /** Selects an interval of elements.
-     *
-     * @param from  [[IndexO]]
-     * @param until [[IndexO]]
-     * @return a sequence containing the elements greater than or equal to circular index ''from''
-     *         extending up to (but not including) circular index ''until'' of this sequence.
-     * @note a slice of a circular sequence can be bigger than the size of the elements in the sequence.
-     * @example {{{Seq(0, 1, 2).sliceO(-1, 4) // Seq(2, 0, 1, 2, 0)}}}
-     */
-    def sliceO(from: IndexO, until: IndexO): CC[A] = {
-      if (ring.isEmpty) ring
-      else if (from >= until) emptied(ring)
-      else {
-        val length = until - from
-        val times = Math.ceil(length / ring.size).toInt + 1
-        multiply(startAt(from), times).take(length)
-      }
-    }
+  trait RingDecorators[A, CC[B] <: SeqOps[B, CC, CC[B]]] extends Any with SlicingOps[A, CC] {
 
     private def growBy(growth: Int): CC[A] =
       sliceO(0, ring.size + growth)
@@ -161,7 +63,7 @@ object RingSeq {
      */
     def indexOfSliceO(that: Seq[A], from: IndexO = 0): Index = {
       val grown = growBy(that.size - 1)
-      grown.indexOfSlice(that, floor(from, grown.size))
+      grown.indexOfSlice(that, grown.indexFrom(from))
     }
 
     /** Finds last index before or at a given end index where this circular sequence contains a given sequence as a slice.
@@ -175,7 +77,7 @@ object RingSeq {
      */
     def lastIndexOfSliceO(that: Seq[A], end: IndexO = -1): Index = {
       val grown = growBy(that.size - 1)
-      grown.lastIndexOfSlice(that, floor(end, grown.size))
+      grown.lastIndexOfSlice(that, grown.indexFrom(end))
     }
 
     /** Groups elements in fixed size blocks by passing a "sliding window" over them
