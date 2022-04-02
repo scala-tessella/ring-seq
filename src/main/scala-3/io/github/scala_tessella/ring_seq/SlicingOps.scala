@@ -2,6 +2,7 @@ package io.github.scala_tessella.ring_seq
 
 import scala.collection.{Seq, SeqOps}
 
+/** Provides slicing operations for a `Seq` considered circular. */
 trait SlicingOps extends TransformingOps:
 
   /** Extension providing decorators for a `Seq` considered circular. */

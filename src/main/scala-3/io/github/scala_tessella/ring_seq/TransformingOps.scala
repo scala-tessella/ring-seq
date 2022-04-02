@@ -2,9 +2,9 @@ package io.github.scala_tessella.ring_seq
 
 import scala.collection.SeqOps
 
+/** Provides rotation and reflection operations for a `Seq` considered circular. */
 trait TransformingOps extends IndexingOps:
 
-  /** Extension providing decorators for a `Seq` considered circular. */
   extension[A, CC[B] <: SeqOps[B, CC, CC[B]]](ring: CC[A])
 
     /** Rotate the sequence to the right by some steps.

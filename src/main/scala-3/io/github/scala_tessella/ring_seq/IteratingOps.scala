@@ -2,9 +2,9 @@ package io.github.scala_tessella.ring_seq
 
 import scala.collection.{Seq, SeqOps}
 
+/** Provides operations returning iterators of sequences for a `Seq` considered circular. */
 trait IteratingOps extends SlicingOps:
 
-  /** Extension providing decorators for a `Seq` considered circular. */
   extension[A, CC[B] <: SeqOps[B, CC, CC[B]]](ring: CC[A])
 
     /** Groups elements in fixed size blocks by passing a "sliding window" over them

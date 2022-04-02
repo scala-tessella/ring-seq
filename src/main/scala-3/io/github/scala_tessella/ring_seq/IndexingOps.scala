@@ -2,6 +2,7 @@ package io.github.scala_tessella.ring_seq
 
 import scala.collection.SeqOps
 
+/** Provides indexing operations for a `Seq` considered circular. */
 trait IndexingOps:
 
   /** For improved readability, the index of a `Seq`. */
@@ -13,7 +14,6 @@ trait IndexingOps:
    */
   type IndexO = Int
 
-  /** Extension providing decorators for a `Seq` considered circular. */
   extension[A, CC[B] <: SeqOps[B, CC, CC[B]]](ring: CC[A])
 
     /** Normalize a given index of a circular `Seq`
