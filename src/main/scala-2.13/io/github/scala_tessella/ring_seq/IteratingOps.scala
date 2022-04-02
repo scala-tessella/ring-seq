@@ -1,6 +1,6 @@
 package io.github.scala_tessella.ring_seq
 
-import scala.collection.{Seq, SeqOps}
+import scala.collection.SeqOps
 
 object IteratingOps {
 
@@ -61,7 +61,6 @@ object IteratingOps {
 
   }
 
-  /** Value class providing methods for a generic `Seq` considered circular. */
   private implicit class IteratingEnrichment[A, CC[B] <: SeqOps[B, CC, CC[B]]](val ring: CC[A]) extends AnyVal with IteratingDecorators[A, CC]
 
 }

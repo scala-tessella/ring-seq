@@ -52,7 +52,6 @@ object ComparingOps {
 
   }
 
-  /** Value class providing methods for a generic `Seq` considered circular. */
   private implicit class ComparingEnrichment[A, CC[B] <: SeqOps[B, CC, CC[B]]](val ring: CC[A]) extends AnyVal with ComparingDecorators[A, CC]
 
 }

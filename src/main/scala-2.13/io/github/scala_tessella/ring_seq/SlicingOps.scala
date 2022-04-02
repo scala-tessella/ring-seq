@@ -85,7 +85,6 @@ object SlicingOps {
 
   }
 
-  /** Value class providing methods for a generic `Seq` considered circular. */
   private implicit class SlicingEnrichment[A, CC[B] <: SeqOps[B, CC, CC[B]]](val ring: CC[A]) extends AnyVal with SlicingDecorators[A, CC]
 
 }
