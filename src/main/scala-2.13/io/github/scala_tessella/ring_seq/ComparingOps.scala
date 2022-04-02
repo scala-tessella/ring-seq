@@ -2,8 +2,10 @@ package io.github.scala_tessella.ring_seq
 
 import scala.collection.SeqOps
 
+/** Provides comparing operations for a `Seq` considered circular */
 object ComparingOps {
 
+  /** Universal trait providing comparing decorators for a `Seq` considered circular. */
   trait ComparingDecorators[A, CC[B] <: SeqOps[B, CC, CC[B]]] extends Any with IteratingOps.IteratingDecorators[A, CC] {
 
     private def isTransformationOf(that: CC[A], f: CC[A] => Iterator[CC[A]]): Boolean = {

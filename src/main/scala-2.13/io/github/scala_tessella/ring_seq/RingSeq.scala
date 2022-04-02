@@ -11,9 +11,9 @@ import scala.collection.{Seq, SeqOps}
  */
 object RingSeq {
 
-  type Index = IndexingDecorators.Index
+  type Index = IndexingOps.Index
 
-  type IndexO = IndexingDecorators.IndexO
+  type IndexO = IndexingOps.IndexO
 
   /** Universal trait providing decorators for a `Seq` considered circular. */
   trait RingDecorators[A, CC[B] <: SeqOps[B, CC, CC[B]]] extends Any

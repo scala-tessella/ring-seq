@@ -5,12 +5,21 @@ import scala.collection.SeqOps
 /** Provides indexing operations for a `Seq` considered circular */
 object IndexingOps {
 
+  /** For improved readability, the index of a `Seq`. */
+  type Index = Int
+
+  /** For improved readability, the index of a circular `Seq`.
+   *
+   * @note any value is a valid index, provided that `Seq` is not empty
+   */
+  type IndexO = Int
+
   /** Universal trait providing indexing decorators for a `Seq` considered circular. */
   trait IndexingDecorators[A, CC[B] <: SeqOps[B, CC, CC[B]]] extends Any {
 
-    type Index = IndexingDecorators.Index
+    type Index = IndexingOps.Index
 
-    type IndexO = IndexingDecorators.IndexO
+    type IndexO = IndexingOps.IndexO
 
     /** The circular sequence */
     def ring: CC[A]
@@ -26,20 +35,6 @@ object IndexingOps {
      */
     def applyO(i: IndexO): A =
       ring(indexFrom(i))
-
-  }
-
-  /** Contains helper types for indexing */
-  object IndexingDecorators {
-
-    /** For improved readability, the index of a `Seq`. */
-    type Index = Int
-
-    /** For improved readability, the index of a circular `Seq`.
-     *
-     * @note any value is a valid index, provided that `Seq` is not empty
-     */
-    type IndexO = Int
 
   }
 
