@@ -31,7 +31,7 @@ trait SlicingOps[A, CC[B] <: SeqOps[B, CC, CC[B]]] extends Any with Transforming
    * @note a slice of a circular sequence can be bigger than the size of the elements in the sequence.
    * @example {{{Seq(0, 1, 2).sliceO(-1, 4) // Seq(2, 0, 1, 2, 0)}}}
    */
-  def sliceO(from: IndexO, until: IndexO): CC[A] = {
+  def sliceO(from: IndexO, until: IndexO): CC[A] =
     if (ring.isEmpty) ring
     else if (from >= until) emptied
     else {
@@ -39,6 +39,5 @@ trait SlicingOps[A, CC[B] <: SeqOps[B, CC, CC[B]]] extends Any with Transforming
       val times = Math.ceil(length / ring.size).toInt + 1
       multiply(startAt(from), times).take(length)
     }
-  }
 
 }
