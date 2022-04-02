@@ -26,8 +26,8 @@ They fall into the following categories:
 @@@ index
 
 * [Indexing](categories/indexing.md)
-* [Index search](categories/index-search.md)
 * [Rotation and reflection](categories/rotation-reflection.md)
+* [Slicing](categories/slicing.md)
 * [Iterators](categories/iterators.md)
 * [Comparisons](categories/comparisons.md)
 * [Symmetry](categories/symmetry.md)
@@ -35,21 +35,21 @@ They fall into the following categories:
 @@@
 
 ### [Indexing](categories/indexing.html)
-
 * [`applyO`](categories/indexing.html#applyo)
-* [`sliceO`](categories/indexing.html#sliceo)
-
-### [Index search](categories/index-search.html)
-
-* [`indexOfSliceO`](categories/index-search.html#indexofsliceo)
-* [`lastIndexOfSliceO`](categories/index-search.html#lastindexofsliceo)
-* [`segmentLengthO`](categories/index-search.html#segmentlenghto)
+* [`indexFrom`](categories/indexing.html#indexfrom)
 
 ### [Rotation and reflection](categories/rotation-reflection.html)
 * [`rotateRight`](categories/rotation-reflection.html#rotateright)
 * [`rotateLeft`](categories/rotation-reflection.html#rotateleft)
 * [`startAt`](categories/rotation-reflection.html#startat)
 * [`reflectAt`](categories/rotation-reflection.html#reflectat)
+
+### [Slicing](categories/slicing.html)
+* [`sliceO`](categories/slicing.html#sliceo)
+* [`indexOfSliceO`](categories/slicing.html#indexofsliceo)
+* [`lastIndexOfSliceO`](categories/slicing.html#lastindexofsliceo)
+* [`segmentLengthO`](categories/slicing.html#segmentlenghto)
+* [`containsSliceO`](categories/slicing.html#containssliceo)
 
 ### [Iterators](categories/iterators.html)
 * [`slidingO`](categories/iterators.html#slidingo)
@@ -59,14 +59,12 @@ They fall into the following categories:
 * [`rotationsAndReflections`](iterators.html#rotationsandreflections)
 
 ### [Comparisons](categories/comparisons.html)
-* [`containsSliceO`](categories/comparisons.html#containssliceo)
 * [`isReflection`](categories/comparisons.html#isreflection)
 * [`isReversion`](categories/comparisons.html#isreversion)
 * [`isRotation`](categories/comparisons.html#isrotation)
 * [`isRotationOrReflection`](categories/comparisons.html#isrotationorreflection)
 
 ### [Symmetry](categories/symmetry.html)
-
 * [`rotationalSymmetry`](categories/symmetry.html#rotationalsymmetry)
 * [`symmetryIndices`](categories/symmetry.html#symmetryindices)
 * [`symmetry`](categories/symmetry.html#symmetry)
