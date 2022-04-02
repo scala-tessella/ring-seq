@@ -22,11 +22,11 @@ trait SymmetryOps extends TransformingOps:
         val exactFoldsDesc = size +: (size / 2 to 2 by -1).filter(size % _ == 0)
         exactFoldsDesc.find(areFoldsSymmetrical).getOrElse(1)
 
-    private def greaterHalfSize: Int =
-      Math.ceil(ring.size / 2.0).toInt
+    private def greaterHalfRange(size: Int): Range =
+      0 until Math.ceil(size / 2.0).toInt
 
     private def checkReflectionAxis(gap: Int): Boolean =
-      (0 until greaterHalfSize).forall(j => ring.applyO(j + 1) == ring.applyO(-(j + gap)))
+      greaterHalfRange(ring.size).forall(j => ring.applyO(j + 1) == ring.applyO(-(j + gap)))
 
     private def hasHeadOnAxis: Boolean =
       checkReflectionAxis(1)
@@ -35,7 +35,7 @@ trait SymmetryOps extends TransformingOps:
       checkReflectionAxis(0)
 
     private def findReflectionSymmetry: Option[Index] =
-      (0 until greaterHalfSize).find(j =>
+      greaterHalfRange(ring.size)find(j =>
         val rotation = ring.startAt(j)
         rotation.hasHeadOnAxis || rotation.hasAxisBetweenHeadAndNext
       )
