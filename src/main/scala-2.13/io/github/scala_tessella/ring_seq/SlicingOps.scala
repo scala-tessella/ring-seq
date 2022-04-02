@@ -1,6 +1,6 @@
 package io.github.scala_tessella.ring_seq
 
-import scala.collection.SeqOps
+import scala.collection.{Seq, SeqOps}
 
 object SlicingOps {
 
@@ -42,6 +42,50 @@ object SlicingOps {
         multiply(startAt(from), times).take(length)
       }
 
+    private def growBy(growth: Int): CC[A] =
+      sliceO(0, ring.size + growth)
+
+    /** Tests whether this circular sequence contains a given sequence as a slice.
+     *
+     * @param that the sequence to test
+     * @return true if this circular sequence contains a slice with the same elements as ''that'',
+     *         otherwise false.
+     * @example {{{Seq(0, 1, 2).containsSliceO(Seq(2, 0, 1, 2, 0)) // true}}}
+     */
+    def containsSliceO(that: Seq[A]): Boolean =
+      growBy(that.size - 1).containsSlice(that)
+
+    /** Finds first index after or at a start index where this circular sequence contains a given sequence as a slice.
+     *
+     * @param that the sequence to test
+     * @param from [[IndexO]]
+     * @return the first index >= ''from'' such that the elements of this circular sequence starting at this index
+     *         match the elements of sequence ''that'',
+     *         or -1 if no such subsequence exists.
+     * @example {{{Seq(0, 1, 2).indexOfSliceO(Seq(2, 0, 1, 2, 0)) // 2}}}
+     */
+    def indexOfSliceO(that: Seq[A], from: IndexO = 0): Index = {
+      val grown = growBy(that.size - 1)
+      grown.indexOfSlice(that, grown.indexFrom(from))
+    }
+
+    /** Finds last index before or at a given end index where this circular sequence contains a given sequence as a slice.
+     *
+     * @param that the sequence to test
+     * @param end  [[IndexO]]
+     * @return the last index <= ''end'' such that the elements of this circular sequence starting at this index
+     *         match the elements of sequence ''that'',
+     *         or -1 if no such subsequence exists.
+     * @example {{{Seq(0, 1, 2, 0, 1, 2).lastIndexOfSliceO(Seq(2, 0)) // 5}}}
+     */
+    def lastIndexOfSliceO(that: Seq[A], end: IndexO = -1): Index = {
+      val grown = growBy(that.size - 1)
+      grown.lastIndexOfSlice(that, grown.indexFrom(end))
+    }
+
   }
+
+  /** Value class providing methods for a generic `Seq` considered circular. */
+  private implicit class SlicingEnrichment[A, CC[B] <: SeqOps[B, CC, CC[B]]](val ring: CC[A]) extends AnyVal with SlicingDecorators[A, CC]
 
 }
