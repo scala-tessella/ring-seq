@@ -2,6 +2,7 @@ package io.github.scala_tessella.ring_seq
 
 import scala.collection.SeqOps
 
+/** Provides symmetry operations for a `Seq` considered circular */
 object SymmetryOps {
 
   private def greaterHalfRange(size: Int): Range =
@@ -16,6 +17,7 @@ object SymmetryOps {
   private def hasAxisBetweenHeadAndNext[A, CC[B] <: SeqOps[B, CC, CC[B]]](seq: CC[A]): Boolean =
     checkReflectionAxis(seq, 0)
 
+  /** Universal trait providing symmetry decorators for a `Seq` considered circular. */
   trait SymmetryDecorators[A, CC[B] <: SeqOps[B, CC, CC[B]]] extends Any with TransformingOps.TransformingDecorators[A, CC] {
 
     private def areFoldsSymmetrical: Int => Boolean =

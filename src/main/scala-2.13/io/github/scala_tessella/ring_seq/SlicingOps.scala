@@ -2,8 +2,10 @@ package io.github.scala_tessella.ring_seq
 
 import scala.collection.{Seq, SeqOps}
 
+/** Provides slicing operations for a `Seq` considered circular */
 object SlicingOps {
 
+  /** Universal trait providing slicing decorators for a `Seq` considered circular. */
   trait SlicingDecorators[A, CC[B] <: SeqOps[B, CC, CC[B]]] extends Any with TransformingOps.TransformingDecorators[A, CC] {
 
     /** Computes the length of the longest segment that starts from some circular index

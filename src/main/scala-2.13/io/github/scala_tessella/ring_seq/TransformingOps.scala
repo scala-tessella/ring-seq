@@ -2,8 +2,10 @@ package io.github.scala_tessella.ring_seq
 
 import scala.collection.SeqOps
 
+/** Provides rotation and reflection operations for a `Seq` considered circular. */
 object TransformingOps {
 
+  /** Universal trait providing rotation and reflection decorators for a `Seq` considered circular. */
   trait TransformingDecorators[A, CC[B] <: SeqOps[B, CC, CC[B]]] extends Any with IndexingOps.IndexingDecorators[A, CC] {
 
     /** Rotate the sequence to the right by some steps.
