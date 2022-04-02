@@ -16,6 +16,10 @@ trait IndexOps:
   /** Extension providing decorators for a `Seq` considered circular. */
   extension[A, CC[B] <: SeqOps[B, CC, CC[B]]](ring: CC[A])
 
+    /** Normalize a given index of a circular `Seq`
+     *
+     * @param i [[IndexO]]
+     */
     def indexFrom(i: IndexO): Index =
       java.lang.Math.floorMod(i, ring.size)
 
