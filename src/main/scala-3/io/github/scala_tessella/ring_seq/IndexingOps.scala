@@ -2,7 +2,7 @@ package io.github.scala_tessella.ring_seq
 
 import scala.collection.SeqOps
 
-trait IndexOps:
+trait IndexingOps:
 
   /** For improved readability, the index of a `Seq`. */
   type Index = Int

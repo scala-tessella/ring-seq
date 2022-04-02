@@ -2,7 +2,7 @@ package io.github.scala_tessella.ring_seq
 
 import scala.collection.SeqOps
 
-trait SymmetryOps extends TransformOps:
+trait SymmetryOps extends TransformingOps:
 
   /** Extension providing decorators for a `Seq` considered circular. */
   extension[A, CC[B] <: SeqOps[B, CC, CC[B]]](ring: CC[A])

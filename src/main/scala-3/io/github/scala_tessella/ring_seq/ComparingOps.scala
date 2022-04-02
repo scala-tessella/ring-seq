@@ -2,7 +2,7 @@ package io.github.scala_tessella.ring_seq
 
 import scala.collection.{Seq, SeqOps}
 
-trait ComparisonOps extends IteratorOps:
+trait ComparingOps extends IteratingOps:
 
   /** Extension providing decorators for a `Seq` considered circular. */
   extension[A, CC[B] <: SeqOps[B, CC, CC[B]]](ring: CC[A])

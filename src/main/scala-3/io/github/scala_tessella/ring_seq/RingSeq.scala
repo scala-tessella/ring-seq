@@ -5,4 +5,4 @@ package io.github.scala_tessella.ring_seq
  *
  * @author Mario Càllisto
  */
-object RingSeq extends ComparisonOps with SymmetryOps
+object RingSeq extends ComparingOps with SymmetryOps
