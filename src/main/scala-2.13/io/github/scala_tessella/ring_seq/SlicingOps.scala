@@ -2,7 +2,7 @@ package io.github.scala_tessella.ring_seq
 
 import scala.collection.SeqOps
 
-trait SlicingOps[A, CC[B] <: SeqOps[B, CC, CC[B]]] extends Any with TransformingOps[A, CC] with IndexingOps[A, CC] {
+trait SlicingOps[A, CC[B] <: SeqOps[B, CC, CC[B]]] extends Any with TransformingOps[A, CC] {
 
   /** Computes the length of the longest segment that starts from some circular index
    * and whose elements all satisfy some predicate.
