@@ -37,7 +37,7 @@ object RingSeq {
     })
 
   /** Universal trait providing decorators for a `Seq` considered circular. */
-  trait RingDecorators[A, CC[B] <: SeqOps[B, CC, CC[B]]] extends Any with SlicingOps[A, CC] {
+  trait RingDecorators[A, CC[B] <: SeqOps[B, CC, CC[B]]] extends Any with SlicingOps.SlicingDecorators[A, CC] {
 
     private def growBy(growth: Int): CC[A] =
       sliceO(0, ring.size + growth)
