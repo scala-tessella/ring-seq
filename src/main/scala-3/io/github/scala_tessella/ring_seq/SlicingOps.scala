@@ -5,7 +5,6 @@ import scala.collection.{Seq, SeqOps}
 /** Provides slicing operations for a `Seq` considered circular. */
 trait SlicingOps extends TransformingOps:
 
-  /** Extension providing decorators for a `Seq` considered circular. */
   extension[A, CC[B] <: SeqOps[B, CC, CC[B]]](ring: CC[A])
 
     /** Computes the length of the longest segment that starts from some circular index

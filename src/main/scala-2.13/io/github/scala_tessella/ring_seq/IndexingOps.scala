@@ -2,8 +2,8 @@ package io.github.scala_tessella.ring_seq
 
 import scala.collection.SeqOps
 
-/** Universal trait providing decorators for a `Seq` considered circular. */
-trait IndexingOps[A, CC[B] <: SeqOps[B, CC, CC[B]]] extends Any {
+/** Provides indexing operations for a `Seq` considered circular */
+object IndexingOps {
 
   /** For improved readability, the index of a `Seq`. */
   type Index = Int
@@ -14,19 +14,28 @@ trait IndexingOps[A, CC[B] <: SeqOps[B, CC, CC[B]]] extends Any {
    */
   type IndexO = Int
 
-  /** The circular sequence */
-  def ring: CC[A]
+  /** Universal trait providing indexing decorators for a `Seq` considered circular. */
+  trait IndexingDecorators[A, CC[B] <: SeqOps[B, CC, CC[B]]] extends Any {
 
-  def indexFrom(i: IndexO): Index =
-    java.lang.Math.floorMod(i, ring.size)
+    type Index = IndexingOps.Index
 
-  /** Gets the element at some circular index.
-   *
-   * @param i [[IndexO]]
-   * @throws java.lang.ArithmeticException if `Seq` is empty
-   * @example {{{Seq(0, 1, 2).applyO(3) // 0}}}
-   */
-  def applyO(i: IndexO): A =
-    ring(indexFrom(i))
+    type IndexO = IndexingOps.IndexO
+
+    /** The circular sequence */
+    def ring: CC[A]
+
+    def indexFrom(i: IndexO): Index =
+      java.lang.Math.floorMod(i, ring.size)
+
+    /** Gets the element at some circular index.
+     *
+     * @param i [[IndexO]]
+     * @throws java.lang.ArithmeticException if `Seq` is empty
+     * @example {{{Seq(0, 1, 2).applyO(3) // 0}}}
+     */
+    def applyO(i: IndexO): A =
+      ring(indexFrom(i))
+
+  }
 
 }
