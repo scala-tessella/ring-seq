@@ -11,6 +11,43 @@ import scala.collection.Seq
 
 class IteratingOpsSpec extends AnyFlatSpec with TestHelper with should.Matchers {
 
+  "A sequence" can "be slided by one step" in {
+    "ABCDE".sliding(2).toList.map(_.mkString) shouldBe List(
+      "AB",
+      "BC",
+      "CD",
+      "DE"
+    )
+  }
+
+  it can "be slided by two steps" in {
+    "ABCDE".sliding(2, 2).toList.map(_.mkString) shouldBe List(
+      "AB",
+      "CD",
+      "E"
+    )
+  }
+
+  "The same sequence when considered circular" can "be slided circularly by one step" in {
+    "ABCDE".slidingO(2).toList.map(_.mkString) shouldBe List(
+      "AB",
+      "BC",
+      "CD",
+      "DE",
+      "EA"
+    )
+  }
+
+  it can "be slided circularly by two steps" in {
+    "ABCDE".slidingO(2, 2).toList.map(_.mkString) shouldBe List(
+      "AB",
+      "CD",
+      "EA",
+      "BC",
+      "DE"
+    )
+  }
+
   "An empty circular sequence" can "be iterated on all rotations" in {
     e.rotations.toList shouldBe List(e)
   }
