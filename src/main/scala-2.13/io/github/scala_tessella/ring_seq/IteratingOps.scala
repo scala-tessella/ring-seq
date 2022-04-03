@@ -6,7 +6,9 @@ import scala.collection.SeqOps
 object IteratingOps {
 
   /** Universal trait providing decorators returning iterators of sequences for a `Seq` considered circular. */
-  trait IteratingDecorators[A, CC[B] <: SeqOps[B, CC, CC[B]]] extends Any with SlicingOps.SlicingDecorators[A, CC] {
+  trait IteratingDecorators[A, CC[B] <: SeqOps[B, CC, CC[B]]]
+    extends Any
+      with SlicingOps.SlicingDecorators[A, CC] {
 
     /** Groups elements in fixed size blocks by passing a "sliding window" over them
      *
@@ -63,6 +65,8 @@ object IteratingOps {
 
   }
 
-  private implicit class IteratingEnrichment[A, CC[B] <: SeqOps[B, CC, CC[B]]](val ring: CC[A]) extends AnyVal with IteratingDecorators[A, CC]
+  private implicit class IteratingEnrichment[A, CC[B] <: SeqOps[B, CC, CC[B]]](val ring: CC[A])
+    extends AnyVal
+      with IteratingDecorators[A, CC]
 
 }

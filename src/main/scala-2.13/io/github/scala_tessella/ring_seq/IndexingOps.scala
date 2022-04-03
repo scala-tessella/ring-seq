@@ -15,7 +15,8 @@ object IndexingOps {
   type IndexO = Int
 
   /** Universal trait providing indexing decorators for a `Seq` considered circular. */
-  trait IndexingDecorators[A, CC[B] <: SeqOps[B, CC, CC[B]]] extends Any {
+  trait IndexingDecorators[A, CC[B] <: SeqOps[B, CC, CC[B]]]
+    extends Any {
 
     type Index = IndexingOps.Index
 

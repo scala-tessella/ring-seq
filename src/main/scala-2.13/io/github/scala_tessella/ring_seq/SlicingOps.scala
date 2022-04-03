@@ -6,7 +6,9 @@ import scala.collection.{Seq, SeqOps}
 object SlicingOps {
 
   /** Universal trait providing slicing decorators for a `Seq` considered circular. */
-  trait SlicingDecorators[A, CC[B] <: SeqOps[B, CC, CC[B]]] extends Any with TransformingOps.TransformingDecorators[A, CC] {
+  trait SlicingDecorators[A, CC[B] <: SeqOps[B, CC, CC[B]]]
+    extends Any
+      with TransformingOps.TransformingDecorators[A, CC] {
 
     /** Computes the length of the longest segment that starts from some circular index
      * and whose elements all satisfy some predicate.
@@ -87,6 +89,8 @@ object SlicingOps {
 
   }
 
-  private implicit class SlicingEnrichment[A, CC[B] <: SeqOps[B, CC, CC[B]]](val ring: CC[A]) extends AnyVal with SlicingDecorators[A, CC]
+  private implicit class SlicingEnrichment[A, CC[B] <: SeqOps[B, CC, CC[B]]](val ring: CC[A])
+    extends AnyVal
+      with SlicingDecorators[A, CC]
 
 }

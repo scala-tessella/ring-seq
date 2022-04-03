@@ -6,7 +6,9 @@ import scala.collection.SeqOps
 object ComparingOps {
 
   /** Universal trait providing comparing decorators for a `Seq` considered circular. */
-  trait ComparingDecorators[A, CC[B] <: SeqOps[B, CC, CC[B]]] extends Any with IteratingOps.IteratingDecorators[A, CC] {
+  trait ComparingDecorators[A, CC[B] <: SeqOps[B, CC, CC[B]]]
+    extends Any
+      with IteratingOps.IteratingDecorators[A, CC] {
 
     private def isTransformationOf(that: CC[A], f: CC[A] => Iterator[CC[A]]): Boolean = {
       ring.sizeCompare(that.size) == 0 && f(ring).contains(that)
@@ -54,6 +56,8 @@ object ComparingOps {
 
   }
 
-  private implicit class ComparingEnrichment[A, CC[B] <: SeqOps[B, CC, CC[B]]](val ring: CC[A]) extends AnyVal with ComparingDecorators[A, CC]
+  private implicit class ComparingEnrichment[A, CC[B] <: SeqOps[B, CC, CC[B]]](val ring: CC[A])
+    extends AnyVal
+      with ComparingDecorators[A, CC]
 
 }

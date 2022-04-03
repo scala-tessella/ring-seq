@@ -6,7 +6,9 @@ import scala.collection.SeqOps
 object TransformingOps {
 
   /** Universal trait providing rotation and reflection decorators for a `Seq` considered circular. */
-  trait TransformingDecorators[A, CC[B] <: SeqOps[B, CC, CC[B]]] extends Any with IndexingOps.IndexingDecorators[A, CC] {
+  trait TransformingDecorators[A, CC[B] <: SeqOps[B, CC, CC[B]]]
+    extends Any
+      with IndexingOps.IndexingDecorators[A, CC] {
 
     /** Rotate the sequence to the right by some steps.
      *

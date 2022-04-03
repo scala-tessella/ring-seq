@@ -1,7 +1,5 @@
 package io.github.scala_tessella.ring_seq
 
-import io.github.scala_tessella.ring_seq.IndexingOps.IndexingDecorators
-
 import scala.collection.{Seq, SeqOps}
 
 /** Adds implicit methods to `[[https://www.scala-lang.org/api/current/scala/collection/Seq.html Seq]]`
@@ -16,17 +14,20 @@ object RingSeq {
   type IndexO = IndexingOps.IndexO
 
   /** Universal trait providing decorators for a `Seq` considered circular. */
-  trait RingDecorators[A, CC[B] <: SeqOps[B, CC, CC[B]]] extends Any
-    with ComparingOps.ComparingDecorators[A, CC]
-    with SymmetryOps.SymmetryDecorators[A, CC] {}
+  trait RingSeqDecorators[A, CC[B] <: SeqOps[B, CC, CC[B]]]
+    extends Any
+      with ComparingOps.ComparingDecorators[A, CC]
+      with SymmetryOps.SymmetryDecorators[A, CC] {}
 
   /** Value class providing methods for a generic `Seq` considered circular. */
-  implicit class RingSeqEnrichment[A, CC[B] <: SeqOps[B, CC, CC[B]]](val ring: CC[A]) extends AnyVal
-    with RingDecorators[A, CC]
+  implicit class RingSeqEnrichment[A, CC[B] <: SeqOps[B, CC, CC[B]]](val ring: CC[A])
+    extends AnyVal
+      with RingSeqDecorators[A, CC]
 
   /** Value class providing methods for a `String` considered circular. */
-  implicit class RingStringEnrichment(private val s: String) extends AnyVal
-    with RingDecorators[Char, Seq] {
+  implicit class RingStringEnrichment(private val s: String)
+    extends AnyVal
+      with RingSeqDecorators[Char, Seq] {
 
     /** Converts this string into a circular `Seq`.
      *
@@ -37,8 +38,9 @@ object RingSeq {
   }
 
   /** Value class providing methods for a `StringBuilder` considered circular. */
-  implicit class RingStringBuilderEnrichment(private val sb: StringBuilder) extends AnyVal
-    with RingDecorators[Char, Seq] {
+  implicit class RingStringBuilderEnrichment(private val sb: StringBuilder)
+    extends AnyVal
+      with RingSeqDecorators[Char, Seq] {
 
     /** Converts this string builder into a circular `Seq`.
      *

@@ -18,7 +18,9 @@ object SymmetryOps {
     checkReflectionAxis(seq, 0)
 
   /** Universal trait providing symmetry decorators for a `Seq` considered circular. */
-  trait SymmetryDecorators[A, CC[B] <: SeqOps[B, CC, CC[B]]] extends Any with TransformingOps.TransformingDecorators[A, CC] {
+  trait SymmetryDecorators[A, CC[B] <: SeqOps[B, CC, CC[B]]]
+    extends Any
+      with TransformingOps.TransformingDecorators[A, CC] {
 
     private def areFoldsSymmetrical: Int => Boolean =
       n => rotateRight(ring.size / n) == ring
@@ -70,6 +72,8 @@ object SymmetryOps {
 
   }
 
-  private implicit class SymmetryEnrichment[A, CC[B] <: SeqOps[B, CC, CC[B]]](val ring: CC[A]) extends AnyVal with SymmetryDecorators[A, CC]
+  private implicit class SymmetryEnrichment[A, CC[B] <: SeqOps[B, CC, CC[B]]](val ring: CC[A])
+    extends AnyVal
+      with SymmetryDecorators[A, CC]
 
 }
