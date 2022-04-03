@@ -8,7 +8,8 @@ import org.scalatest.flatspec._
 import org.scalatest.matchers._
 
 import scala.collection.immutable.Queue
-import scala.collection.mutable.{Buffer, ListBuffer, StringBuilder, Queue => MutableQueue}
+import scala.collection.mutable
+import scala.collection.mutable.{ListBuffer, Queue => MutableQueue}
 
 class TransformingOpsSpec extends AnyFlatSpec with TestHelper with should.Matchers {
 
@@ -26,9 +27,9 @@ class TransformingOpsSpec extends AnyFlatSpec with TestHelper with should.Matche
   }
 
   "Any mutable Seq subtype" can "be rotated" in {
-    s12345.toBuffer.rotateRight(2) shouldBe Buffer(4, 5, 1, 2, 3)
+    s12345.toBuffer.rotateRight(2) shouldBe mutable.Buffer(4, 5, 1, 2, 3)
     ListBuffer(1, 2, 3, 4, 5).rotateRight(2) shouldBe ListBuffer(4, 5, 1, 2, 3)
-    val sb = new StringBuilder("ABCDE")
+    val sb = new mutable.StringBuilder("ABCDE")
     sb.rotateRight(2).toList shouldBe List('D', 'E', 'A', 'B', 'C')
     MutableQueue(1, 2, 3, 4, 5).rotateRight(2) shouldBe MutableQueue(4, 5, 1, 2, 3)
   }
