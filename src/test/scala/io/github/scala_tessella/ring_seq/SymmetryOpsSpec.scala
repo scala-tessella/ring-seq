@@ -9,7 +9,7 @@ import RingSeq._
 
 import scala.collection.Seq
 
-class SymmetriesSpec extends AnyFlatSpec with TestHelper with should.Matchers {
+class SymmetryOpsSpec extends AnyFlatSpec with TestHelper with should.Matchers {
 
   val spin3: Seq[Int] = Seq(1, 2, 3, 1, 2, 3, 1, 2, 3)
   val eptagon: Seq[Int] = Seq(6, 6, 6, 6, 6, 6, 6)

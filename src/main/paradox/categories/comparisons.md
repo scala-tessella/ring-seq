@@ -1,30 +1,5 @@
 # Comparisons
 
-## `containsSliceO`
-
-The circular equivalent of `containsSlice`.
-
-@@@ note
-
-Given the [definition of circular sequence](../what-is.html), a slice can contain more elements than the sequence itself.
-
-@@@
-
-### Example
-
-```scala
-Seq(0, 1, 2).containsSliceO(Seq(2, 0, 1, 2, 0)) // true
-```
-
-### Compared to standard
-
-In the same example the standard version behaves differently,
-does not find the "unrolled" slice.
-
-```scala
-Seq(0, 1, 2).containsSlice(Seq(2, 0, 1, 2, 0)) // false
-```
-
 ## `isReflection`
 
 Tests if a sequence is a reflection of another one.
