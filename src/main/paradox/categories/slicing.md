@@ -1,4 +1,4 @@
-# Index search
+# Slicing
 
 ## `sliceO`
 
