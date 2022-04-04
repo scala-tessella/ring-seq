@@ -6,7 +6,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="description" content='Extends Scala Seq with ring (circular) methods'/>
-<link rel="canonical" href="https://github.com/scala-tessella/ring-seqcategories/index-search.html"/>
+<link rel="canonical" href="https://github.com/scala-tessella/ring-seqcategories/slicing.html"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:100normal,100italic,300normal,300italic,400normal,400italic,500normal,500italic,700normal,700italic,900normal,900italicc" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../lib/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="../js/page.js"></script>
@@ -32,7 +32,7 @@
 <span class="home-icon">⌂</span>RingSeq
 </a>
 <div class="version-number">
-0.3.0
+0.4.0
 </div>
 </div>
 <div class="nav-toc">
@@ -42,8 +42,8 @@
   <li><a href="../reference.html" class="page">Reference</a>
   <ul>
     <li><a href="../categories/indexing.html" class="page">Indexing</a></li>
-    <li><a href="../categories/index-search.html" class="active page">Index search</a></li>
     <li><a href="../categories/rotation-reflection.html" class="page">Rotation and reflection</a></li>
+    <li><a href="../categories/slicing.html" class="active page">Index search</a></li>
     <li><a href="../categories/iterators.html" class="page">Iterators</a></li>
     <li><a href="../categories/comparisons.html" class="page">Comparisons</a></li>
     <li><a href="../categories/symmetry.html" class="page">Symmetry</a></li>
@@ -80,7 +80,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <span class="home-icon">⌂</span>RingSeq
 </a>
 <div class="version-number">
-0.3.0
+0.4.0
 </div>
 </div>
 <div class="nav-toc">
@@ -90,8 +90,8 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
   <li><a href="../reference.html" class="page">Reference</a>
   <ul>
     <li><a href="../categories/indexing.html" class="page">Indexing</a></li>
-    <li><a href="../categories/index-search.html" class="active page">Index search</a></li>
     <li><a href="../categories/rotation-reflection.html" class="page">Rotation and reflection</a></li>
+    <li><a href="../categories/slicing.html" class="active page">Index search</a></li>
     <li><a href="../categories/iterators.html" class="page">Iterators</a></li>
     <li><a href="../categories/comparisons.html" class="page">Comparisons</a></li>
     <li><a href="../categories/symmetry.html" class="page">Symmetry</a></li>
@@ -123,6 +123,16 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="page-content row">
 <div class="small-12 large-9 column" id="docs">
 <h1><a href="#index-search" name="index-search" class="anchor"><span class="anchor-link"></span></a>Index search</h1>
+<h2><a href="#sliceo" name="sliceo" class="anchor"><span class="anchor-link"></span></a><code>sliceO</code></h2>
+<p>The circular equivalent of <code>slice</code>.</p><div class="callout note "><div class="callout-title">Note</div>
+<p>Given the <a href="../what-is.html">definition of circular sequence</a>, a slice can contain more elements than the sequence itself.</p></div>
+<h3><a href="#example" name="example" class="anchor"><span class="anchor-link"></span></a>Example</h3>
+<pre class="prettyprint"><code class="language-scala">Seq(0, 1, 2).sliceO(-1, 4) // Seq(2, 0, 1, 2, 0)
+</code></pre>
+<h3><a href="#compared-to-standard" name="compared-to-standard" class="anchor"><span class="anchor-link"></span></a>Compared to standard</h3>
+<p>In the same example the standard version behaves differently, it is equivalent to <code>slice(0, 2)</code>, does not return the &ldquo;unrolled&rdquo; slice.</p>
+<pre class="prettyprint"><code class="language-scala">Seq(0, 1, 2).slice(-1, 4) // Seq(0, 1, 2)
+</code></pre>
 <h2><a href="#indexofsliceo" name="indexofsliceo" class="anchor"><span class="anchor-link"></span></a><code>indexOfSliceO</code></h2>
 <p>The circular equivalent of <code>indexOfSlice</code>.</p><div class="callout note "><div class="callout-title">Note</div>
 <p>Given the <a href="../what-is.html">definition of circular sequence</a>, a slice can contain more elements than the sequence itself.</p></div>
@@ -151,12 +161,22 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <p>In the same example the standard version behaves differently, does not find the segment containing the last and first elements.</p>
 <pre class="prettyprint"><code class="language-scala">Seq(0, 1, 2).segmentLength(_ % 2 == 0, 2) // 1
 </code></pre>
+<h2><a href="#containssliceo" name="containssliceo" class="anchor"><span class="anchor-link"></span></a><code>containsSliceO</code></h2>
+<p>The circular equivalent of <code>containsSlice</code>.</p><div class="callout note "><div class="callout-title">Note</div>
+<p>Given the <a href="../what-is.html">definition of circular sequence</a>, a slice can contain more elements than the sequence itself.</p></div>
+<h3><a href="#example" name="example" class="anchor"><span class="anchor-link"></span></a>Example</h3>
+<pre class="prettyprint"><code class="language-scala">Seq(0, 1, 2).containsSliceO(Seq(2, 0, 1, 2, 0)) // true
+</code></pre>
+<h3><a href="#compared-to-standard" name="compared-to-standard" class="anchor"><span class="anchor-link"></span></a>Compared to standard</h3>
+<p>In the same example the standard version behaves differently, does not find the &ldquo;unrolled&rdquo; slice.</p>
+<pre class="prettyprint"><code class="language-scala">Seq(0, 1, 2).containsSlice(Seq(2, 0, 1, 2, 0)) // false
+</code></pre>
 <div class="source-github">
-The source code for this page can be found <a href="https://github.com/scala-tessella/ring-seq/tree/v0.3.0/src/main/paradox/categories/index-search.md">here</a>.
+The source code for this page can be found <a href="https://github.com/scala-tessella/ring-seq/tree/v0.4.0/src/main/paradox/categories/slicing.md">here</a>.
 </div>
 
 <div class="nav-next">
-<p><strong>Next:</strong> <a href="../categories/rotation-reflection.html">Rotation and reflection</a></p>
+<p><strong>Next:</strong> <a href="../categories/iterators.html">Iterators</a></p>
 </div>
 </div>
 <div class="large-3 show-for-large column" data-sticky-container>
@@ -165,11 +185,13 @@ The source code for this page can be found <a href="https://github.com/scala-tes
 <div class="nav-title">On this page:</div>
 <div class="nav-toc">
 <ul>
-  <li><a href="../categories/index-search.html#index-search" class="header">Index search</a>
+  <li><a href="../categories/slicing.html#index-search" class="header">Index search</a>
   <ul>
-    <li><a href="../categories/index-search.html#indexofsliceo" class="header"><code>indexOfSliceO</code></a></li>
-    <li><a href="../categories/index-search.html#lastindexofsliceo" class="header"><code>lastIndexOfSliceO</code></a></li>
-    <li><a href="../categories/index-search.html#segmentlengtho" class="header"><code>segmentLengthO</code></a></li>
+    <li><a href="../categories/slicing.html#sliceo" class="header"><code>sliceO</code></a></li>
+    <li><a href="../categories/slicing.html#indexofsliceo" class="header"><code>indexOfSliceO</code></a></li>
+    <li><a href="../categories/slicing.html#lastindexofsliceo" class="header"><code>lastIndexOfSliceO</code></a></li>
+    <li><a href="../categories/slicing.html#segmentlengtho" class="header"><code>segmentLengthO</code></a></li>
+    <li><a href="../categories/slicing.html#containssliceo" class="header"><code>containsSliceO</code></a></li>
   </ul></li>
 </ul>
 </div>
@@ -237,7 +259,7 @@ The source code for this page can be found <a href="https://github.com/scala-tes
 <script type="text/javascript" src="../lib/prettify/prettify.js"></script>
 <script type="text/javascript" src="../lib/prettify/lang-scala.js"></script>
 <script type="text/javascript">jQuery(function(){window.prettyPrint && prettyPrint()});</script>
-<script type="text/javascript">jQuery(function(jq){initOldVersionWarnings(jq, '0.3.0', 'https://github.com/scala-tessella/ring-seq')});</script>
+<script type="text/javascript">jQuery(function(jq){initOldVersionWarnings(jq, '0.4.0', 'https://github.com/scala-tessella/ring-seq')});</script>
 
 
 </html>

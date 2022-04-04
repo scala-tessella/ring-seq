@@ -32,7 +32,7 @@
 <span class="home-icon">⌂</span>RingSeq
 </a>
 <div class="version-number">
-0.3.0
+0.4.0
 </div>
 </div>
 <div class="nav-toc">
@@ -42,8 +42,8 @@
   <li><a href="reference.html" class="active page">Reference</a>
   <ul>
     <li><a href="categories/indexing.html" class="page">Indexing</a></li>
-    <li><a href="categories/index-search.html" class="page">Index search</a></li>
     <li><a href="categories/rotation-reflection.html" class="page">Rotation and reflection</a></li>
+    <li><a href="categories/slicing.html" class="page">Index search</a></li>
     <li><a href="categories/iterators.html" class="page">Iterators</a></li>
     <li><a href="categories/comparisons.html" class="page">Comparisons</a></li>
     <li><a href="categories/symmetry.html" class="page">Symmetry</a></li>
@@ -80,7 +80,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <span class="home-icon">⌂</span>RingSeq
 </a>
 <div class="version-number">
-0.3.0
+0.4.0
 </div>
 </div>
 <div class="nav-toc">
@@ -90,8 +90,8 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
   <li><a href="reference.html" class="active page">Reference</a>
   <ul>
     <li><a href="categories/indexing.html" class="page">Indexing</a></li>
-    <li><a href="categories/index-search.html" class="page">Index search</a></li>
     <li><a href="categories/rotation-reflection.html" class="page">Rotation and reflection</a></li>
+    <li><a href="categories/slicing.html" class="page">Index search</a></li>
     <li><a href="categories/iterators.html" class="page">Iterators</a></li>
     <li><a href="categories/comparisons.html" class="page">Comparisons</a></li>
     <li><a href="categories/symmetry.html" class="page">Symmetry</a></li>
@@ -136,13 +136,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <h3><a href="#" name="" class="anchor"><span class="anchor-link"></span></a><a href="categories/indexing.html">Indexing</a></h3>
 <ul>
   <li><a href="categories/indexing.html#applyo"><code>applyO</code></a></li>
-  <li><a href="categories/indexing.html#sliceo"><code>sliceO</code></a></li>
-</ul>
-<h3><a href="#" name="" class="anchor"><span class="anchor-link"></span></a><a href="categories/index-search.html">Index search</a></h3>
-<ul>
-  <li><a href="categories/index-search.html#indexofsliceo"><code>indexOfSliceO</code></a></li>
-  <li><a href="categories/index-search.html#lastindexofsliceo"><code>lastIndexOfSliceO</code></a></li>
-  <li><a href="categories/index-search.html#segmentlenghto"><code>segmentLengthO</code></a></li>
+  <li><a href="categories/indexing.html#indexfrom"><code>indexFrom</code></a></li>
 </ul>
 <h3><a href="#" name="" class="anchor"><span class="anchor-link"></span></a><a href="categories/rotation-reflection.html">Rotation and reflection</a></h3>
 <ul>
@@ -150,6 +144,14 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
   <li><a href="categories/rotation-reflection.html#rotateleft"><code>rotateLeft</code></a></li>
   <li><a href="categories/rotation-reflection.html#startat"><code>startAt</code></a></li>
   <li><a href="categories/rotation-reflection.html#reflectat"><code>reflectAt</code></a></li>
+</ul>
+<h3><a href="#" name="" class="anchor"><span class="anchor-link"></span></a><a href="categories/slicing.html">Slicing</a></h3>
+<ul>
+  <li><a href="categories/slicing.html#sliceo"><code>sliceO</code></a></li>
+  <li><a href="categories/slicing.html#indexofsliceo"><code>indexOfSliceO</code></a></li>
+  <li><a href="categories/slicing.html#lastindexofsliceo"><code>lastIndexOfSliceO</code></a></li>
+  <li><a href="categories/slicing.html#segmentlenghto"><code>segmentLengthO</code></a></li>
+  <li><a href="categories/slicing.html#containssliceo"><code>containsSliceO</code></a></li>
 </ul>
 <h3><a href="#" name="" class="anchor"><span class="anchor-link"></span></a><a href="categories/iterators.html">Iterators</a></h3>
 <ul>
@@ -161,7 +163,6 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 </ul>
 <h3><a href="#" name="" class="anchor"><span class="anchor-link"></span></a><a href="categories/comparisons.html">Comparisons</a></h3>
 <ul>
-  <li><a href="categories/comparisons.html#containssliceo"><code>containsSliceO</code></a></li>
   <li><a href="categories/comparisons.html#isreflection"><code>isReflection</code></a></li>
   <li><a href="categories/comparisons.html#isreversion"><code>isReversion</code></a></li>
   <li><a href="categories/comparisons.html#isrotation"><code>isRotation</code></a></li>
@@ -174,7 +175,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
   <li><a href="categories/symmetry.html#symmetry"><code>symmetry</code></a></li>
 </ul>
 <div class="source-github">
-The source code for this page can be found <a href="https://github.com/scala-tessella/ring-seq/tree/v0.3.0/src/main/paradox/reference.md">here</a>.
+The source code for this page can be found <a href="https://github.com/scala-tessella/ring-seq/tree/v0.4.0/src/main/paradox/reference.md">here</a>.
 </div>
 
 <div class="nav-next">
@@ -258,7 +259,7 @@ The source code for this page can be found <a href="https://github.com/scala-tes
 <script type="text/javascript" src="lib/prettify/prettify.js"></script>
 <script type="text/javascript" src="lib/prettify/lang-scala.js"></script>
 <script type="text/javascript">jQuery(function(){window.prettyPrint && prettyPrint()});</script>
-<script type="text/javascript">jQuery(function(jq){initOldVersionWarnings(jq, '0.3.0', 'https://github.com/scala-tessella/ring-seq')});</script>
+<script type="text/javascript">jQuery(function(jq){initOldVersionWarnings(jq, '0.4.0', 'https://github.com/scala-tessella/ring-seq')});</script>
 
 
 </html>

@@ -32,7 +32,7 @@
 <span class="home-icon">⌂</span>RingSeq
 </a>
 <div class="version-number">
-0.3.0
+0.4.0
 </div>
 </div>
 <div class="nav-toc">
@@ -42,8 +42,8 @@
   <li><a href="../reference.html" class="page">Reference</a>
   <ul>
     <li><a href="../categories/indexing.html" class="page">Indexing</a></li>
-    <li><a href="../categories/index-search.html" class="page">Index search</a></li>
     <li><a href="../categories/rotation-reflection.html" class="page">Rotation and reflection</a></li>
+    <li><a href="../categories/slicing.html" class="page">Index search</a></li>
     <li><a href="../categories/iterators.html" class="page">Iterators</a></li>
     <li><a href="../categories/comparisons.html" class="active page">Comparisons</a></li>
     <li><a href="../categories/symmetry.html" class="page">Symmetry</a></li>
@@ -80,7 +80,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <span class="home-icon">⌂</span>RingSeq
 </a>
 <div class="version-number">
-0.3.0
+0.4.0
 </div>
 </div>
 <div class="nav-toc">
@@ -90,8 +90,8 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
   <li><a href="../reference.html" class="page">Reference</a>
   <ul>
     <li><a href="../categories/indexing.html" class="page">Indexing</a></li>
-    <li><a href="../categories/index-search.html" class="page">Index search</a></li>
     <li><a href="../categories/rotation-reflection.html" class="page">Rotation and reflection</a></li>
+    <li><a href="../categories/slicing.html" class="page">Index search</a></li>
     <li><a href="../categories/iterators.html" class="page">Iterators</a></li>
     <li><a href="../categories/comparisons.html" class="active page">Comparisons</a></li>
     <li><a href="../categories/symmetry.html" class="page">Symmetry</a></li>
@@ -123,16 +123,6 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="page-content row">
 <div class="small-12 large-9 column" id="docs">
 <h1><a href="#comparisons" name="comparisons" class="anchor"><span class="anchor-link"></span></a>Comparisons</h1>
-<h2><a href="#containssliceo" name="containssliceo" class="anchor"><span class="anchor-link"></span></a><code>containsSliceO</code></h2>
-<p>The circular equivalent of <code>containsSlice</code>.</p><div class="callout note "><div class="callout-title">Note</div>
-<p>Given the <a href="../what-is.html">definition of circular sequence</a>, a slice can contain more elements than the sequence itself.</p></div>
-<h3><a href="#example" name="example" class="anchor"><span class="anchor-link"></span></a>Example</h3>
-<pre class="prettyprint"><code class="language-scala">Seq(0, 1, 2).containsSliceO(Seq(2, 0, 1, 2, 0)) // true
-</code></pre>
-<h3><a href="#compared-to-standard" name="compared-to-standard" class="anchor"><span class="anchor-link"></span></a>Compared to standard</h3>
-<p>In the same example the standard version behaves differently, does not find the &ldquo;unrolled&rdquo; slice.</p>
-<pre class="prettyprint"><code class="language-scala">Seq(0, 1, 2).containsSlice(Seq(2, 0, 1, 2, 0)) // false
-</code></pre>
 <h2><a href="#isreflection" name="isreflection" class="anchor"><span class="anchor-link"></span></a><code>isReflection</code></h2>
 <p>Tests if a sequence is a reflection of another one.</p><div class="callout note "><div class="callout-title">Note</div>
 <p>A sequence is always a reflection of itself.</p></div>
@@ -158,7 +148,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <pre class="prettyprint"><code class="language-scala">Seq(0, 1, 2).isRotationOrReflection(Seq(2, 0, 1)) // true
 </code></pre>
 <div class="source-github">
-The source code for this page can be found <a href="https://github.com/scala-tessella/ring-seq/tree/v0.3.0/src/main/paradox/categories/comparisons.md">here</a>.
+The source code for this page can be found <a href="https://github.com/scala-tessella/ring-seq/tree/v0.4.0/src/main/paradox/categories/comparisons.md">here</a>.
 </div>
 
 <div class="nav-next">
@@ -173,7 +163,6 @@ The source code for this page can be found <a href="https://github.com/scala-tes
 <ul>
   <li><a href="../categories/comparisons.html#comparisons" class="header">Comparisons</a>
   <ul>
-    <li><a href="../categories/comparisons.html#containssliceo" class="header"><code>containsSliceO</code></a></li>
     <li><a href="../categories/comparisons.html#isreflection" class="header"><code>isReflection</code></a></li>
     <li><a href="../categories/comparisons.html#isreversion" class="header"><code>isReversion</code></a></li>
     <li><a href="../categories/comparisons.html#isrotation" class="header"><code>isRotation</code></a></li>
@@ -245,7 +234,7 @@ The source code for this page can be found <a href="https://github.com/scala-tes
 <script type="text/javascript" src="../lib/prettify/prettify.js"></script>
 <script type="text/javascript" src="../lib/prettify/lang-scala.js"></script>
 <script type="text/javascript">jQuery(function(){window.prettyPrint && prettyPrint()});</script>
-<script type="text/javascript">jQuery(function(jq){initOldVersionWarnings(jq, '0.3.0', 'https://github.com/scala-tessella/ring-seq')});</script>
+<script type="text/javascript">jQuery(function(jq){initOldVersionWarnings(jq, '0.4.0', 'https://github.com/scala-tessella/ring-seq')});</script>
 
 
 </html>
