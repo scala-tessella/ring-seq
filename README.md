@@ -10,7 +10,7 @@ its elements forming a ring.
 
 It works on any immutable / mutable `Seq` and sub-types.
 
-Available for Scala `3.1.1` and `2.13.8`.
+Available for Scala `3.2.12` and `2.13.8`.
 
 ## Setup
 
