@@ -1,7 +1,7 @@
 package io.github.scala_tessella.ring_seq
 
-/** Adds implicit methods to `[[https://www.scala-lang.org/api/current/scala/collection/Seq.html Seq]]`
- * (immutable / mutable and subtypes) for when a sequence needs to be considered '''circular''', its elements forming a ring.
+/** Adds implicit methods to [`scala.collection.Seq`](https://scala-lang.org/api/3.x/scala/collection/Seq.html)
+ * (immutable / mutable and subtypes) for when a sequence needs to be considered **circular**, its elements forming a ring.
  *
  * @author Mario Càllisto
  */
