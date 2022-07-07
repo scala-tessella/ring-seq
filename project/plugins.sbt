@@ -1,6 +1,6 @@
 addSbtPlugin("ch.epfl.scala" % "sbt-scalafix" % "0.10.0")
 addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "1.4.1")
-addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.9.2")
+addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.10.2")
 addSbtPlugin("com.typesafe.sbt" % "sbt-ghpages" % "0.6.3")
 addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "3.9.7")
 addSbtPlugin("com.jsuereth" % "sbt-pgp" % "2.1.1")
