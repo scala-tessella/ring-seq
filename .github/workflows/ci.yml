@@ -13,7 +13,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 8
+          java-version: 11
       - name: Build and Test
         run: sbt -v +test
       - name: Scalafix
