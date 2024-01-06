@@ -1,14 +1,14 @@
 import xerial.sbt.Sonatype._
 
-val scalatest = "org.scalatest" %% "scalatest" % "3.2.13" % "test"
-val scalacheck = "org.scalacheck" %% "scalacheck" % "1.16.0" % "test"
+val scalatest = "org.scalatest" %% "scalatest" % "3.2.17" % "test"
+val scalacheck = "org.scalacheck" %% "scalacheck" % "1.17.0" % "test"
 
 enablePlugins(ParadoxPlugin, ParadoxSitePlugin)
 enablePlugins(SiteScaladocPlugin)
 enablePlugins(GhpagesPlugin)
 
 ThisBuild / organization := "io.github.scala-tessella"
-ThisBuild / crossScalaVersions := Seq("3.1.1", "2.13.8")
+ThisBuild / crossScalaVersions := Seq("3.3.1", "2.13.12")
 ThisBuild / scalaVersion := crossScalaVersions.value.head
 ThisBuild / semanticdbEnabled := true
 ThisBuild / semanticdbVersion := scalafixSemanticdb.revision
