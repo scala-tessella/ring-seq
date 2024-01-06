@@ -60,6 +60,7 @@ providing new circular methods to any collection under `Seq`.
 ## Design
 
 The same decorators could possibly be added to [scala-collection-contrib](https://github.com/scala/scala-collection-contrib) and exist just there,
-but the underlying design has (at least for me) a very steep learning curve and the community help is weak. One clear maintenance advantage is that the source code is the same for Scala 2.13 and Scala 3.
+but the underlying design has (at least for me) a very steep learning curve and the community help is weak.
+One clear maintenance advantage would be that the source code is the same for Scala 2.13 and Scala 3.
 
 So, for now, is a conscious decision to achieve the same results with a simpler design (even if the source code is different between Scala 2.13 and Scala 3) and to publish in this, concise and hopefully useful, separate library.

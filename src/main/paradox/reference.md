@@ -4,7 +4,7 @@ This page shows all the features provided by the library.
 
 ##  Scaladoc
 
-Browse the @scaladoc[API documentation](io.github.scala_tessella.ring_seq.RingSeq$) for detailed information.
+Browse the Scala 3 (valid for Scala 2.13 as well) @scaladoc[API documentation](io.github.scala_tessella.ring_seq.RingSeq$) for detailed information.
 
 ## Methods
 
