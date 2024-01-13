@@ -5,7 +5,7 @@ addSbtPlugin(
 )
 addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.10.5")
 addSbtPlugin(
-  ("com.typesafe.sbt" % "sbt-ghpages" % "0.6.3")
+  ("com.github.sbt" % "sbt-ghpages" % "0.8.0")
     .exclude("org.scala-lang.modules", "scala-xml_2.12")
 )
 addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "3.10.0")
