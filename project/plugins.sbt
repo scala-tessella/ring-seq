@@ -1,8 +1,6 @@
 addSbtPlugin("ch.epfl.scala" % "sbt-scalafix" % "0.11.1")
-addSbtPlugin(
-  ("com.typesafe.sbt" % "sbt-site" % "1.4.1")
-    .exclude("org.scala-lang.modules", "scala-xml_2.12")
-)
+addSbtPlugin("com.github.sbt" % "sbt-site" % "1.5.0")
+addSbtPlugin("com.github.sbt" % "sbt-site-paradox" % "1.5.0")
 addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.10.5")
 addSbtPlugin("com.github.sbt" % "sbt-ghpages" % "0.8.0")
 addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "3.10.0")

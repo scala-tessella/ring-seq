@@ -3,7 +3,7 @@ import xerial.sbt.Sonatype._
 val scalatest = "org.scalatest" %% "scalatest" % "3.2.17" % "test"
 val scalacheck = "org.scalacheck" %% "scalacheck" % "1.17.0" % "test"
 
-enablePlugins(ParadoxPlugin, ParadoxSitePlugin)
+enablePlugins(SitePreviewPlugin, ParadoxSitePlugin)
 enablePlugins(SiteScaladocPlugin)
 enablePlugins(GhpagesPlugin)
 
