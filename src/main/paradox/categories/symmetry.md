@@ -29,7 +29,7 @@ the number >= 0 of reflections in which a circular sequence looks exactly the sa
 
 @@@ note
 
-Rotational symmetry is always higher or equal than reflectional symmetry.
+Reflectional symmetry is always lower or equal than rotational symmetry.
 
 @@@
 
