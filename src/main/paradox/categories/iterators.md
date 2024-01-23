@@ -25,7 +25,7 @@ All possible rotations.
 
 @@@ note
 
-Starting from itself and moving one rotation step to the right.
+Starting from itself and moving one rotation step to the left.
 
 @@@
 
