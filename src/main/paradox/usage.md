@@ -4,7 +4,7 @@ This page shows examples of how the library can be used.
 
 ##  `Ring[A]` class
 
-An example class wrapping a sequence and keeping a mutable state of rotation and reflection.
+An example class wrapping a sequence and keeping mutable states of rotation and reflection.
 
 Thanks to the primitives available, it can be built in few lines of code:
 
