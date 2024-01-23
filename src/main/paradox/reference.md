@@ -56,7 +56,7 @@ They fall into the following categories:
 * [`rotations`](categories/iterators.html#rotations)
 * [`reversions`](categories/iterators.html#reversions)
 * [`reflections`](categories/iterators.html#reflections)
-* [`rotationsAndReflections`](iterators.html#rotationsandreflections)
+* [`rotationsAndReflections`](categories/iterators.html#rotationsandreflections)
 
 ### [Comparisons](categories/comparisons.html)
 * [`isReflection`](categories/comparisons.html#isreflection)

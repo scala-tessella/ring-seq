@@ -50,7 +50,7 @@ cannot find the "unrolled" slice.
 Seq(0, 1, 2).indexOfSlice(Seq(2, 0, 1, 2, 0)) // -1
 ```
 
-##`lastIndexOfSliceO`
+## `lastIndexOfSliceO`
 
 The circular equivalent of `lastIndexOfSlice`.
 
@@ -69,7 +69,7 @@ does not find the slice containing the last and first elements.
 Seq(0, 1, 2, 0, 1, 2).lastIndexOfSlice(Seq(2, 0)) // 2
 ```
 
-##`segmentLengthO`
+## `segmentLengthO`
 
 The circular equivalent of `segmentLength`.
 

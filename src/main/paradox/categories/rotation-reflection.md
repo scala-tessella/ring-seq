@@ -10,7 +10,7 @@ Returns a sequence rotated to the right.
 Seq(0, 1, 2).rotateRight(1) // Seq(2, 0, 1)
 ```
 
-##`rotateLeft`
+## `rotateLeft`
 
 Returns a sequence rotated to the left.
 
@@ -20,7 +20,7 @@ Returns a sequence rotated to the left.
 Seq(0, 1, 2).rotateLeft(1) // Seq(1, 2, 0)
 ```
 
-##`startAt`
+## `startAt`
 
 Returns a sequence rotated to start at circular index.
 
@@ -36,7 +36,7 @@ Is equivalent to [`rotateLeft`](rotation-reflection.html#rotateleft).
 Seq(0, 1, 2).startAt(1) // Seq(1, 2, 0)
 ```
 
-##`reflectAt`
+## `reflectAt`
 
 Returns a sequence reversed and rotated to start at circular index.
 

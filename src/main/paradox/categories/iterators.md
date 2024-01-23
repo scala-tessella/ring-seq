@@ -19,7 +19,7 @@ does not pass the "sliding window" on the last and first elements.
 Seq(0, 1, 2).sliding(2) // Iterator(Seq(0, 1), Seq(1, 2))```
 ```
 
-##`rotations`
+## `rotations`
 
 All possible rotations.
 
@@ -43,7 +43,7 @@ Just itself on empty `Seq`.
 Seq.empty.rotations // Iterator(Seq())
 ```
 
-##`reversions`
+## `reversions`
 
 2 sequences, the sequence itself and reversed.
 
@@ -61,7 +61,7 @@ Just itself on empty `Seq`.
 Seq.empty.reversions // Iterator(Seq())
 ```
 
-##`reflections`
+## `reflections`
 
 2 sequences, the sequence itself and reflected at the start.
 
@@ -79,7 +79,7 @@ Just itself on empty `Seq`.
 Seq.empty.reflections // Iterator(Seq())
 ```
 
-##`rotationsAndReflections`
+## `rotationsAndReflections`
 
 All possible rotations and reflections.
 
