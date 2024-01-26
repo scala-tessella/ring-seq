@@ -44,3 +44,6 @@ can be browsed and searched [here](https://scala-tessella.github.io/ring-seq/api
 ### Website
 
 Check the [RingSeq website](https://scala-tessella.github.io/ring-seq/) for more info.
+
+## Other languages
+The same library is available also for the Python language, check [RingSeqPy (Python version)](https://github.com/scala-tessella/ring-seq-py/).

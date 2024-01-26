@@ -64,3 +64,7 @@ but the underlying design has (at least for me) a very steep learning curve and 
 One clear maintenance advantage would be that the source code is the same for Scala 2.13 and Scala 3.
 
 So, for now, is a conscious decision to achieve the same results with a simpler design (even if the source code is different between Scala 2.13 and Scala 3) and to publish in this, concise and hopefully useful, separate library.
+
+## Other languages
+
+The same library is available also for the Python language, check [RingSeqPy (Python version)](https://github.com/scala-tessella/ring-seq-py/).
