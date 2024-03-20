@@ -1,6 +1,6 @@
 addSbtPlugin("ch.epfl.scala" % "sbt-scalafix" % "0.12.0")
-addSbtPlugin("com.github.sbt" % "sbt-site" % "1.5.0")
-addSbtPlugin("com.github.sbt" % "sbt-site-paradox" % "1.5.0")
+addSbtPlugin("com.github.sbt" % "sbt-site" % "1.6.0")
+addSbtPlugin("com.github.sbt" % "sbt-site-paradox" % "1.6.0")
 addSbtPlugin("com.github.sbt" % "sbt-ghpages" % "0.8.0")
 addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "3.10.0")
 addSbtPlugin("com.github.sbt" % "sbt-pgp" % "2.2.1")
