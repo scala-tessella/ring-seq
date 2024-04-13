@@ -1,4 +1,4 @@
-import xerial.sbt.Sonatype._
+import xerial.sbt.Sonatype.*
 
 val scalatest = "org.scalatest" %% "scalatest" % "3.2.18" % "test"
 val scalacheck = "org.scalacheck" %% "scalacheck" % "1.17.0" % "test"
@@ -26,7 +26,6 @@ lazy val root = (project in file("."))
     git.remoteRepo := sonatypeProjectHosting.value.get.scmUrl,
     ghpagesNoJekyll := true,
     libraryDependencies ++= Seq(scalatest, scalacheck),
-    coverageEnabled := true,
     Compile / scalacOptions ++= {
       CrossVersion.partialVersion(scalaVersion.value) match {
         case Some((3, _)) => Nil
