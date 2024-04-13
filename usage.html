@@ -32,7 +32,7 @@
 <span class="home-icon">⌂</span>RingSeq
 </a>
 <div class="version-number">
-0.3.0+21-c37d71eb+20220402-1834
+0.5.1
 </div>
 </div>
 <div class="nav-toc">
@@ -43,7 +43,7 @@
   <ul>
     <li><a href="categories/indexing.html" class="page">Indexing</a></li>
     <li><a href="categories/rotation-reflection.html" class="page">Rotation and reflection</a></li>
-    <li><a href="categories/slicing.html" class="page">Index search</a></li>
+    <li><a href="categories/slicing.html" class="page">Slicing</a></li>
     <li><a href="categories/iterators.html" class="page">Iterators</a></li>
     <li><a href="categories/comparisons.html" class="page">Comparisons</a></li>
     <li><a href="categories/symmetry.html" class="page">Symmetry</a></li>
@@ -80,7 +80,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <span class="home-icon">⌂</span>RingSeq
 </a>
 <div class="version-number">
-0.3.0+21-c37d71eb+20220402-1834
+0.5.1
 </div>
 </div>
 <div class="nav-toc">
@@ -91,7 +91,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
   <ul>
     <li><a href="categories/indexing.html" class="page">Indexing</a></li>
     <li><a href="categories/rotation-reflection.html" class="page">Rotation and reflection</a></li>
-    <li><a href="categories/slicing.html" class="page">Index search</a></li>
+    <li><a href="categories/slicing.html" class="page">Slicing</a></li>
     <li><a href="categories/iterators.html" class="page">Iterators</a></li>
     <li><a href="categories/comparisons.html" class="page">Comparisons</a></li>
     <li><a href="categories/symmetry.html" class="page">Symmetry</a></li>
@@ -124,7 +124,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <h1><a href="#usage-examples" name="usage-examples" class="anchor"><span class="anchor-link"></span></a>Usage examples</h1>
 <p>This page shows examples of how the library can be used.</p>
 <h2><a href="#ring-a-class" name="ring-a-class" class="anchor"><span class="anchor-link"></span></a><code>Ring[A]</code> class</h2>
-<p>An example class wrapping a sequence and keeping a mutable state of rotation and reflection.</p>
+<p>An example class wrapping a sequence and keeping mutable states of rotation and reflection.</p>
 <p>Thanks to the primitives available, it can be built in few lines of code:</p>
 <pre class="prettyprint"><code class="language-scala">// using type IndexO to signal a circular index
 class Ring[A](underlying: Seq[A], var headIndex: IndexO = 0, var isReflected: Boolean = false ) {
@@ -154,7 +154,7 @@ class Ring[A](underlying: Seq[A], var headIndex: IndexO = 0, var isReflected: Bo
 </code></pre>
 <p>Check the <a href="api/io/github/scala_tessella/ring_seq/examples/Ring.html" title="io.github.scala_tessella.ring_seq.examples.Ring"><code>API documentation for Ring class</code></a> for detailed information.</p>
 <div class="source-github">
-The source code for this page can be found <a href="https://github.com/scala-tessella/ring-seq/tree/master/src/main/paradox/usage.md">here</a>.
+The source code for this page can be found <a href="https://github.com/scala-tessella/ring-seq/tree/v0.5.1/src/main/paradox/usage.md">here</a>.
 </div>
 
 <div class="nav-next">
@@ -212,7 +212,7 @@ The source code for this page can be found <a href="https://github.com/scala-tes
 
 <!--
 <div class="copyright">
-<span class="text">&copy; 2022</span>
+<span class="text">&copy; 2024</span>
 <a href="https://www.example.com" class="logo">logo</a>
 </div>
 -->
@@ -237,7 +237,7 @@ The source code for this page can be found <a href="https://github.com/scala-tes
 <script type="text/javascript" src="lib/prettify/prettify.js"></script>
 <script type="text/javascript" src="lib/prettify/lang-scala.js"></script>
 <script type="text/javascript">jQuery(function(){window.prettyPrint && prettyPrint()});</script>
-<script type="text/javascript">jQuery(function(jq){initOldVersionWarnings(jq, '0.3.0+21-c37d71eb+20220402-1834', 'https://github.com/scala-tessella/ring-seq')});</script>
+<script type="text/javascript">jQuery(function(jq){initOldVersionWarnings(jq, '0.5.1', 'https://github.com/scala-tessella/ring-seq')});</script>
 
 
 </html>
