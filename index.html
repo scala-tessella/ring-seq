@@ -32,7 +32,7 @@
 <span class="home-icon">⌂</span>RingSeq
 </a>
 <div class="version-number">
-0.5.0
+0.3.0+21-c37d71eb+20220402-1834
 </div>
 </div>
 <div class="nav-toc">
@@ -43,7 +43,7 @@
   <ul>
     <li><a href="categories/indexing.html" class="page">Indexing</a></li>
     <li><a href="categories/rotation-reflection.html" class="page">Rotation and reflection</a></li>
-    <li><a href="categories/slicing.html" class="page">Slicing</a></li>
+    <li><a href="categories/slicing.html" class="page">Index search</a></li>
     <li><a href="categories/iterators.html" class="page">Iterators</a></li>
     <li><a href="categories/comparisons.html" class="page">Comparisons</a></li>
     <li><a href="categories/symmetry.html" class="page">Symmetry</a></li>
@@ -80,7 +80,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <span class="home-icon">⌂</span>RingSeq
 </a>
 <div class="version-number">
-0.5.0
+0.3.0+21-c37d71eb+20220402-1834
 </div>
 </div>
 <div class="nav-toc">
@@ -91,7 +91,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
   <ul>
     <li><a href="categories/indexing.html" class="page">Indexing</a></li>
     <li><a href="categories/rotation-reflection.html" class="page">Rotation and reflection</a></li>
-    <li><a href="categories/slicing.html" class="page">Slicing</a></li>
+    <li><a href="categories/slicing.html" class="page">Index search</a></li>
     <li><a href="categories/iterators.html" class="page">Iterators</a></li>
     <li><a href="categories/comparisons.html" class="page">Comparisons</a></li>
     <li><a href="categories/symmetry.html" class="page">Symmetry</a></li>
@@ -121,7 +121,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <p>Available for Scala <code>3.1.1</code> and <code>2.13.8</code>.</p>
 <h2><a href="#setup" name="setup" class="anchor"><span class="anchor-link"></span></a>Setup</h2>
 <p>Add the following dependency to your <code>build.sbt</code> file:</p>
-<pre class="prettyprint"><code class="language-scala">libraryDependencies += &quot;io.github.scala-tessella&quot; %% &quot;ring-seq&quot; % &quot;0.5.0&quot;
+<pre class="prettyprint"><code class="language-scala">libraryDependencies += &quot;io.github.scala-tessella&quot; %% &quot;ring-seq&quot; % &quot;0.3.0+21-c37d71eb+20220402-1834&quot;
 </code></pre>
 <h2><a href="#getting-started" name="getting-started" class="anchor"><span class="anchor-link"></span></a>Getting started</h2>
 <p>First, start with the following import:</p>
@@ -137,11 +137,8 @@ ListBuffer(1, 3, 5, 7, 9).reflectAt(3) // ListBuffer(7, 5, 3, 1, 9)
 <h2><a href="#solution" name="solution" class="anchor"><span class="anchor-link"></span></a>Solution</h2>
 <p><strong>RingSeq</strong> is a small, purely functional, self-contained library, where most of the circular use cases are already solved and building blocks provided for the others.</p>
 <p>Leveraging Scala 3 <a href="https://docs.scala-lang.org/scala3/book/ca-extension-methods.html"><code>extension</code></a> or Scala 2 <a href="https://docs.scala-lang.org/overviews/core/implicit-classes.html"><code>implicit class</code></a>, it acts like a <em>decorator</em>, providing new circular methods to any collection under <code>Seq</code>.</p>
-<h2><a href="#design" name="design" class="anchor"><span class="anchor-link"></span></a>Design</h2>
-<p>The same decorators could possibly be added to <a href="https://github.com/scala/scala-collection-contrib">scala-collection-contrib</a> and exist just there, but the underlying design has (at least for me) a very steep learning curve and the community help is weak. One clear maintenance advantage would be that the source code is the same for Scala 2.13 and Scala 3.</p>
-<p>So, for now, is a conscious decision to achieve the same results with a simpler design (even if the source code is different between Scala 2.13 and Scala 3) and to publish in this, concise and hopefully useful, separate library.</p>
 <div class="source-github">
-The source code for this page can be found <a href="https://github.com/scala-tessella/ring-seq/tree/v0.5.0/src/main/paradox/index.md">here</a>.
+The source code for this page can be found <a href="https://github.com/scala-tessella/ring-seq/tree/master/src/main/paradox/index.md">here</a>.
 </div>
 
 <div class="nav-next">
@@ -160,7 +157,6 @@ The source code for this page can be found <a href="https://github.com/scala-tes
     <li><a href="index.html#getting-started" class="header">Getting started</a></li>
     <li><a href="index.html#need" class="header">Need</a></li>
     <li><a href="index.html#solution" class="header">Solution</a></li>
-    <li><a href="index.html#design" class="header">Design</a></li>
   </ul></li>
 </ul>
 </div>
@@ -203,7 +199,7 @@ The source code for this page can be found <a href="https://github.com/scala-tes
 
 <!--
 <div class="copyright">
-<span class="text">&copy; 2024</span>
+<span class="text">&copy; 2022</span>
 <a href="https://www.example.com" class="logo">logo</a>
 </div>
 -->
@@ -228,7 +224,7 @@ The source code for this page can be found <a href="https://github.com/scala-tes
 <script type="text/javascript" src="lib/prettify/prettify.js"></script>
 <script type="text/javascript" src="lib/prettify/lang-scala.js"></script>
 <script type="text/javascript">jQuery(function(){window.prettyPrint && prettyPrint()});</script>
-<script type="text/javascript">jQuery(function(jq){initOldVersionWarnings(jq, '0.5.0', 'https://github.com/scala-tessella/ring-seq')});</script>
+<script type="text/javascript">jQuery(function(jq){initOldVersionWarnings(jq, '0.3.0+21-c37d71eb+20220402-1834', 'https://github.com/scala-tessella/ring-seq')});</script>
 
 
 </html>

@@ -8,7 +8,7 @@ class Input extends Component {
   }
 
   onInputChange = ({ currentTarget: { value } }) => {
-    setTimeout(this.props.onInputChange(value), 300);
+    this.props.onInputChange(value);
   };
 
   onKeydown = (e) => {

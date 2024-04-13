@@ -9,6 +9,8 @@ const withEvent = (element, listener, callback) => {
   return () => element && element.removeEventListener(listener, callback);
 };
 
+const init = (cb) => window.addEventListener("DOMContentLoaded", cb);
+
 const attachDOM = (element, html) => {
   if (element) {
     element.innerHTML = htmlToString(html);
