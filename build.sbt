@@ -1,7 +1,7 @@
 import xerial.sbt.Sonatype.*
 
 val scalatest = "org.scalatest" %% "scalatest" % "3.2.18" % "test"
-val scalacheck = "org.scalacheck" %% "scalacheck" % "1.17.0" % "test"
+val scalacheck = "org.scalacheck" %% "scalacheck" % "1.17.1" % "test"
 
 enablePlugins(SitePreviewPlugin, ParadoxSitePlugin)
 enablePlugins(SiteScaladocPlugin)
