@@ -17,9 +17,9 @@ jobs:
 #      - name: Set 3.3.3
 #        run: sbt ++ 3.3.3
       - name: Build and Test Scala3 JS
-        run: sbt ringSeqJS/test
+        run: sbt +ringSeqJS/test
       - name: Build and Test Scala3 JVM
-        run: sbt ringSeqJVM/test
+        run: sbt +ringSeqJVM/test
 #      - name: Set 2.13.13
 #        run: sbt ++ 2.13.13
 #      - name: Build and Test Scala2 JS
