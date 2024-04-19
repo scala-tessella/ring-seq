@@ -14,7 +14,17 @@ jobs:
         with:
           distribution: temurin
           java-version: 11
-      - name: Build and Test
-        run: sbt -v +test
+      - name: Set 3.3.3
+        run: sbt ++ 3.3.3
+      - name: Build and Test Scala3 JS
+        run: sbt ringSeqJS/test
+      - name: Build and Test Scala3 JVM
+        run: sbt ringSeqJVM/test
+      - name: Set 3.3.3
+        run: sbt ++ 2.13.13
+      - name: Build and Test Scala2 JS
+        run: sbt ringSeqJS/test
+      - name: Build and Test Scala2 JVM
+        run: sbt ringSeqJVM/test
       - name: Scalafix
         run: sbt -v +"scalafixAll --check"

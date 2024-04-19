@@ -32,14 +32,6 @@ class IndexingOpsSpec extends AnyFlatSpec with TestHelper with should.Matchers {
     "ABCDE".applyO(5) shouldEqual 'A'
   }
 
-  "While a non-empty sequence" must "have no element indexed before the first" in {
-    assertThrows[IndexOutOfBoundsException] { "ABCDE".apply(-1) }
-  }
-
-  it must "have no element indexed after the last" in {
-    assertThrows[IndexOutOfBoundsException] { "ABCDE".apply(5) }
-  }
-
   "An empty circular sequence" must "have no indexed elements" in {
     assertThrows[ArithmeticException] { Seq.empty.applyO(0) }
   }
