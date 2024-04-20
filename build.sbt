@@ -12,6 +12,8 @@ ThisBuild / semanticdbVersion := scalafixSemanticdb.revision
 ThisBuild / versionScheme := Some("early-semver")
 ThisBuild / licenses := Seq("APL2" -> url("https://www.apache.org/licenses/LICENSE-2.0.txt"))
 ThisBuild / publishTo := sonatypePublishToBundle.value
+ThisBuild / developers := List(Developer("scala-tessella", "scala-tessella", "mario.callisto@gmail.com", url("https://github.com/scala-tessella")))
+ThisBuild / homepage := Some(url("https://github.com/scala-tessella"))
 
 lazy val root =
   project
