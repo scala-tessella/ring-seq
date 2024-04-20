@@ -1,4 +1,4 @@
-pages = [{"l":"index.html#","e":false,"i":"","n":"ring-seq","t":"ring-seq","d":"","k":"static","x":""},
+pages = [{"l":"index.html#","e":false,"i":"","n":"root","t":"root","d":"","k":"static","x":""},
 {"l":"io/github/scala_tessella/ring_seq.html#","e":false,"i":"","n":"io.github.scala_tessella.ring_seq","t":"io.github.scala_tessella.ring_seq","d":"","k":"package","x":""},
 {"l":"io/github/scala_tessella/ring_seq/examples.html#","e":false,"i":"","n":"io.github.scala_tessella.ring_seq.examples","t":"io.github.scala_tessella.ring_seq.examples","d":"","k":"package","x":""},
 {"l":"io/github/scala_tessella/ring_seq/examples/Ring.html#","e":false,"i":"","n":"Ring","t":"Ring[A](underlying: Seq[A], var headIndex: IndexO, var isReflected: Boolean)","d":"io.github.scala_tessella.ring_seq.examples","k":"class","x":""},
