@@ -6,7 +6,7 @@ its elements forming a ring.
 
 It works on any immutable / mutable `Seq` and sub-types.
 
-Available for Scala `3.3.1` and `2.13.13`.
+Available for Scala `3.3.1` and `2.13.13`, compatible with Scala.js
 
 ## Setup
 
@@ -14,7 +14,7 @@ Add the following dependency to your `build.sbt` file:
 
 @@@vars
 ~~~ scala
-libraryDependencies += "io.github.scala-tessella" %% "ring-seq" % "$project.version$"
+libraryDependencies += "io.github.scala-tessella" %% "ring-seq" % "$project.version$" // Use %%% instead of %% if you're using ScalaJS
 ~~~
 @@@
 

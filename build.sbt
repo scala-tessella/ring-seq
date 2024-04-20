@@ -9,6 +9,7 @@ ThisBuild / crossScalaVersions := Seq("3.3.3", "2.13.13")
 ThisBuild / scalaVersion := crossScalaVersions.value.head
 ThisBuild / semanticdbEnabled := true
 ThisBuild / semanticdbVersion := scalafixSemanticdb.revision
+ThisBuild / versionScheme := Some("early-semver")
 
 lazy val root =
   project
