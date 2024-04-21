@@ -17,7 +17,7 @@ Available for Scala `3.3.3` and `2.13.13`, compatible with Scala.js
 
 Add the following dependency to your `build.sbt` file:
 ```scala
-libraryDependencies += "io.github.scala-tessella" %% "ring-seq" % "0.6.0" // Use %%% instead of %% if you're using ScalaJS
+libraryDependencies += "io.github.scala-tessella" %% "ring-seq" % "0.6.2" // Use %%% instead of %% if you're using ScalaJS
 
 ```
 
