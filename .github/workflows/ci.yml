@@ -9,11 +9,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup JDK
+      - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          distribution: temurin
           java-version: 17
+          distribution: temurin
+          cache: sbt
+      - name: Setup sbt
+        uses: sbt/setup-sbt@v1
       - name: Build and Test Scala3 JS
         run: sbt +ringSeqJS/test
       - name: Build and Test Scala3 JVM
