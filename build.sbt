@@ -18,7 +18,7 @@ ThisBuild / homepage := Some(url("https://github.com/scala-tessella"))
 lazy val root =
   project
     .in(file("."))
-    .aggregate(ringSeq.js, ringSeq.jvm)
+    .aggregate(ringSeq.js, ringSeq.jvm, ringSeq.native)
     .settings(
       sonatypeProjectHosting := Some(GitHubHosting("scala-tessella", "ring-seq", "mario.callisto@gmail.com")),
       sonatypeCredentialHost := "s01.oss.sonatype.org",
@@ -36,7 +36,7 @@ lazy val root =
     )
 
 lazy val ringSeq =
-  crossProject(JSPlatform, JVMPlatform)
+  crossProject(JSPlatform, JVMPlatform, NativePlatform)
     .crossType(CrossType.Pure)
     .in(file("."))
     .settings(
@@ -51,5 +51,8 @@ lazy val ringSeq =
       // Add JVM-specific settings here
     )
     .jsSettings(
-    // Add JS-specific settings here
-  )
+      // Add JS-specific settings here
+    )
+    .nativeSettings(
+      // Add native-specific settings here
+    )
