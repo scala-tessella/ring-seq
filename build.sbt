@@ -5,7 +5,7 @@ enablePlugins(SiteScaladocPlugin)
 enablePlugins(GhpagesPlugin)
 
 ThisBuild / organization := "io.github.scala-tessella"
-ThisBuild / crossScalaVersions := Seq("3.3.4", "2.13.15")
+ThisBuild / crossScalaVersions := Seq("3.3.4", "2.13.16")
 ThisBuild / scalaVersion := crossScalaVersions.value.head
 ThisBuild / semanticdbEnabled := true
 ThisBuild / semanticdbVersion := scalafixSemanticdb.revision
