@@ -20,9 +20,8 @@ class IndexingOpsSpec extends AnyFlatSpec with TestHelper with should.Matchers {
     "ABCDE".indexFrom(5) shouldEqual 0
   }
 
-  "An empty sequence" must "have no normalized index" in {
-    assertThrows[ArithmeticException] { Seq.empty.indexFrom(0) }
-  }
+  "An empty sequence" must "have no normalized index" in
+    assertThrows[ArithmeticException](Seq.empty.indexFrom(0))
 
   "A non-empty circular sequence" must "always have an element indexed before another one" in {
     "ABCDE".applyO(-1) shouldEqual 'E'
@@ -32,23 +31,23 @@ class IndexingOpsSpec extends AnyFlatSpec with TestHelper with should.Matchers {
     "ABCDE".applyO(5) shouldEqual 'A'
   }
 
-  "An empty circular sequence" must "have no indexed elements" in {
-    assertThrows[ArithmeticException] { Seq.empty.applyO(0) }
-  }
+  "An empty circular sequence" must "have no indexed elements" in
+    assertThrows[ArithmeticException](Seq.empty.applyO(0))
 
-  "An empty sequence" must "have no indexed elements" in {
-    assertThrows[IndexOutOfBoundsException] { Seq.empty.apply(0) }
-  }
+  "An empty sequence" must "have no indexed elements" in
+    assertThrows[IndexOutOfBoundsException](Seq.empty.apply(0))
 
   "Any non empty circular sequence" must "return an element for any index" in {
-    val elems = "ABC"
+    val elems                         = "ABC"
     val gen: Gen[(Seq[Char], IndexO)] =
       for {
         seq <- Gen.nonEmptyContainerOf[Seq, Char](Gen.oneOf(elems))
-        i <- arbitrary[IndexO]
+        i   <- arbitrary[IndexO]
       } yield (seq, i)
     check(
-      forAll(gen)({ case (seq, i) => elems.contains(seq.applyO(i)) })
+      forAll(gen) { case (seq, i) =>
+        elems.contains(seq.applyO(i))
+      }
     )(_)
   }
 

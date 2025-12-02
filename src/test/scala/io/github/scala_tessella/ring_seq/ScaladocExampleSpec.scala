@@ -25,7 +25,14 @@ class ScaladocExampleSpec extends AnyFlatSpec with should.Matchers {
     seq.rotations.toList shouldBe List(seq, Seq(1, 2, 0), Seq(2, 0, 1))
     seq.reflections.toList shouldBe List(seq, Seq(0, 2, 1))
     seq.reversions.toList shouldBe List(seq, Seq(2, 1, 0))
-    seq.rotationsAndReflections.toList shouldBe List(seq, Seq(1, 2, 0), Seq(2, 0, 1), Seq(0, 2, 1), Seq(2, 1, 0), Seq(1, 0, 2))
+    seq.rotationsAndReflections.toList shouldBe List(
+      seq,
+      Seq(1, 2, 0),
+      Seq(2, 0, 1),
+      Seq(0, 2, 1),
+      Seq(2, 1, 0),
+      Seq(1, 0, 2)
+    )
     seq.isRotationOf(Seq(1, 2, 0)) shouldBe true
     seq.isReflectionOf(Seq(0, 2, 1)) shouldBe true
     seq.isReversionOf(Seq(2, 1, 0)) shouldBe true
