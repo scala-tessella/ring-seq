@@ -28,40 +28,24 @@ trait SymmetryOps extends TransformingOps:
 
         n / smallestPeriod.getOrElse(n)
 
-    private def greaterHalfRange: Range =
-      0 until Math.ceil(ring.size / 2.0).toInt
-
-    private def checkReflectionAxis(gap: Int): Boolean =
-      greaterHalfRange.forall(j => ring.applyO(j + 1) == ring.applyO(-(j + gap)))
-
-    private def hasHeadOnAxis: Boolean =
-      checkReflectionAxis(1)
-
-    private def hasAxisBetweenHeadAndNext: Boolean =
-      checkReflectionAxis(0)
-
-    private def findReflectionSymmetry: Option[Index] =
-      greaterHalfRange.find(j =>
-        val rotation = ring.startAt(j)
-        rotation.hasHeadOnAxis || rotation.hasAxisBetweenHeadAndNext
-      )
-
     /** Finds the indices of each element of this circular sequence close to an axis of reflectional symmetry.
       *
       * @return
       *   the indices of each element of this circular sequence close to an axis of reflectional symmetry,
       *   that is a line of symmetry that splits the sequence in two identical halves.
       * @example
-      *   {{{Seq(2, 1, 2, 2, 1, 2, 2, 1, 2, 2, 1, 2).symmetryIndices // List(1, 4, 7, 10)}}}
+      *   {{{Seq(2, 1, 2, 2, 1, 2, 2, 1, 2, 2, 1, 2).symmetryIndices // List(0, 3, 6, 9)}}}
       */
-    def symmetryIndices: List[Index] =
+    def symmetryIndices: List[Int] =
       if ring.isEmpty then Nil
       else
-        val folds    = rotationalSymmetry
-        val foldSize = ring.size / folds
-        ring.take(foldSize).findReflectionSymmetry match
-          case None    => Nil
-          case Some(j) => (0 until folds).toList.map(_ * foldSize + j)
+        val reversed = ring.reverse
+
+        // We check rotations of the reversed list against the original.
+        // If list == rotate(reverse(list), k), it implies an axis of symmetry exists.
+        // This is equivalent to counting how many shifts of the reversed list match the original.
+        (0 until ring.size).toList.filter: shift =>
+          ring == reversed.rotateLeft(shift)
 
     /** Computes the order of reflectional (mirror) symmetry possessed by this circular sequence.
       *

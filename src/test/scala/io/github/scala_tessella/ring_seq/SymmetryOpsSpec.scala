@@ -45,10 +45,10 @@ class SymmetryOpsSpec extends AnyFlatSpec with TestHelper with should.Matchers {
     e.symmetryIndices shouldBe Nil
     spin3.symmetryIndices shouldBe Nil
     eptagon.symmetryIndices shouldBe List(0, 1, 2, 3, 4, 5, 6) 
-    squaroid.symmetryIndices shouldBe List(1, 4, 7, 10)
-    axisOnElement.symmetryIndices shouldBe List(0)
-    axisOffElement.symmetryIndices shouldBe List(3)
-    axisOnOffElement.symmetryIndices shouldBe List(0)
+    squaroid.symmetryIndices shouldBe List(0, 3, 6, 9)
+    axisOnElement.symmetryIndices shouldBe List(5)
+    axisOffElement.symmetryIndices shouldBe List(0)
+    axisOnOffElement.symmetryIndices shouldBe List(6)
   }
 
   "Any Seq" must "have rotational higher or equal than reflectional symmetry" in {

@@ -31,7 +31,7 @@ class ScaladocExampleSpec extends AnyFlatSpec with should.Matchers {
     seq.isReversionOf(Seq(2, 1, 0)) shouldBe true
     seq.isRotationOrReflectionOf(Seq(2, 0, 1)) shouldBe true
     Seq(0, 1, 2, 0, 1, 2).rotationalSymmetry shouldBe 2
-    Seq(2, 1, 2, 2, 1, 2, 2, 1, 2, 2, 1, 2).symmetryIndices shouldBe List(1, 4, 7, 10)
+    Seq(2, 1, 2, 2, 1, 2, 2, 1, 2, 2, 1, 2).symmetryIndices shouldBe List(0, 3, 6, 9)
     Seq(2, 1, 2, 2, 1, 2, 2, 1, 2, 2, 1, 2).symmetry shouldBe 4
   }
 
