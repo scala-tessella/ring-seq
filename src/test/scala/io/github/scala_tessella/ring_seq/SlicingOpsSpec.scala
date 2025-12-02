@@ -49,7 +49,7 @@ class SlicingOpsSpec extends AnyFlatSpec with TestHelper with should.Matchers {
     s12345.lastIndexOfSlice(circularSlice) shouldBe -1
     s12345.lastIndexOfSliceO(circularSlice) shouldBe 4
   }
-  
+
   it can "return the last index of a contained circular slice before end" in {
     s12345.lastIndexOfSlice(circularSlice, 5) shouldBe -1
     s12345.lastIndexOfSliceO(circularSlice, 5) shouldBe 4

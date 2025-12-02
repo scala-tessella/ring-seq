@@ -6,7 +6,7 @@ import org.scalatest.matchers._
 class RingSpec extends AnyFlatSpec with should.Matchers {
 
   val underlying = List(1, 2, 3, 4)
-  val ring = new Ring(underlying)
+  val ring       = new Ring(underlying)
 
   "An instance of an examples.Ring class" must "be created with no rotation and no reversion" in {
     ring.currentHead shouldBe 1

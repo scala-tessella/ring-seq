@@ -11,11 +11,11 @@ import scala.collection.Seq
 
 class SymmetryOpsSpec extends AnyFlatSpec with TestHelper with should.Matchers {
 
-  val spin3: Seq[Int] = Seq(1, 2, 3, 1, 2, 3, 1, 2, 3)
-  val eptagon: Seq[Int] = Seq(6, 6, 6, 6, 6, 6, 6)
-  val squaroid: Seq[Int] = Seq(2, 1, 2, 2, 1, 2, 2, 1, 2, 2, 1, 2)
-  val axisOnElement: Seq[Int] = Seq(1, 2, 3, 4, 3, 2)
-  val axisOffElement: Seq[Int] = Seq(1, 2, 3, 4, 4, 3, 2, 1)
+  val spin3: Seq[Int]            = Seq(1, 2, 3, 1, 2, 3, 1, 2, 3)
+  val eptagon: Seq[Int]          = Seq(6, 6, 6, 6, 6, 6, 6)
+  val squaroid: Seq[Int]         = Seq(2, 1, 2, 2, 1, 2, 2, 1, 2, 2, 1, 2)
+  val axisOnElement: Seq[Int]    = Seq(1, 2, 3, 4, 3, 2)
+  val axisOffElement: Seq[Int]   = Seq(1, 2, 3, 4, 4, 3, 2, 1)
   val axisOnOffElement: Seq[Int] = Seq(1, 2, 3, 4, 4, 3, 2)
 
   "A Vector considered as a ring" can "have n-fold rotational symmetry" in {
@@ -44,7 +44,7 @@ class SymmetryOpsSpec extends AnyFlatSpec with TestHelper with should.Matchers {
     s12345.symmetryIndices shouldBe Nil
     e.symmetryIndices shouldBe Nil
     spin3.symmetryIndices shouldBe Nil
-    eptagon.symmetryIndices shouldBe List(0, 1, 2, 3, 4, 5, 6) 
+    eptagon.symmetryIndices shouldBe List(0, 1, 2, 3, 4, 5, 6)
     squaroid.symmetryIndices shouldBe List(1, 4, 7, 10)
     axisOnElement.symmetryIndices shouldBe List(0)
     axisOffElement.symmetryIndices shouldBe List(3)

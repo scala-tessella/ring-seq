@@ -16,14 +16,14 @@ class TransformingOpsSpec extends AnyFlatSpec with TestHelper with should.Matche
   "Any immutable Seq subtype" can "be rotated" in {
     "SCALA".rotateRight(2) shouldEqual WrappedString('L', 'A', 'S', 'C', 'A')
     "SCALA".rotateRight(2).mkString shouldEqual "LASCA"
-    val asList = s12345.toList
+    val asList   = s12345.toList
     asList.rotateRight(2) shouldBe List(4, 5, 1, 2, 3)
-    asList.rotateRight(2) shouldBe a [List[_]]
-    asList.rotateRight(2) should not be a [Vector[_]]
+    asList.rotateRight(2) shouldBe a[List[_]]
+    asList.rotateRight(2) should not be a[Vector[_]]
     val asVector = s12345.toVector
     asVector.rotateRight(2) shouldBe Vector(4, 5, 1, 2, 3)
-    asVector.rotateRight(2) shouldBe a [Vector[_]]
-    asVector.rotateRight(2) should not be a [List[_]]
+    asVector.rotateRight(2) shouldBe a[Vector[_]]
+    asVector.rotateRight(2) should not be a[List[_]]
     Queue(1, 2, 3, 4, 5).rotateRight(2) shouldBe Queue(4, 5, 1, 2, 3)
   }
 
