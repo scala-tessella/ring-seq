@@ -7,22 +7,26 @@ trait SymmetryOps extends TransformingOps:
 
   extension [A, CC[B] <: SeqOps[B, CC, CC[B]]](ring: CC[A])
 
-    private def areFoldsSymmetrical: Int => Boolean =
-      n => ring.rotateRight(ring.size / n) == ring
-
-    /** Computes the order of rotational symmetry possessed by this circular sequence.
+    /** Computes the order of rotational symmetry possessed by this circular sequence, that is the number of
+      * times the sequence matches itself as it makes a full rotation.
       *
       * @return
-      *   the number >= 1 of rotations in which this circular sequence looks exactly the same.
+      *   An integer between 1 and the size of the sequence. 1 means no symmetry (only identity), max means a
+      *   perfect circle (e.g., all elements equal).
       * @example
       *   {{{Seq(0, 1, 2, 0, 1, 2).rotationalSymmetry // 2}}}
       */
     def rotationalSymmetry: Int =
-      val size = ring.size
-      if size < 2 then 1
+      val n = ring.size
+      if n < 2 then 1
       else
-        val exactFoldsDesc = size +: (size / 2 to 2 by -1).filter(size % _ == 0)
-        exactFoldsDesc.find(areFoldsSymmetrical).getOrElse(1)
+        // Find the smallest shift that makes the list equal to itself
+        val smallestPeriod =
+          (1 to n).find: shift =>
+            // Optimization: We only need to check shifts that divide n
+            n % shift == 0 && ring.rotateRight(shift) == ring
+
+        n / smallestPeriod.getOrElse(n)
 
     private def greaterHalfRange: Range =
       0 until Math.ceil(ring.size / 2.0).toInt
