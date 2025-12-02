@@ -19,17 +19,19 @@ object SymmetryOps {
 
   /** Universal trait providing symmetry decorators for a `Seq` considered circular. */
   trait SymmetryDecorators[A, CC[B] <: SeqOps[B, CC, CC[B]]]
-    extends Any
+      extends Any
       with TransformingOps.TransformingDecorators[A, CC] {
 
     private def areFoldsSymmetrical: Int => Boolean =
       n => rotateRight(ring.size / n) == ring
 
     /** Computes the order of rotational symmetry possessed by this circular sequence.
-     *
-     * @return the number >= 1 of rotations in which this circular sequence looks exactly the same.
-     * @example {{{Seq(0, 1, 2, 0, 1, 2).rotationalSymmetry // 2}}}
-     */
+      *
+      * @return
+      *   the number >= 1 of rotations in which this circular sequence looks exactly the same.
+      * @example
+      *   {{{Seq(0, 1, 2, 0, 1, 2).rotationalSymmetry // 2}}}
+      */
     def rotationalSymmetry: Int = {
       val size = ring.size
       if (size < 2) 1
@@ -40,40 +42,44 @@ object SymmetryOps {
     }
 
     private def findReflectionSymmetry(seq: CC[A]): Option[Index] =
-      greaterHalfRange(seq.size).find(j => {
+      greaterHalfRange(seq.size).find { j =>
         val rotation = seq.startAt(j)
         hasHeadOnAxis(rotation) || hasAxisBetweenHeadAndNext(rotation)
-      })
+      }
 
     /** Finds the indices of each element of this circular sequence close to an axis of reflectional symmetry.
-     *
-     * @return the indices of each element of this circular sequence close to an axis of reflectional symmetry,
-     *         that is a line of symmetry that splits the sequence in two identical halves.
-     * @example {{{Seq(2, 1, 2, 2, 1, 2, 2, 1, 2, 2, 1, 2).symmetryIndices // List(1, 4, 7, 10)}}}
-     */
+      *
+      * @return
+      *   the indices of each element of this circular sequence close to an axis of reflectional symmetry,
+      *   that is a line of symmetry that splits the sequence in two identical halves.
+      * @example
+      *   {{{Seq(2, 1, 2, 2, 1, 2, 2, 1, 2, 2, 1, 2).symmetryIndices // List(1, 4, 7, 10)}}}
+      */
     def symmetryIndices: List[Index] =
       if (ring.isEmpty) Nil
       else {
-        val folds = rotationalSymmetry
+        val folds    = rotationalSymmetry
         val foldSize = ring.size / folds
         findReflectionSymmetry(ring.take(foldSize)) match {
-          case None => Nil
+          case None    => Nil
           case Some(j) => (0 until folds).toList.map(_ * foldSize + j)
         }
       }
 
     /** Computes the order of reflectional (mirror) symmetry possessed by this circular sequence.
-     *
-     * @return the number >= 0 of reflections in which this circular sequence looks exactly the same.
-     * @example {{{Seq(2, 1, 2, 2, 1, 2, 2, 1, 2, 2, 1, 2).symmetry // 4}}}
-     */
+      *
+      * @return
+      *   the number >= 0 of reflections in which this circular sequence looks exactly the same.
+      * @example
+      *   {{{Seq(2, 1, 2, 2, 1, 2, 2, 1, 2, 2, 1, 2).symmetry // 4}}}
+      */
     def symmetry: Int =
       symmetryIndices.size
 
   }
 
-  private implicit class SymmetryEnrichment[A, CC[B] <: SeqOps[B, CC, CC[B]]](val ring: CC[A])
-    extends AnyVal
+  implicit private class SymmetryEnrichment[A, CC[B] <: SeqOps[B, CC, CC[B]]](val ring: CC[A])
+      extends AnyVal
       with SymmetryDecorators[A, CC]
 
 }

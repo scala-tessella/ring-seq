@@ -5,28 +5,34 @@ import io.github.scala_tessella.ring_seq.RingSeq._
 import scala.collection.Seq
 
 /** An example class wrapping a sequence and keeping a mutable state of rotation and reflection
- *
- * @param underlying the wrapped sequence
- * @param headIndex mutable state of rotation, a circular index of the sequence head
- * @param isReflected mutable state of reflection
- * @tparam A the type of the elements in the sequence
- */
-class Ring[A](underlying: Seq[A], var headIndex: IndexO = 0, var isReflected: Boolean = false ) {
+  *
+  * @param underlying
+  *   the wrapped sequence
+  * @param headIndex
+  *   mutable state of rotation, a circular index of the sequence head
+  * @param isReflected
+  *   mutable state of reflection
+  * @tparam A
+  *   the type of the elements in the sequence
+  */
+class Ring[A](underlying: Seq[A], var headIndex: IndexO = 0, var isReflected: Boolean = false) {
 
   private def directionMultiplier: Int =
     if (isReflected) 1 else -1
 
   /** Adds a rotation to the right by some steps.
-   *
-   * @param step Int
-   */
+    *
+    * @param step
+    *   Int
+    */
   def rotateR(step: Int = 1): Unit =
     headIndex += step * directionMultiplier
 
   /** Adds a rotation to the left by some steps.
-   *
-   * @param step Int
-   */
+    *
+    * @param step
+    *   Int
+    */
   def rotateL(step: Int = 1): Unit =
     rotateR(-step)
 
@@ -35,16 +41,18 @@ class Ring[A](underlying: Seq[A], var headIndex: IndexO = 0, var isReflected: Bo
     isReflected = !isReflected
 
   /** Gets the head element of the sequence at the current state of rotation and reflection.
-   *
-   * @return the element at the head of the rotated and reflected sequence.
-   */
+    *
+    * @return
+    *   the element at the head of the rotated and reflected sequence.
+    */
   def currentHead: A =
     underlying.applyO(headIndex)
 
   /** Gets the sequence at the current state of rotation and reflection.
-   *
-   * @return the rotated and reflected sequence.
-   */
+    *
+    * @return
+    *   the rotated and reflected sequence.
+    */
   def current: Seq[A] =
     if (isReflected) underlying.reflectAt(headIndex) else underlying.startAt(headIndex)
 
