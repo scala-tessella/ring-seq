@@ -20,6 +20,7 @@ lazy val root =
     .in(file("."))
     .aggregate(ringSeq.js, ringSeq.jvm, ringSeq.native)
     .settings(
+      name := "ringSeq-root",
       sonatypeProjectHosting := Some(GitHubHosting("scala-tessella", "ring-seq", "mario.callisto@gmail.com")),
       sonatypeCredentialHost := "s01.oss.sonatype.org",
       SiteScaladoc / siteSubdirName := "api",
