@@ -33,7 +33,8 @@ trait IteratingOps extends SlicingOps:
       *   {{{Seq(0, 1, 2).rotations // Iterator(Seq(0, 1, 2), Seq(1, 2, 0), Seq(2, 0, 1))}}}
       */
     def rotations: Iterator[CC[A]] =
-      transformations(r => slidingO(r.size))
+      transformations: r =>
+        slidingO(r.size)
 
     /** Computes all the reflections of this circular sequence
       *
@@ -44,7 +45,8 @@ trait IteratingOps extends SlicingOps:
       *   {{{Seq(0, 1, 2).reflections // Iterator(Seq(0, 1, 2), Seq(0, 2, 1))}}}
       */
     def reflections: Iterator[CC[A]] =
-      transformations(r => List(r, r.reflectAt()).iterator)
+      transformations: r =>
+        List(r, r.reflectAt()).iterator
 
     /** Computes all the reversions of this circular sequence
       *
@@ -55,7 +57,8 @@ trait IteratingOps extends SlicingOps:
       *   {{{Seq(0, 1, 2).reversions // Iterator(Seq(0, 1, 2), Seq(2, 1, 0))}}}
       */
     def reversions: Iterator[CC[A]] =
-      transformations(r => List(r, r.reverse).iterator)
+      transformations: r =>
+        List(r, r.reverse).iterator
 
     /** Computes all the rotations and reflections of this circular sequence
       *
@@ -67,4 +70,5 @@ trait IteratingOps extends SlicingOps:
       *   {{{Seq(0, 1, 2).rotationsAndReflections // Iterator(Seq(0, 1, 2), Seq(1, 2, 0), Seq(2, 0, 1), Seq(0, 2, 1), Seq(2, 1, 0), Seq(1, 0, 2))}}}
       */
     def rotationsAndReflections: Iterator[CC[A]] =
-      transformations(_.reflections.flatMap(_.rotations))
+      transformations:
+        _.reflections.flatMap(_.rotations)

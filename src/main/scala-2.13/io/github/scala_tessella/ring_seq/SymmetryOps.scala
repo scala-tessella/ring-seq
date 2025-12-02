@@ -23,14 +23,14 @@ object SymmetryOps {
       with TransformingOps.TransformingDecorators[A, CC] {
 
     /** Computes the order of rotational symmetry possessed by this circular sequence, that is the number of
-     * times the sequence matches itself as it makes a full rotation.
-     *
-     * @return
-     *   An integer between 1 and the size of the sequence. 1 means no symmetry (only identity), max means a
-     *   perfect circle (e.g., all elements equal).
-     * @example
-     *   {{{Seq(0, 1, 2, 0, 1, 2).rotationalSymmetry // 2}}}
-     */
+      * times the sequence matches itself as it makes a full rotation.
+      *
+      * @return
+      *   An integer between 1 and the size of the sequence. 1 means no symmetry (only identity), max means a
+      *   perfect circle (e.g., all elements equal).
+      * @example
+      *   {{{Seq(0, 1, 2, 0, 1, 2).rotationalSymmetry // 2}}}
+      */
     def rotationalSymmetry: Int = {
       val n = ring.size
       if (n < 2)
