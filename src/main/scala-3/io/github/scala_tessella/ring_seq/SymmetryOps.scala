@@ -2,8 +2,7 @@ package io.github.scala_tessella.ring_seq
 
 import scala.collection.SeqOps
 
-/** Provides symmetry operations for a `Seq` considered circular. */
-trait SymmetryOps extends TransformingOps:
+object SymmetryOps extends IndexingOps:
 
   /** A location on the circular sequence where a symmetry axis can pass through.
    *   - Vertex: The axis passes directly through the element at this index.
@@ -12,6 +11,11 @@ trait SymmetryOps extends TransformingOps:
   sealed trait AxisLocation
   case class Vertex(i: Index) extends AxisLocation
   case class Edge(i: Index, j: Index) extends AxisLocation
+
+/** Provides symmetry operations for a `Seq` considered circular. */
+trait SymmetryOps extends TransformingOps:
+
+  import SymmetryOps.{AxisLocation, Edge, Vertex}
 
   extension [A, CC[B] <: SeqOps[B, CC, CC[B]]](ring: CC[A])
 
