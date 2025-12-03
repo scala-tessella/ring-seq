@@ -6,6 +6,7 @@ import org.scalacheck.Test.check
 import org.scalatest.flatspec._
 import org.scalatest.matchers._
 import RingSeq._
+import io.github.scala_tessella.ring_seq.SymmetryOps.{Edge, Vertex}
 
 import scala.collection.Seq
 
@@ -56,6 +57,53 @@ class SymmetryOpsSpec extends AnyFlatSpec with TestHelper with should.Matchers {
     check(
       forAll(gen)(seq => seq.rotationalSymmetry >= seq.symmetry)
     )(_)
+  }
+
+  behavior of "reflectionalSymmetryAxes"
+
+  they should "be found for a triangle" in {
+    Seq(1, 1, 1).reflectionalSymmetryAxes shouldBe
+      List(
+        (Vertex(1), Edge(2, 0)),
+        (Vertex(2), Edge(0, 1)),
+        (Vertex(0), Edge(1, 2))
+      )
+  }
+
+  they should "be found for a doubled triangle" in {
+    Seq(1, 2, 1, 2, 1, 2).reflectionalSymmetryAxes shouldBe
+      List(
+        (Vertex(2), Vertex(5)),
+        (Vertex(1), Vertex(4)),
+        (Vertex(0), Vertex(3))
+      )
+  }
+
+  they should "be found for a square" in {
+    Seq(1, 1, 1, 1).reflectionalSymmetryAxes shouldBe
+      List(
+        (Edge(1, 2), Edge(3, 0)),
+        (Vertex(1), Vertex(3)),
+        (Edge(0, 1), Edge(2, 3)),
+        (Vertex(0), Vertex(2))
+      )
+  }
+
+  they should "be found for a doubled square" in {
+    Seq(1, 2, 1, 2, 1, 2, 1, 2).reflectionalSymmetryAxes shouldBe
+      List(
+        (Vertex(3), Vertex(7)),
+        (Vertex(2), Vertex(6)),
+        (Vertex(1), Vertex(5)),
+        (Vertex(0), Vertex(4))
+      )
+  }
+
+  they should "be found for a specular pentagon" in {
+    Seq(1, 1, 2, 3, 2).reflectionalSymmetryAxes shouldBe
+      List(
+        (Vertex(3), Edge(0, 1))
+      )
   }
 
 }
