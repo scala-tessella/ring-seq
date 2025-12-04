@@ -8,11 +8,11 @@ import scala.collection.SeqOps
 object SymmetryOps {
 
   /** A location on the circular sequence where a symmetry axis can pass through.
-   *   - Vertex: The axis passes directly through the element at this index.
-   *   - Edge: The axis passes between the elements at these indices.
-   */
+    *   - Vertex: The axis passes directly through the element at this index.
+    *   - Edge: The axis passes between the elements at these indices.
+    */
   sealed trait AxisLocation
-  case class Vertex(i: Index) extends AxisLocation
+  case class Vertex(i: Index)         extends AxisLocation
   case class Edge(i: Index, j: Index) extends AxisLocation
 
   /** Universal trait providing symmetry decorators for a `Seq` considered circular. */
@@ -37,6 +37,7 @@ object SymmetryOps {
         // Find the smallest shift that makes the list equal to itself
         val smallestPeriod =
           (1 to n).find { shift =>
+
             // Optimization: We only need to check shifts that divide n
             n % shift == 0 && ring.rotateRight(shift) == ring
           }
@@ -68,11 +69,11 @@ object SymmetryOps {
       }
 
     /** Calculates the axes of reflectional symmetry. Returns a list of pairs of locations where each axis
-     * intersects the cycle.
-     *
-     * @return
-     *   A list where each pair represents the two points on the cycle where the axis passes.
-     */
+      * intersects the cycle.
+      *
+      * @return
+      *   A list where each pair represents the two points on the cycle where the axis passes.
+      */
     def reflectionalSymmetryAxes: List[(AxisLocation, AxisLocation)] = {
       val n = ring.size
 
@@ -83,16 +84,17 @@ object SymmetryOps {
         (i + n / 2) % n
 
       symmetryIndices.map { shift =>
+
         // The reflection maps index i to (n - 1 - shift - i) % n.
         // Fixed points satisfy 2*i == n - 1 - shift (mod n).
         // Let K = n - 1 - shift.
-        val K = (n - 1 - shift) % n
+        val K          = (n - 1 - shift) % n
         val effectiveK = if (K < 0) K + n else K
 
         if (n % 2 != 0) {
           // Odd n: Equation 2*i = K (mod n) has exactly one solution for vertices.
           // Inverse of 2 mod n is (n + 1) / 2.
-          val v = (effectiveK * (n + 1) / 2) % n
+          val v               = (effectiveK * (n + 1) / 2) % n
           // The axis must also pass through the midpoint of the opposite edge.
           // Edge index e is the edge starting at (v + n / 2) % n.
           val oppositeEdgeIdx = oppositeEdgeIndex(v)

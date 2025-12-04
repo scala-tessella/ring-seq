@@ -5,11 +5,11 @@ import scala.collection.SeqOps
 object SymmetryOps extends IndexingOps:
 
   /** A location on the circular sequence where a symmetry axis can pass through.
-   *   - Vertex: The axis passes directly through the element at this index.
-   *   - Edge: The axis passes between the elements at these indices.
-   */
+    *   - Vertex: The axis passes directly through the element at this index.
+    *   - Edge: The axis passes between the elements at these indices.
+    */
   sealed trait AxisLocation
-  case class Vertex(i: Index) extends AxisLocation
+  case class Vertex(i: Index)         extends AxisLocation
   case class Edge(i: Index, j: Index) extends AxisLocation
 
 /** Provides symmetry operations for a `Seq` considered circular. */
@@ -60,11 +60,11 @@ trait SymmetryOps extends TransformingOps:
           ring == reversed.rotateLeft(shift)
 
     /** Calculates the axes of reflectional symmetry. Returns a list of pairs of locations where each axis
-     * intersects the cycle.
-     *
-     * @return
-     *   A list where each pair represents the two points on the cycle where the axis passes.
-     */
+      * intersects the cycle.
+      *
+      * @return
+      *   A list where each pair represents the two points on the cycle where the axis passes.
+      */
     def reflectionalSymmetryAxes: List[(AxisLocation, AxisLocation)] =
       val n = ring.size
 
@@ -75,6 +75,7 @@ trait SymmetryOps extends TransformingOps:
         (i + n / 2) % n
 
       symmetryIndices.map: shift =>
+
         // The reflection maps index i to (n - 1 - shift - i) % n.
         // Fixed points satisfy 2*i == n - 1 - shift (mod n).
         // Let K = n - 1 - shift.
