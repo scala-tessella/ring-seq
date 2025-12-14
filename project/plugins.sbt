@@ -1,4 +1,4 @@
-addSbtPlugin("ch.epfl.scala" % "sbt-scalafix" % "0.14.4")
+addSbtPlugin("ch.epfl.scala" % "sbt-scalafix" % "0.14.5")
 addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.5.6")
 addSbtPlugin("com.github.sbt" % "sbt-site" % "1.7.0")
 addSbtPlugin("com.github.sbt" % "sbt-site-paradox" % "1.7.0")
