@@ -33,10 +33,9 @@ trait SymmetryOps extends TransformingOps:
       if n < 2 then 1
       else
         // Find the smallest shift that makes the list equal to itself
-        val smallestPeriod =
-          (1 to n).find: shift =>
-            // Optimization: We only need to check shifts that divide n
-            n % shift == 0 && ring.rotateLeft(shift) == ring
+        val smallestPeriod = (1 to n).find: shift =>
+          // Optimization: We only need to check shifts that divide n
+          n % shift == 0 && ring.rotateLeft(shift) == ring
 
         n / smallestPeriod.getOrElse(n)
 
@@ -71,8 +70,7 @@ trait SymmetryOps extends TransformingOps:
       def edgeIndices(i: Index): Edge =
         Edge(i, (i + 1) % n)
 
-      def oppositeEdgeIndex(i: Index): Index =
-        (i + n / 2) % n
+      def oppositeEdgeIndex(i: Index): Index = (i + n / 2) % n
 
       symmetryIndices.map: shift =>
 
