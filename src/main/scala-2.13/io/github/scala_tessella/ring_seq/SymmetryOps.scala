@@ -35,12 +35,11 @@ object SymmetryOps {
         1
       else {
         // Find the smallest shift that makes the list equal to itself
-        val smallestPeriod =
-          (1 to n).find { shift =>
+        val smallestPeriod = (1 to n).find { shift =>
 
-            // Optimization: We only need to check shifts that divide n
-            n % shift == 0 && ring.rotateRight(shift) == ring
-          }
+          // Optimization: We only need to check shifts that divide n
+          n % shift == 0 && ring.rotateRight(shift) == ring
+        }
 
         n / smallestPeriod.getOrElse(n)
       }
@@ -80,8 +79,7 @@ object SymmetryOps {
       def edgeIndices(i: Index): AxisLocation =
         Edge(i, (i + 1) % n)
 
-      def oppositeEdgeIndex(i: Index): Index =
-        (i + n / 2) % n
+      def oppositeEdgeIndex(i: Index): Index = (i + n / 2) % n
 
       symmetryIndices.map { shift =>
 
