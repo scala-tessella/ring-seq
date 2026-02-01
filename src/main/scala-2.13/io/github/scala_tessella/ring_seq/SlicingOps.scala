@@ -29,8 +29,9 @@ object SlicingOps {
     private def emptied: CC[A] =
       ring.take(0)
 
-    private def multiply(seq: CC[A], times: Int): CC[A] =
-      (0 until times).foldLeft(emptied)((acc, _) => acc ++ seq)
+    private def multiply(seq: CC[A], times: Int): CC[A] = (0 until times).foldLeft(emptied)((acc, _) =>
+      acc ++ seq
+    )
 
     /** Selects an interval of elements.
       *

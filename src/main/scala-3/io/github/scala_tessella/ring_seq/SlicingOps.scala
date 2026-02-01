@@ -26,8 +26,7 @@ trait SlicingOps extends TransformingOps:
     private def emptied: CC[A] =
       ring.take(0)
 
-    private def multiply(times: Int): CC[A] =
-      (0 until times).foldLeft(emptied)((acc, _) => acc ++ ring)
+    private def multiply(times: Int): CC[A] = (0 until times).foldLeft(emptied)((acc, _) => acc ++ ring)
 
     /** Selects an interval of elements.
       *
