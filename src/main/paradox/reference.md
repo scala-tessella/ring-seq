@@ -50,6 +50,9 @@ They fall into the following categories:
 * [`lastIndexOfSliceO`](categories/slicing.html#lastindexofsliceo)
 * [`segmentLengthO`](categories/slicing.html#segmentlenghto)
 * [`containsSliceO`](categories/slicing.html#containssliceo)
+* `takeWhileO`
+* `dropWhileO`
+* `spanO`
 
 ### [Iterators](categories/iterators.html)
 * [`slidingO`](categories/iterators.html#slidingo)
@@ -57,14 +60,24 @@ They fall into the following categories:
 * [`reversions`](categories/iterators.html#reversions)
 * [`reflections`](categories/iterators.html#reflections)
 * [`rotationsAndReflections`](categories/iterators.html#rotationsandreflections)
+* `groupedO`
+* `zipWithIndexO`
 
 ### [Comparisons](categories/comparisons.html)
 * [`isReflection`](categories/comparisons.html#isreflection)
 * [`isReversion`](categories/comparisons.html#isreversion)
 * [`isRotation`](categories/comparisons.html#isrotation)
 * [`isRotationOrReflection`](categories/comparisons.html#isrotationorreflection)
+* `alignTo`
+* `hammingDistance`
+* `minRotationalHammingDistance`
 
 ### [Symmetry](categories/symmetry.html)
 * [`rotationalSymmetry`](categories/symmetry.html#rotationalsymmetry)
 * [`symmetryIndices`](categories/symmetry.html#symmetryindices)
 * [`symmetry`](categories/symmetry.html#symmetry)
+
+### Canonical forms (necklace / bracelet)
+* `canonicalIndex` — starting index of the lexicographically smallest rotation (Booth's algorithm, O(n))
+* `canonical` — the lex-smallest rotation; useful for hashing/deduplicating equivalent rings
+* `bracelet` — the lex-smallest representative under both rotation and reflection

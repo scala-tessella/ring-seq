@@ -55,4 +55,27 @@ class SlicingOpsSpec extends AnyFlatSpec with TestHelper with should.Matchers {
     s12345.lastIndexOfSliceO(circularSlice, 5) shouldBe 4
   }
 
+  "takeWhileO" can "take a prefix from a circular index" in {
+    Seq(0, 1, 2, 3, 4).takeWhileO(_ < 3, 1) shouldBe Seq(1, 2)
+  }
+
+  it can "wrap around the ring" in {
+    // startAt(3) on [0,1,2,3,4] => [3,4,0,1,2]; takeWhile != 1 => [3,4,0]
+    Seq(0, 1, 2, 3, 4).takeWhileO(_ != 1, 3) shouldBe Seq(3, 4, 0)
+  }
+
+  "dropWhileO" can "drop a prefix from a circular index" in {
+    Seq(0, 1, 2, 3, 4).dropWhileO(_ < 3, 1) shouldBe Seq(3, 4, 0)
+  }
+
+  "spanO" can "split at the first failing element" in {
+    Seq(0, 1, 2, 3, 4).spanO(_ < 3, 1) shouldBe ((Seq(1, 2), Seq(3, 4, 0)))
+  }
+
+  it must "produce the same parts as takeWhileO and dropWhileO" in {
+    val (prefix, suffix) = s12345.spanO(_ < 4, 2)
+    prefix shouldBe s12345.takeWhileO(_ < 4, 2)
+    suffix shouldBe s12345.dropWhileO(_ < 4, 2)
+  }
+
 }

@@ -18,7 +18,7 @@ object RingSeq {
   /** Universal trait providing decorators for a `Seq` considered circular. */
   trait RingSeqDecorators[A, CC[B] <: SeqOps[B, CC, CC[B]]]
       extends Any
-      with ComparingOps.ComparingDecorators[A, CC]
+      with NecklaceOps.NecklaceDecorators[A, CC]
       with SymmetryOps.SymmetryDecorators[A, CC] {}
 
   /** Value class providing methods for a generic `Seq` considered circular. */

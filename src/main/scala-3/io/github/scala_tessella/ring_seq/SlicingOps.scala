@@ -23,6 +23,45 @@ trait SlicingOps extends TransformingOps:
     def segmentLengthO(p: A => Boolean, from: IndexO = 0): Int =
       ring.startAt(from).segmentLength(p)
 
+    /** Selects the longest prefix of elements starting at some circular index that satisfy a predicate.
+      *
+      * @param p
+      *   the predicate used to test elements
+      * @param from
+      *   [[IndexO]]
+      * @example
+      *   {{{Seq(0, 1, 2, 3, 4).takeWhileO(_ < 3, 1) // Seq(1, 2)}}}
+      */
+    def takeWhileO(p: A => Boolean, from: IndexO = 0): CC[A] =
+      ring.startAt(from).takeWhile(p)
+
+    /** Drops the longest prefix of elements starting at some circular index that satisfy a predicate.
+      *
+      * @param p
+      *   the predicate used to test elements
+      * @param from
+      *   [[IndexO]]
+      * @example
+      *   {{{Seq(0, 1, 2, 3, 4).dropWhileO(_ < 3, 1) // Seq(3, 4, 0)}}}
+      */
+    def dropWhileO(p: A => Boolean, from: IndexO = 0): CC[A] =
+      ring.startAt(from).dropWhile(p)
+
+    /** Splits this circular sequence into a prefix/suffix pair at the first element starting from some
+      * circular index that does not satisfy the predicate.
+      *
+      * @param p
+      *   the predicate used to test elements
+      * @param from
+      *   [[IndexO]]
+      * @return
+      *   a pair `(takeWhileO(p, from), dropWhileO(p, from))`.
+      * @example
+      *   {{{Seq(0, 1, 2, 3, 4).spanO(_ < 3, 1) // (Seq(1, 2), Seq(3, 4, 0))}}}
+      */
+    def spanO(p: A => Boolean, from: IndexO = 0): (CC[A], CC[A]) =
+      ring.startAt(from).span(p)
+
     private def emptied: CC[A] =
       ring.take(0)
 

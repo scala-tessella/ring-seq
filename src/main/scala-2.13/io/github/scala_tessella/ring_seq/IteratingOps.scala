@@ -25,6 +25,38 @@ object IteratingOps {
     def slidingO(size: Int, step: Int = 1): Iterator[CC[A]] =
       sliceO(0, step * (ring.size - 1) + size).sliding(size, step)
 
+    /** Groups elements of this circular sequence in fixed size blocks, the way [[slidingO]] does with `step`
+      * equal to `size`.
+      *
+      * @param size
+      *   the number of elements per group
+      * @return
+      *   An iterator producing sequences of size ''size''. Yields no elements if the sequence is empty.
+      * @example
+      *   {{{Seq(0, 1, 2, 3, 4).groupedO(2) // Iterator(Seq(0, 1), Seq(2, 3), Seq(4, 0), Seq(1, 2), Seq(3, 4))}}}
+      */
+    def groupedO(size: Int): Iterator[CC[A]] =
+      if (ring.isEmpty) Iterator.empty else slidingO(size, size)
+
+    /** Iterates over the elements paired with their original (circular) index, starting at some circular
+      * index.
+      *
+      * @param from
+      *   [[IndexO]]
+      * @return
+      *   an iterator of `(element, index)` pairs of length `ring.size`. Indices are in `[0, ring.size)`.
+      * @example
+      *   {{{Seq('a', 'b', 'c').zipWithIndexO(1).toList // List(('b', 1), ('c', 2), ('a', 0))}}}
+      */
+    def zipWithIndexO(from: IndexO = 0): Iterator[(A, Index)] = {
+      val n = ring.size
+      if (n == 0) Iterator.empty
+      else {
+        val start = indexFrom(from)
+        startAt(from).iterator.zipWithIndex.map { case (a, i) => (a, (start + i) % n) }
+      }
+    }
+
     private def transformations(f: CC[A] => Iterator[CC[A]]): Iterator[CC[A]] =
       if (ring.isEmpty) Iterator(ring) else f(ring)
 

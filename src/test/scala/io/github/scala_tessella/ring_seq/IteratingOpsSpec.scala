@@ -103,4 +103,42 @@ class IteratingOpsSpec extends AnyFlatSpec with TestHelper with should.Matchers 
     )(_)
   }
 
+  "groupedO" can "group a circular sequence in fixed-size blocks" in {
+    "ABCDE".groupedO(2).toList.map(_.mkString) shouldBe List(
+      "AB",
+      "CD",
+      "EA",
+      "BC",
+      "DE"
+    )
+  }
+
+  it must "be equivalent to slidingO with step == size" in {
+    s12345.groupedO(2).toList shouldBe s12345.slidingO(2, 2).toList
+  }
+
+  "An empty circular sequence" must "produce no groups" in {
+    e.groupedO(2).toList shouldBe Nil
+  }
+
+  "zipWithIndexO" can "pair each element with its original index" in {
+    Seq('a', 'b', 'c').zipWithIndexO(1).toList shouldBe List(
+      ('b', 1),
+      ('c', 2),
+      ('a', 0)
+    )
+  }
+
+  it must "default starting from index 0" in {
+    Seq('a', 'b', 'c').zipWithIndexO().toList shouldBe List(
+      ('a', 0),
+      ('b', 1),
+      ('c', 2)
+    )
+  }
+
+  it must "yield no pairs for an empty sequence" in {
+    e.zipWithIndexO().toList shouldBe Nil
+  }
+
 }

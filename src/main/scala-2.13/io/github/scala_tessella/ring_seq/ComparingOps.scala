@@ -67,6 +67,61 @@ object ComparingOps {
     def isRotationOrReflectionOf(that: CC[A]): Boolean =
       isSameSize(that) && (containsAsRotation(ring, that) || containsAsRotation(reflectAt(), that))
 
+    /** Finds the rotation offset that aligns this circular sequence with a given sequence.
+      *
+      * @param that
+      *   the sequence to align to
+      * @return
+      *   `Some(k)` such that `ring.startAt(k) == that`, or `None` if no rotation matches (or sizes differ).
+      * @example
+      *   {{{Seq(0, 1, 2).alignTo(Seq(2, 0, 1)) // Some(2)}}}
+      */
+    def alignTo(that: CC[A]): Option[Index] =
+      if (!isSameSize(that)) None
+      else if (ring.isEmpty) Some(0)
+      else {
+        val idx = (ring ++ ring.init).indexOfSlice(that.toSeq)
+        if (idx < 0) None else Some(idx)
+      }
+
+    /** The number of positions at which corresponding elements differ (Hamming distance).
+      *
+      * @param that
+      *   the sequence to compare against, must have the same size
+      * @example
+      *   {{{Seq(1, 0, 1, 1).hammingDistance(Seq(1, 1, 0, 1)) // 2}}}
+      */
+    def hammingDistance(that: CC[A]): Int = {
+      require(isSameSize(that), "sequences must have the same size")
+      ComparingOps.hammingOf(ring, that)
+    }
+
+    /** The minimum Hamming distance over all rotations of this circular sequence.
+      *
+      * @param that
+      *   the sequence to compare against, must have the same size
+      * @return
+      *   `0` iff `that` is a rotation of `this`, otherwise the smallest number of positional mismatches
+      *   over any rotation. Useful for "how close are these two rings, up to rotation?".
+      * @example
+      *   {{{Seq(1, 0, 1, 1).minRotationalHammingDistance(Seq(1, 1, 0, 1)) // 0}}}
+      */
+    def minRotationalHammingDistance(that: CC[A]): Int = {
+      require(isSameSize(that), "sequences must have the same size")
+      if (ring.isEmpty) 0
+      else rotations.map(rot => ComparingOps.hammingOf(rot, that)).min
+    }
+
+  }
+
+  private def hammingOf[A, CC[B] <: SeqOps[B, CC, CC[B]]](a: CC[A], b: CC[A]): Int = {
+    var count = 0
+    val ai = a.iterator
+    val bi = b.iterator
+    while (ai.hasNext) {
+      if (ai.next() != bi.next()) count += 1
+    }
+    count
   }
 
   implicit private class ComparingEnrichment[A, CC[B] <: SeqOps[B, CC, CC[B]]](val ring: CC[A])
