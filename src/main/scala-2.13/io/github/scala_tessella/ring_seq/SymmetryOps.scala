@@ -12,8 +12,31 @@ object SymmetryOps {
     *   - Edge: The axis passes between the elements at these indices.
     */
   sealed trait AxisLocation
-  case class Vertex(i: Index)         extends AxisLocation
-  case class Edge(i: Index, j: Index) extends AxisLocation
+  case class Vertex(i: Index) extends AxisLocation
+
+  /** The location between two consecutive elements of a circular sequence.
+    *
+    * The invariant `j == (i + 1) mod n` is enforced — direct construction is forbidden.
+    * Use [[Edge.apply]] to build instances; pattern matching with `case Edge(i, j) => ...`
+    * still works.
+    */
+  sealed abstract case class Edge(i: Index, j: Index) extends AxisLocation
+
+  object Edge {
+
+    /** Constructs the edge between consecutive elements of a circular sequence of size `n`,
+      * starting at circular index `i`. The endpoint `j = ((i mod n) + 1) mod n` is computed.
+      *
+      * @param i circular index of the first endpoint (any `IndexO`, will be normalized to `[0, n)`)
+      * @param n the ring size; must be positive
+      * @throws IllegalArgumentException if `n <= 0`
+      */
+    def apply(i: Index, n: Int): Edge = {
+      require(n > 0, "ring size must be positive")
+      val ii = java.lang.Math.floorMod(i, n)
+      new Edge(ii, (ii + 1) % n) {}
+    }
+  }
 
   /** Universal trait providing symmetry decorators for a `Seq` considered circular. */
   trait SymmetryDecorators[A, CC[B] <: SeqOps[B, CC, CC[B]]]
@@ -86,7 +109,7 @@ object SymmetryOps {
       val n = ring.size
 
       def edgeIndices(i: Index): AxisLocation =
-        Edge(i, (i + 1) % n)
+        Edge(i, n)
 
       def oppositeEdgeIndex(i: Index): Index =
         (i + n / 2) % n

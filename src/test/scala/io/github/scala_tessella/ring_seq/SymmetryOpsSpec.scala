@@ -64,9 +64,9 @@ class SymmetryOpsSpec extends AnyFlatSpec with TestHelper with should.Matchers {
   they should "be found for a triangle" in {
     Seq(1, 1, 1).reflectionalSymmetryAxes shouldBe
       List(
-        (Vertex(1), Edge(2, 0)),
-        (Vertex(2), Edge(0, 1)),
-        (Vertex(0), Edge(1, 2))
+        (Vertex(1), Edge(2, 3)),
+        (Vertex(2), Edge(0, 3)),
+        (Vertex(0), Edge(1, 3))
       )
   }
 
@@ -82,9 +82,9 @@ class SymmetryOpsSpec extends AnyFlatSpec with TestHelper with should.Matchers {
   they should "be found for a square" in {
     Seq(1, 1, 1, 1).reflectionalSymmetryAxes shouldBe
       List(
-        (Edge(1, 2), Edge(3, 0)),
+        (Edge(1, 4), Edge(3, 4)),
         (Vertex(1), Vertex(3)),
-        (Edge(0, 1), Edge(2, 3)),
+        (Edge(0, 4), Edge(2, 4)),
         (Vertex(0), Vertex(2))
       )
   }
@@ -102,8 +102,36 @@ class SymmetryOpsSpec extends AnyFlatSpec with TestHelper with should.Matchers {
   they should "be found for a specular pentagon" in {
     Seq(1, 1, 2, 3, 2).reflectionalSymmetryAxes shouldBe
       List(
-        (Vertex(3), Edge(0, 1))
+        (Vertex(3), Edge(0, 5))
       )
+  }
+
+  behavior of "Edge"
+
+  it should "compute the second endpoint as (i + 1) mod n" in {
+    val e = Edge(2, 4)
+    e.i shouldBe 2
+    e.j shouldBe 3
+    val wrap = Edge(3, 4)
+    wrap.j shouldBe 0
+  }
+
+  it should "normalize negative or out-of-range i" in {
+    Edge(-1, 5) shouldBe Edge(4, 5)
+    Edge(7, 5) shouldBe Edge(2, 5)
+  }
+
+  it should "reject non-positive ring sizes" in {
+    an[IllegalArgumentException] should be thrownBy Edge(0, 0)
+    an[IllegalArgumentException] should be thrownBy Edge(0, -1)
+  }
+
+  it should "support pattern matching on (i, j)" in {
+    Edge(2, 4) match {
+      case Edge(i, j) =>
+        i shouldBe 2
+        j shouldBe 3
+    }
   }
 
 }
