@@ -26,9 +26,6 @@ trait SlicingOps extends TransformingOps:
     private def emptied: CC[A] =
       ring.take(0)
 
-    private def multiply(times: Int): CC[A] =
-      (0 until times).foldLeft(emptied)((acc, _) => acc ++ ring)
-
     /** Selects an interval of elements.
       *
       * @param from
@@ -47,9 +44,10 @@ trait SlicingOps extends TransformingOps:
       if ring.isEmpty then ring
       else if from >= to then emptied
       else
-        val length = to - from
-        val times  = Math.ceil(length / ring.size).toInt + 1
-        ring.startAt(from).multiply(times).take(length)
+        val length  = to - from
+        val rotated = ring.startAt(from)
+        // O(length) build via the collection's own factory; avoids the previous quadratic `++` fold.
+        ring.iterableFactory.from(Iterator.continually(rotated).flatten.take(length))
 
     private def growBy(growth: Int): CC[A] =
       sliceO(0, ring.size + growth)

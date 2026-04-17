@@ -65,6 +65,20 @@ One clear maintenance advantage would be that the source code is the same for Sc
 
 So, for now, is a conscious decision to achieve the same results with a simpler design (even if the source code is different between Scala 2.13 and Scala 3) and to publish in this, concise and hopefully useful, separate library.
 
+## Performance notes
+
+The library works on any `Seq`, but **circular operations involve random indexing**, which is `O(1)`
+on `IndexedSeq` (e.g. `Vector`, `ArraySeq`, `String`) and `O(n)` on `LinearSeq` (e.g. `List`).
+
+For best performance on large sequences:
+
+- Prefer `Vector` (or any `IndexedSeq`) over `List`.
+- If you start from a `List` and call several circular operations on it, convert once with `.toVector`.
+
+Operations that enumerate rotations or reflections (`rotations`, `isRotationOf`, `rotationalSymmetry`,
+`symmetry`, `symmetryIndices`, `containsSliceO`, `sliceO` with large output, …) all scale linearly
+in the chosen output size, but each element access pays the indexing cost above.
+
 ## Other languages
 
 The same library is available also for the Python language, check [RingSeqPy (Python version)](https://github.com/scala-tessella/ring-seq-py/).

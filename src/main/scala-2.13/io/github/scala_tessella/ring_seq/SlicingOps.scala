@@ -29,9 +29,6 @@ object SlicingOps {
     private def emptied: CC[A] =
       ring.take(0)
 
-    private def multiply(seq: CC[A], times: Int): CC[A] =
-      (0 until times).foldLeft(emptied)((acc, _) => acc ++ seq)
-
     /** Selects an interval of elements.
       *
       * @param from
@@ -50,9 +47,10 @@ object SlicingOps {
       if (ring.isEmpty) ring
       else if (from >= until) emptied
       else {
-        val length = until - from
-        val times  = Math.ceil(length / ring.size).toInt + 1
-        multiply(startAt(from), times).take(length)
+        val length  = until - from
+        val rotated = startAt(from)
+        // O(length) build via the collection's own factory; avoids the previous quadratic `++` fold.
+        ring.iterableFactory.from(Iterator.continually(rotated).flatten.take(length))
       }
 
     private def growBy(growth: Int): CC[A] =

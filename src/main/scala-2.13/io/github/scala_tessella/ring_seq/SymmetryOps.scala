@@ -2,7 +2,7 @@ package io.github.scala_tessella.ring_seq
 
 import io.github.scala_tessella.ring_seq.IndexingOps.Index
 
-import scala.collection.SeqOps
+import scala.collection.{IndexedSeq, SeqOps}
 
 /** Provides symmetry operations for a `Seq` considered circular */
 object SymmetryOps {
@@ -34,12 +34,16 @@ object SymmetryOps {
       if (n < 2)
         1
       else {
-        // Find the smallest shift that makes the list equal to itself
+        // Materialize once for O(1)/O(log n) indexing; avoids per-candidate rotation allocation.
+        val indexed: IndexedSeq[A] = ring match {
+          case is: IndexedSeq[A] => is
+          case _                 => ring.toVector
+        }
         val smallestPeriod =
           (1 to n).find { shift =>
 
-            // Optimization: We only need to check shifts that divide n
-            n % shift == 0 && ring.rotateRight(shift) == ring
+            // Only periods that divide n can be candidates.
+            n % shift == 0 && (0 until (n - shift)).forall(i => indexed(i) == indexed(i + shift))
           }
 
         n / smallestPeriod.getOrElse(n)
@@ -54,19 +58,23 @@ object SymmetryOps {
       * @example
       *   {{{Seq(2, 1, 2, 2, 1, 2, 2, 1, 2, 2, 1, 2).symmetryIndices // List(0, 3, 6, 9)}}}
       */
-    def symmetryIndices: List[Index] =
-      if (ring.isEmpty) Nil
+    def symmetryIndices: List[Index] = {
+      val n = ring.size
+      if (n == 0) Nil
       else {
-        val reversed = ring.reverse
+        // Materialize once for O(1)/O(log n) indexing; avoids per-shift rotation allocation.
+        val indexed: IndexedSeq[A] = ring match {
+          case is: IndexedSeq[A] => is
+          case _                 => ring.toVector
+        }
+        val reversed: IndexedSeq[A] = indexed.reverse
+        // ring == reversed.rotateLeft(shift)  <=>  forall i. indexed(i) == reversed((i + shift) mod n)
+        (0 until n).toList.filter { shift =>
 
-        // We check rotations of the reversed list against the original.
-        // If list == rotate(reverse(list), k), it implies an axis of symmetry exists.
-        // This is equivalent to counting how many shifts of the reversed list match the original.
-        (0 until ring.size).toList.filter { shift =>
-
-          ring == reversed.rotateLeft(shift)
+          (0 until n).forall(i => indexed(i) == reversed((i + shift) % n))
         }
       }
+    }
 
     /** Calculates the axes of reflectional symmetry. Returns a list of pairs of locations where each axis
       * intersects the cycle.
