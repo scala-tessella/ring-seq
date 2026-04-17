@@ -62,3 +62,15 @@ lazy val ringSeq =
     .nativeSettings(
       // Add native-specific settings here
     )
+
+lazy val benchmarks =
+  project
+    .in(file("benchmarks"))
+    .enablePlugins(JmhPlugin)
+    .dependsOn(ringSeq.jvm)
+    .settings(
+      name               := "ring-seq-benchmarks",
+      publish / skip     := true,
+      crossScalaVersions := Seq("3.3.7"),
+      scalaVersion       := "3.3.7"
+    )
