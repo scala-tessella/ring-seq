@@ -109,7 +109,7 @@ class SymmetryOpsSpec extends AnyFlatSpec with TestHelper with should.Matchers {
   behavior of "Edge"
 
   it should "compute the second endpoint as (i + 1) mod n" in {
-    val e = Edge(2, 4)
+    val e    = Edge(2, 4)
     e.i shouldBe 2
     e.j shouldBe 3
     val wrap = Edge(3, 4)

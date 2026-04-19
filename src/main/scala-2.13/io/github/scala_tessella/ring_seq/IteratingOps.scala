@@ -53,7 +53,9 @@ object IteratingOps {
       if (n == 0) Iterator.empty
       else {
         val start = indexFrom(from)
-        startAt(from).iterator.zipWithIndex.map { case (a, i) => (a, (start + i) % n) }
+        startAt(from).iterator.zipWithIndex.map { case (a, i) =>
+          (a, (start + i) % n)
+        }
       }
     }
 

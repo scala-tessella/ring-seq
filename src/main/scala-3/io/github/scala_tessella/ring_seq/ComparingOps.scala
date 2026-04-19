@@ -95,8 +95,8 @@ trait ComparingOps extends IteratingOps:
       * @param that
       *   the sequence to compare against, must have the same size
       * @return
-      *   `0` iff `that` is a rotation of `this`, otherwise the smallest number of positional mismatches
-      *   over any rotation. Useful for "how close are these two rings, up to rotation?".
+      *   `0` iff `that` is a rotation of `this`, otherwise the smallest number of positional mismatches over
+      *   any rotation. Useful for "how close are these two rings, up to rotation?".
       * @example
       *   {{{Seq(1, 0, 1, 1).minRotationalHammingDistance(Seq(1, 1, 0, 1)) // 0}}}
       */
@@ -107,8 +107,8 @@ trait ComparingOps extends IteratingOps:
 
   private def hammingOf[A, CC[B] <: SeqOps[B, CC, CC[B]]](a: CC[A], b: CC[A]): Int =
     var count = 0
-    val ai = a.iterator
-    val bi = b.iterator
+    val ai    = a.iterator
+    val bi    = b.iterator
     while ai.hasNext do
       if ai.next() != bi.next() then count += 1
     count
