@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `RingSeq` now re-exports the axis-location types, so `import RingSeq._` (Scala 2.13) / `import RingSeq.*` (Scala 3) is enough to bring both the extension methods and the `AxisLocation` / `Vertex` / `Edge` types into scope — no more second import from `SymmetryOps`. Achieved via `export` in Scala 3 and via `type` + companion-`val` aliases in Scala 2.13.
+- JMH benchmark `ComparingBench.minRotationalHammingDistance_{rotation,oneOff,reversed}` at sizes 16/256/4096, covering the min/mid/max regimes of the pruning heuristic. Exercises with `sbt "benchmarks/Jmh/run -prof gc -- ComparingBench.minRotationalHammingDistance"`.
+
+### Performance
+
+- **`minRotationalHammingDistance` rewritten to avoid allocating rotations.** The old implementation did `ring.rotations.map(hammingOf(_, that)).min`, which allocated `n` intermediate `CC[A]` instances. The new implementation materialises the two sequences once to `IndexedSeq`, then compares by index with a rotating offset and a running-best prune. Semantics are unchanged — same 15 `ComparingOpsSpec` tests pass on both Scala 3 and 2.13.
 
 ### Changed
 

@@ -1,6 +1,6 @@
 package io.github.scala_tessella.ring_seq
 
-import scala.collection.{Seq, SeqOps}
+import scala.collection.{IndexedSeq, Seq, SeqOps}
 
 /** Provides comparison operations for a `Seq` considered circular. */
 trait ComparingOps extends IteratingOps:
@@ -102,8 +102,30 @@ trait ComparingOps extends IteratingOps:
       */
     def minRotationalHammingDistance(that: CC[A]): Int =
       require(isSameSize(that), "sequences must have the same size")
-      if ring.isEmpty then 0
-      else ring.rotations.map(rot => hammingOf(rot, that)).min
+      val n = ring.size
+      if n == 0 then 0
+      else
+        // Materialize once; compare by index without allocating `n` rotations.
+        val a: IndexedSeq[A] = ring match
+          case is: IndexedSeq[A] => is
+          case _                 => ring.toVector
+        val b: IndexedSeq[A] = that match
+          case is: IndexedSeq[A] => is
+          case _                 => that.toVector
+        var best = Int.MaxValue
+        var k    = 0
+        while k < n && best != 0 do
+          var count = 0
+          var i     = 0
+          var ai    = k
+          while i < n && count < best do
+            if a(ai) != b(i) then count += 1
+            ai += 1
+            if ai == n then ai = 0
+            i += 1
+          if count < best then best = count
+          k += 1
+        best
 
   private def hammingOf[A, CC[B] <: SeqOps[B, CC, CC[B]]](a: CC[A], b: CC[A]): Int =
     var count = 0
