@@ -7,4 +7,9 @@ package io.github.scala_tessella.ring_seq
   * @author
   *   Mario Càllisto
   */
-object RingSeq extends NecklaceOps with SymmetryOps
+object RingSeq extends NecklaceOps with SymmetryOps:
+
+  /** Re-exports the axis-location types so that `import RingSeq.*` brings both the extension methods
+    * and the `AxisLocation`/`Vertex`/`Edge` types into scope in one go.
+    */
+  export SymmetryOps.{AxisLocation, Vertex, Edge}

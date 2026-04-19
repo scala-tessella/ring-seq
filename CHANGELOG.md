@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.8.0] - Unreleased
 
+### Added
+
+- `RingSeq` now re-exports the axis-location types, so `import RingSeq._` (Scala 2.13) / `import RingSeq.*` (Scala 3) is enough to bring both the extension methods and the `AxisLocation` / `Vertex` / `Edge` types into scope — no more second import from `SymmetryOps`. Achieved via `export` in Scala 3 and via `type` + companion-`val` aliases in Scala 2.13.
+
 ### Changed
 
 - **Breaking — `groupedO` semantics.** `groupedO(size)` now partitions the ring into `ceil(n / size)` **non-overlapping** blocks (the last wrapping across the seam so every block has exactly `size` elements), aligning with the intuition of standard `grouped`. Previously it was `slidingO(size, size)`, which produced `n` strided sliding windows that covered every ring position rather than partitioning. Callers that relied on the old behaviour should switch to `slidingO(size, size)` explicitly.

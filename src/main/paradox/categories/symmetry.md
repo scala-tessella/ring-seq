@@ -32,7 +32,7 @@ the edge is between index `i` and `(i + 1) mod n`).
 ### Example
 
 ```scala
-import io.github.scala_tessella.ring_seq.SymmetryOps.{Edge, Vertex}
+import io.github.scala_tessella.ring_seq.RingSeq._ // brings AxisLocation, Vertex and Edge into scope
 
 Seq(1, 1, 1).reflectionalSymmetryAxes
 // List(

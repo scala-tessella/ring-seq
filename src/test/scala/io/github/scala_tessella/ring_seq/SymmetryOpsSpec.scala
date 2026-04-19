@@ -6,7 +6,6 @@ import org.scalacheck.Test.check
 import org.scalatest.flatspec._
 import org.scalatest.matchers._
 import RingSeq._
-import io.github.scala_tessella.ring_seq.SymmetryOps.{Edge, Vertex}
 
 import scala.collection.Seq
 
