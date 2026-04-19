@@ -52,7 +52,7 @@ lazy val ringSeq =
       name        := "ring-seq",
       description := "Extends Scala Seq with ring (circular) methods",
       libraryDependencies ++= Seq(
-        "org.scalatest"  %%% "scalatest"  % "3.2.19" % "test",
+        "org.scalatest"  %%% "scalatest"  % "3.2.20" % "test",
         "org.scalacheck" %%% "scalacheck" % "1.19.0" % "test"
       )
     )
