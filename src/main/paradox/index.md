@@ -91,5 +91,6 @@ in the chosen output size, but each element access pays the indexing cost above.
 ## Other languages
 
 The same library is available also for:
+
 - Python: check [RingSeqPy (Python version)](https://github.com/scala-tessella/ring-seq-py/).
 - Rust: check [RingSeq (Rust version)](https://github.com/scala-tessella/ring-seq-rs/).
