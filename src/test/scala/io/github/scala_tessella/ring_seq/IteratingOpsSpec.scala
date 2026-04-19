@@ -103,18 +103,22 @@ class IteratingOpsSpec extends AnyFlatSpec with TestHelper with should.Matchers 
     )(_)
   }
 
-  "groupedO" can "group a circular sequence in fixed-size blocks" in {
-    "ABCDE".groupedO(2).toList.map(_.mkString) shouldBe List(
-      "AB",
-      "CD",
-      "EA",
-      "BC",
-      "DE"
-    )
+  "groupedO" can "partition a circular sequence into fixed-size blocks, wrapping the last one" in {
+    "ABCDE".groupedO(2).toList.map(_.mkString) shouldBe List("AB", "CD", "EA")
   }
 
-  it must "be equivalent to slidingO with step == size" in {
-    s12345.groupedO(2).toList shouldBe s12345.slidingO(2, 2).toList
+  it can "partition without wrap when size divides the ring" in {
+    "ABCDEF".groupedO(2).toList.map(_.mkString) shouldBe List("AB", "CD", "EF")
+  }
+
+  it must "produce ceil(n/size) blocks, each of exactly size elements" in {
+    val groups = "ABCDE".groupedO(3).toList
+    groups.map(_.mkString) shouldBe List("ABC", "DEA")
+    groups.forall(_.length == 3) shouldBe true
+  }
+
+  it can "produce a single block larger than the ring when size > n" in {
+    "AB".groupedO(5).toList.map(_.mkString) shouldBe List("ABABA")
   }
 
   "An empty circular sequence" must "produce no groups" in {

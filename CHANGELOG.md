@@ -4,6 +4,18 @@ All notable changes to this project are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.0] - Unreleased
+
+### Changed
+
+- **Breaking — `groupedO` semantics.** `groupedO(size)` now partitions the ring into `ceil(n / size)` **non-overlapping** blocks (the last wrapping across the seam so every block has exactly `size` elements), aligning with the intuition of standard `grouped`. Previously it was `slidingO(size, size)`, which produced `n` strided sliding windows that covered every ring position rather than partitioning. Callers that relied on the old behaviour should switch to `slidingO(size, size)` explicitly.
+  ```scala
+  // old: Seq(0, 1, 2, 3, 4).groupedO(2) ==
+  //      Iterator(Seq(0, 1), Seq(2, 3), Seq(4, 0), Seq(1, 2), Seq(3, 4))
+  // new: Seq(0, 1, 2, 3, 4).groupedO(2) ==
+  //      Iterator(Seq(0, 1), Seq(2, 3), Seq(4, 0))
+  ```
+
 ## [0.7.1] - 2026-04-19
 
 ### Changed

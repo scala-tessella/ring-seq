@@ -105,14 +105,30 @@ Seq.empty.rotationsAndReflections // Iterator(Seq())
 
 ## `groupedO`
 
-The circular equivalent of `grouped` — partitions the ring into fixed-size blocks. Equivalent to `slidingO(size, size)`.
+The circular equivalent of `grouped` — partitions the ring into `ceil(n / size)` non-overlapping fixed-size blocks.
 
-Unlike standard `grouped`, the final block wraps around the seam, so every block has exactly `size` elements.
+Unlike standard `grouped`, the final block wraps across the seam between the last and first elements, so **every** block has exactly `size` elements.
 
 ### Example
 
 ```scala
 "ABCDE".groupedO(2).toList.map(_.mkString) // List("AB", "CD", "EA")
+```
+
+### Without wrap
+
+When `size` divides the ring length, no wrap is needed.
+
+```scala
+"ABCDEF".groupedO(2).toList.map(_.mkString) // List("AB", "CD", "EF")
+```
+
+### Block larger than the ring
+
+When `size > n`, a single block wraps around multiple times.
+
+```scala
+"AB".groupedO(5).toList.map(_.mkString) // List("ABABA")
 ```
 
 ### On empty seq

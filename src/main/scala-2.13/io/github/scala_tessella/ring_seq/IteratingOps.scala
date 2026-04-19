@@ -25,18 +25,26 @@ object IteratingOps {
     def slidingO(size: Int, step: Int = 1): Iterator[CC[A]] =
       sliceO(0, step * (ring.size - 1) + size).sliding(size, step)
 
-    /** Groups elements of this circular sequence in fixed size blocks, the way [[slidingO]] does with `step`
-      * equal to `size`.
+    /** Partitions this circular sequence into non-overlapping fixed-size blocks.
+      *
+      * Unlike standard `grouped`, the last block wraps across the seam between the last and first elements,
+      * so '''every''' block has exactly `size` elements. Produces `ceil(n / size)` blocks for a ring of size `n`,
+      * and no blocks for an empty ring.
       *
       * @param size
-      *   the number of elements per group
+      *   the number of elements per block; must be positive
       * @return
-      *   An iterator producing sequences of size ''size''. Yields no elements if the sequence is empty.
+      *   an iterator producing sequences of size ''size''; empty when the ring is empty.
       * @example
-      *   {{{Seq(0, 1, 2, 3, 4).groupedO(2) // Iterator(Seq(0, 1), Seq(2, 3), Seq(4, 0), Seq(1, 2), Seq(3, 4))}}}
+      *   {{{Seq(0, 1, 2, 3, 4).groupedO(2) // Iterator(Seq(0, 1), Seq(2, 3), Seq(4, 0))}}}
       */
     def groupedO(size: Int): Iterator[CC[A]] =
-      if (ring.isEmpty) Iterator.empty else slidingO(size, size)
+      if (ring.isEmpty) Iterator.empty
+      else {
+        val n     = ring.size
+        val count = (n + size - 1) / size
+        sliceO(0, count * size).grouped(size)
+      }
 
     /** Iterates over the elements paired with their original (circular) index, starting at some circular
       * index.
