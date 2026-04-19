@@ -4,7 +4,14 @@ All notable changes to this project are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.7.0] - 2026-04-2019
+## [0.7.1] - Unreleased
+
+### Changed
+
+- **Dual-licensed under Apache-2.0 OR MIT.** Previously Apache-2.0 only. Downstream users may now choose either license at their option; no rights are removed from anyone already consuming the library under Apache-2.0. The repository now ships `LICENSE-APACHE` (the former `LICENSE`, renamed) and `LICENSE-MIT`.
+- `build.sbt` `licenses` field now lists both entries using SPDX identifiers (`Apache-2.0`, `MIT`) instead of the non-standard `APL2` shorthand.
+
+## [0.7.0] - 2026-04-19
 
 ### Added
 
