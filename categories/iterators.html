@@ -32,7 +32,7 @@
 <span class="home-icon">⌂</span>RingSeq
 </a>
 <div class="version-number">
-0.7.0
+0.7.1
 </div>
 </div>
 <div class="nav-toc">
@@ -47,6 +47,7 @@
     <li><a href="../categories/iterators.html" class="active page">Iterators</a></li>
     <li><a href="../categories/comparisons.html" class="page">Comparisons</a></li>
     <li><a href="../categories/symmetry.html" class="page">Symmetry</a></li>
+    <li><a href="../categories/necklaces.html" class="page">Canonical forms (necklaces and bracelets)</a></li>
   </ul></li>
   <li><a href="../github.html" class="page">GitHub repository</a></li>
 </ul>
@@ -80,7 +81,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <span class="home-icon">⌂</span>RingSeq
 </a>
 <div class="version-number">
-0.7.0
+0.7.1
 </div>
 </div>
 <div class="nav-toc">
@@ -95,6 +96,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
     <li><a href="../categories/iterators.html" class="active page">Iterators</a></li>
     <li><a href="../categories/comparisons.html" class="page">Comparisons</a></li>
     <li><a href="../categories/symmetry.html" class="page">Symmetry</a></li>
+    <li><a href="../categories/necklaces.html" class="page">Canonical forms (necklaces and bracelets)</a></li>
   </ul></li>
   <li><a href="../github.html" class="page">GitHub repository</a></li>
 </ul>
@@ -170,8 +172,26 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <p>Just itself on empty <code>Seq</code>.</p>
 <pre class="prettyprint"><code class="language-scala">Seq.empty.rotationsAndReflections // Iterator(Seq())
 </code></pre>
+<h2><a href="#groupedo" name="groupedo" class="anchor"><span class="anchor-link"></span></a><code>groupedO</code></h2>
+<p>The circular equivalent of <code>grouped</code> — partitions the ring into fixed-size blocks. Equivalent to <code>slidingO(size, size)</code>.</p>
+<p>Unlike standard <code>grouped</code>, the final block wraps around the seam, so every block has exactly <code>size</code> elements.</p>
+<h3><a href="#example" name="example" class="anchor"><span class="anchor-link"></span></a>Example</h3>
+<pre class="prettyprint"><code class="language-scala">&quot;ABCDE&quot;.groupedO(2).toList.map(_.mkString) // List(&quot;AB&quot;, &quot;CD&quot;, &quot;EA&quot;)
+</code></pre>
+<h3><a href="#on-empty-seq" name="on-empty-seq" class="anchor"><span class="anchor-link"></span></a>On empty seq</h3>
+<pre class="prettyprint"><code class="language-scala">Seq.empty.groupedO(2).toList // Nil
+</code></pre>
+<h2><a href="#zipwithindexo" name="zipwithindexo" class="anchor"><span class="anchor-link"></span></a><code>zipWithIndexO</code></h2>
+<p>The circular equivalent of <code>zipWithIndex</code>, pairing each element with its <strong>original</strong> (circular) index rather than its position in the iterator. Accepts an optional starting circular index.</p>
+<h3><a href="#example" name="example" class="anchor"><span class="anchor-link"></span></a>Example</h3>
+<pre class="prettyprint"><code class="language-scala">Seq(&#39;a&#39;, &#39;b&#39;, &#39;c&#39;).zipWithIndexO(1).toList // List((&#39;b&#39;, 1), (&#39;c&#39;, 2), (&#39;a&#39;, 0))
+</code></pre>
+<h3><a href="#default" name="default" class="anchor"><span class="anchor-link"></span></a>Default</h3>
+<p>Starting at index <code>0</code> produces the same output as <code>zipWithIndex</code>.</p>
+<pre class="prettyprint"><code class="language-scala">Seq(&#39;a&#39;, &#39;b&#39;, &#39;c&#39;).zipWithIndexO().toList // List((&#39;a&#39;, 0), (&#39;b&#39;, 1), (&#39;c&#39;, 2))
+</code></pre>
 <div class="source-github">
-The source code for this page can be found <a href="https://github.com/scala-tessella/ring-seq/tree/v0.7.0/src/main/paradox/categories/iterators.md">here</a>.
+The source code for this page can be found <a href="https://github.com/scala-tessella/ring-seq/tree/v0.7.1/src/main/paradox/categories/iterators.md">here</a>.
 </div>
 
 <div class="nav-next">
@@ -191,6 +211,8 @@ The source code for this page can be found <a href="https://github.com/scala-tes
     <li><a href="../categories/iterators.html#reversions" class="header"><code>reversions</code></a></li>
     <li><a href="../categories/iterators.html#reflections" class="header"><code>reflections</code></a></li>
     <li><a href="../categories/iterators.html#rotationsandreflections" class="header"><code>rotationsAndReflections</code></a></li>
+    <li><a href="../categories/iterators.html#groupedo" class="header"><code>groupedO</code></a></li>
+    <li><a href="../categories/iterators.html#zipwithindexo" class="header"><code>zipWithIndexO</code></a></li>
   </ul></li>
 </ul>
 </div>
@@ -258,7 +280,7 @@ The source code for this page can be found <a href="https://github.com/scala-tes
 <script type="text/javascript" src="../lib/prettify/prettify.js"></script>
 <script type="text/javascript" src="../lib/prettify/lang-scala.js"></script>
 <script type="text/javascript">jQuery(function(){window.prettyPrint && prettyPrint()});</script>
-<script type="text/javascript">jQuery(function(jq){initOldVersionWarnings(jq, '0.7.0', 'https://github.com/scala-tessella/ring-seq')});</script>
+<script type="text/javascript">jQuery(function(jq){initOldVersionWarnings(jq, '0.7.1', 'https://github.com/scala-tessella/ring-seq')});</script>
 
 
 </html>

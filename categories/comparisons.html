@@ -32,7 +32,7 @@
 <span class="home-icon">⌂</span>RingSeq
 </a>
 <div class="version-number">
-0.7.0
+0.7.1
 </div>
 </div>
 <div class="nav-toc">
@@ -47,6 +47,7 @@
     <li><a href="../categories/iterators.html" class="page">Iterators</a></li>
     <li><a href="../categories/comparisons.html" class="active page">Comparisons</a></li>
     <li><a href="../categories/symmetry.html" class="page">Symmetry</a></li>
+    <li><a href="../categories/necklaces.html" class="page">Canonical forms (necklaces and bracelets)</a></li>
   </ul></li>
   <li><a href="../github.html" class="page">GitHub repository</a></li>
 </ul>
@@ -80,7 +81,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <span class="home-icon">⌂</span>RingSeq
 </a>
 <div class="version-number">
-0.7.0
+0.7.1
 </div>
 </div>
 <div class="nav-toc">
@@ -95,6 +96,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
     <li><a href="../categories/iterators.html" class="page">Iterators</a></li>
     <li><a href="../categories/comparisons.html" class="active page">Comparisons</a></li>
     <li><a href="../categories/symmetry.html" class="page">Symmetry</a></li>
+    <li><a href="../categories/necklaces.html" class="page">Canonical forms (necklaces and bracelets)</a></li>
   </ul></li>
   <li><a href="../github.html" class="page">GitHub repository</a></li>
 </ul>
@@ -147,8 +149,28 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <h3><a href="#example" name="example" class="anchor"><span class="anchor-link"></span></a>Example</h3>
 <pre class="prettyprint"><code class="language-scala">Seq(0, 1, 2).isRotationOrReflection(Seq(2, 0, 1)) // true
 </code></pre>
+<h2><a href="#alignto" name="alignto" class="anchor"><span class="anchor-link"></span></a><code>alignTo</code></h2>
+<p>Returns the rotation offset <code>k</code> such that <code>this.startAt(k) == that</code>, or <code>None</code> if <code>that</code> is not a rotation of <code>this</code> (including a size mismatch).</p>
+<h3><a href="#example" name="example" class="anchor"><span class="anchor-link"></span></a>Example</h3>
+<pre class="prettyprint"><code class="language-scala">Seq(0, 1, 2).alignTo(Seq(2, 0, 1)) // Some(2)
+Seq(0, 1, 2).alignTo(Seq(1, 0, 2)) // None
+</code></pre>
+<h3><a href="#compared-to-isrotationof" name="compared-to-isrotationof" class="anchor"><span class="anchor-link"></span></a>Compared to <code>isRotationOf</code></h3>
+<p><code>isRotationOf</code> answers <em>whether</em> two sequences are rotations; <code>alignTo</code> additionally tells you <em>by how much</em>.</p>
+<h2><a href="#hammingdistance" name="hammingdistance" class="anchor"><span class="anchor-link"></span></a><code>hammingDistance</code></h2>
+<p>Counts the positional mismatches between two circular sequences of the same size. Throws <code>IllegalArgumentException</code> if sizes differ.</p>
+<h3><a href="#example" name="example" class="anchor"><span class="anchor-link"></span></a>Example</h3>
+<pre class="prettyprint"><code class="language-scala">Seq(1, 0, 1, 1).hammingDistance(Seq(1, 1, 0, 1)) // 2
+Seq(1, 2, 3).hammingDistance(Seq(1, 2, 3))       // 0
+</code></pre>
+<h2><a href="#minrotationalhammingdistance" name="minrotationalhammingdistance" class="anchor"><span class="anchor-link"></span></a><code>minRotationalHammingDistance</code></h2>
+<p>The minimum Hamming distance over all rotations of this sequence against <code>that</code>. Returns <code>0</code> iff <code>that</code> is a rotation of <code>this</code>.</p>
+<h3><a href="#example" name="example" class="anchor"><span class="anchor-link"></span></a>Example</h3>
+<pre class="prettyprint"><code class="language-scala">// Rotating [0,0,1,1,0] by 2 gives [1,1,0,0,0]; vs [1,1,0,0,1] → 1 mismatch.
+Seq(0, 0, 1, 1, 0).minRotationalHammingDistance(Seq(1, 1, 0, 0, 1)) // 1
+</code></pre>
 <div class="source-github">
-The source code for this page can be found <a href="https://github.com/scala-tessella/ring-seq/tree/v0.7.0/src/main/paradox/categories/comparisons.md">here</a>.
+The source code for this page can be found <a href="https://github.com/scala-tessella/ring-seq/tree/v0.7.1/src/main/paradox/categories/comparisons.md">here</a>.
 </div>
 
 <div class="nav-next">
@@ -167,6 +189,9 @@ The source code for this page can be found <a href="https://github.com/scala-tes
     <li><a href="../categories/comparisons.html#isreversion" class="header"><code>isReversion</code></a></li>
     <li><a href="../categories/comparisons.html#isrotation" class="header"><code>isRotation</code></a></li>
     <li><a href="../categories/comparisons.html#isrotationorreflection" class="header"><code>isRotationOrReflection</code></a></li>
+    <li><a href="../categories/comparisons.html#alignto" class="header"><code>alignTo</code></a></li>
+    <li><a href="../categories/comparisons.html#hammingdistance" class="header"><code>hammingDistance</code></a></li>
+    <li><a href="../categories/comparisons.html#minrotationalhammingdistance" class="header"><code>minRotationalHammingDistance</code></a></li>
   </ul></li>
 </ul>
 </div>
@@ -234,7 +259,7 @@ The source code for this page can be found <a href="https://github.com/scala-tes
 <script type="text/javascript" src="../lib/prettify/prettify.js"></script>
 <script type="text/javascript" src="../lib/prettify/lang-scala.js"></script>
 <script type="text/javascript">jQuery(function(){window.prettyPrint && prettyPrint()});</script>
-<script type="text/javascript">jQuery(function(jq){initOldVersionWarnings(jq, '0.7.0', 'https://github.com/scala-tessella/ring-seq')});</script>
+<script type="text/javascript">jQuery(function(jq){initOldVersionWarnings(jq, '0.7.1', 'https://github.com/scala-tessella/ring-seq')});</script>
 
 
 </html>

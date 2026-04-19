@@ -32,7 +32,7 @@
 <span class="home-icon">⌂</span>RingSeq
 </a>
 <div class="version-number">
-0.7.0
+0.7.1
 </div>
 </div>
 <div class="nav-toc">
@@ -47,6 +47,7 @@
     <li><a href="../categories/iterators.html" class="page">Iterators</a></li>
     <li><a href="../categories/comparisons.html" class="page">Comparisons</a></li>
     <li><a href="../categories/symmetry.html" class="page">Symmetry</a></li>
+    <li><a href="../categories/necklaces.html" class="page">Canonical forms (necklaces and bracelets)</a></li>
   </ul></li>
   <li><a href="../github.html" class="page">GitHub repository</a></li>
 </ul>
@@ -80,7 +81,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <span class="home-icon">⌂</span>RingSeq
 </a>
 <div class="version-number">
-0.7.0
+0.7.1
 </div>
 </div>
 <div class="nav-toc">
@@ -95,6 +96,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
     <li><a href="../categories/iterators.html" class="page">Iterators</a></li>
     <li><a href="../categories/comparisons.html" class="page">Comparisons</a></li>
     <li><a href="../categories/symmetry.html" class="page">Symmetry</a></li>
+    <li><a href="../categories/necklaces.html" class="page">Canonical forms (necklaces and bracelets)</a></li>
   </ul></li>
   <li><a href="../github.html" class="page">GitHub repository</a></li>
 </ul>
@@ -171,8 +173,28 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <p>In the same example the standard version behaves differently, does not find the &ldquo;unrolled&rdquo; slice.</p>
 <pre class="prettyprint"><code class="language-scala">Seq(0, 1, 2).containsSlice(Seq(2, 0, 1, 2, 0)) // false
 </code></pre>
+<h2><a href="#takewhileo" name="takewhileo" class="anchor"><span class="anchor-link"></span></a><code>takeWhileO</code></h2>
+<p>The circular equivalent of <code>takeWhile</code>, starting at a given circular index.</p>
+<h3><a href="#example" name="example" class="anchor"><span class="anchor-link"></span></a>Example</h3>
+<pre class="prettyprint"><code class="language-scala">Seq(0, 1, 2, 3, 4).takeWhileO(_ &lt; 3, 1) // Seq(1, 2)
+</code></pre>
+<h3><a href="#wrapping-around" name="wrapping-around" class="anchor"><span class="anchor-link"></span></a>Wrapping around</h3>
+<p>The prefix can cross the seam between the last and first elements.</p>
+<pre class="prettyprint"><code class="language-scala">// startAt(3) gives Seq(3, 4, 0, 1, 2); takeWhile(_ != 1) stops at index 0
+Seq(0, 1, 2, 3, 4).takeWhileO(_ != 1, 3) // Seq(3, 4, 0)
+</code></pre>
+<h2><a href="#dropwhileo" name="dropwhileo" class="anchor"><span class="anchor-link"></span></a><code>dropWhileO</code></h2>
+<p>The circular equivalent of <code>dropWhile</code>, starting at a given circular index.</p>
+<h3><a href="#example" name="example" class="anchor"><span class="anchor-link"></span></a>Example</h3>
+<pre class="prettyprint"><code class="language-scala">Seq(0, 1, 2, 3, 4).dropWhileO(_ &lt; 3, 1) // Seq(3, 4, 0)
+</code></pre>
+<h2><a href="#spano" name="spano" class="anchor"><span class="anchor-link"></span></a><code>spanO</code></h2>
+<p>The circular equivalent of <code>span</code> — splits into the pair <code>(takeWhileO(p), dropWhileO(p))</code> without evaluating the predicate twice.</p>
+<h3><a href="#example" name="example" class="anchor"><span class="anchor-link"></span></a>Example</h3>
+<pre class="prettyprint"><code class="language-scala">Seq(0, 1, 2, 3, 4).spanO(_ &lt; 3, 1) // (Seq(1, 2), Seq(3, 4, 0))
+</code></pre>
 <div class="source-github">
-The source code for this page can be found <a href="https://github.com/scala-tessella/ring-seq/tree/v0.7.0/src/main/paradox/categories/slicing.md">here</a>.
+The source code for this page can be found <a href="https://github.com/scala-tessella/ring-seq/tree/v0.7.1/src/main/paradox/categories/slicing.md">here</a>.
 </div>
 
 <div class="nav-next">
@@ -192,6 +214,9 @@ The source code for this page can be found <a href="https://github.com/scala-tes
     <li><a href="../categories/slicing.html#lastindexofsliceo" class="header"><code>lastIndexOfSliceO</code></a></li>
     <li><a href="../categories/slicing.html#segmentlengtho" class="header"><code>segmentLengthO</code></a></li>
     <li><a href="../categories/slicing.html#containssliceo" class="header"><code>containsSliceO</code></a></li>
+    <li><a href="../categories/slicing.html#takewhileo" class="header"><code>takeWhileO</code></a></li>
+    <li><a href="../categories/slicing.html#dropwhileo" class="header"><code>dropWhileO</code></a></li>
+    <li><a href="../categories/slicing.html#spano" class="header"><code>spanO</code></a></li>
   </ul></li>
 </ul>
 </div>
@@ -259,7 +284,7 @@ The source code for this page can be found <a href="https://github.com/scala-tes
 <script type="text/javascript" src="../lib/prettify/prettify.js"></script>
 <script type="text/javascript" src="../lib/prettify/lang-scala.js"></script>
 <script type="text/javascript">jQuery(function(){window.prettyPrint && prettyPrint()});</script>
-<script type="text/javascript">jQuery(function(jq){initOldVersionWarnings(jq, '0.7.0', 'https://github.com/scala-tessella/ring-seq')});</script>
+<script type="text/javascript">jQuery(function(jq){initOldVersionWarnings(jq, '0.7.1', 'https://github.com/scala-tessella/ring-seq')});</script>
 
 
 </html>

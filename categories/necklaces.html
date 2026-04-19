@@ -2,11 +2,11 @@
 <html class="no-js" lang="en">
 
 <head>
-<title>Indexing · RingSeq</title>
+<title>Canonical forms (necklaces and bracelets) · RingSeq</title>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="description" content='ringSeq-root'/>
-<link rel="canonical" href="https://github.com/scala-tessella/ring-seqcategories/indexing.html"/>
+<link rel="canonical" href="https://github.com/scala-tessella/ring-seqcategories/necklaces.html"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:100normal,100italic,300normal,300italic,400normal,400italic,500normal,500italic,700normal,700italic,900normal,900italicc" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../lib/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="../js/page.js"></script>
@@ -41,13 +41,13 @@
   <li><a href="../usage.html" class="page">Usage examples</a></li>
   <li><a href="../reference.html" class="page">Reference</a>
   <ul>
-    <li><a href="../categories/indexing.html" class="active page">Indexing</a></li>
+    <li><a href="../categories/indexing.html" class="page">Indexing</a></li>
     <li><a href="../categories/rotation-reflection.html" class="page">Rotation and reflection</a></li>
     <li><a href="../categories/slicing.html" class="page">Slicing</a></li>
     <li><a href="../categories/iterators.html" class="page">Iterators</a></li>
     <li><a href="../categories/comparisons.html" class="page">Comparisons</a></li>
     <li><a href="../categories/symmetry.html" class="page">Symmetry</a></li>
-    <li><a href="../categories/necklaces.html" class="page">Canonical forms (necklaces and bracelets)</a></li>
+    <li><a href="../categories/necklaces.html" class="active page">Canonical forms (necklaces and bracelets)</a></li>
   </ul></li>
   <li><a href="../github.html" class="page">GitHub repository</a></li>
 </ul>
@@ -90,13 +90,13 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
   <li><a href="../usage.html" class="page">Usage examples</a></li>
   <li><a href="../reference.html" class="page">Reference</a>
   <ul>
-    <li><a href="../categories/indexing.html" class="active page">Indexing</a></li>
+    <li><a href="../categories/indexing.html" class="page">Indexing</a></li>
     <li><a href="../categories/rotation-reflection.html" class="page">Rotation and reflection</a></li>
     <li><a href="../categories/slicing.html" class="page">Slicing</a></li>
     <li><a href="../categories/iterators.html" class="page">Iterators</a></li>
     <li><a href="../categories/comparisons.html" class="page">Comparisons</a></li>
     <li><a href="../categories/symmetry.html" class="page">Symmetry</a></li>
-    <li><a href="../categories/necklaces.html" class="page">Canonical forms (necklaces and bracelets)</a></li>
+    <li><a href="../categories/necklaces.html" class="active page">Canonical forms (necklaces and bracelets)</a></li>
   </ul></li>
   <li><a href="../github.html" class="page">GitHub repository</a></li>
 </ul>
@@ -116,7 +116,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <ul>
   <li><a href="../index.html">RingSeq</a></li>
   <li><a href="../reference.html">Reference</a></li>
-  <li>Indexing</li>
+  <li>Canonical forms (necklaces and bracelets)</li>
 </ul>
 </div>
 </div>
@@ -124,32 +124,39 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 
 <div class="page-content row">
 <div class="small-12 large-9 column" id="docs">
-<h1><a href="#indexing" name="indexing" class="anchor"><span class="anchor-link"></span></a>Indexing</h1>
-<h2><a href="#applyo" name="applyo" class="anchor"><span class="anchor-link"></span></a><code>applyO</code></h2>
-<p>The circular equivalent of <code>apply</code>.</p><div class="callout note "><div class="callout-title">Note</div>
-<p>Given the <a href="../what-is.html">definition of circular sequence</a>, it returns an element for any possible integer.</p></div>
+<h1><a href="#canonical-forms-necklaces-and-bracelets-" name="canonical-forms-necklaces-and-bracelets-" class="anchor"><span class="anchor-link"></span></a>Canonical forms (necklaces and bracelets)</h1>
+<p>A <strong>necklace</strong> is an equivalence class of circular sequences under rotation; a <strong>bracelet</strong> is the equivalence class under rotation <em>and</em> reflection.</p>
+<p>These operations return a canonical representative of the class, suitable for hashing, deduplication, or comparing &ldquo;is this ring the same pattern as that one?&rdquo; in one step.</p>
+<p>All three use Booth&rsquo;s O(n) algorithm where relevant.</p>
+<h2><a href="#canonicalindex" name="canonicalindex" class="anchor"><span class="anchor-link"></span></a><code>canonicalIndex</code></h2>
+<p>The starting index of the lexicographically smallest rotation.</p>
 <h3><a href="#example" name="example" class="anchor"><span class="anchor-link"></span></a>Example</h3>
-<pre class="prettyprint"><code class="language-scala">Seq(0, 1, 2).applyO(3) // 0
+<pre class="prettyprint"><code class="language-scala">Seq(2, 0, 1).canonicalIndex // 1
 </code></pre>
-<h3><a href="#compared-to-standard" name="compared-to-standard" class="anchor"><span class="anchor-link"></span></a>Compared to standard</h3>
-<p>In the same example the standard version behaves differently, does not return an element, it throws.</p>
-<pre class="prettyprint"><code class="language-scala">Seq(0, 1, 2).apply(3) // IndexOutOfBoundsException
-</code></pre>
-<h3><a href="#not-a-total-function" name="not-a-total-function" class="anchor"><span class="anchor-link"></span></a>Not a total function</h3>
-<p>It does not return a value for an empty sequence.</p>
-<pre class="prettyprint"><code class="language-scala">Seq.empty.applyO(0) // ArithmeticException
-</code></pre>
-<h2><a href="#indexfrom" name="indexfrom" class="anchor"><span class="anchor-link"></span></a><code>indexFrom</code></h2>
-<p>Converts a circular index into a standard index.</p>
+<h2><a href="#canonical" name="canonical" class="anchor"><span class="anchor-link"></span></a><code>canonical</code></h2>
+<p>The lexicographically smallest rotation (necklace canonical form).</p>
+<p>Two sequences are rotations of each other iff their <code>canonical</code> forms are equal.</p>
 <h3><a href="#example" name="example" class="anchor"><span class="anchor-link"></span></a>Example</h3>
-<pre class="prettyprint"><code class="language-scala">Seq(0, 1, 2).indexFrom(30001) // 1
+<pre class="prettyprint"><code class="language-scala">Seq(2, 0, 1).canonical // Seq(0, 1, 2)
+Seq(1, 2, 0).canonical // Seq(0, 1, 2)
+</code></pre>
+<h3><a href="#use-as-a-rotation-test" name="use-as-a-rotation-test" class="anchor"><span class="anchor-link"></span></a>Use as a rotation test</h3>
+<pre class="prettyprint"><code class="language-scala">a.canonical == b.canonical // true iff a.isRotationOf(b)  (and sizes match)
+</code></pre>
+<h2><a href="#bracelet" name="bracelet" class="anchor"><span class="anchor-link"></span></a><code>bracelet</code></h2>
+<p>The lexicographically smallest representative under <strong>both</strong> rotation and reflection.</p>
+<p>Two sequences belong to the same bracelet equivalence class iff their <code>bracelet</code> forms are equal.</p>
+<h3><a href="#example" name="example" class="anchor"><span class="anchor-link"></span></a>Example</h3>
+<pre class="prettyprint"><code class="language-scala">// Seq(3, 1, 2): rotations → [3,1,2],[1,2,3],[2,3,1]; add reflections → [3,2,1],[2,1,3],[1,3,2].
+// The lex-smallest of all six is [1,2,3].
+Seq(3, 1, 2).bracelet // Seq(1, 2, 3)
 </code></pre>
 <div class="source-github">
-The source code for this page can be found <a href="https://github.com/scala-tessella/ring-seq/tree/v0.7.1/src/main/paradox/categories/indexing.md">here</a>.
+The source code for this page can be found <a href="https://github.com/scala-tessella/ring-seq/tree/v0.7.1/src/main/paradox/categories/necklaces.md">here</a>.
 </div>
 
 <div class="nav-next">
-<p><strong>Next:</strong> <a href="../categories/rotation-reflection.html">Rotation and reflection</a></p>
+<p><strong>Next:</strong> <a href="../github.html">GitHub repository</a></p>
 </div>
 </div>
 <div class="large-3 show-for-large column" data-sticky-container>
@@ -158,10 +165,11 @@ The source code for this page can be found <a href="https://github.com/scala-tes
 <div class="nav-title">On this page:</div>
 <div class="nav-toc">
 <ul>
-  <li><a href="../categories/indexing.html#indexing" class="header">Indexing</a>
+  <li><a href="../categories/necklaces.html#canonical-forms-necklaces-and-bracelets-" class="header">Canonical forms (necklaces and bracelets)</a>
   <ul>
-    <li><a href="../categories/indexing.html#applyo" class="header"><code>applyO</code></a></li>
-    <li><a href="../categories/indexing.html#indexfrom" class="header"><code>indexFrom</code></a></li>
+    <li><a href="../categories/necklaces.html#canonicalindex" class="header"><code>canonicalIndex</code></a></li>
+    <li><a href="../categories/necklaces.html#canonical" class="header"><code>canonical</code></a></li>
+    <li><a href="../categories/necklaces.html#bracelet" class="header"><code>bracelet</code></a></li>
   </ul></li>
 </ul>
 </div>

@@ -32,7 +32,7 @@
 <span class="home-icon">⌂</span>RingSeq
 </a>
 <div class="version-number">
-0.7.0
+0.7.1
 </div>
 </div>
 <div class="nav-toc">
@@ -47,6 +47,7 @@
     <li><a href="categories/iterators.html" class="page">Iterators</a></li>
     <li><a href="categories/comparisons.html" class="page">Comparisons</a></li>
     <li><a href="categories/symmetry.html" class="page">Symmetry</a></li>
+    <li><a href="categories/necklaces.html" class="page">Canonical forms (necklaces and bracelets)</a></li>
   </ul></li>
   <li><a href="github.html" class="page">GitHub repository</a></li>
 </ul>
@@ -80,7 +81,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <span class="home-icon">⌂</span>RingSeq
 </a>
 <div class="version-number">
-0.7.0
+0.7.1
 </div>
 </div>
 <div class="nav-toc">
@@ -95,6 +96,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
     <li><a href="categories/iterators.html" class="page">Iterators</a></li>
     <li><a href="categories/comparisons.html" class="page">Comparisons</a></li>
     <li><a href="categories/symmetry.html" class="page">Symmetry</a></li>
+    <li><a href="categories/necklaces.html" class="page">Canonical forms (necklaces and bracelets)</a></li>
   </ul></li>
   <li><a href="github.html" class="page">GitHub repository</a></li>
 </ul>
@@ -152,9 +154,9 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
   <li><a href="categories/slicing.html#lastindexofsliceo"><code>lastIndexOfSliceO</code></a></li>
   <li><a href="categories/slicing.html#segmentlenghto"><code>segmentLengthO</code></a></li>
   <li><a href="categories/slicing.html#containssliceo"><code>containsSliceO</code></a></li>
-  <li><code>takeWhileO</code></li>
-  <li><code>dropWhileO</code></li>
-  <li><code>spanO</code></li>
+  <li><a href="categories/slicing.html#takewhileo"><code>takeWhileO</code></a></li>
+  <li><a href="categories/slicing.html#dropwhileo"><code>dropWhileO</code></a></li>
+  <li><a href="categories/slicing.html#spano"><code>spanO</code></a></li>
 </ul>
 <h3><a href="#" name="" class="anchor"><span class="anchor-link"></span></a><a href="categories/iterators.html">Iterators</a></h3>
 <ul>
@@ -163,8 +165,8 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
   <li><a href="categories/iterators.html#reversions"><code>reversions</code></a></li>
   <li><a href="categories/iterators.html#reflections"><code>reflections</code></a></li>
   <li><a href="categories/iterators.html#rotationsandreflections"><code>rotationsAndReflections</code></a></li>
-  <li><code>groupedO</code></li>
-  <li><code>zipWithIndexO</code></li>
+  <li><a href="categories/iterators.html#groupedo"><code>groupedO</code></a></li>
+  <li><a href="categories/iterators.html#zipwithindexo"><code>zipWithIndexO</code></a></li>
 </ul>
 <h3><a href="#" name="" class="anchor"><span class="anchor-link"></span></a><a href="categories/comparisons.html">Comparisons</a></h3>
 <ul>
@@ -172,24 +174,27 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
   <li><a href="categories/comparisons.html#isreversion"><code>isReversion</code></a></li>
   <li><a href="categories/comparisons.html#isrotation"><code>isRotation</code></a></li>
   <li><a href="categories/comparisons.html#isrotationorreflection"><code>isRotationOrReflection</code></a></li>
-  <li><code>alignTo</code></li>
-  <li><code>hammingDistance</code></li>
-  <li><code>minRotationalHammingDistance</code></li>
+  <li><a href="categories/comparisons.html#alignto"><code>alignTo</code></a></li>
+  <li><a href="categories/comparisons.html#hammingdistance"><code>hammingDistance</code></a></li>
+  <li><a href="categories/comparisons.html#minrotationalhammingdistance"><code>minRotationalHammingDistance</code></a></li>
 </ul>
 <h3><a href="#" name="" class="anchor"><span class="anchor-link"></span></a><a href="categories/symmetry.html">Symmetry</a></h3>
 <ul>
   <li><a href="categories/symmetry.html#rotationalsymmetry"><code>rotationalSymmetry</code></a></li>
   <li><a href="categories/symmetry.html#symmetryindices"><code>symmetryIndices</code></a></li>
+  <li><a href="categories/symmetry.html#reflectionalsymmetryaxes"><code>reflectionalSymmetryAxes</code></a></li>
   <li><a href="categories/symmetry.html#symmetry"><code>symmetry</code></a></li>
 </ul>
-<h3><a href="#canonical-forms-necklace-bracelet-" name="canonical-forms-necklace-bracelet-" class="anchor"><span class="anchor-link"></span></a>Canonical forms (necklace / bracelet)</h3>
+<h3><a href="#" name="" class="anchor"><span class="anchor-link"></span></a><a href="categories/necklaces.html">Canonical forms</a></h3>
 <ul>
-  <li><code>canonicalIndex</code> — starting index of the lexicographically smallest rotation (Booth&rsquo;s algorithm, O(n))</li>
-  <li><code>canonical</code> — the lex-smallest rotation; useful for hashing/deduplicating equivalent rings</li>
-  <li><code>bracelet</code> — the lex-smallest representative under both rotation and reflection</li>
+  <li><a href="categories/necklaces.html#canonicalindex"><code>canonicalIndex</code></a></li>
+  <li><a href="categories/necklaces.html#canonical"><code>canonical</code></a></li>
+  <li><a href="categories/necklaces.html#bracelet"><code>bracelet</code></a></li>
 </ul>
+<h2><a href="#changelog" name="changelog" class="anchor"><span class="anchor-link"></span></a>Changelog</h2>
+<p>See the <a href="https://github.com/scala-tessella/ring-seq/blob/main/CHANGELOG.md">CHANGELOG on GitHub</a> for the full history of notable changes per release.</p>
 <div class="source-github">
-The source code for this page can be found <a href="https://github.com/scala-tessella/ring-seq/tree/v0.7.0/src/main/paradox/reference.md">here</a>.
+The source code for this page can be found <a href="https://github.com/scala-tessella/ring-seq/tree/v0.7.1/src/main/paradox/reference.md">here</a>.
 </div>
 
 <div class="nav-next">
@@ -206,6 +211,7 @@ The source code for this page can be found <a href="https://github.com/scala-tes
   <ul>
     <li><a href="reference.html#scaladoc" class="header">Scaladoc</a></li>
     <li><a href="reference.html#methods" class="header">Methods</a></li>
+    <li><a href="reference.html#changelog" class="header">Changelog</a></li>
   </ul></li>
 </ul>
 </div>
@@ -273,7 +279,7 @@ The source code for this page can be found <a href="https://github.com/scala-tes
 <script type="text/javascript" src="lib/prettify/prettify.js"></script>
 <script type="text/javascript" src="lib/prettify/lang-scala.js"></script>
 <script type="text/javascript">jQuery(function(){window.prettyPrint && prettyPrint()});</script>
-<script type="text/javascript">jQuery(function(jq){initOldVersionWarnings(jq, '0.7.0', 'https://github.com/scala-tessella/ring-seq')});</script>
+<script type="text/javascript">jQuery(function(jq){initOldVersionWarnings(jq, '0.7.1', 'https://github.com/scala-tessella/ring-seq')});</script>
 
 
 </html>
