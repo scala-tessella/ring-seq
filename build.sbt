@@ -1,5 +1,3 @@
-import xerial.sbt.Sonatype.*
-
 enablePlugins(SitePreviewPlugin, ParadoxSitePlugin)
 enablePlugins(SiteScaladocPlugin)
 enablePlugins(GhpagesPlugin)
@@ -11,14 +9,17 @@ ThisBuild / semanticdbEnabled  := true
 ThisBuild / semanticdbVersion  := scalafixSemanticdb.revision
 ThisBuild / versionScheme      := Some("early-semver")
 ThisBuild / licenses           := Seq("APL2" -> url("https://www.apache.org/licenses/LICENSE-2.0.txt"))
-ThisBuild / publishTo          := sonatypePublishToBundle.value
 ThisBuild / developers         := List(Developer(
   "scala-tessella",
   "scala-tessella",
   "mario.callisto@gmail.com",
   url("https://github.com/scala-tessella")
 ))
-ThisBuild / homepage           := Some(url("https://github.com/scala-tessella"))
+ThisBuild / homepage           := Some(url("https://github.com/scala-tessella/ring-seq"))
+ThisBuild / scmInfo            := Some(ScmInfo(
+  url("https://github.com/scala-tessella/ring-seq"),
+  "scm:git:git@github.com:scala-tessella/ring-seq.git"
+))
 
 lazy val root =
   project
@@ -26,11 +27,10 @@ lazy val root =
     .aggregate(ringSeq.js, ringSeq.jvm, ringSeq.native)
     .settings(
       name                          := "ringSeq-root",
-      sonatypeProjectHosting        := Some(GitHubHosting("scala-tessella", "ring-seq", "mario.callisto@gmail.com")),
-      sonatypeCredentialHost        := "s01.oss.sonatype.org",
+      publish / skip                := true,
       SiteScaladoc / siteSubdirName := "api",
       paradoxProperties += ("scaladoc.base_url" -> "api"),
-      git.remoteRepo                := sonatypeProjectHosting.value.get.scmUrl,
+      git.remoteRepo                := "git@github.com:scala-tessella/ring-seq.git",
       ghpagesNoJekyll               := true,
       Compile / scalacOptions ++= {
         CrossVersion.partialVersion(scalaVersion.value) match {
