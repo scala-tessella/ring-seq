@@ -112,3 +112,42 @@ does not find the "unrolled" slice.
 ```scala
 Seq(0, 1, 2).containsSlice(Seq(2, 0, 1, 2, 0)) // false
 ```
+
+## `takeWhileO`
+
+The circular equivalent of `takeWhile`, starting at a given circular index.
+
+### Example
+
+```scala
+Seq(0, 1, 2, 3, 4).takeWhileO(_ < 3, 1) // Seq(1, 2)
+```
+
+### Wrapping around
+
+The prefix can cross the seam between the last and first elements.
+
+```scala
+// startAt(3) gives Seq(3, 4, 0, 1, 2); takeWhile(_ != 1) stops at index 0
+Seq(0, 1, 2, 3, 4).takeWhileO(_ != 1, 3) // Seq(3, 4, 0)
+```
+
+## `dropWhileO`
+
+The circular equivalent of `dropWhile`, starting at a given circular index.
+
+### Example
+
+```scala
+Seq(0, 1, 2, 3, 4).dropWhileO(_ < 3, 1) // Seq(3, 4, 0)
+```
+
+## `spanO`
+
+The circular equivalent of `span` — splits into the pair `(takeWhileO(p), dropWhileO(p))` without evaluating the predicate twice.
+
+### Example
+
+```scala
+Seq(0, 1, 2, 3, 4).spanO(_ < 3, 1) // (Seq(1, 2), Seq(3, 4, 0))
+```

@@ -6,7 +6,7 @@ its elements forming a ring.
 
 It works on any immutable / mutable `Seq` and sub-types.
 
-Available for Scala `3.3.3` and `2.13.13`, compatible with Scala.js
+Available for Scala `3.3.7` and `2.13.18`, cross-published for the JVM, Scala.js, and Scala Native.
 
 ## Setup
 
@@ -57,6 +57,15 @@ or Scala 2 [`implicit class`](https://docs.scala-lang.org/overviews/core/implici
 it acts like a _decorator_,
 providing new circular methods to any collection under `Seq`.
 
+## Use cases
+
+- **Bioinformatics** — circular DNA/RNA sequence alignment and comparison
+- **Graphics** — polygon vertex manipulation, closed curve operations
+- **Procedural generation** — tile rings, symmetry-aware pattern generation
+- **Music theory** — pitch-class sets, chord inversions
+- **Combinatorics** — necklace/bracelet enumeration, Burnside's lemma
+- **Embedded / robotics** — circular sensor arrays, rotary encoder positions
+
 ## Design
 
 The same decorators could possibly be added to [scala-collection-contrib](https://github.com/scala/scala-collection-contrib) and exist just there,
@@ -81,4 +90,6 @@ in the chosen output size, but each element access pays the indexing cost above.
 
 ## Other languages
 
-The same library is available also for the Python language, check [RingSeqPy (Python version)](https://github.com/scala-tessella/ring-seq-py/).
+The same library is available also for:
+- Python: check [RingSeqPy (Python version)](https://github.com/scala-tessella/ring-seq-py/).
+- Rust: check [RingSeq (Rust version)](https://github.com/scala-tessella/ring-seq-rs/).

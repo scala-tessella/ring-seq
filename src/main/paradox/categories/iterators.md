@@ -102,3 +102,39 @@ Just itself on empty `Seq`.
 ```scala
 Seq.empty.rotationsAndReflections // Iterator(Seq())
 ```
+
+## `groupedO`
+
+The circular equivalent of `grouped` — partitions the ring into fixed-size blocks. Equivalent to `slidingO(size, size)`.
+
+Unlike standard `grouped`, the final block wraps around the seam, so every block has exactly `size` elements.
+
+### Example
+
+```scala
+"ABCDE".groupedO(2).toList.map(_.mkString) // List("AB", "CD", "EA")
+```
+
+### On empty seq
+
+```scala
+Seq.empty.groupedO(2).toList // Nil
+```
+
+## `zipWithIndexO`
+
+The circular equivalent of `zipWithIndex`, pairing each element with its **original** (circular) index rather than its position in the iterator. Accepts an optional starting circular index.
+
+### Example
+
+```scala
+Seq('a', 'b', 'c').zipWithIndexO(1).toList // List(('b', 1), ('c', 2), ('a', 0))
+```
+
+### Default
+
+Starting at index `0` produces the same output as `zipWithIndex`.
+
+```scala
+Seq('a', 'b', 'c').zipWithIndexO().toList // List(('a', 0), ('b', 1), ('c', 2))
+```

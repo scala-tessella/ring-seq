@@ -31,6 +31,7 @@ They fall into the following categories:
 * [Iterators](categories/iterators.md)
 * [Comparisons](categories/comparisons.md)
 * [Symmetry](categories/symmetry.md)
+* [Canonical forms](categories/necklaces.md)
 
 @@@
 
@@ -50,9 +51,9 @@ They fall into the following categories:
 * [`lastIndexOfSliceO`](categories/slicing.html#lastindexofsliceo)
 * [`segmentLengthO`](categories/slicing.html#segmentlenghto)
 * [`containsSliceO`](categories/slicing.html#containssliceo)
-* `takeWhileO`
-* `dropWhileO`
-* `spanO`
+* [`takeWhileO`](categories/slicing.html#takewhileo)
+* [`dropWhileO`](categories/slicing.html#dropwhileo)
+* [`spanO`](categories/slicing.html#spano)
 
 ### [Iterators](categories/iterators.html)
 * [`slidingO`](categories/iterators.html#slidingo)
@@ -60,24 +61,29 @@ They fall into the following categories:
 * [`reversions`](categories/iterators.html#reversions)
 * [`reflections`](categories/iterators.html#reflections)
 * [`rotationsAndReflections`](categories/iterators.html#rotationsandreflections)
-* `groupedO`
-* `zipWithIndexO`
+* [`groupedO`](categories/iterators.html#groupedo)
+* [`zipWithIndexO`](categories/iterators.html#zipwithindexo)
 
 ### [Comparisons](categories/comparisons.html)
 * [`isReflection`](categories/comparisons.html#isreflection)
 * [`isReversion`](categories/comparisons.html#isreversion)
 * [`isRotation`](categories/comparisons.html#isrotation)
 * [`isRotationOrReflection`](categories/comparisons.html#isrotationorreflection)
-* `alignTo`
-* `hammingDistance`
-* `minRotationalHammingDistance`
+* [`alignTo`](categories/comparisons.html#alignto)
+* [`hammingDistance`](categories/comparisons.html#hammingdistance)
+* [`minRotationalHammingDistance`](categories/comparisons.html#minrotationalhammingdistance)
 
 ### [Symmetry](categories/symmetry.html)
 * [`rotationalSymmetry`](categories/symmetry.html#rotationalsymmetry)
 * [`symmetryIndices`](categories/symmetry.html#symmetryindices)
+* [`reflectionalSymmetryAxes`](categories/symmetry.html#reflectionalsymmetryaxes)
 * [`symmetry`](categories/symmetry.html#symmetry)
 
-### Canonical forms (necklace / bracelet)
-* `canonicalIndex` — starting index of the lexicographically smallest rotation (Booth's algorithm, O(n))
-* `canonical` — the lex-smallest rotation; useful for hashing/deduplicating equivalent rings
-* `bracelet` — the lex-smallest representative under both rotation and reflection
+### [Canonical forms](categories/necklaces.html)
+* [`canonicalIndex`](categories/necklaces.html#canonicalindex)
+* [`canonical`](categories/necklaces.html#canonical)
+* [`bracelet`](categories/necklaces.html#bracelet)
+
+## Changelog
+
+See the [CHANGELOG on GitHub](https://github.com/scala-tessella/ring-seq/blob/main/CHANGELOG.md) for the full history of notable changes per release.

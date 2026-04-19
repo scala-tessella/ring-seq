@@ -32,13 +32,28 @@ gpg --list-secret-keys --keyid-format=long
 gpg --keyserver keyserver.ubuntu.com --send-keys ABCDEF0123456789
 ```
 
-Export the private key, base64-encoded, so it fits in a GitHub secret:
+Export the private key, base64-encoded, so it fits in a GitHub secret.
+
+**Linux:**
 
 ```bash
 gpg --armor --export-secret-keys ABCDEF0123456789 | base64 -w0 > pgp-secret.b64
 ```
 
-(On macOS, use `base64` with no `-w0`.)
+**macOS** (the BSD `base64` has no `-w0`; wrapping newlines must be stripped explicitly):
+
+```bash
+gpg --armor --export-secret-keys ABCDEF0123456789 | base64 | tr -d '\n' > pgp-secret.b64
+```
+
+**Sanity-check — this step catches the most common CI failure.** Decode the file back; the first line must be the PGP armor header:
+
+```bash
+cat pgp-secret.b64 | base64 --decode | head -1
+# expected: -----BEGIN PGP PRIVATE KEY BLOCK-----
+```
+
+If you see `base64: invalid input` or anything other than the header, the file is malformed — re-export before uploading.
 
 ### 4. GitHub Actions secrets
 
@@ -50,6 +65,10 @@ In GitHub → repo → **Settings** → **Secrets and variables** → **Actions*
 | `SONATYPE_PASSWORD` | User token **password** from step 2 |
 | `PGP_SECRET` | Contents of `pgp-secret.b64` from step 3 |
 | `PGP_PASSPHRASE` | The passphrase you set on the key in step 3 |
+
+When pasting `PGP_PASSPHRASE`, be careful to copy the **entire** passphrase — a truncated last character fails with a generic `gpg: signing failed` later in the run, which is surprisingly hard to diagnose. If in doubt, type the passphrase into a scratch file first, verify its length, then paste.
+
+When pasting `PGP_SECRET`, paste the **entire** contents of `pgp-secret.b64` — no quotes, no prefix, no trailing newline.
 
 Delete `pgp-secret.b64` afterwards.
 
