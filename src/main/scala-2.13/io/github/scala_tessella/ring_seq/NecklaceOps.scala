@@ -1,7 +1,5 @@
 package io.github.scala_tessella.ring_seq
 
-import io.github.scala_tessella.ring_seq.IndexingOps.Index
-
 import scala.collection.{IndexedSeq, SeqOps}
 
 /** Provides canonical-form operations for a `Seq` considered circular. */
@@ -51,15 +49,10 @@ object NecklaceOps {
       *   the smaller of `canonical` and `reflectAt().canonical`, by lexicographic ordering.
       */
     def bracelet(implicit ord: Ordering[A]): CC[A] = {
+      import Ordering.Implicits.seqOrdering
       val a = canonical
       val b = NecklaceOps.canonicalOf(reflectAt())
-      val ai = a.iterator
-      val bi = b.iterator
-      var cmp = 0
-      while (cmp == 0 && ai.hasNext) {
-        cmp = ord.compare(ai.next(), bi.next())
-      }
-      if (cmp <= 0) a else b
+      Seq(a, b).minBy(_.toSeq)
     }
   }
 

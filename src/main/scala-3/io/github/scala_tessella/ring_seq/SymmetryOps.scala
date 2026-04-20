@@ -81,8 +81,9 @@ trait SymmetryOps extends TransformingOps:
           case _                 => ring.toVector
         val reversed: IndexedSeq[A] = indexed.reverse
         // ring == reversed.rotateLeft(shift)  ⇔  forall i. indexed(i) == reversed((i + shift) mod n)
-        (0 until n).toList.filter: shift =>
-          (0 until n).forall(i => indexed(i) == reversed((i + shift) % n))
+        (0 until n)
+          .filter(shift => (0 until n).forall(i => indexed(i) == reversed((i + shift) % n)))
+          .toList
 
     /** Calculates the axes of reflectional symmetry. Returns a list of pairs of locations where each axis
       * intersects the cycle.

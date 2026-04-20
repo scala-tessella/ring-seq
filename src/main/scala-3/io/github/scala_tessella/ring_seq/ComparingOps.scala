@@ -77,7 +77,7 @@ trait ComparingOps extends IteratingOps:
       else if ring.isEmpty then Some(0)
       else
         val idx = (ring ++ ring.init).indexOfSlice(that.toSeq)
-        if idx < 0 then None else Some(idx)
+        Option.when(idx >= 0)(idx)
 
     /** The number of positions at which corresponding elements differ (Hamming distance).
       *

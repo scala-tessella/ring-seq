@@ -66,12 +66,8 @@ trait NecklaceOps extends ComparingOps:
       * @return
       *   the smaller of `canonical` and `reflectAt().canonical`, by lexicographic ordering.
       */
-    def bracelet(using ord: Ordering[A]): CC[A] =
+    def bracelet(using Ordering[A]): CC[A] =
+      import Ordering.Implicits.seqOrdering
       val a = ring.canonical
       val b = ring.reflectAt().canonical
-      val ai = a.iterator
-      val bi = b.iterator
-      var cmp = 0
-      while cmp == 0 && ai.hasNext do
-        cmp = ord.compare(ai.next(), bi.next())
-      if cmp <= 0 then a else b
+      Seq(a, b).minBy(_.toSeq)
