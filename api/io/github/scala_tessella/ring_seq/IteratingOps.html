@@ -230,11 +230,12 @@ node9 -> node8;
             <div class="originInfo"></div>
             <div class="memberDocumentation">
              <div class="documentableBrief doc">
-              <p>Groups elements of this circular sequence in fixed size blocks, the way <a href="IteratingOps.html#slidingO-fffff58d">slidingO</a> does with <code>step</code> equal to <code>size</code>.</p>
+              <p>Partitions this circular sequence into non-overlapping fixed-size blocks.</p>
              </div>
              <div class="cover">
               <div class="doc">
-               <p>Groups elements of this circular sequence in fixed size blocks, the way <a href="IteratingOps.html#slidingO-fffff58d">slidingO</a> does with <code>step</code> equal to <code>size</code>.</p>
+               <p>Partitions this circular sequence into non-overlapping fixed-size blocks.</p>
+               <p>Unlike standard <code>grouped</code>, the last block wraps across the seam between the last and first elements, so <strong>every</strong> block has exactly <code>size</code> elements. Produces <code>ceil(n / size)</code> blocks for a ring of size <code>n</code>, and no blocks for an empty ring.</p>
               </div>
               <h2 class="h200">Value parameters</h2>
               <dl class="attributes attributes-small">
@@ -242,7 +243,7 @@ node9 -> node8;
                 size
                </dt>
                <dd class="body-medium">
-                <p>the number of elements per group</p>
+                <p>the number of elements per block; must be positive</p>
                </dd>
               </dl>
               <h2 class="h200">Attributes</h2>
@@ -251,7 +252,7 @@ node9 -> node8;
                 Returns
                </dt>
                <dd class="body-medium">
-                <p>An iterator producing sequences of size ''size''. Yields no elements if the sequence is empty.</p>
+                <p>an iterator producing sequences of size ''size''; empty when the ring is empty.</p>
                </dd>
                <dt class="body-small">
                 Example
@@ -260,7 +261,7 @@ node9 -> node8;
                 <div>
                  <div>
                   <div class="snippet mono-small-block">
-                   <pre><code class="language-"><span line-number="1" class=""><span class="tooltip-container"></span>Seq(0, 1, 2, 3, 4).groupedO(2) // Iterator(Seq(0, 1), Seq(2, 3), Seq(4, 0), Seq(1, 2), Seq(3, 4))
+                   <pre><code class="language-"><span line-number="1" class=""><span class="tooltip-container"></span>Seq(0, 1, 2, 3, 4).groupedO(2) // Iterator(Seq(0, 1), Seq(2, 3), Seq(4, 0))
 </span></code></pre>
                    <div class="buttons"></div>
                   </div>

@@ -784,6 +784,265 @@ node10 -> node8;
         </div>
         <div>
          <span class="groupHeader"><span t="k">extension </span>[<span t="k"></span><span data-unresolved-link="" t="t">A</span>, <span t="k"></span><span data-unresolved-link="" t="t">CC</span><span t="k"> &lt;: </span>(<span data-unresolved-link="" t="t">SeqOps</span>)](<span t="k"></span><span t="k"></span><span data-unresolved-link="" t="n">ring</span>: <span t="t">CC</span>[<span t="t">A</span>])</span>
+         <div class="documentableElement" id="reflectAt-fffff1bd" data-f-inherited="TransformingOps">
+          <div class="documentableElement-expander">
+           <button class="icon-button ar show-content"></button>
+           <div class="header monospace mono-medium">
+            <div class="signature">
+             <span class="modifiers"></span><span class="kind"><span t="k">def </span></span><a href="RingSeq$.html#reflectAt-fffff1bd" t="n" class="documentableName ">reflectAt</a>(<span t="k"></span><span t="k"></span><span data-unresolved-link="" t="n">i</span>: <a href="IndexingOps.html#IndexO-0" t="t">IndexO</a> = ...): <span data-unresolved-link="" t="t">CC</span>[<span data-unresolved-link="" t="t">A</span>]
+            </div>
+           </div>
+          </div>
+          <div class="docs">
+           <span class="modifiers"></span>
+           <div>
+            <div class="originInfo"></div>
+            <div class="memberDocumentation">
+             <div class="documentableBrief doc">
+              <p>Reflects the sequence to start at some circular index.</p>
+             </div>
+             <div class="cover">
+              <div class="doc">
+               <p>Reflects the sequence to start at some circular index.</p>
+              </div>
+              <h2 class="h200">Value parameters</h2>
+              <dl class="attributes attributes-small">
+               <dt class="body-small">
+                i
+               </dt>
+               <dd class="body-medium">
+                <p><a href="TransformingOps.html#IndexO-0">IndexO</a></p>
+               </dd>
+              </dl>
+              <h2 class="h200">Attributes</h2>
+              <dl class="attributes attributes-small">
+               <dt class="body-small">
+                Returns
+               </dt>
+               <dd class="body-medium">
+                <p>a sequence consisting of all elements reversed and rotated to start at circular index ''i''.</p>
+               </dd>
+               <dt class="body-small">
+                Example
+               </dt>
+               <dd class="body-medium">
+                <div>
+                 <div>
+                  <div class="snippet mono-small-block">
+                   <pre><code class="language-"><span line-number="1" class=""><span class="tooltip-container"></span>Seq(0, 1, 2).reflectAt() // Seq(0, 2, 1)
+</span></code></pre>
+                   <div class="buttons"></div>
+                  </div>
+                 </div>
+                </div>
+               </dd>
+               <dt class="body-small">
+                Inherited from:
+               </dt>
+               <dd class="body-medium">
+                <a href="TransformingOps.html#reflectAt-fffff1bd">TransformingOps</a>
+               </dd>
+              </dl>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+         <div class="documentableElement" id="rotateLeft-fffff1bd" data-f-inherited="TransformingOps">
+          <div class="documentableElement-expander">
+           <button class="icon-button ar show-content"></button>
+           <div class="header monospace mono-medium">
+            <div class="signature">
+             <span class="modifiers"></span><span class="kind"><span t="k">def </span></span><a href="RingSeq$.html#rotateLeft-fffff1bd" t="n" class="documentableName ">rotateLeft</a>(<span t="k"></span><span t="k"></span><span data-unresolved-link="" t="n">step</span>: <span data-unresolved-link="" t="t">Int</span>): <span data-unresolved-link="" t="t">CC</span>[<span data-unresolved-link="" t="t">A</span>]
+            </div>
+           </div>
+          </div>
+          <div class="docs">
+           <span class="modifiers"></span>
+           <div>
+            <div class="originInfo"></div>
+            <div class="memberDocumentation">
+             <div class="documentableBrief doc">
+              <p>Rotates the sequence to the left by some steps.</p>
+             </div>
+             <div class="cover">
+              <div class="doc">
+               <p>Rotates the sequence to the left by some steps.</p>
+              </div>
+              <h2 class="h200">Value parameters</h2>
+              <dl class="attributes attributes-small">
+               <dt class="body-small">
+                step
+               </dt>
+               <dd class="body-medium">
+                <p>the circular distance between each old and new position</p>
+               </dd>
+              </dl>
+              <h2 class="h200">Attributes</h2>
+              <dl class="attributes attributes-small">
+               <dt class="body-small">
+                Returns
+               </dt>
+               <dd class="body-medium">
+                <p>a sequence consisting of all elements rotated to the left by ''step'' places. If ''step'' is negative the rotation happens to the right.</p>
+               </dd>
+               <dt class="body-small">
+                Example
+               </dt>
+               <dd class="body-medium">
+                <div>
+                 <div>
+                  <div class="snippet mono-small-block">
+                   <pre><code class="language-"><span line-number="1" class=""><span class="tooltip-container"></span>Seq(0, 1, 2).rotateLeft(1) // Seq(1, 2, 0)
+</span></code></pre>
+                   <div class="buttons"></div>
+                  </div>
+                 </div>
+                </div>
+               </dd>
+               <dt class="body-small">
+                Inherited from:
+               </dt>
+               <dd class="body-medium">
+                <a href="TransformingOps.html#rotateLeft-fffff1bd">TransformingOps</a>
+               </dd>
+              </dl>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+         <div class="documentableElement" id="rotateRight-fffff1bd" data-f-inherited="TransformingOps">
+          <div class="documentableElement-expander">
+           <button class="icon-button ar show-content"></button>
+           <div class="header monospace mono-medium">
+            <div class="signature">
+             <span class="modifiers"></span><span class="kind"><span t="k">def </span></span><a href="RingSeq$.html#rotateRight-fffff1bd" t="n" class="documentableName ">rotateRight</a>(<span t="k"></span><span t="k"></span><span data-unresolved-link="" t="n">step</span>: <span data-unresolved-link="" t="t">Int</span>): <span data-unresolved-link="" t="t">CC</span>[<span data-unresolved-link="" t="t">A</span>]
+            </div>
+           </div>
+          </div>
+          <div class="docs">
+           <span class="modifiers"></span>
+           <div>
+            <div class="originInfo"></div>
+            <div class="memberDocumentation">
+             <div class="documentableBrief doc">
+              <p>Rotate the sequence to the right by some steps.</p>
+             </div>
+             <div class="cover">
+              <div class="doc">
+               <p>Rotate the sequence to the right by some steps.</p>
+              </div>
+              <h2 class="h200">Value parameters</h2>
+              <dl class="attributes attributes-small">
+               <dt class="body-small">
+                step
+               </dt>
+               <dd class="body-medium">
+                <p>the circular distance between each new and old position</p>
+               </dd>
+              </dl>
+              <h2 class="h200">Attributes</h2>
+              <dl class="attributes attributes-small">
+               <dt class="body-small">
+                Returns
+               </dt>
+               <dd class="body-medium">
+                <p>a sequence consisting of all elements rotated to the right by ''step'' places. If ''step'' is negative the rotation happens to the left.</p>
+               </dd>
+               <dt class="body-small">
+                Example
+               </dt>
+               <dd class="body-medium">
+                <div>
+                 <div>
+                  <div class="snippet mono-small-block">
+                   <pre><code class="language-"><span line-number="1" class=""><span class="tooltip-container"></span>Seq(0, 1, 2).rotateRight(1) // Seq(2, 0, 1)
+</span></code></pre>
+                   <div class="buttons"></div>
+                  </div>
+                 </div>
+                </div>
+               </dd>
+               <dt class="body-small">
+                Inherited from:
+               </dt>
+               <dd class="body-medium">
+                <a href="TransformingOps.html#rotateRight-fffff1bd">TransformingOps</a>
+               </dd>
+              </dl>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+         <div class="documentableElement" id="startAt-fffff1bd" data-f-inherited="TransformingOps">
+          <div class="documentableElement-expander">
+           <button class="icon-button ar show-content"></button>
+           <div class="header monospace mono-medium">
+            <div class="signature">
+             <span class="modifiers"></span><span class="kind"><span t="k">def </span></span><a href="RingSeq$.html#startAt-fffff1bd" t="n" class="documentableName ">startAt</a>(<span t="k"></span><span t="k"></span><span data-unresolved-link="" t="n">i</span>: <a href="IndexingOps.html#IndexO-0" t="t">IndexO</a>): <span data-unresolved-link="" t="t">CC</span>[<span data-unresolved-link="" t="t">A</span>]
+            </div>
+           </div>
+          </div>
+          <div class="docs">
+           <span class="modifiers"></span>
+           <div>
+            <div class="originInfo"></div>
+            <div class="memberDocumentation">
+             <div class="documentableBrief doc">
+              <p>Rotates the sequence to start at some circular index.</p>
+             </div>
+             <div class="cover">
+              <div class="doc">
+               <p>Rotates the sequence to start at some circular index.</p>
+              </div>
+              <h2 class="h200">Value parameters</h2>
+              <dl class="attributes attributes-small">
+               <dt class="body-small">
+                i
+               </dt>
+               <dd class="body-medium">
+                <p><a href="TransformingOps.html#IndexO-0">IndexO</a></p>
+               </dd>
+              </dl>
+              <h2 class="h200">Attributes</h2>
+              <dl class="attributes attributes-small">
+               <dt class="body-small">
+                Returns
+               </dt>
+               <dd class="body-medium">
+                <p>a sequence consisting of all elements rotated to start at circular index ''i''. It is equivalent to <a href="TransformingOps.html#rotateLeft-fffff1bd">rotateLeft</a>.</p>
+               </dd>
+               <dt class="body-small">
+                Example
+               </dt>
+               <dd class="body-medium">
+                <div>
+                 <div>
+                  <div class="snippet mono-small-block">
+                   <pre><code class="language-"><span line-number="1" class=""><span class="tooltip-container"></span>Seq(0, 1, 2).startAt(1) // Seq(1, 2, 0)
+</span></code></pre>
+                   <div class="buttons"></div>
+                  </div>
+                 </div>
+                </div>
+               </dd>
+               <dt class="body-small">
+                Inherited from:
+               </dt>
+               <dd class="body-medium">
+                <a href="TransformingOps.html#startAt-fffff1bd">TransformingOps</a>
+               </dd>
+              </dl>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div>
+         <span class="groupHeader"><span t="k">extension </span>[<span t="k"></span><span data-unresolved-link="" t="t">A</span>, <span t="k"></span><span data-unresolved-link="" t="t">CC</span><span t="k"> &lt;: </span>(<span data-unresolved-link="" t="t">SeqOps</span>)](<span t="k"></span><span t="k"></span><span data-unresolved-link="" t="n">ring</span>: <span t="t">CC</span>[<span t="t">A</span>])</span>
          <div class="documentableElement" id="alignTo-fffff58f" data-f-inherited="ComparingOps">
           <div class="documentableElement-expander">
            <button class="icon-button ar show-content"></button>
@@ -1229,265 +1488,6 @@ node10 -> node8;
         </div>
         <div>
          <span class="groupHeader"><span t="k">extension </span>[<span t="k"></span><span data-unresolved-link="" t="t">A</span>, <span t="k"></span><span data-unresolved-link="" t="t">CC</span><span t="k"> &lt;: </span>(<span data-unresolved-link="" t="t">SeqOps</span>)](<span t="k"></span><span t="k"></span><span data-unresolved-link="" t="n">ring</span>: <span t="t">CC</span>[<span t="t">A</span>])</span>
-         <div class="documentableElement" id="reflectAt-fffff1bd" data-f-inherited="TransformingOps">
-          <div class="documentableElement-expander">
-           <button class="icon-button ar show-content"></button>
-           <div class="header monospace mono-medium">
-            <div class="signature">
-             <span class="modifiers"></span><span class="kind"><span t="k">def </span></span><a href="RingSeq$.html#reflectAt-fffff1bd" t="n" class="documentableName ">reflectAt</a>(<span t="k"></span><span t="k"></span><span data-unresolved-link="" t="n">i</span>: <a href="IndexingOps.html#IndexO-0" t="t">IndexO</a> = ...): <span data-unresolved-link="" t="t">CC</span>[<span data-unresolved-link="" t="t">A</span>]
-            </div>
-           </div>
-          </div>
-          <div class="docs">
-           <span class="modifiers"></span>
-           <div>
-            <div class="originInfo"></div>
-            <div class="memberDocumentation">
-             <div class="documentableBrief doc">
-              <p>Reflects the sequence to start at some circular index.</p>
-             </div>
-             <div class="cover">
-              <div class="doc">
-               <p>Reflects the sequence to start at some circular index.</p>
-              </div>
-              <h2 class="h200">Value parameters</h2>
-              <dl class="attributes attributes-small">
-               <dt class="body-small">
-                i
-               </dt>
-               <dd class="body-medium">
-                <p><a href="TransformingOps.html#IndexO-0">IndexO</a></p>
-               </dd>
-              </dl>
-              <h2 class="h200">Attributes</h2>
-              <dl class="attributes attributes-small">
-               <dt class="body-small">
-                Returns
-               </dt>
-               <dd class="body-medium">
-                <p>a sequence consisting of all elements reversed and rotated to start at circular index ''i''.</p>
-               </dd>
-               <dt class="body-small">
-                Example
-               </dt>
-               <dd class="body-medium">
-                <div>
-                 <div>
-                  <div class="snippet mono-small-block">
-                   <pre><code class="language-"><span line-number="1" class=""><span class="tooltip-container"></span>Seq(0, 1, 2).reflectAt() // Seq(0, 2, 1)
-</span></code></pre>
-                   <div class="buttons"></div>
-                  </div>
-                 </div>
-                </div>
-               </dd>
-               <dt class="body-small">
-                Inherited from:
-               </dt>
-               <dd class="body-medium">
-                <a href="TransformingOps.html#reflectAt-fffff1bd">TransformingOps</a>
-               </dd>
-              </dl>
-             </div>
-            </div>
-           </div>
-          </div>
-         </div>
-         <div class="documentableElement" id="rotateLeft-fffff1bd" data-f-inherited="TransformingOps">
-          <div class="documentableElement-expander">
-           <button class="icon-button ar show-content"></button>
-           <div class="header monospace mono-medium">
-            <div class="signature">
-             <span class="modifiers"></span><span class="kind"><span t="k">def </span></span><a href="RingSeq$.html#rotateLeft-fffff1bd" t="n" class="documentableName ">rotateLeft</a>(<span t="k"></span><span t="k"></span><span data-unresolved-link="" t="n">step</span>: <span data-unresolved-link="" t="t">Int</span>): <span data-unresolved-link="" t="t">CC</span>[<span data-unresolved-link="" t="t">A</span>]
-            </div>
-           </div>
-          </div>
-          <div class="docs">
-           <span class="modifiers"></span>
-           <div>
-            <div class="originInfo"></div>
-            <div class="memberDocumentation">
-             <div class="documentableBrief doc">
-              <p>Rotates the sequence to the left by some steps.</p>
-             </div>
-             <div class="cover">
-              <div class="doc">
-               <p>Rotates the sequence to the left by some steps.</p>
-              </div>
-              <h2 class="h200">Value parameters</h2>
-              <dl class="attributes attributes-small">
-               <dt class="body-small">
-                step
-               </dt>
-               <dd class="body-medium">
-                <p>the circular distance between each old and new position</p>
-               </dd>
-              </dl>
-              <h2 class="h200">Attributes</h2>
-              <dl class="attributes attributes-small">
-               <dt class="body-small">
-                Returns
-               </dt>
-               <dd class="body-medium">
-                <p>a sequence consisting of all elements rotated to the left by ''step'' places. If ''step'' is negative the rotation happens to the right.</p>
-               </dd>
-               <dt class="body-small">
-                Example
-               </dt>
-               <dd class="body-medium">
-                <div>
-                 <div>
-                  <div class="snippet mono-small-block">
-                   <pre><code class="language-"><span line-number="1" class=""><span class="tooltip-container"></span>Seq(0, 1, 2).rotateLeft(1) // Seq(1, 2, 0)
-</span></code></pre>
-                   <div class="buttons"></div>
-                  </div>
-                 </div>
-                </div>
-               </dd>
-               <dt class="body-small">
-                Inherited from:
-               </dt>
-               <dd class="body-medium">
-                <a href="TransformingOps.html#rotateLeft-fffff1bd">TransformingOps</a>
-               </dd>
-              </dl>
-             </div>
-            </div>
-           </div>
-          </div>
-         </div>
-         <div class="documentableElement" id="rotateRight-fffff1bd" data-f-inherited="TransformingOps">
-          <div class="documentableElement-expander">
-           <button class="icon-button ar show-content"></button>
-           <div class="header monospace mono-medium">
-            <div class="signature">
-             <span class="modifiers"></span><span class="kind"><span t="k">def </span></span><a href="RingSeq$.html#rotateRight-fffff1bd" t="n" class="documentableName ">rotateRight</a>(<span t="k"></span><span t="k"></span><span data-unresolved-link="" t="n">step</span>: <span data-unresolved-link="" t="t">Int</span>): <span data-unresolved-link="" t="t">CC</span>[<span data-unresolved-link="" t="t">A</span>]
-            </div>
-           </div>
-          </div>
-          <div class="docs">
-           <span class="modifiers"></span>
-           <div>
-            <div class="originInfo"></div>
-            <div class="memberDocumentation">
-             <div class="documentableBrief doc">
-              <p>Rotate the sequence to the right by some steps.</p>
-             </div>
-             <div class="cover">
-              <div class="doc">
-               <p>Rotate the sequence to the right by some steps.</p>
-              </div>
-              <h2 class="h200">Value parameters</h2>
-              <dl class="attributes attributes-small">
-               <dt class="body-small">
-                step
-               </dt>
-               <dd class="body-medium">
-                <p>the circular distance between each new and old position</p>
-               </dd>
-              </dl>
-              <h2 class="h200">Attributes</h2>
-              <dl class="attributes attributes-small">
-               <dt class="body-small">
-                Returns
-               </dt>
-               <dd class="body-medium">
-                <p>a sequence consisting of all elements rotated to the right by ''step'' places. If ''step'' is negative the rotation happens to the left.</p>
-               </dd>
-               <dt class="body-small">
-                Example
-               </dt>
-               <dd class="body-medium">
-                <div>
-                 <div>
-                  <div class="snippet mono-small-block">
-                   <pre><code class="language-"><span line-number="1" class=""><span class="tooltip-container"></span>Seq(0, 1, 2).rotateRight(1) // Seq(2, 0, 1)
-</span></code></pre>
-                   <div class="buttons"></div>
-                  </div>
-                 </div>
-                </div>
-               </dd>
-               <dt class="body-small">
-                Inherited from:
-               </dt>
-               <dd class="body-medium">
-                <a href="TransformingOps.html#rotateRight-fffff1bd">TransformingOps</a>
-               </dd>
-              </dl>
-             </div>
-            </div>
-           </div>
-          </div>
-         </div>
-         <div class="documentableElement" id="startAt-fffff1bd" data-f-inherited="TransformingOps">
-          <div class="documentableElement-expander">
-           <button class="icon-button ar show-content"></button>
-           <div class="header monospace mono-medium">
-            <div class="signature">
-             <span class="modifiers"></span><span class="kind"><span t="k">def </span></span><a href="RingSeq$.html#startAt-fffff1bd" t="n" class="documentableName ">startAt</a>(<span t="k"></span><span t="k"></span><span data-unresolved-link="" t="n">i</span>: <a href="IndexingOps.html#IndexO-0" t="t">IndexO</a>): <span data-unresolved-link="" t="t">CC</span>[<span data-unresolved-link="" t="t">A</span>]
-            </div>
-           </div>
-          </div>
-          <div class="docs">
-           <span class="modifiers"></span>
-           <div>
-            <div class="originInfo"></div>
-            <div class="memberDocumentation">
-             <div class="documentableBrief doc">
-              <p>Rotates the sequence to start at some circular index.</p>
-             </div>
-             <div class="cover">
-              <div class="doc">
-               <p>Rotates the sequence to start at some circular index.</p>
-              </div>
-              <h2 class="h200">Value parameters</h2>
-              <dl class="attributes attributes-small">
-               <dt class="body-small">
-                i
-               </dt>
-               <dd class="body-medium">
-                <p><a href="TransformingOps.html#IndexO-0">IndexO</a></p>
-               </dd>
-              </dl>
-              <h2 class="h200">Attributes</h2>
-              <dl class="attributes attributes-small">
-               <dt class="body-small">
-                Returns
-               </dt>
-               <dd class="body-medium">
-                <p>a sequence consisting of all elements rotated to start at circular index ''i''. It is equivalent to <a href="TransformingOps.html#rotateLeft-fffff1bd">rotateLeft</a>.</p>
-               </dd>
-               <dt class="body-small">
-                Example
-               </dt>
-               <dd class="body-medium">
-                <div>
-                 <div>
-                  <div class="snippet mono-small-block">
-                   <pre><code class="language-"><span line-number="1" class=""><span class="tooltip-container"></span>Seq(0, 1, 2).startAt(1) // Seq(1, 2, 0)
-</span></code></pre>
-                   <div class="buttons"></div>
-                  </div>
-                 </div>
-                </div>
-               </dd>
-               <dt class="body-small">
-                Inherited from:
-               </dt>
-               <dd class="body-medium">
-                <a href="TransformingOps.html#startAt-fffff1bd">TransformingOps</a>
-               </dd>
-              </dl>
-             </div>
-            </div>
-           </div>
-          </div>
-         </div>
-        </div>
-        <div>
-         <span class="groupHeader"><span t="k">extension </span>[<span t="k"></span><span data-unresolved-link="" t="t">A</span>, <span t="k"></span><span data-unresolved-link="" t="t">CC</span><span t="k"> &lt;: </span>(<span data-unresolved-link="" t="t">SeqOps</span>)](<span t="k"></span><span t="k"></span><span data-unresolved-link="" t="n">ring</span>: <span t="t">CC</span>[<span t="t">A</span>])</span>
          <div class="documentableElement" id="groupedO-fffffdd8" data-f-inherited="IteratingOps">
           <div class="documentableElement-expander">
            <button class="icon-button ar show-content"></button>
@@ -1503,11 +1503,12 @@ node10 -> node8;
             <div class="originInfo"></div>
             <div class="memberDocumentation">
              <div class="documentableBrief doc">
-              <p>Groups elements of this circular sequence in fixed size blocks, the way <a href="IteratingOps.html#slidingO-fffff58d">slidingO</a> does with <code>step</code> equal to <code>size</code>.</p>
+              <p>Partitions this circular sequence into non-overlapping fixed-size blocks.</p>
              </div>
              <div class="cover">
               <div class="doc">
-               <p>Groups elements of this circular sequence in fixed size blocks, the way <a href="IteratingOps.html#slidingO-fffff58d">slidingO</a> does with <code>step</code> equal to <code>size</code>.</p>
+               <p>Partitions this circular sequence into non-overlapping fixed-size blocks.</p>
+               <p>Unlike standard <code>grouped</code>, the last block wraps across the seam between the last and first elements, so <strong>every</strong> block has exactly <code>size</code> elements. Produces <code>ceil(n / size)</code> blocks for a ring of size <code>n</code>, and no blocks for an empty ring.</p>
               </div>
               <h2 class="h200">Value parameters</h2>
               <dl class="attributes attributes-small">
@@ -1515,7 +1516,7 @@ node10 -> node8;
                 size
                </dt>
                <dd class="body-medium">
-                <p>the number of elements per group</p>
+                <p>the number of elements per block; must be positive</p>
                </dd>
               </dl>
               <h2 class="h200">Attributes</h2>
@@ -1524,7 +1525,7 @@ node10 -> node8;
                 Returns
                </dt>
                <dd class="body-medium">
-                <p>An iterator producing sequences of size ''size''. Yields no elements if the sequence is empty.</p>
+                <p>an iterator producing sequences of size ''size''; empty when the ring is empty.</p>
                </dd>
                <dt class="body-small">
                 Example
@@ -1533,7 +1534,7 @@ node10 -> node8;
                 <div>
                  <div>
                   <div class="snippet mono-small-block">
-                   <pre><code class="language-"><span line-number="1" class=""><span class="tooltip-container"></span>Seq(0, 1, 2, 3, 4).groupedO(2) // Iterator(Seq(0, 1), Seq(2, 3), Seq(4, 0), Seq(1, 2), Seq(3, 4))
+                   <pre><code class="language-"><span line-number="1" class=""><span class="tooltip-container"></span>Seq(0, 1, 2, 3, 4).groupedO(2) // Iterator(Seq(0, 1), Seq(2, 3), Seq(4, 0))
 </span></code></pre>
                    <div class="buttons"></div>
                   </div>
@@ -2372,7 +2373,98 @@ node10 -> node8;
       </section>
      </div>
     </section>
+    <section id="Exports">
+     <div data-togglable="Exports" class="tab expand">
+      <div class="member-group-header">
+       <h3 data-togglable="Exports" class="h400">Exports</h3>
+      </div>
+      <section id="Defined-exports">
+       <div class="documentableList expand">
+        <div class="documentableList-expander">
+         <button class="icon-button show-content expand"></button>
+         <h4 class="groupHeader h200">Defined exports</h4>
+        </div>
+        <div class="documentableElement" id="AxisLocation-0" data-f-export="from SymmetryOps$}" data-f-keywords="final">
+         <div class="documentableElement-expander">
+          <button class="icon-button ar show-content"></button>
+          <div class="header monospace mono-medium">
+           <div class="signature">
+            <span class="modifiers"><span t="k">final </span></span><span class="kind"><span t="k">type </span></span><a href="RingSeq$.html#AxisLocation-0" t="n" class="documentableName ">AxisLocation</a><span t="k"> = </span><a href="SymmetryOps$$AxisLocation.html" t="t">AxisLocation</a>
+           </div>
+          </div>
+         </div>
+         <div class="docs">
+          <span class="modifiers"></span>
+          <div>
+           <div class="originInfo">
+            Exported from <a href="SymmetryOps$.html">SymmetryOps$</a>
+           </div>
+           <div class="memberDocumentation"></div>
+          </div>
+         </div>
+        </div>
+        <div class="documentableElement" id="Edge-0" data-f-export="from SymmetryOps}" data-f-keywords="final">
+         <div class="documentableElement-expander">
+          <button class="icon-button ar show-content"></button>
+          <div class="header monospace mono-medium">
+           <div class="signature">
+            <span class="modifiers"><span t="k">final </span></span><span class="kind"><span t="k">val </span></span><a href="RingSeq$.html#Edge-0" t="n" class="documentableName ">Edge</a>: <a href="SymmetryOps$$Edge$.html" t="t">Edge</a>
+           </div>
+          </div>
+         </div>
+         <div class="docs">
+          <span class="modifiers"></span>
+          <div>
+           <div class="originInfo">
+            Exported from <a href="SymmetryOps$.html">SymmetryOps</a>
+           </div>
+           <div class="memberDocumentation"></div>
+          </div>
+         </div>
+        </div>
+        <div class="documentableElement" id="Edge-0" data-f-export="from SymmetryOps$}" data-f-keywords="final">
+         <div class="documentableElement-expander">
+          <button class="icon-button ar show-content"></button>
+          <div class="header monospace mono-medium">
+           <div class="signature">
+            <span class="modifiers"><span t="k">final </span></span><span class="kind"><span t="k">type </span></span><a href="RingSeq$.html#Edge-0" t="n" class="documentableName ">Edge</a><span t="k"> = </span><a href="SymmetryOps$$Edge.html" t="t">Edge</a>
+           </div>
+          </div>
+         </div>
+         <div class="docs">
+          <span class="modifiers"></span>
+          <div>
+           <div class="originInfo">
+            Exported from <a href="SymmetryOps$.html">SymmetryOps$</a>
+           </div>
+           <div class="memberDocumentation"></div>
+          </div>
+         </div>
+        </div>
+        <div class="documentableElement" id="Vertex-0" data-f-export="from SymmetryOps$}" data-f-keywords="final">
+         <div class="documentableElement-expander">
+          <button class="icon-button ar show-content"></button>
+          <div class="header monospace mono-medium">
+           <div class="signature">
+            <span class="modifiers"><span t="k">final </span></span><span class="kind"><span t="k">type </span></span><a href="RingSeq$.html#Vertex-0" t="n" class="documentableName ">Vertex</a><span t="k"> = </span><a href="SymmetryOps$$Vertex.html" t="t">Vertex</a>
+           </div>
+          </div>
+         </div>
+         <div class="docs">
+          <span class="modifiers"></span>
+          <div>
+           <div class="originInfo">
+            Exported from <a href="SymmetryOps$.html">SymmetryOps$</a>
+           </div>
+           <div class="memberDocumentation"></div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </section>
+     </div>
+    </section>
    </div>
   </div>
  </div>
-</section></div><div id="toc" class="body-small"><div id="toc-container"><span class="toc-title h200">In this article</span><nav class="toc-nav"><ul class="toc-list"><li><a href="#attributes">Attributes</a></li><li><a href="#members-list">Members list</a><ul><li><a href="#Type-members">Type members</a><ul><li><a href="#Inherited-types">Inherited types</a></li></ul></li><li><a href="#Extensions">Extensions</a><ul><li><a href="#Inherited-extensions">Inherited extensions</a></li></ul></li></ul></li></ul></nav></div></div></div><div id="footer" class="body-small mobile-footer"><div class="left-container">Generated with</div><div class="right-container"><div class="text"></div></div><div class="text-mobile"></div></div></div></div></body></html>
+</section></div><div id="toc" class="body-small"><div id="toc-container"><span class="toc-title h200">In this article</span><nav class="toc-nav"><ul class="toc-list"><li><a href="#attributes">Attributes</a></li><li><a href="#members-list">Members list</a><ul><li><a href="#Type-members">Type members</a><ul><li><a href="#Inherited-types">Inherited types</a></li></ul></li><li><a href="#Extensions">Extensions</a><ul><li><a href="#Inherited-extensions">Inherited extensions</a></li></ul></li><li><a href="#Exports">Exports</a><ul><li><a href="#Defined-exports">Defined exports</a></li></ul></li></ul></li></ul></nav></div></div></div><div id="footer" class="body-small mobile-footer"><div class="left-container">Generated with</div><div class="right-container"><div class="text"></div></div><div class="text-mobile"></div></div></div></div></body></html>
