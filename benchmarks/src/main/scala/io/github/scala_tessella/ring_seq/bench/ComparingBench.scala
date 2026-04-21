@@ -24,9 +24,9 @@ class ComparingBench:
   @Setup
   def setup(): Unit =
     ring = Vector.tabulate(size)(identity)
-    rotated = ring.rotateLeft(size / 2)   // True case found halfway through the rotation enumeration.
-    unrelated = ring.updated(0, -1)       // False case: every rotation must be enumerated.
-    reversed = ring.reverse               // Pessimistic case for minRotationalHammingDistance: no rotation matches.
+    rotated = ring.rotateLeft(size / 2) // True case found halfway through the rotation enumeration.
+    unrelated = ring.updated(0, -1)     // False case: every rotation must be enumerated.
+    reversed = ring.reverse // Pessimistic case for minRotationalHammingDistance: no rotation matches.
 
   @Benchmark def isRotationOf_match: Boolean =
     ring.isRotationOf(rotated)

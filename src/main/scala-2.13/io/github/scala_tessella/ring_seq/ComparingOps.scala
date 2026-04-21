@@ -101,8 +101,8 @@ object ComparingOps {
       * @param that
       *   the sequence to compare against, must have the same size
       * @return
-      *   `0` iff `that` is a rotation of `this`, otherwise the smallest number of positional mismatches
-      *   over any rotation. Useful for "how close are these two rings, up to rotation?".
+      *   `0` iff `that` is a rotation of `this`, otherwise the smallest number of positional mismatches over
+      *   any rotation. Useful for "how close are these two rings, up to rotation?".
       * @example
       *   {{{Seq(1, 0, 1, 1).minRotationalHammingDistance(Seq(1, 1, 0, 1)) // 0}}}
       */
@@ -120,8 +120,8 @@ object ComparingOps {
           case is: IndexedSeq[A] => is
           case _                 => that.toVector
         }
-        var best = Int.MaxValue
-        var k    = 0
+        var best             = Int.MaxValue
+        var k                = 0
         while (k < n && best != 0) {
           var count = 0
           var i     = 0
@@ -143,11 +143,10 @@ object ComparingOps {
 
   private def hammingOf[A, CC[B] <: SeqOps[B, CC, CC[B]]](a: CC[A], b: CC[A]): Int = {
     var count = 0
-    val ai = a.iterator
-    val bi = b.iterator
-    while (ai.hasNext) {
+    val ai    = a.iterator
+    val bi    = b.iterator
+    while (ai.hasNext)
       if (ai.next() != bi.next()) count += 1
-    }
     count
   }
 

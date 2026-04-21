@@ -61,6 +61,7 @@ class ComparingOpsSpec extends AnyFlatSpec with should.Matchers {
   it must "agree with isRotationOf" in {
     check(
       forAll(arbitrary[Seq[Int]]) { seq =>
+
         seq.rotations.toList.zipWithIndex.forall { case (rot, _) =>
           val k = seq.alignTo(rot)
           k.isDefined && seq.startAt(k.get) == rot

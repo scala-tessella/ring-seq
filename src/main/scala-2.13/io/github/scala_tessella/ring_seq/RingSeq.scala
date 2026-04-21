@@ -19,9 +19,9 @@ object RingSeq {
   // and the `AxisLocation`/`Vertex`/`Edge` types (with companions, for pattern matching) into scope.
   type AxisLocation = SymmetryOps.AxisLocation
   type Vertex       = SymmetryOps.Vertex
-  val Vertex        = SymmetryOps.Vertex
-  type Edge         = SymmetryOps.Edge
-  val Edge          = SymmetryOps.Edge
+  val Vertex = SymmetryOps.Vertex
+  type Edge = SymmetryOps.Edge
+  val Edge = SymmetryOps.Edge
 
   /** Universal trait providing decorators for a `Seq` considered circular. */
   trait RingSeqDecorators[A, CC[B] <: SeqOps[B, CC, CC[B]]]

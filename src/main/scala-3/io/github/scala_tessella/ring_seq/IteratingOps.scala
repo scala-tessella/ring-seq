@@ -24,8 +24,8 @@ trait IteratingOps extends SlicingOps:
     /** Partitions this circular sequence into non-overlapping fixed-size blocks.
       *
       * Unlike standard `grouped`, the last block wraps across the seam between the last and first elements,
-      * so **every** block has exactly `size` elements. Produces `ceil(n / size)` blocks for a ring of size `n`,
-      * and no blocks for an empty ring.
+      * so **every** block has exactly `size` elements. Produces `ceil(n / size)` blocks for a ring of size
+      * `n`, and no blocks for an empty ring.
       *
       * @param size
       *   the number of elements per block; must be positive
