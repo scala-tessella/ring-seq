@@ -34,6 +34,7 @@ class NecklaceOpsSpec extends AnyFlatSpec with TestHelper with should.Matchers {
   "Canonical form" must "be invariant under rotation" in {
     check(
       forAll(arbitrary[Seq[Int]]) { seq =>
+
         seq.rotations.toList.forall(rot => rot.canonical == seq.canonical)
       }
     )(_)
@@ -42,6 +43,7 @@ class NecklaceOpsSpec extends AnyFlatSpec with TestHelper with should.Matchers {
   "Two sequences" must "be rotations of each other iff their canonical forms are equal" in {
     check(
       forAll(arbitrary[Seq[Int]], arbitrary[Seq[Int]]) { (a, b) =>
+
         a.isRotationOf(b) == (a.size == b.size && a.canonical == b.canonical)
       }
     )(_)
@@ -56,6 +58,7 @@ class NecklaceOpsSpec extends AnyFlatSpec with TestHelper with should.Matchers {
   "Bracelet form" must "be invariant under rotation and reflection" in {
     check(
       forAll(arbitrary[Seq[Int]]) { seq =>
+
         seq.rotationsAndReflections.toList.forall(t => t.bracelet == seq.bracelet)
       }
     )(_)
@@ -65,6 +68,7 @@ class NecklaceOpsSpec extends AnyFlatSpec with TestHelper with should.Matchers {
     val ord = Ordering.Implicits.seqOrdering[List, Int]
     check(
       forAll(arbitrary[Seq[Int]]) { seq =>
+
         if (seq.isEmpty) true
         else ord.lteq(seq.bracelet.toList, seq.canonical.toList)
       }

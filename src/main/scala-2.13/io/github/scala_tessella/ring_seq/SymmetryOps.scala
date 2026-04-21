@@ -16,20 +16,22 @@ object SymmetryOps {
 
   /** The location between two consecutive elements of a circular sequence.
     *
-    * The invariant `j == (i + 1) mod n` is enforced — direct construction is forbidden.
-    * Use [[Edge.apply]] to build instances; pattern matching with `case Edge(i, j) => ...`
-    * still works.
+    * The invariant `j == (i + 1) mod n` is enforced — direct construction is forbidden. Use [[Edge.apply]] to
+    * build instances; pattern matching with `case Edge(i, j) => ...` still works.
     */
   sealed abstract case class Edge(i: Index, j: Index) extends AxisLocation
 
   object Edge {
 
-    /** Constructs the edge between consecutive elements of a circular sequence of size `n`,
-      * starting at circular index `i`. The endpoint `j = ((i mod n) + 1) mod n` is computed.
+    /** Constructs the edge between consecutive elements of a circular sequence of size `n`, starting at
+      * circular index `i`. The endpoint `j = ((i mod n) + 1) mod n` is computed.
       *
-      * @param i circular index of the first endpoint (any `IndexO`, will be normalized to `[0, n)`)
-      * @param n the ring size; must be positive
-      * @throws IllegalArgumentException if `n <= 0`
+      * @param i
+      *   circular index of the first endpoint (any `IndexO`, will be normalized to `[0, n)`)
+      * @param n
+      *   the ring size; must be positive
+      * @throws IllegalArgumentException
+      *   if `n <= 0`
       */
     def apply(i: Index, n: Int): Edge = {
       require(n > 0, "ring size must be positive")
@@ -62,12 +64,11 @@ object SymmetryOps {
           case is: IndexedSeq[A] => is
           case _                 => ring.toVector
         }
-        val smallestPeriod =
-          (1 to n).find { shift =>
+        val smallestPeriod         = (1 to n).find { shift =>
 
-            // Only periods that divide n can be candidates.
-            n % shift == 0 && (0 until (n - shift)).forall(i => indexed(i) == indexed(i + shift))
-          }
+          // Only periods that divide n can be candidates.
+          n % shift == 0 && (0 until (n - shift)).forall(i => indexed(i) == indexed(i + shift))
+        }
 
         n / smallestPeriod.getOrElse(n)
       }
@@ -86,7 +87,7 @@ object SymmetryOps {
       if (n == 0) Nil
       else {
         // Materialize once for O(1)/O(log n) indexing; avoids per-shift rotation allocation.
-        val indexed: IndexedSeq[A] = ring match {
+        val indexed: IndexedSeq[A]  = ring match {
           case is: IndexedSeq[A] => is
           case _                 => ring.toVector
         }
@@ -111,8 +112,7 @@ object SymmetryOps {
       def edgeIndices(i: Index): AxisLocation =
         Edge(i, n)
 
-      def oppositeEdgeIndex(i: Index): Index =
-        (i + n / 2) % n
+      def oppositeEdgeIndex(i: Index): Index = (i + n / 2) % n
 
       symmetryIndices.map { shift =>
 

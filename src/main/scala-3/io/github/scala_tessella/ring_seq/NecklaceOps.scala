@@ -6,11 +6,11 @@ object NecklaceOps:
 
   /** Booth's O(n) algorithm: starting index of the lexicographically smallest rotation. */
   private[ring_seq] def leastRotationBooth[A](s: IndexedSeq[A])(using ord: Ordering[A]): Int =
-    val n   = s.length
-    val len = 2 * n
-    val f   = Array.fill(len)(-1)
-    var k   = 0
-    var j   = 1
+    val n               = s.length
+    val len             = 2 * n
+    val f               = Array.fill(len)(-1)
+    var k               = 0
+    var j               = 1
     def at(idx: Int): A = s(idx % n)
     while j < len do
       val sj = at(j)
@@ -48,8 +48,8 @@ trait NecklaceOps extends ComparingOps:
 
     /** The lexicographically smallest rotation of this circular sequence (necklace canonical form).
       *
-      * Two circular sequences are rotations of each other iff their canonical forms are equal,
-      * making this useful for hashing / deduplicating equivalent rings.
+      * Two circular sequences are rotations of each other iff their canonical forms are equal, making this
+      * useful for hashing / deduplicating equivalent rings.
       *
       * @example
       *   {{{Seq(2, 0, 1).canonical // Seq(0, 1, 2)}}}
@@ -57,8 +57,8 @@ trait NecklaceOps extends ComparingOps:
     def canonical(using Ordering[A]): CC[A] =
       ring.startAt(ring.canonicalIndex)
 
-    /** The lexicographically smallest representative under both rotation and reflection
-      * (bracelet canonical form).
+    /** The lexicographically smallest representative under both rotation and reflection (bracelet canonical
+      * form).
       *
       * Two circular sequences belong to the same bracelet equivalence class iff their bracelet forms are
       * equal — useful for problems where mirror images are considered identical.
