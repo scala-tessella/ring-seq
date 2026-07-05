@@ -32,13 +32,14 @@
 <span class="home-icon">⌂</span>RingSeq
 </a>
 <div class="version-number">
-0.8.0
+0.9.0
 </div>
 </div>
 <div class="nav-toc">
 <ul>
   <li><a href="../what-is.html" class="page">What is a circular sequence</a></li>
   <li><a href="../usage.html" class="page">Usage examples</a></li>
+  <li><a href="../view.html" class="page">The RingView layer</a></li>
   <li><a href="../reference.html" class="page">Reference</a>
   <ul>
     <li><a href="../categories/indexing.html" class="active page">Indexing</a></li>
@@ -81,13 +82,14 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <span class="home-icon">⌂</span>RingSeq
 </a>
 <div class="version-number">
-0.8.0
+0.9.0
 </div>
 </div>
 <div class="nav-toc">
 <ul>
   <li><a href="../what-is.html" class="page">What is a circular sequence</a></li>
   <li><a href="../usage.html" class="page">Usage examples</a></li>
+  <li><a href="../view.html" class="page">The RingView layer</a></li>
   <li><a href="../reference.html" class="page">Reference</a>
   <ul>
     <li><a href="../categories/indexing.html" class="active page">Indexing</a></li>
@@ -139,13 +141,24 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <p>It does not return a value for an empty sequence.</p>
 <pre class="prettyprint"><code class="language-scala">Seq.empty.applyO(0) // ArithmeticException
 </code></pre>
+<h2><a href="#lifto" name="lifto" class="anchor"><span class="anchor-link"></span></a><code>liftO</code></h2>
+<p>The circular equivalent of <code>lift</code>: like <code>applyO</code>, but total. Since any integer is a valid circular index of a non-empty sequence, it returns <code>None</code> only when the sequence is empty.</p>
+<h3><a href="#example" name="example" class="anchor"><span class="anchor-link"></span></a>Example</h3>
+<pre class="prettyprint"><code class="language-scala">Seq(0, 1, 2).liftO(3)   // Some(0)
+Seq.empty[Int].liftO(0) // None
+</code></pre>
+<h2><a href="#indexofo" name="indexofo" class="anchor"><span class="anchor-link"></span></a><code>indexOfO</code></h2>
+<p>The circular equivalent of <code>indexOf</code>: finds the index of the first element equal to a given value, searching circularly from a circular index (default <code>0</code>) and wrapping past the end.</p>
+<h3><a href="#example" name="example" class="anchor"><span class="anchor-link"></span></a>Example</h3>
+<pre class="prettyprint"><code class="language-scala">Seq(0, 1, 2).indexOfO(0, 1) // 0 — found by wrapping, indexOf(0, 1) would be -1
+</code></pre>
 <h2><a href="#indexfrom" name="indexfrom" class="anchor"><span class="anchor-link"></span></a><code>indexFrom</code></h2>
 <p>Converts a circular index into a standard index.</p>
 <h3><a href="#example" name="example" class="anchor"><span class="anchor-link"></span></a>Example</h3>
 <pre class="prettyprint"><code class="language-scala">Seq(0, 1, 2).indexFrom(30001) // 1
 </code></pre>
 <div class="source-github">
-The source code for this page can be found <a href="https://github.com/scala-tessella/ring-seq/tree/v0.8.0/src/main/paradox/categories/indexing.md">here</a>.
+The source code for this page can be found <a href="https://github.com/scala-tessella/ring-seq/tree/v0.9.0/src/main/paradox/categories/indexing.md">here</a>.
 </div>
 
 <div class="nav-next">
@@ -161,6 +174,8 @@ The source code for this page can be found <a href="https://github.com/scala-tes
   <li><a href="../categories/indexing.html#indexing" class="header">Indexing</a>
   <ul>
     <li><a href="../categories/indexing.html#applyo" class="header"><code>applyO</code></a></li>
+    <li><a href="../categories/indexing.html#lifto" class="header"><code>liftO</code></a></li>
+    <li><a href="../categories/indexing.html#indexofo" class="header"><code>indexOfO</code></a></li>
     <li><a href="../categories/indexing.html#indexfrom" class="header"><code>indexFrom</code></a></li>
   </ul></li>
 </ul>
@@ -229,7 +244,7 @@ The source code for this page can be found <a href="https://github.com/scala-tes
 <script type="text/javascript" src="../lib/prettify/prettify.js"></script>
 <script type="text/javascript" src="../lib/prettify/lang-scala.js"></script>
 <script type="text/javascript">jQuery(function(){window.prettyPrint && prettyPrint()});</script>
-<script type="text/javascript">jQuery(function(jq){initOldVersionWarnings(jq, '0.8.0', 'https://github.com/scala-tessella/ring-seq')});</script>
+<script type="text/javascript">jQuery(function(jq){initOldVersionWarnings(jq, '0.9.0', 'https://github.com/scala-tessella/ring-seq')});</script>
 
 
 </html>

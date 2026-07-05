@@ -1,4 +1,4 @@
-<!DOCTYPE html><html data-pathToRoot="../../../../" data-rawLocation="io/github/scala_tessella/ring_seq/SlicingOps" data-dynamicSideMenu="false"><head><meta charset="utf-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta><title>SlicingOps</title><link rel="shortcut icon" type="image/x-icon" href="../../../../favicon.ico"></link><script type="text/javascript" src="../../../../scripts/theme.js"></script><script type="text/javascript" src="../../../../scripts/searchData.js" defer="true"></script><script type="text/javascript" src="../../../../scripts/scastieConfiguration.js" defer="true"></script><link rel="stylesheet" href="../../../../styles/theme/bundle.css"></link><link rel="stylesheet" href="../../../../styles/theme/components/bundle.css"></link><link rel="stylesheet" href="../../../../styles/theme/components/button/bundle.css"></link><link rel="stylesheet" href="../../../../styles/theme/layout/bundle.css"></link><link rel="stylesheet" href="../../../../styles/nord-light.css"></link><link rel="stylesheet" href="../../../../styles/dotty-icons.css"></link><link rel="stylesheet" href="../../../../styles/filter-bar.css"></link><link rel="stylesheet" href="../../../../styles/code-snippets.css"></link><link rel="stylesheet" href="../../../../styles/searchbar.css"></link><link rel="stylesheet" href="../../../../styles/social-links.css"></link><link rel="stylesheet" href="../../../../styles/versions-dropdown.css"></link><link rel="stylesheet" href="../../../../styles/content-contributors.css"></link><link rel="stylesheet" href="../../../../styles/fontawesome.css"></link><script type="text/javascript" src="../../../../hljs/highlight.pack.js" defer="true"></script><script type="text/javascript" src="../../../../scripts/hljs-scala3.js" defer="true"></script><script type="text/javascript" src="../../../../scripts/ux.js" defer="true"></script><script type="text/javascript" src="../../../../scripts/common/component.js" defer="true"></script><script type="text/javascript" src="../../../../scripts/common/utils.js" defer="true"></script><script type="text/javascript" src="../../../../scripts/components/FilterBar.js" defer="true"></script><script type="text/javascript" src="../../../../scripts/components/DocumentableList.js" defer="true"></script><script type="text/javascript" src="../../../../scripts/components/Input.js" defer="true"></script><script type="text/javascript" src="../../../../scripts/components/FilterGroup.js" defer="true"></script><script type="text/javascript" src="../../../../scripts/components/Filter.js" defer="true"></script><script type="text/javascript" src="../../../../scripts/scaladoc-scalajs.js" defer="true"></script><script type="text/javascript" src="../../../../scripts/contributors.js" defer="true"></script><script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js" defer="true"></script><script type="text/javascript" src="https://d3js.org/d3.v6.min.js" defer="true"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/graphlib-dot@0.6.2/dist/graphlib-dot.min.js" defer="true"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dagre-d3/0.6.1/dagre-d3.min.js" defer="true"></script><script type="text/javascript" src="https://scastie.scala-lang.org/embedded.js" defer="true"></script><script type="text/javascript" src="../../../../scripts/data.js" defer="true"></script><link rel="stylesheet" href="../../../../styles/apistyles.css"></link><script>var pathToRoot = "../../../../";</script></head><body><div id=""><div id="header" class="body-small"><div class="header-container-left"><a href="../../../../" class="logo-container"><span class="project-name h300">ringSeq-root</span></a><span onclick="dropdownHandler(event)" class="text-button with-arrow" id="dropdown-trigger"><a></a></span><div id="version-dropdown" class="dropdown-menu"></div></div><div class="header-container-right"><button id="search-toggle" class="icon-button"></button><span id="theme-toggle" class="icon-button"></span><span id="mobile-menu-toggle" class="icon-button hamburger"></span></div></div><div id="mobile-menu"><div class="mobile-menu-header body-small"><span class="mobile-menu-logo"><span class="project-name h300">ringSeq-root</span></span><button id="mobile-menu-close" class="icon-button close"></button></div><div class="mobile-menu-container body-medium"><input id="mobile-scaladoc-searchbar-input" class="scaladoc-searchbar-input" type="search" placeholder="Find anything"></input><span id="mobile-theme-toggle" class="mobile-menu-item mode"></span></div></div><span id="mobile-sidebar-toggle" class="floating-button"></span><div id="leftColumn" class="body-small"><div class="switcher-container"><a id="api-nav-button" class="switcher h100 selected" href="../../../../index.html">API</a></div><nav id="api-nav" class="side-menu"><div class="ni n0 expanded"><span class="nh h100 expanded cs"><button class="ar icon-button expanded"></button><a href="../ring_seq.html"><span class="micon pa"></span><span>io.github.scala_tessella.ring_seq</span></a></span><div class="ni n1"><span class="nh "><button class="ar icon-button "></button><a href="examples.html"><span class="micon pa"></span><span>examples</span></a></span><div class="ni n2 "><span class="nh "><a href="examples/Ring.html"><span class="micon cl"></span><span>Ring</span></a></span></div></div><div class="ni n1 "><span class="nh "><a href="ComparingOps.html"><span class="micon tr"></span><span>ComparingOps</span></a></span></div><div class="ni n1 "><span class="nh "><a href="IndexingOps.html"><span class="micon tr"></span><span>IndexingOps</span></a></span></div><div class="ni n1 "><span class="nh "><a href="IteratingOps.html"><span class="micon tr"></span><span>IteratingOps</span></a></span></div><div class="ni n1 "><span class="nh "><a href="NecklaceOps$.html"><span class="micon ob"></span><span>NecklaceOps</span></a></span></div><div class="ni n1 "><span class="nh "><a href="NecklaceOps.html"><span class="micon tr"></span><span>NecklaceOps</span></a></span></div><div class="ni n1 "><span class="nh "><a href="RingSeq$.html"><span class="micon ob"></span><span>RingSeq</span></a></span></div><div class="ni n1 expanded"><span class="nh h100 selected"><a href="#"><span class="micon tr"></span><span>SlicingOps</span></a></span></div><div class="ni n1"><span class="nh "><button class="ar icon-button "></button><a href="SymmetryOps$.html"><span class="micon ob"></span><span>SymmetryOps</span></a></span><div class="ni n2 "><span class="nh "><a href="SymmetryOps$$AxisLocation.html"><span class="micon tr"></span><span>AxisLocation</span></a></span></div><div class="ni n2 "><span class="nh "><a href="SymmetryOps$$Edge.html"><span class="micon cl"></span><span>Edge</span></a></span></div><div class="ni n2 "><span class="nh "><a href="SymmetryOps$$Edge$.html"><span class="micon ob"></span><span>Edge</span></a></span></div><div class="ni n2 "><span class="nh "><a href="SymmetryOps$$Vertex.html"><span class="micon cl"></span><span>Vertex</span></a></span></div></div><div class="ni n1 "><span class="nh "><a href="SymmetryOps.html"><span class="micon tr"></span><span>SymmetryOps</span></a></span></div><div class="ni n1 "><span class="nh "><a href="TransformingOps.html"><span class="micon tr"></span><span>TransformingOps</span></a></span></div></div></nav></div><div id="footer" class="body-small"><div class="left-container">Generated with</div><div class="right-container"><div class="text"></div></div><div class="text-mobile"></div></div><div id="scaladoc-searchBar"></div><div id="main"><div class="breadcrumbs container"><a href="../../../../index.html">ringSeq-root</a>/<a href="../ring_seq.html">io.github.scala_tessella.ring_seq</a>/<a href="SlicingOps.html">SlicingOps</a></div><div id="content" class="body-medium"><div><div class="cover-header">
+<!DOCTYPE html><html data-pathToRoot="../../../../" data-rawLocation="io/github/scala_tessella/ring_seq/SlicingOps" data-dynamicSideMenu="false"><head><meta charset="utf-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta><title>SlicingOps</title><link rel="shortcut icon" type="image/x-icon" href="../../../../favicon.ico"></link><script type="text/javascript" src="../../../../scripts/theme.js"></script><script type="text/javascript" src="../../../../scripts/searchData.js" defer="true"></script><script type="text/javascript" src="../../../../scripts/scastieConfiguration.js" defer="true"></script><link rel="stylesheet" href="../../../../styles/theme/bundle.css"></link><link rel="stylesheet" href="../../../../styles/theme/components/bundle.css"></link><link rel="stylesheet" href="../../../../styles/theme/components/button/bundle.css"></link><link rel="stylesheet" href="../../../../styles/theme/layout/bundle.css"></link><link rel="stylesheet" href="../../../../styles/nord-light.css"></link><link rel="stylesheet" href="../../../../styles/dotty-icons.css"></link><link rel="stylesheet" href="../../../../styles/filter-bar.css"></link><link rel="stylesheet" href="../../../../styles/code-snippets.css"></link><link rel="stylesheet" href="../../../../styles/searchbar.css"></link><link rel="stylesheet" href="../../../../styles/social-links.css"></link><link rel="stylesheet" href="../../../../styles/versions-dropdown.css"></link><link rel="stylesheet" href="../../../../styles/content-contributors.css"></link><link rel="stylesheet" href="../../../../styles/fontawesome.css"></link><script type="text/javascript" src="../../../../hljs/highlight.pack.js" defer="true"></script><script type="text/javascript" src="../../../../scripts/hljs-scala3.js" defer="true"></script><script type="text/javascript" src="../../../../scripts/ux.js" defer="true"></script><script type="text/javascript" src="../../../../scripts/common/component.js" defer="true"></script><script type="text/javascript" src="../../../../scripts/common/utils.js" defer="true"></script><script type="text/javascript" src="../../../../scripts/components/FilterBar.js" defer="true"></script><script type="text/javascript" src="../../../../scripts/components/DocumentableList.js" defer="true"></script><script type="text/javascript" src="../../../../scripts/components/Input.js" defer="true"></script><script type="text/javascript" src="../../../../scripts/components/FilterGroup.js" defer="true"></script><script type="text/javascript" src="../../../../scripts/components/Filter.js" defer="true"></script><script type="text/javascript" src="../../../../scripts/scaladoc-scalajs.js" defer="true"></script><script type="text/javascript" src="../../../../scripts/contributors.js" defer="true"></script><script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js" defer="true"></script><script type="text/javascript" src="https://d3js.org/d3.v6.min.js" defer="true"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/graphlib-dot@0.6.2/dist/graphlib-dot.min.js" defer="true"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dagre-d3/0.6.1/dagre-d3.min.js" defer="true"></script><script type="text/javascript" src="https://scastie.scala-lang.org/embedded.js" defer="true"></script><script type="text/javascript" src="../../../../scripts/data.js" defer="true"></script><link rel="stylesheet" href="../../../../styles/apistyles.css"></link><script>var pathToRoot = "../../../../";</script></head><body><div id=""><div id="header" class="body-small"><div class="header-container-left"><a href="../../../../" class="logo-container"><span class="project-name h300">ringSeq-root</span></a><span onclick="dropdownHandler(event)" class="text-button with-arrow" id="dropdown-trigger"><a></a></span><div id="version-dropdown" class="dropdown-menu"></div></div><div class="header-container-right"><button id="search-toggle" class="icon-button"></button><span id="theme-toggle" class="icon-button"></span><span id="mobile-menu-toggle" class="icon-button hamburger"></span></div></div><div id="mobile-menu"><div class="mobile-menu-header body-small"><span class="mobile-menu-logo"><span class="project-name h300">ringSeq-root</span></span><button id="mobile-menu-close" class="icon-button close"></button></div><div class="mobile-menu-container body-medium"><input id="mobile-scaladoc-searchbar-input" class="scaladoc-searchbar-input" type="search" placeholder="Find anything"></input><span id="mobile-theme-toggle" class="mobile-menu-item mode"></span></div></div><span id="mobile-sidebar-toggle" class="floating-button"></span><div id="leftColumn" class="body-small"><div class="switcher-container"><a id="api-nav-button" class="switcher h100 selected" href="../../../../index.html">API</a></div><nav id="api-nav" class="side-menu"><div class="ni n0 expanded"><span class="nh h100 expanded cs"><button class="ar icon-button expanded"></button><a href="../ring_seq.html"><span class="micon pa"></span><span>io.github.scala_tessella.ring_seq</span></a></span><div class="ni n1"><span class="nh "><button class="ar icon-button "></button><a href="examples.html"><span class="micon pa"></span><span>examples</span></a></span><div class="ni n2 "><span class="nh "><a href="examples/Ring.html"><span class="micon cl"></span><span>Ring</span></a></span></div></div><div class="ni n1 "><span class="nh "><a href="ComparingOps.html"><span class="micon tr"></span><span>ComparingOps</span></a></span></div><div class="ni n1 "><span class="nh "><a href="IndexingOps.html"><span class="micon tr"></span><span>IndexingOps</span></a></span></div><div class="ni n1 "><span class="nh "><a href="IteratingOps.html"><span class="micon tr"></span><span>IteratingOps</span></a></span></div><div class="ni n1 "><span class="nh "><a href="NecklaceOps$.html"><span class="micon ob"></span><span>NecklaceOps</span></a></span></div><div class="ni n1 "><span class="nh "><a href="NecklaceOps.html"><span class="micon tr"></span><span>NecklaceOps</span></a></span></div><div class="ni n1 "><span class="nh "><a href="RingSeq$.html"><span class="micon ob"></span><span>RingSeq</span></a></span></div><div class="ni n1 "><span class="nh "><a href="RingView.html"><span class="micon cl"></span><span>RingView</span></a></span></div><div class="ni n1 "><span class="nh "><a href="RingView$.html"><span class="micon ob"></span><span>RingView</span></a></span></div><div class="ni n1 expanded"><span class="nh h100 selected"><a href="#"><span class="micon tr"></span><span>SlicingOps</span></a></span></div><div class="ni n1"><span class="nh "><button class="ar icon-button "></button><a href="SymmetryOps$.html"><span class="micon ob"></span><span>SymmetryOps</span></a></span><div class="ni n2 "><span class="nh "><a href="SymmetryOps$$AxisLocation.html"><span class="micon tr"></span><span>AxisLocation</span></a></span></div><div class="ni n2 "><span class="nh "><a href="SymmetryOps$$Edge.html"><span class="micon cl"></span><span>Edge</span></a></span></div><div class="ni n2 "><span class="nh "><a href="SymmetryOps$$Edge$.html"><span class="micon ob"></span><span>Edge</span></a></span></div><div class="ni n2 "><span class="nh "><a href="SymmetryOps$$Vertex.html"><span class="micon cl"></span><span>Vertex</span></a></span></div></div><div class="ni n1 "><span class="nh "><a href="SymmetryOps.html"><span class="micon tr"></span><span>SymmetryOps</span></a></span></div><div class="ni n1 "><span class="nh "><a href="TransformingOps.html"><span class="micon tr"></span><span>TransformingOps</span></a></span></div></div></nav></div><div id="footer" class="body-small"><div class="left-container">Generated with</div><div class="right-container"><div class="text"></div></div><div class="text-mobile"></div></div><div id="scaladoc-searchBar"></div><div id="main"><div class="breadcrumbs container"><a href="../../../../index.html">ringSeq-root</a>/<a href="../ring_seq.html">io.github.scala_tessella.ring_seq</a>/<a href="SlicingOps.html">SlicingOps</a></div><div id="content" class="body-medium"><div><div class="cover-header">
  <span class="icon"><span class="micon tr"></span></span>
  <h1 class="h600 single">SlicingOps</h1>
 </div>
@@ -219,7 +219,7 @@ node9 -> node8;
            <button class="icon-button ar show-content"></button>
            <div class="header monospace mono-medium">
             <div class="signature">
-             <span class="modifiers"></span><span class="kind"><span t="k">def </span></span><a href="SlicingOps.html#containsSliceO-fffffb20" t="n" class="documentableName ">containsSliceO</a>(<span t="k"></span><span t="k"></span><span data-unresolved-link="" t="n">slice</span>: <span data-unresolved-link="" t="t">Seq</span>[<span t="t">A</span>]): <span data-unresolved-link="" t="t">Boolean</span>
+             <span class="modifiers"></span><span class="kind"><span t="k">def </span></span><a href="SlicingOps.html#containsSliceO-fffffb20" t="n" class="documentableName ">containsSliceO</a>(<span t="k"></span><span t="k"></span><span data-unresolved-link="" t="n">that</span>: <span data-unresolved-link="" t="t">Seq</span>[<span t="t">A</span>]): <span data-unresolved-link="" t="t">Boolean</span>
             </div>
            </div>
           </div>
@@ -372,7 +372,7 @@ node9 -> node8;
                 Returns
                </dt>
                <dd class="body-medium">
-                <p>the first index &gt;= ''from'' such that the elements of this circular sequence starting at this index match the elements of sequence ''that'', or -1 if no such subsequence exists.</p>
+                <p>the first index &gt;= ''from'' such that the elements of this circular sequence starting at this index match the elements of sequence ''that'', or -1 if no such subsequence exists. An empty ''that'' is found at <code>indexFrom(from)</code> (or 0 on an empty sequence).</p>
                </dd>
                <dt class="body-small">
                 Example
@@ -436,7 +436,7 @@ node9 -> node8;
                 Returns
                </dt>
                <dd class="body-medium">
-                <p>the last index &lt;= ''end'' such that the elements of this circular sequence starting at this index match the elements of sequence ''that'', or -1 if no such subsequence exists.</p>
+                <p>the last index &lt;= ''end'' such that the elements of this circular sequence starting at this index match the elements of sequence ''that'', or -1 if no such subsequence exists. An empty ''that'' is found at <code>indexFrom(end)</code> (or 0 on an empty sequence).</p>
                </dd>
                <dt class="body-small">
                 Example
@@ -527,7 +527,7 @@ node9 -> node8;
            <button class="icon-button ar show-content"></button>
            <div class="header monospace mono-medium">
             <div class="signature">
-             <span class="modifiers"></span><span class="kind"><span t="k">def </span></span><a href="SlicingOps.html#sliceO-fffff2b2" t="n" class="documentableName ">sliceO</a>(<span t="k"></span><span t="k"></span><span data-unresolved-link="" t="n">from</span>: <a href="IndexingOps.html#IndexO-0" t="t">IndexO</a>, <span t="k"></span><span data-unresolved-link="" t="n">to</span>: <a href="IndexingOps.html#IndexO-0" t="t">IndexO</a>): <span data-unresolved-link="" t="t">CC</span>[<span data-unresolved-link="" t="t">A</span>]
+             <span class="modifiers"></span><span class="kind"><span t="k">def </span></span><a href="SlicingOps.html#sliceO-fffff2b2" t="n" class="documentableName ">sliceO</a>(<span t="k"></span><span t="k"></span><span data-unresolved-link="" t="n">from</span>: <a href="IndexingOps.html#IndexO-0" t="t">IndexO</a>, <span t="k"></span><span data-unresolved-link="" t="n">until</span>: <a href="IndexingOps.html#IndexO-0" t="t">IndexO</a>): <span data-unresolved-link="" t="t">CC</span>[<span data-unresolved-link="" t="t">A</span>]
             </div>
            </div>
           </div>
@@ -1094,6 +1094,137 @@ node9 -> node8;
                </dt>
                <dd class="body-medium">
                 <a href="IndexingOps.html#indexFrom-ffffffc9">IndexingOps</a>
+               </dd>
+              </dl>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+         <div class="documentableElement" id="indexOfO-fffff89c" data-f-inherited="IndexingOps">
+          <div class="documentableElement-expander">
+           <button class="icon-button ar show-content"></button>
+           <div class="header monospace mono-medium">
+            <div class="signature">
+             <span class="modifiers"></span><span class="kind"><span t="k">def </span></span><a href="SlicingOps.html#indexOfO-fffff89c" t="n" class="documentableName ">indexOfO</a>(<span t="k"></span><span t="k"></span><span data-unresolved-link="" t="n">elem</span>: <span t="t">A</span>, <span t="k"></span><span data-unresolved-link="" t="n">from</span>: <a href="IndexingOps.html#IndexO-0" t="t">IndexO</a> = ...): <a href="IndexingOps.html#Index-0" t="t">Index</a>
+            </div>
+           </div>
+          </div>
+          <div class="docs">
+           <span class="modifiers"></span>
+           <div>
+            <div class="originInfo"></div>
+            <div class="memberDocumentation">
+             <div class="documentableBrief doc">
+              <p>Finds the circular index of the first element equal to a given value, searching circularly from a given circular index (the circular version of <code>indexOf</code>).</p>
+             </div>
+             <div class="cover">
+              <div class="doc">
+               <p>Finds the circular index of the first element equal to a given value, searching circularly from a given circular index (the circular version of <code>indexOf</code>).</p>
+               <p>The whole ring is searched, wrapping past the end back to the start.</p>
+              </div>
+              <h2 class="h200">Value parameters</h2>
+              <dl class="attributes attributes-small">
+               <dt class="body-small">
+                elem
+               </dt>
+               <dd class="body-medium">
+                <p>the element value to search for</p>
+               </dd>
+               <dt class="body-small">
+                from
+               </dt>
+               <dd class="body-medium">
+                <p><a href="IndexingOps.html#IndexO-0">IndexO</a></p>
+               </dd>
+              </dl>
+              <h2 class="h200">Attributes</h2>
+              <dl class="attributes attributes-small">
+               <dt class="body-small">
+                Returns
+               </dt>
+               <dd class="body-medium">
+                <p>the <a href="IndexingOps.html#Index-0">Index</a> in <code>[0, size)</code> of the first element found at or after circular index ''from'', or -1 if the element is not in the sequence.</p>
+               </dd>
+               <dt class="body-small">
+                Example
+               </dt>
+               <dd class="body-medium">
+                <div>
+                 <div>
+                  <div class="snippet mono-small-block">
+                   <pre><code class="language-"><span line-number="1" class=""><span class="tooltip-container"></span>Seq(0, 1, 2).indexOfO(0, 1) // 0
+</span></code></pre>
+                   <div class="buttons"></div>
+                  </div>
+                 </div>
+                </div>
+               </dd>
+               <dt class="body-small">
+                Inherited from:
+               </dt>
+               <dd class="body-medium">
+                <a href="IndexingOps.html#indexOfO-fffff89c">IndexingOps</a>
+               </dd>
+              </dl>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+         <div class="documentableElement" id="liftO-a5b" data-f-inherited="IndexingOps">
+          <div class="documentableElement-expander">
+           <button class="icon-button ar show-content"></button>
+           <div class="header monospace mono-medium">
+            <div class="signature">
+             <span class="modifiers"></span><span class="kind"><span t="k">def </span></span><a href="SlicingOps.html#liftO-a5b" t="n" class="documentableName ">liftO</a>(<span t="k"></span><span t="k"></span><span data-unresolved-link="" t="n">i</span>: <a href="IndexingOps.html#IndexO-0" t="t">IndexO</a>): <span data-unresolved-link="" t="t">Option</span>[<span data-unresolved-link="" t="t">A</span>]
+            </div>
+           </div>
+          </div>
+          <div class="docs">
+           <span class="modifiers"></span>
+           <div>
+            <div class="originInfo"></div>
+            <div class="memberDocumentation">
+             <div class="documentableBrief doc">
+              <p>Optionally gets the element at some circular index (the circular version of <code>lift</code>).</p>
+             </div>
+             <div class="cover">
+              <div class="doc">
+               <p>Optionally gets the element at some circular index (the circular version of <code>lift</code>).</p>
+               <p>Since every circular index is valid on a non-empty sequence, this returns <code>None</code> only when the sequence is empty.</p>
+              </div>
+              <h2 class="h200">Value parameters</h2>
+              <dl class="attributes attributes-small">
+               <dt class="body-small">
+                i
+               </dt>
+               <dd class="body-medium">
+                <p><a href="IndexingOps.html#IndexO-0">IndexO</a></p>
+               </dd>
+              </dl>
+              <h2 class="h200">Attributes</h2>
+              <dl class="attributes attributes-small">
+               <dt class="body-small">
+                Example
+               </dt>
+               <dd class="body-medium">
+                <div>
+                 <div>
+                  <div class="snippet mono-small-block">
+                   <pre><code class="language-"><span line-number="1" class=""><span class="tooltip-container"></span><span class="hideable"> </span>Seq(0, 1, 2).liftO(3)   // Some(0)
+</span><span line-number="2" class=""><span class="tooltip-container"></span><span class="hideable"> </span>Seq.empty[Int].liftO(0) // None
+</span></code></pre>
+                   <div class="buttons"></div>
+                  </div>
+                 </div>
+                </div>
+               </dd>
+               <dt class="body-small">
+                Inherited from:
+               </dt>
+               <dd class="body-medium">
+                <a href="IndexingOps.html#liftO-a5b">IndexingOps</a>
                </dd>
               </dl>
              </div>

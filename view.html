@@ -2,11 +2,11 @@
 <html class="no-js" lang="en">
 
 <head>
-<title>RingSeq</title>
+<title>The RingView layer · RingSeq</title>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="description" content='ringSeq-root'/>
-<link rel="canonical" href="https://github.com/scala-tessella/ring-seqindex.html"/>
+<link rel="canonical" href="https://github.com/scala-tessella/ring-seqview.html"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:100normal,100italic,300normal,300italic,400normal,400italic,500normal,500italic,700normal,700italic,900normal,900italicc" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="lib/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="js/page.js"></script>
@@ -28,7 +28,7 @@
 <div class="off-canvas position-left" id="off-canvas-menu" data-off-canvas>
 <nav class="off-canvas-nav">
 <div class="nav-home">
-<a href="index.html" class="active">
+<a href="index.html" >
 <span class="home-icon">⌂</span>RingSeq
 </a>
 <div class="version-number">
@@ -39,7 +39,7 @@
 <ul>
   <li><a href="what-is.html" class="page">What is a circular sequence</a></li>
   <li><a href="usage.html" class="page">Usage examples</a></li>
-  <li><a href="view.html" class="page">The RingView layer</a></li>
+  <li><a href="view.html" class="active page">The RingView layer</a></li>
   <li><a href="reference.html" class="page">Reference</a>
   <ul>
     <li><a href="categories/indexing.html" class="page">Indexing</a></li>
@@ -65,7 +65,7 @@
 H3.6C3.048,13,3,13.447,3,14c0,0.553,0.048,1,0.6,1H16.4c0.552,0,0.6-0.447,0.6-1C17,13.447,16.952,13,16.4,13z M3.6,7H16.4
 C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.048,7,3.6,7z"/></svg>
 </a>
-<div class="title"><a href="index.html" class="active">RingSeq</a></div>
+<div class="title"><a href="index.html">RingSeq</a></div>
 
 <!--
 <a href="https://www.example.com" class="logo show-for-medium">logo</a>
@@ -78,7 +78,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="medium-3 large-2 show-for-medium column">
 <nav class="site-nav">
 <div class="nav-home">
-<a href="index.html" class="active">
+<a href="index.html" >
 <span class="home-icon">⌂</span>RingSeq
 </a>
 <div class="version-number">
@@ -89,7 +89,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <ul>
   <li><a href="what-is.html" class="page">What is a circular sequence</a></li>
   <li><a href="usage.html" class="page">Usage examples</a></li>
-  <li><a href="view.html" class="page">The RingView layer</a></li>
+  <li><a href="view.html" class="active page">The RingView layer</a></li>
   <li><a href="reference.html" class="page">Reference</a>
   <ul>
     <li><a href="categories/indexing.html" class="page">Indexing</a></li>
@@ -114,65 +114,65 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 
 <div class="page-header row">
 <div class="medium-12 show-for-medium column">
+<div class="nav-breadcrumbs">
+<ul>
+  <li><a href="index.html">RingSeq</a></li>
+  <li>The RingView layer</li>
+</ul>
+</div>
 </div>
 </div>
 
 <div class="page-content row">
 <div class="small-12 large-9 column" id="docs">
-<h1><a href="#ringseq" name="ringseq" class="anchor"><span class="anchor-link"></span></a>RingSeq</h1>
-<p>A library that adds new operations to Scala <code>Seq</code> for when a sequence needs to be considered <a href="what-is.html"><strong>circular</strong></a>, its elements forming a ring.</p>
-<p>It works on any immutable / mutable <code>Seq</code> and sub-types.</p>
-<p>Available for Scala <code>3.3.7</code> and <code>2.13.18</code>, cross-published for the JVM, Scala.js, and Scala Native.</p>
-<h2><a href="#setup" name="setup" class="anchor"><span class="anchor-link"></span></a>Setup</h2>
-<p>Add the following dependency to your <code>build.sbt</code> file:</p>
-<pre class="prettyprint"><code class="language-scala">libraryDependencies += &quot;io.github.scala-tessella&quot; %% &quot;ring-seq&quot; % &quot;0.9.0&quot; // Use %%% instead of %% if you&#39;re using ScalaJS
-</code></pre>
-<h2><a href="#getting-started" name="getting-started" class="anchor"><span class="anchor-link"></span></a>Getting started</h2>
-<p>First, start with the following import:</p>
+<h1><a href="#the-ringview-layer" name="the-ringview-layer" class="anchor"><span class="anchor-link"></span></a>The RingView layer</h1>
+<p><code>.ring</code> turns any <code>Seq</code> (or <code>String</code> / <code>StringBuilder</code>) into a <strong>lazy view</strong> of the circular sequence:</p>
 <pre class="prettyprint"><code class="language-scala">import io.github.scala_tessella.ring_seq.RingSeq._
+
+val ring = Vector(0, 1, 2, 3).ring // RingView[Int] — no copy
 </code></pre>
-<p>Where the <a href="https://github.com/scala-tessella/ring-seq/blob/master/src/main/scala/io/github/scala_tessella/ring_seq/RingSeq.scala"><code>RingSeq</code></a> object is imported, any collection under <code>Seq</code> will access the new methods. You can write something like:</p>
-<pre class="prettyprint"><code class="language-scala">&quot;RING&quot;.rotateRight(1).mkString // GRIN
-List(0, 1, 2, 3).startAt(2) // List(2, 3, 0, 1)
-ListBuffer(1, 3, 5, 7, 9).reflectAt(3) // ListBuffer(7, 5, 3, 1, 9)
+<p>A <code>RingView</code> wraps the underlying elements together with a rotation offset and a reflection flag. All the positional bookkeeping goes through a single internal translation, so transformations are pure index arithmetic:</p>
+<pre class="prettyprint"><code class="language-scala">ring.rotateRight(1)  // O(1), still a view
+ring.reflectAt()     // O(1), still a view
+ring.reverse         // O(1), still a view
+ring.startAt(2)      // O(1), still a view
 </code></pre>
-<h2><a href="#need" name="need" class="anchor"><span class="anchor-link"></span></a>Need</h2>
-<p>Whenever data are structured in a circular sequence, chances are you don&rsquo;t want to locally reinvent the wheel (pun intended).</p>
-<h2><a href="#solution" name="solution" class="anchor"><span class="anchor-link"></span></a>Solution</h2>
-<p><strong>RingSeq</strong> is a small, purely functional, self-contained library, where most of the circular use cases are already solved and building blocks provided for the others.</p>
-<p>Leveraging Scala 3 <a href="https://docs.scala-lang.org/scala3/book/ca-extension-methods.html"><code>extension</code></a> or Scala 2 <a href="https://docs.scala-lang.org/overviews/core/implicit-classes.html"><code>implicit class</code></a>, it acts like a <em>decorator</em>, providing new circular methods to any collection under <code>Seq</code>.</p>
-<h2><a href="#use-cases" name="use-cases" class="anchor"><span class="anchor-link"></span></a>Use cases</h2>
+<p>This is the same design as the <code>Circular</code> view of the <a href="https://github.com/scala-tessella/ring-seq-rs">Rust port</a>.</p>
+<h2><a href="#views-all-the-way-down" name="views-all-the-way-down" class="anchor"><span class="anchor-link"></span></a>Views all the way down</h2>
+<p><code>rotations</code>, <code>reflections</code>, <code>reversions</code> and <code>rotationsAndReflections</code> return iterators of <strong>views</strong>, produced in O(1) each — so searches short-circuit without materializing anything:</p>
+<pre class="prettyprint"><code class="language-scala">Vector(0, 1, 2, 3).ring.rotations.exists(_.iterator.sameElements(Seq(2, 3, 0, 1))) // true
+</code></pre>
+<h2><a href="#plain-names" name="plain-names" class="anchor"><span class="anchor-link"></span></a>Plain names</h2>
+<p>Because <code>RingView</code> is its own type, there is no <code>Seq</code> method to clash with: the circular operations carry their plain names, with no <code>O</code> suffix.</p>
+<pre class="prettyprint"><code class="language-scala">val v = Vector(0, 1, 2).ring
+v(3)             // 0 — indexing wraps in both directions
+v.lift(3)        // Some(0)
+v.slice(-1, 4)   // Iterator(2, 0, 1, 2, 0)
+v.sliding(2)     // Iterator(Seq(0, 1), Seq(1, 2), Seq(2, 0))
+</code></pre>
+<p>All the <a href="categories/comparisons.html">comparison</a>, <a href="categories/necklaces.html">necklace</a> and <a href="categories/symmetry.html">symmetry</a> operations are available too, under the same plain names: <code>isRotationOf</code>, <code>alignTo</code>, <code>canonical</code>, <code>bracelet</code>, <code>rotationalSymmetry</code>, <code>reflectionalSymmetryAxes</code>, …</p>
+<h2><a href="#materialize-at-the-boundary" name="materialize-at-the-boundary" class="anchor"><span class="anchor-link"></span></a>Materialize at the boundary</h2>
+<p>A view stays a view until you ask for a collection:</p>
+<pre class="prettyprint"><code class="language-scala">val v = Vector(0, 1, 2, 3).ring.rotateRight(1)
+
+v.toVector  // Vector(3, 0, 1, 2)
+v.toSeq     // Seq(3, 0, 1, 2)
+v.to(List)  // List(3, 0, 1, 2)
+v.iterator  // Iterator(3, 0, 1, 2)
+</code></pre><div class="callout note "><div class="callout-title">Note</div>
+<p>A view over a <strong>mutable</strong> sequence reflects later mutations of it, exactly like the standard library views. A non-indexed source (e.g. <code>List</code>) is copied once to a <code>Vector</code> when the view is created.</p></div>
+<h2><a href="#views-or-decorators-" name="views-or-decorators-" class="anchor"><span class="anchor-link"></span></a>Views or decorators?</h2>
+<p>Both layers expose the same operations:</p>
 <ul>
-  <li><strong>Bioinformatics</strong> — circular DNA/RNA sequence alignment and comparison</li>
-  <li><strong>Graphics</strong> — polygon vertex manipulation, closed curve operations</li>
-  <li><strong>Procedural generation</strong> — tile rings, symmetry-aware pattern generation</li>
-  <li><strong>Music theory</strong> — pitch-class sets, chord inversions</li>
-  <li><strong>Combinatorics</strong> — necklace/bracelet enumeration, Burnside&rsquo;s lemma</li>
-  <li><strong>Embedded / robotics</strong> — circular sensor arrays, rotary encoder positions</li>
-</ul>
-<h2><a href="#design" name="design" class="anchor"><span class="anchor-link"></span></a>Design</h2>
-<p>The same decorators could possibly be added to <a href="https://github.com/scala/scala-collection-contrib">scala-collection-contrib</a> and exist just there, but the underlying design has (at least for me) a very steep learning curve and the community help is weak. One clear maintenance advantage would be that the source code is the same for Scala 2.13 and Scala 3.</p>
-<p>So, for now, is a conscious decision to achieve the same results with a simpler design (even if the source code is different between Scala 2.13 and Scala 3) and to publish in this, concise and hopefully useful, separate library.</p>
-<h2><a href="#performance-notes" name="performance-notes" class="anchor"><span class="anchor-link"></span></a>Performance notes</h2>
-<p>The library works on any <code>Seq</code>, but <strong>circular operations involve random indexing</strong>, which is <code>O(1)</code> on <code>IndexedSeq</code> (e.g. <code>Vector</code>, <code>ArraySeq</code>, <code>String</code>) and <code>O(n)</code> on <code>LinearSeq</code> (e.g. <code>List</code>).</p>
-<p>For best performance on large sequences:</p>
-<ul>
-  <li>Prefer <code>Vector</code> (or any <code>IndexedSeq</code>) over <code>List</code>.</li>
-  <li>If you start from a <code>List</code> and call several circular operations on it, convert once with <code>.toVector</code>.</li>
-</ul>
-<p>Operations that enumerate rotations or reflections (<code>rotations</code>, <code>isRotationOf</code>, <code>rotationalSymmetry</code>, <code>symmetry</code>, <code>symmetryIndices</code>, <code>containsSliceO</code>, <code>sliceO</code> with large output, …) all scale linearly in the chosen output size, but each element access pays the indexing cost above.</p>
-<h2><a href="#other-languages" name="other-languages" class="anchor"><span class="anchor-link"></span></a>Other languages</h2>
-<p>The same library is available also for:</p>
-<ul>
-  <li>Python: check <a href="https://github.com/scala-tessella/ring-seq-py/">RingSeqPy (Python version)</a>.</li>
-  <li>Rust: check <a href="https://github.com/scala-tessella/ring-seq-rs/">RingSeq (Rust version)</a>.</li>
+  <li>use the <strong>decorator methods</strong> (<code>rotateRight</code>, <code>sliceO</code>, …, directly on your <code>Seq</code>) for one-shot  operations where you want the result in the same collection type you started with;</li>
+  <li>use <strong><code>.ring</code></strong> for chained transformations, for enumerating rotations/reflections cheaply,  or when you want lazy, short-circuiting pipelines.</li>
 </ul>
 <div class="source-github">
-The source code for this page can be found <a href="https://github.com/scala-tessella/ring-seq/tree/v0.9.0/src/main/paradox/index.md">here</a>.
+The source code for this page can be found <a href="https://github.com/scala-tessella/ring-seq/tree/v0.9.0/src/main/paradox/view.md">here</a>.
 </div>
 
 <div class="nav-next">
-<p><strong>Next:</strong> <a href="what-is.html">What is a circular sequence</a></p>
+<p><strong>Next:</strong> <a href="reference.html">Reference</a></p>
 </div>
 </div>
 <div class="large-3 show-for-large column" data-sticky-container>
@@ -181,16 +181,12 @@ The source code for this page can be found <a href="https://github.com/scala-tes
 <div class="nav-title">On this page:</div>
 <div class="nav-toc">
 <ul>
-  <li><a href="index.html#ringseq" class="header">RingSeq</a>
+  <li><a href="view.html#the-ringview-layer" class="header">The RingView layer</a>
   <ul>
-    <li><a href="index.html#setup" class="header">Setup</a></li>
-    <li><a href="index.html#getting-started" class="header">Getting started</a></li>
-    <li><a href="index.html#need" class="header">Need</a></li>
-    <li><a href="index.html#solution" class="header">Solution</a></li>
-    <li><a href="index.html#use-cases" class="header">Use cases</a></li>
-    <li><a href="index.html#design" class="header">Design</a></li>
-    <li><a href="index.html#performance-notes" class="header">Performance notes</a></li>
-    <li><a href="index.html#other-languages" class="header">Other languages</a></li>
+    <li><a href="view.html#views-all-the-way-down" class="header">Views all the way down</a></li>
+    <li><a href="view.html#plain-names" class="header">Plain names</a></li>
+    <li><a href="view.html#materialize-at-the-boundary" class="header">Materialize at the boundary</a></li>
+    <li><a href="view.html#views-or-decorators-" class="header">Views or decorators?</a></li>
   </ul></li>
 </ul>
 </div>

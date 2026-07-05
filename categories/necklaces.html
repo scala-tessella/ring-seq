@@ -32,13 +32,14 @@
 <span class="home-icon">⌂</span>RingSeq
 </a>
 <div class="version-number">
-0.8.0
+0.9.0
 </div>
 </div>
 <div class="nav-toc">
 <ul>
   <li><a href="../what-is.html" class="page">What is a circular sequence</a></li>
   <li><a href="../usage.html" class="page">Usage examples</a></li>
+  <li><a href="../view.html" class="page">The RingView layer</a></li>
   <li><a href="../reference.html" class="page">Reference</a>
   <ul>
     <li><a href="../categories/indexing.html" class="page">Indexing</a></li>
@@ -81,13 +82,14 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <span class="home-icon">⌂</span>RingSeq
 </a>
 <div class="version-number">
-0.8.0
+0.9.0
 </div>
 </div>
 <div class="nav-toc">
 <ul>
   <li><a href="../what-is.html" class="page">What is a circular sequence</a></li>
   <li><a href="../usage.html" class="page">Usage examples</a></li>
+  <li><a href="../view.html" class="page">The RingView layer</a></li>
   <li><a href="../reference.html" class="page">Reference</a>
   <ul>
     <li><a href="../categories/indexing.html" class="page">Indexing</a></li>
@@ -127,7 +129,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <h1><a href="#canonical-forms-necklaces-and-bracelets-" name="canonical-forms-necklaces-and-bracelets-" class="anchor"><span class="anchor-link"></span></a>Canonical forms (necklaces and bracelets)</h1>
 <p>A <strong>necklace</strong> is an equivalence class of circular sequences under rotation; a <strong>bracelet</strong> is the equivalence class under rotation <em>and</em> reflection.</p>
 <p>These operations return a canonical representative of the class, suitable for hashing, deduplication, or comparing &ldquo;is this ring the same pattern as that one?&rdquo; in one step.</p>
-<p>All three use Booth&rsquo;s O(n) algorithm where relevant.</p>
+<p>All three use the two-pointer minimal-rotation algorithm where relevant — O(n) time, O(1) extra space (the same algorithm as the Rust and Python ports).</p>
 <h2><a href="#canonicalindex" name="canonicalindex" class="anchor"><span class="anchor-link"></span></a><code>canonicalIndex</code></h2>
 <p>The starting index of the lexicographically smallest rotation.</p>
 <h3><a href="#example" name="example" class="anchor"><span class="anchor-link"></span></a>Example</h3>
@@ -152,7 +154,7 @@ Seq(1, 2, 0).canonical // Seq(0, 1, 2)
 Seq(3, 1, 2).bracelet // Seq(1, 2, 3)
 </code></pre>
 <div class="source-github">
-The source code for this page can be found <a href="https://github.com/scala-tessella/ring-seq/tree/v0.8.0/src/main/paradox/categories/necklaces.md">here</a>.
+The source code for this page can be found <a href="https://github.com/scala-tessella/ring-seq/tree/v0.9.0/src/main/paradox/categories/necklaces.md">here</a>.
 </div>
 
 <div class="nav-next">
@@ -237,7 +239,7 @@ The source code for this page can be found <a href="https://github.com/scala-tes
 <script type="text/javascript" src="../lib/prettify/prettify.js"></script>
 <script type="text/javascript" src="../lib/prettify/lang-scala.js"></script>
 <script type="text/javascript">jQuery(function(){window.prettyPrint && prettyPrint()});</script>
-<script type="text/javascript">jQuery(function(jq){initOldVersionWarnings(jq, '0.8.0', 'https://github.com/scala-tessella/ring-seq')});</script>
+<script type="text/javascript">jQuery(function(jq){initOldVersionWarnings(jq, '0.9.0', 'https://github.com/scala-tessella/ring-seq')});</script>
 
 
 </html>
