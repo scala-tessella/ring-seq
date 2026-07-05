@@ -21,7 +21,7 @@ Zero runtime dependencies.
 Add the dependency to your `build.sbt`:
 
 ```scala
-libraryDependencies += "io.github.scala-tessella" %% "ring-seq" % "0.8.0"
+libraryDependencies += "io.github.scala-tessella" %% "ring-seq" % "0.9.0"
 // Use %%% instead of %% for Scala.js or Scala Native
 ```
 
@@ -121,11 +121,31 @@ Seq(0, 1, 0, 1).rotationalSymmetry          // 2
 | `reflectionalSymmetryAxes` | Full axis geometry as `(AxisLocation, AxisLocation)` pairs (`Vertex` / `Edge`) |
 | `symmetry` | Number of reflectional symmetry axes |
 
+## The `RingView` layer
+
+For chained transformations, `.ring` turns any `Seq` (or `String`) into a **lazy view**:
+a [`RingView`](https://scala-tessella.github.io/ring-seq/view.html) wraps the elements once
+and tracks a rotation offset plus a reflection flag, so rotating and reflecting are O(1)
+and never copy — the same design as the `Circular` view of the Rust port.
+
+```scala
+val ring = Vector(0, 1, 2, 3).ring    // a view — no copy
+ring.rotateRight(1).reflectAt()       // O(1) transforms, still a view
+ring.rotations                        // Iterator of n views, O(1) each
+ring.rotateRight(1).to(List)          // materialize at the boundary: List(3, 0, 1, 2)
+"RING".ring.reverse.iterator.mkString // "GNIR"
+```
+
+On a `RingView` the circular operations carry their plain names — no `O` suffix is needed,
+since there is no `Seq` method to clash with: `ring(5)` wraps, `ring.slice(-1, 4)`,
+`ring.sliding(2)`, `ring.lift(i)`, plus all the comparison, necklace and symmetry operations.
+
 ## Naming convention
 
 The alternative circular versions of methods that already exist on `Seq` keep the same name
 with an appended `O` suffix (meaning _ring_) — for example `applyO` is the circular version of `apply`.
 Operations with no standard-library counterpart use plain names.
+On [`RingView`](#the-ringview-layer) the `O` suffix is dropped.
 
 ## Performance notes
 

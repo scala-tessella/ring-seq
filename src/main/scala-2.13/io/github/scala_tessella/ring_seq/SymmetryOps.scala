@@ -55,14 +55,14 @@ object SymmetryOps {
       *   {{{Seq(0, 1, 2, 0, 1, 2).rotationalSymmetry // 2}}}
       */
     def rotationalSymmetry: Int = {
-      val n = ring.size
+      val n = underlying.size
       if (n < 2)
         1
       else {
         // Materialize once for O(1)/O(log n) indexing; avoids per-candidate rotation allocation.
-        val indexed: IndexedSeq[A] = ring match {
+        val indexed: IndexedSeq[A] = underlying match {
           case is: IndexedSeq[A] => is
-          case _                 => ring.toVector
+          case _                 => underlying.toVector
         }
         val smallestPeriod         = (1 to n).find { shift =>
 
@@ -83,13 +83,13 @@ object SymmetryOps {
       *   {{{Seq(2, 1, 2, 2, 1, 2, 2, 1, 2, 2, 1, 2).symmetryIndices // List(0, 3, 6, 9)}}}
       */
     def symmetryIndices: List[Index] = {
-      val n = ring.size
+      val n = underlying.size
       if (n == 0) Nil
       else {
         // Materialize once for O(1)/O(log n) indexing; avoids per-shift rotation allocation.
-        val indexed: IndexedSeq[A]  = ring match {
+        val indexed: IndexedSeq[A]  = underlying match {
           case is: IndexedSeq[A] => is
-          case _                 => ring.toVector
+          case _                 => underlying.toVector
         }
         val reversed: IndexedSeq[A] = indexed.reverse
         // ring == reversed.rotateLeft(shift)  <=>  forall i. indexed(i) == reversed((i + shift) mod n)
@@ -112,7 +112,7 @@ object SymmetryOps {
       *   }}}
       */
     def reflectionalSymmetryAxes: List[(AxisLocation, AxisLocation)] = {
-      val n = ring.size
+      val n = underlying.size
 
       def edgeIndices(i: Index): AxisLocation =
         Edge(i, n)
@@ -167,7 +167,7 @@ object SymmetryOps {
 
   }
 
-  implicit private class SymmetryEnrichment[A, CC[B] <: SeqOps[B, CC, CC[B]]](val ring: CC[A])
+  implicit private class SymmetryEnrichment[A, CC[B] <: SeqOps[B, CC, CC[B]]](val underlying: CC[A])
       extends AnyVal
       with SymmetryDecorators[A, CC]
 

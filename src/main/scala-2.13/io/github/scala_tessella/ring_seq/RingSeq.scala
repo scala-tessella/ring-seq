@@ -30,9 +30,23 @@ object RingSeq {
       with SymmetryOps.SymmetryDecorators[A, CC] {}
 
   /** Value class providing methods for a generic `Seq` considered circular. */
-  implicit class RingSeqEnrichment[A, CC[B] <: SeqOps[B, CC, CC[B]]](val ring: CC[A])
+  implicit class RingSeqEnrichment[A, CC[B] <: SeqOps[B, CC, CC[B]]](val underlying: CC[A])
       extends AnyVal
       with RingSeqDecorators[A, CC]
+
+  /** Value class providing the [[RingView]] entry point for a generic `Seq`. */
+  implicit class RingViewEnrichment[A, CC[B] <: SeqOps[B, CC, CC[B]]](private val self: CC[A])
+      extends AnyVal {
+
+    /** This sequence as a circular [[RingView]]: rotations and reflections become O(1) views over the same
+      * elements, and the circular operations carry their plain names (no `O` suffix).
+      *
+      * @example
+      *   {{{Vector(0, 1, 2, 3).ring.rotateRight(1).toVector // Vector(3, 0, 1, 2)}}}
+      */
+    def ring: RingView[A] = RingView.from(self)
+
+  }
 
   /** Value class providing methods for a `String` considered circular. */
   implicit class RingStringEnrichment(private val s: String)
@@ -44,7 +58,10 @@ object RingSeq {
       * @return
       *   the string as a sequence of `Char`.
       */
-    def ring: Seq[Char] = s.toSeq
+    def underlying: Seq[Char] = s.toSeq
+
+    /** This string as a circular [[RingView]] of its characters. */
+    def ring: RingView[Char] = RingView.from(underlying)
 
   }
 
@@ -58,7 +75,10 @@ object RingSeq {
       * @return
       *   the string builder as a sequence of `Char`.
       */
-    def ring: Seq[Char] = sb.toSeq
+    def underlying: Seq[Char] = sb.toSeq
+
+    /** This string builder as a circular [[RingView]] of its characters. */
+    def ring: RingView[Char] = RingView.from(underlying)
 
   }
 

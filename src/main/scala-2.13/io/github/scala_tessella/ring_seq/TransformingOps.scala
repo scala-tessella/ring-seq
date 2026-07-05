@@ -21,10 +21,10 @@ object TransformingOps {
       *   {{{Seq(0, 1, 2).rotateRight(1) // Seq(2, 0, 1)}}}
       */
     def rotateRight(step: Int): CC[A] =
-      if (ring.isEmpty) ring
+      if (underlying.isEmpty) underlying
       else {
-        val j: Index = ring.size - indexFrom(step)
-        ring.drop(j) ++ ring.take(j)
+        val j: Index = underlying.size - indexFrom(step)
+        underlying.drop(j) ++ underlying.take(j)
       }
 
     /** Rotates the sequence to the left by some steps.

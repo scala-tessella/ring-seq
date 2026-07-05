@@ -11,7 +11,7 @@ object ComparingOps {
       with IteratingOps.IteratingDecorators[A, CC] {
 
     private def isSameSize(that: CC[A]): Boolean =
-      ring.sizeCompare(that.size) == 0
+      underlying.sizeCompare(that.size) == 0
 
     private def containsAsRotation(seq: CC[A], that: CC[A]): Boolean =
       // Any rotation of `seq` is a contiguous slice of `seq ++ seq.init`,
@@ -29,7 +29,7 @@ object ComparingOps {
       *   {{{Seq(0, 1, 2).isRotationOf(Seq(1, 2, 0)) // true}}}
       */
     def isRotationOf(that: CC[A]): Boolean =
-      isSameSize(that) && containsAsRotation(ring, that)
+      isSameSize(that) && containsAsRotation(underlying, that)
 
     /** Tests whether this circular sequence is a reflection of a given sequence.
       *
@@ -41,7 +41,7 @@ object ComparingOps {
       *   {{{Seq(0, 1, 2).isReflectionOf(Seq(0, 2, 1)) // true}}}
       */
     def isReflectionOf(that: CC[A]): Boolean =
-      isSameSize(that) && (ring == that || reflectAt() == that)
+      isSameSize(that) && (underlying == that || reflectAt() == that)
 
     /** Tests whether this circular sequence is a reversion of a given sequence.
       *
@@ -53,7 +53,7 @@ object ComparingOps {
       *   {{{Seq(0, 1, 2).isReversionOf(Seq(2, 1, 0)) // true}}}
       */
     def isReversionOf(that: CC[A]): Boolean =
-      isSameSize(that) && (ring == that || ring.reverse == that)
+      isSameSize(that) && (underlying == that || underlying.reverse == that)
 
     /** Tests whether this circular sequence is a rotation or a reflection of a given sequence.
       *
@@ -65,7 +65,7 @@ object ComparingOps {
       *   {{{Seq(0, 1, 2).isRotationOrReflectionOf(Seq(2, 0, 1)) // true}}}
       */
     def isRotationOrReflectionOf(that: CC[A]): Boolean =
-      isSameSize(that) && (containsAsRotation(ring, that) || containsAsRotation(reflectAt(), that))
+      isSameSize(that) && (containsAsRotation(underlying, that) || containsAsRotation(reflectAt(), that))
 
     /** Finds the rotation offset that aligns this circular sequence with a given sequence.
       *
@@ -78,9 +78,9 @@ object ComparingOps {
       */
     def alignTo(that: CC[A]): Option[Index] =
       if (!isSameSize(that)) None
-      else if (ring.isEmpty) Some(0)
+      else if (underlying.isEmpty) Some(0)
       else {
-        val idx = (ring ++ ring.init).indexOfSlice(that.toSeq)
+        val idx = (underlying ++ underlying.init).indexOfSlice(that.toSeq)
         Option.when(idx >= 0)(idx)
       }
 
@@ -93,7 +93,7 @@ object ComparingOps {
       */
     def hammingDistance(that: CC[A]): Int = {
       require(isSameSize(that), "sequences must have the same size")
-      ComparingOps.hammingOf(ring, that)
+      ComparingOps.hammingOf(underlying, that)
     }
 
     /** The minimum Hamming distance over all rotations of this circular sequence.
@@ -108,13 +108,13 @@ object ComparingOps {
       */
     def minRotationalHammingDistance(that: CC[A]): Int = {
       require(isSameSize(that), "sequences must have the same size")
-      val n = ring.size
+      val n = underlying.size
       if (n == 0) 0
       else {
         // Materialize once; compare by index without allocating `n` rotations.
-        val a: IndexedSeq[A] = ring match {
+        val a: IndexedSeq[A] = underlying match {
           case is: IndexedSeq[A] => is
-          case _                 => ring.toVector
+          case _                 => underlying.toVector
         }
         val b: IndexedSeq[A] = that match {
           case is: IndexedSeq[A] => is
@@ -150,7 +150,7 @@ object ComparingOps {
     count
   }
 
-  implicit private class ComparingEnrichment[A, CC[B] <: SeqOps[B, CC, CC[B]]](val ring: CC[A])
+  implicit private class ComparingEnrichment[A, CC[B] <: SeqOps[B, CC, CC[B]]](val underlying: CC[A])
       extends AnyVal
       with ComparingDecorators[A, CC]
 

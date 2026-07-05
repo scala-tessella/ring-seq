@@ -100,4 +100,62 @@ class ExhaustiveSmallRingSpec extends AnyFlatSpec with should.Matchers {
       }
     }
 
+  it must "have every RingView operation agree with the eager operations under every reachable view" in
+    rings.foreach { s =>
+
+      val offsets = if (s.isEmpty) List(0) else s.indices.toList
+      for {
+        offset    <- offsets
+        reflected <- List(false, true)
+      } {
+        val eager = if (reflected) s.reflectAt(offset) else s.startAt(offset)
+        val view  = if (reflected) s.ring.reflectAt(offset) else s.ring.startAt(offset)
+
+        withClue(s"ring $s offset $offset reflected $reflected: ") {
+          view.toVector shouldBe eager
+          view.iterator.toList shouldBe eager.toList
+          if (eager.nonEmpty) {
+            view(offset + 7) shouldBe eager.applyO(offset + 7)
+            view.lift(-1) shouldBe Some(eager.applyO(-1))
+          } else view.lift(0) shouldBe None
+          view.indexOf(1, 1) shouldBe eager.indexOfO(1, 1)
+          view.slice(-2, 5).toList shouldBe eager.sliceO(-2, 5).toList
+          view.segmentLength(_ != 2, 1) shouldBe eager.segmentLengthO(_ != 2, 1)
+          view.takeWhile(_ != 2, 1).toList shouldBe eager.takeWhileO(_ != 2, 1).toList
+          view.dropWhile(_ != 2, 1).toList shouldBe eager.dropWhileO(_ != 2, 1).toList
+          val (viewPrefix, viewRest)   = view.span(_ != 2, 1)
+          val (eagerPrefix, eagerRest) = eager.spanO(_ != 2, 1)
+          viewPrefix.toList shouldBe eagerPrefix.toList
+          viewRest.toList shouldBe eagerRest.toList
+          view.containsSlice(s.take(2)) shouldBe eager.containsSliceO(s.take(2))
+          view.indexOfSlice(s.take(2), 1) shouldBe eager.indexOfSliceO(s.take(2), 1)
+          view.lastIndexOfSlice(s.take(2)) shouldBe eager.lastIndexOfSliceO(s.take(2))
+          view.indexOfSlice(Vector.empty[Int], 1) shouldBe eager.indexOfSliceO(Vector.empty[Int], 1)
+          view.lastIndexOfSlice(Vector.empty[Int]) shouldBe eager.lastIndexOfSliceO(Vector.empty[Int])
+          view.sliding(2).toList shouldBe eager.slidingO(2).toList
+          view.grouped(2).toList shouldBe eager.groupedO(2).toList
+          view.zipWithIndex(1).toList shouldBe eager.zipWithIndexO(1).toList
+          view.rotations.map(_.toVector).toList shouldBe eager.rotations.toList
+          view.reflections.map(_.toVector).toList shouldBe eager.reflections.toList
+          view.reversions.map(_.toVector).toList shouldBe eager.reversions.toList
+          view.rotationsAndReflections.map(_.toVector).toList shouldBe
+            eager.rotationsAndReflections.toList
+          view.isRotationOf(s) shouldBe eager.isRotationOf(s)
+          view.isReflectionOf(s) shouldBe eager.isReflectionOf(s)
+          view.isReversionOf(s) shouldBe eager.isReversionOf(s)
+          view.isRotationOrReflectionOf(s) shouldBe eager.isRotationOrReflectionOf(s)
+          view.alignTo(s) shouldBe eager.alignTo(s)
+          view.hammingDistance(s) shouldBe eager.hammingDistance(s)
+          view.minRotationalHammingDistance(s) shouldBe eager.minRotationalHammingDistance(s)
+          view.canonicalIndex shouldBe eager.canonicalIndex
+          view.canonical.toVector shouldBe eager.canonical
+          view.bracelet.toVector shouldBe eager.bracelet
+          view.rotationalSymmetry shouldBe eager.rotationalSymmetry
+          view.symmetryIndices shouldBe eager.symmetryIndices
+          view.reflectionalSymmetryAxes shouldBe eager.reflectionalSymmetryAxes
+          view.symmetry shouldBe eager.symmetry
+        }
+      }
+    }
+
 }

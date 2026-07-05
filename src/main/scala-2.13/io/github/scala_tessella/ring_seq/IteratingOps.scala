@@ -23,7 +23,7 @@ object IteratingOps {
       *   {{{Seq(0, 1, 2).slidingO(2) // Iterator(Seq(0, 1), Seq(1, 2), Seq(2, 0))}}}
       */
     def slidingO(size: Int, step: Int = 1): Iterator[CC[A]] =
-      sliceO(0, step * (ring.size - 1) + size).sliding(size, step)
+      sliceO(0, step * (underlying.size - 1) + size).sliding(size, step)
 
     /** Partitions this circular sequence into non-overlapping fixed-size blocks.
       *
@@ -39,9 +39,9 @@ object IteratingOps {
       *   {{{Seq(0, 1, 2, 3, 4).groupedO(2) // Iterator(Seq(0, 1), Seq(2, 3), Seq(4, 0))}}}
       */
     def groupedO(size: Int): Iterator[CC[A]] =
-      if (ring.isEmpty) Iterator.empty
+      if (underlying.isEmpty) Iterator.empty
       else {
-        val n     = ring.size
+        val n     = underlying.size
         val count = (n + size - 1) / size
         sliceO(0, count * size).grouped(size)
       }
@@ -57,7 +57,7 @@ object IteratingOps {
       *   {{{Seq('a', 'b', 'c').zipWithIndexO(1).toList // List(('b', 1), ('c', 2), ('a', 0))}}}
       */
     def zipWithIndexO(from: IndexO = 0): Iterator[(A, Index)] = {
-      val n = ring.size
+      val n = underlying.size
       if (n == 0) Iterator.empty
       else {
         val start = indexFrom(from)
@@ -68,7 +68,7 @@ object IteratingOps {
     }
 
     private def transformations(f: CC[A] => Iterator[CC[A]]): Iterator[CC[A]] =
-      if (ring.isEmpty) Iterator(ring) else f(ring)
+      if (underlying.isEmpty) Iterator(underlying) else f(underlying)
 
     /** Computes all the rotations of this circular sequence
       *
@@ -117,7 +117,7 @@ object IteratingOps {
 
   }
 
-  implicit private class IteratingEnrichment[A, CC[B] <: SeqOps[B, CC, CC[B]]](val ring: CC[A])
+  implicit private class IteratingEnrichment[A, CC[B] <: SeqOps[B, CC, CC[B]]](val underlying: CC[A])
       extends AnyVal
       with IteratingDecorators[A, CC]
 

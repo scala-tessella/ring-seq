@@ -24,10 +24,10 @@ object IndexingOps {
     type IndexO = IndexingOps.IndexO
 
     /** The circular sequence */
-    def ring: CC[A]
+    def underlying: CC[A]
 
     def indexFrom(i: IndexO): Index =
-      java.lang.Math.floorMod(i, ring.size)
+      java.lang.Math.floorMod(i, underlying.size)
 
     /** Gets the element at some circular index.
       *
@@ -39,7 +39,7 @@ object IndexingOps {
       *   {{{Seq(0, 1, 2).applyO(3) // 0}}}
       */
     def applyO(i: IndexO): A =
-      ring(indexFrom(i))
+      underlying(indexFrom(i))
 
     /** Optionally gets the element at some circular index (the circular version of `lift`).
       *
@@ -55,7 +55,7 @@ object IndexingOps {
       *   }}}
       */
     def liftO(i: IndexO): Option[A] =
-      if (ring.isEmpty) None else Some(applyO(i))
+      if (underlying.isEmpty) None else Some(applyO(i))
 
     /** Finds the circular index of the first element equal to a given value, searching circularly from a
       * given circular index (the circular version of `indexOf`).
@@ -73,13 +73,13 @@ object IndexingOps {
       *   {{{Seq(0, 1, 2).indexOfO(0, 1) // 0}}}
       */
     def indexOfO(elem: A, from: IndexO = 0): Index =
-      if (ring.isEmpty) -1
+      if (underlying.isEmpty) -1
       else {
         val start = indexFrom(from)
-        val found = ring.indexOf(elem, start)
+        val found = underlying.indexOf(elem, start)
         if (found >= 0) found
         else {
-          val wrapped = ring.indexOf(elem)
+          val wrapped = underlying.indexOf(elem)
           if (wrapped >= 0 && wrapped < start) wrapped else -1
         }
       }

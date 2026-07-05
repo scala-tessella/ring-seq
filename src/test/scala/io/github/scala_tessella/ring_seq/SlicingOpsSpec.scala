@@ -78,4 +78,30 @@ class SlicingOpsSpec extends AnyFlatSpec with TestHelper with should.Matchers {
     suffix shouldBe s12345.dropWhileO(_ < 4, 2)
   }
 
+  "indexOfSliceO" must "return -1 on an empty sequence searched for a non-empty slice" in {
+    Seq.empty[Int].indexOfSliceO(Seq(1)) shouldBe -1
+  }
+
+  it must "find an empty slice at 0 on an empty sequence" in {
+    Seq.empty[Int].indexOfSliceO(Seq.empty[Int]) shouldBe 0
+  }
+
+  it must "find an empty slice at the normalized start index" in {
+    Seq(0, 1, 2).indexOfSliceO(Seq.empty[Int]) shouldBe 0
+    Seq(0, 1, 2).indexOfSliceO(Seq.empty[Int], 4) shouldBe 1
+  }
+
+  "lastIndexOfSliceO" must "return -1 on an empty sequence searched for a non-empty slice" in {
+    Seq.empty[Int].lastIndexOfSliceO(Seq(1)) shouldBe -1
+  }
+
+  it must "find an empty slice at 0 on an empty sequence" in {
+    Seq.empty[Int].lastIndexOfSliceO(Seq.empty[Int]) shouldBe 0
+  }
+
+  it must "find an empty slice at the normalized end index" in {
+    Seq(0, 1, 2).lastIndexOfSliceO(Seq.empty[Int]) shouldBe 2
+    Seq(0, 1, 2).lastIndexOfSliceO(Seq.empty[Int], 4) shouldBe 1
+  }
+
 }

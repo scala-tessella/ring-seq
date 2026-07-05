@@ -18,12 +18,12 @@ object NecklaceOps {
       *   rotations. Returns `0` for empty or single-element sequences.
       */
     def canonicalIndex(implicit ord: Ordering[A]): Index = {
-      val n = ring.size
+      val n = underlying.size
       if (n <= 1) 0
       else {
-        val indexed: IndexedSeq[A] = ring match {
+        val indexed: IndexedSeq[A] = underlying match {
           case is: IndexedSeq[A] => is
-          case _                 => ring.toVector
+          case _                 => underlying.toVector
         }
         NecklaceOps.leastRotation(indexed)
       }
@@ -97,7 +97,7 @@ object NecklaceOps {
     }
   }
 
-  implicit private class NecklaceEnrichment[A, CC[B] <: SeqOps[B, CC, CC[B]]](val ring: CC[A])
+  implicit private class NecklaceEnrichment[A, CC[B] <: SeqOps[B, CC, CC[B]]](val underlying: CC[A])
       extends AnyVal
       with NecklaceDecorators[A, CC]
 

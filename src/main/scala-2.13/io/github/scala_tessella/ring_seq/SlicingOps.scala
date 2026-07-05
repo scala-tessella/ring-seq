@@ -66,7 +66,7 @@ object SlicingOps {
       startAt(from).span(p)
 
     private def emptied: CC[A] =
-      ring.take(0)
+      underlying.take(0)
 
     /** Selects an interval of elements.
       *
@@ -83,17 +83,17 @@ object SlicingOps {
       *   {{{Seq(0, 1, 2).sliceO(-1, 4) // Seq(2, 0, 1, 2, 0)}}}
       */
     def sliceO(from: IndexO, until: IndexO): CC[A] =
-      if (ring.isEmpty) ring
+      if (underlying.isEmpty) underlying
       else if (from >= until) emptied
       else {
         val length  = until - from
         val rotated = startAt(from)
         // O(length) build via the collection's own factory; avoids the previous quadratic `++` fold.
-        ring.iterableFactory.from(Iterator.continually(rotated).flatten.take(length))
+        underlying.iterableFactory.from(Iterator.continually(rotated).flatten.take(length))
       }
 
     private def growBy(growth: Int): CC[A] =
-      sliceO(0, ring.size + growth)
+      sliceO(0, underlying.size + growth)
 
     /** Tests whether this circular sequence contains a given sequence as a slice.
       *
@@ -116,14 +116,18 @@ object SlicingOps {
       *   [[IndexO]]
       * @return
       *   the first index >= ''from'' such that the elements of this circular sequence starting at this index
-      *   match the elements of sequence ''that'', or -1 if no such subsequence exists.
+      *   match the elements of sequence ''that'', or -1 if no such subsequence exists. An empty ''that'' is
+      *   found at `indexFrom(from)` (or 0 on an empty sequence).
       * @example
       *   {{{Seq(0, 1, 2).indexOfSliceO(Seq(2, 0, 1, 2, 0)) // 2}}}
       */
-    def indexOfSliceO(that: Seq[A], from: IndexO = 0): Index = {
-      val grown = growBy(that.size - 1)
-      grown.indexOfSlice(that, grown.indexFrom(from))
-    }
+    def indexOfSliceO(that: Seq[A], from: IndexO = 0): Index =
+      if (underlying.isEmpty) { if (that.isEmpty) 0 else -1 }
+      else if (that.isEmpty) indexFrom(from)
+      else {
+        val grown = growBy(that.size - 1)
+        grown.indexOfSlice(that, grown.indexFrom(from))
+      }
 
     /** Finds last index before or at a given end index where this circular sequence contains a given sequence
       * as a slice.
@@ -134,18 +138,22 @@ object SlicingOps {
       *   [[IndexO]]
       * @return
       *   the last index <= ''end'' such that the elements of this circular sequence starting at this index
-      *   match the elements of sequence ''that'', or -1 if no such subsequence exists.
+      *   match the elements of sequence ''that'', or -1 if no such subsequence exists. An empty ''that'' is
+      *   found at `indexFrom(end)` (or 0 on an empty sequence).
       * @example
       *   {{{Seq(0, 1, 2, 0, 1, 2).lastIndexOfSliceO(Seq(2, 0)) // 5}}}
       */
-    def lastIndexOfSliceO(that: Seq[A], end: IndexO = -1): Index = {
-      val grown = growBy(that.size - 1)
-      grown.lastIndexOfSlice(that, grown.indexFrom(end))
-    }
+    def lastIndexOfSliceO(that: Seq[A], end: IndexO = -1): Index =
+      if (underlying.isEmpty) { if (that.isEmpty) 0 else -1 }
+      else if (that.isEmpty) indexFrom(end)
+      else {
+        val grown = growBy(that.size - 1)
+        grown.lastIndexOfSlice(that, grown.indexFrom(end))
+      }
 
   }
 
-  implicit private class SlicingEnrichment[A, CC[B] <: SeqOps[B, CC, CC[B]]](val ring: CC[A])
+  implicit private class SlicingEnrichment[A, CC[B] <: SeqOps[B, CC, CC[B]]](val underlying: CC[A])
       extends AnyVal
       with SlicingDecorators[A, CC]
 

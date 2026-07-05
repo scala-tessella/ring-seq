@@ -112,13 +112,17 @@ trait SlicingOps extends TransformingOps:
       *   [[IndexO]]
       * @return
       *   the first index >= ''from'' such that the elements of this circular sequence starting at this index
-      *   match the elements of sequence ''that'', or -1 if no such subsequence exists.
+      *   match the elements of sequence ''that'', or -1 if no such subsequence exists. An empty ''that'' is
+      *   found at `indexFrom(from)` (or 0 on an empty sequence).
       * @example
       *   {{{Seq(0, 1, 2).indexOfSliceO(Seq(2, 0, 1, 2, 0)) // 2}}}
       */
     def indexOfSliceO(that: Seq[A], from: IndexO = 0): Index =
-      val grown = growBy(that.size - 1)
-      grown.indexOfSlice(that, grown.indexFrom(from))
+      if ring.isEmpty then if that.isEmpty then 0 else -1
+      else if that.isEmpty then ring.indexFrom(from)
+      else
+        val grown = growBy(that.size - 1)
+        grown.indexOfSlice(that, grown.indexFrom(from))
 
     /** Finds last index before or at a given end index where this circular sequence contains a given sequence
       * as a slice.
@@ -129,10 +133,14 @@ trait SlicingOps extends TransformingOps:
       *   [[IndexO]]
       * @return
       *   the last index <= ''end'' such that the elements of this circular sequence starting at this index
-      *   match the elements of sequence ''that'', or -1 if no such subsequence exists.
+      *   match the elements of sequence ''that'', or -1 if no such subsequence exists. An empty ''that'' is
+      *   found at `indexFrom(end)` (or 0 on an empty sequence).
       * @example
       *   {{{Seq(0, 1, 2, 0, 1, 2).lastIndexOfSliceO(Seq(2, 0)) // 5}}}
       */
     def lastIndexOfSliceO(that: Seq[A], end: IndexO = -1): Index =
-      val grown = growBy(that.size - 1)
-      grown.lastIndexOfSlice(that, grown.indexFrom(end))
+      if ring.isEmpty then if that.isEmpty then 0 else -1
+      else if that.isEmpty then ring.indexFrom(end)
+      else
+        val grown = growBy(that.size - 1)
+        grown.lastIndexOfSlice(that, grown.indexFrom(end))

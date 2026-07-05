@@ -4,10 +4,12 @@ All notable changes to this project are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.9.0] - 2026-07-05
 
 ### Added
 
+- **`RingView` — a lazy view layer.** `seq.ring` (also available on `String` and `StringBuilder`) wraps any `Seq` in a `RingView`: a rotation offset and a reflection flag over the same elements, with a single internal index translation. `rotateRight` / `rotateLeft` / `startAt` / `reflectAt` / `reverse` are O(1) and return views; `rotations` / `reflections` / `reversions` / `rotationsAndReflections` yield views in O(1) each, so searches short-circuit without materializing. On the view the circular operations carry their plain names (no `O` suffix): wrapping `apply`, `lift`, `indexOf`, `slice`, `sliding`, `grouped`, `zipWithIndex`, and all comparison, necklace and symmetry operations. Materialize with `toSeq` / `toVector` / `to(factory)` / `iterator`. Mirrors the `Circular` view design of ring-seq-rs 0.3 (its ADR 0001); the source is shared between Scala 2.13 and Scala 3.
+- Exhaustive all-views cross-check in `ExhaustiveSmallRingSpec`: every `RingView` operation is compared against its eager counterpart under every reachable `(offset, reflected)` view of the small-ring corpus.
 - **`liftO(i)`** — the circular version of `lift`: `Some(element)` at any circular index, `None` only for an empty sequence. Fills the gap with the `get` accessors of ring-seq-rs and ring-seq-py.
 - **`indexOfO(elem, from)`** — the circular version of `indexOf`: the index of the first occurrence of an element, searching circularly from a circular index and wrapping past the end.
 - **`ExhaustiveSmallRingSpec`** — exhaustive reference test in the spirit of ring-seq-rs `tests/algebra.rs`: all 217 rings of length ≤ 4 over `{0, 1, 2}` and length 5–6 over `{0, 1}` are checked against naive, independently derived reference implementations of the symmetry and necklace operations (including the axis geometry of `reflectionalSymmetryAxes`, previously the least-tested method).
@@ -15,12 +17,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Breaking (Scala 2.13, trait implementors only)** — the decorator traits' abstract member `ring: CC[A]` is renamed `underlying`, freeing the `ring` name for the view entry point. Code that merely does `import RingSeq._` is unaffected; only custom classes mixing the decorator traits in must rename the overridden member. `RingStringEnrichment.ring` and `RingStringBuilderEnrichment.ring` now return a `RingView[Char]` instead of `Seq[Char]` (the plain conversion is still available as `underlying`).
 - **`canonicalIndex` / `canonical` / `bracelet` now use the two-pointer minimal-rotation algorithm** instead of Booth's: same O(n) time and identical results, but O(1) extra space (no failure-array allocation). This aligns the implementation with ring-seq-rs 0.3.1 and ring-seq-py.
 - Scala 3 `sliceO` / `containsSliceO` parameter names aligned with the Scala 2.13 tree and the standard library (`until`, `that`); scaladoc `@param` tags now match the actual parameters.
 - `docs/runbook.md` renamed to `docs/benchmarks.md` — it documents the JMH benchmarks; the release runbook remains [`.github/RUNBOOK.md`](.github/RUNBOOK.md).
 
 ### Fixed
 
+- **`indexOfSliceO` / `lastIndexOfSliceO` edge cases.** Searching an empty sequence threw `ArithmeticException` instead of returning -1; searching for an empty slice could throw on small sequences. Now: a non-empty slice on an empty sequence yields -1; an empty slice is found at the normalized `from`/`end` index (0 on an empty sequence), aligning with standard `indexOfSlice` / `lastIndexOfSlice`. `RingView.indexOfSlice` / `lastIndexOfSlice` inherit the fix.
 - README drift: the setup snippet now points to the latest release (was still `0.7.0`), the Scala.js badge shows `1.21.0` (was `1.16.0`), and the comparisons table lists `isRotationOrReflectionOf` under its real name.
 - Stale header comments in `ComparingBench` and `SlicingBench` that still described the pre-0.8.0 implementations (`minRotationalHammingDistance` allocating all rotations, `sliceO` folding with `++`).
 - `.gitignore` now covers sbt/IDE build directories (`target/`, `.bsp/`, `.idea/`, …) and local JMH result snapshots (`benchmarks/*.json`).
