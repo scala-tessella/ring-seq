@@ -79,11 +79,11 @@ trait SlicingOps extends TransformingOps:
       * @example
       *   {{{Seq(0, 1, 2).sliceO(-1, 4) // Seq(2, 0, 1, 2, 0)}}}
       */
-    def sliceO(from: IndexO, to: IndexO): CC[A] =
+    def sliceO(from: IndexO, until: IndexO): CC[A] =
       if ring.isEmpty then ring
-      else if from >= to then emptied
+      else if from >= until then emptied
       else
-        val length  = to - from
+        val length  = until - from
         val rotated = ring.startAt(from)
         // O(length) build via the collection's own factory; avoids the previous quadratic `++` fold.
         ring.iterableFactory.from(Iterator.continually(rotated).flatten.take(length))
@@ -100,8 +100,8 @@ trait SlicingOps extends TransformingOps:
       * @example
       *   {{{Seq(0, 1, 2).containsSliceO(Seq(2, 0, 1, 2, 0)) // true}}}
       */
-    def containsSliceO(slice: Seq[A]): Boolean =
-      growBy(slice.size - 1).containsSlice(slice)
+    def containsSliceO(that: Seq[A]): Boolean =
+      growBy(that.size - 1).containsSlice(that)
 
     /** Finds first index after or at a start index where this circular sequence contains a given sequence as
       * a slice.

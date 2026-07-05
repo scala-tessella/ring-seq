@@ -38,12 +38,13 @@ class ComparingBench:
     ring.isRotationOrReflectionOf(unrelated)
 
   // ---------------------------------------------------------------------------
-  // minRotationalHammingDistance — O(n²) in time and allocation.
+  // minRotationalHammingDistance — O(n²) worst-case time, O(n) allocation.
   //
-  // The current implementation materialises all `n` rotations via `ring.rotations`
-  // (each rotation is a new CC[A] of size n) and runs a length-n hamming count on
-  // each. Scaling `size` 16 → 256 → 4096 should show a quadratic growth both in
-  // average time and in allocated bytes (use `-prof gc` to see allocation rates).
+  // The implementation materialises the two sequences once to IndexedSeq, then
+  // compares by index with a rotating offset. A running-best prune abandons a
+  // rotation as soon as its mismatch count reaches the best so far, and the scan
+  // stops outright when a distance of 0 is found — so time varies strongly with
+  // the scenario, while allocation stays flat (use `-prof gc` to confirm).
   //
   //     sbt benchmarks/Jmh/run -prof gc -- ComparingBench.minRotationalHammingDistance
   //

@@ -16,7 +16,8 @@ class SlicingBench:
   @Param(Array("16", "256"))
   var size: Int = scala.compiletime.uninitialized
 
-  // Output is `size * growth` elements ⇒ exposes the quadratic `++` fold for high growth.
+  // Output is `size * growth` elements; the build is O(output) via the collection's
+  // own factory, so time should scale linearly with growth.
   @Param(Array("1", "10", "100"))
   var growth: Int = scala.compiletime.uninitialized
 

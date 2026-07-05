@@ -6,7 +6,8 @@ a **bracelet** is the equivalence class under rotation *and* reflection.
 These operations return a canonical representative of the class, suitable for hashing, deduplication,
 or comparing "is this ring the same pattern as that one?" in one step.
 
-All three use Booth's O(n) algorithm where relevant.
+All three use the two-pointer minimal-rotation algorithm where relevant — O(n) time, O(1) extra space
+(the same algorithm as the Rust and Python ports).
 
 ## `canonicalIndex`
 

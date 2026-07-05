@@ -12,6 +12,9 @@ class ScaladocExampleSpec extends AnyFlatSpec with should.Matchers {
     val seq = Seq(0, 1, 2)
 
     seq.applyO(3) shouldBe 0
+    seq.liftO(3) shouldBe Some(0)
+    Seq.empty[Int].liftO(0) shouldBe None
+    seq.indexOfO(0, 1) shouldBe 0
     seq.rotateRight(1) shouldBe Seq(2, 0, 1)
     seq.rotateLeft(1) shouldBe Seq(1, 2, 0)
     seq.startAt(1) shouldBe Seq(1, 2, 0)
@@ -39,6 +42,8 @@ class ScaladocExampleSpec extends AnyFlatSpec with should.Matchers {
     seq.isRotationOrReflectionOf(Seq(2, 0, 1)) shouldBe true
     Seq(0, 1, 2, 0, 1, 2).rotationalSymmetry shouldBe 2
     Seq(2, 1, 2, 2, 1, 2, 2, 1, 2, 2, 1, 2).symmetryIndices shouldBe List(0, 3, 6, 9)
+    Seq(0, 1, 2, 1).reflectionalSymmetryAxes shouldBe List((Vertex(0), Vertex(2)))
+    Seq(0, 0, 1, 1).reflectionalSymmetryAxes shouldBe List((Edge(0, 4), Edge(2, 4)))
     Seq(2, 1, 2, 2, 1, 2, 2, 1, 2, 2, 1, 2).symmetry shouldBe 4
   }
 

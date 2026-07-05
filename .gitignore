@@ -1,2 +1,15 @@
 *.class
 *.log
+
+# sbt / build
+target/
+.bsp/
+.bloop/
+.metals/
+
+# IDE
+.idea/
+.vscode/
+
+# local JMH result snapshots (see docs/benchmarks.md)
+benchmarks/*.json

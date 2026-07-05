@@ -1,7 +1,7 @@
 # **RingSeq**
 [![ring-seq Scala version support](https://index.scala-lang.org/scala-tessella/ring-seq/ring-seq/latest.svg?platform=jvm)](https://index.scala-lang.org/scala-tessella/ring-seq/ring-seq)
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.scala-tessella/ring-seq_3.svg?label=Maven%20Central)](https://central.sonatype.com/search?q=ring-seq)
-[![Scala.js](https://www.scala-js.org/assets/badges/scalajs-1.16.0.svg)](https://www.scala-js.org)
+[![Scala.js](https://www.scala-js.org/assets/badges/scalajs-1.21.0.svg)](https://www.scala-js.org)
 [![CI](https://github.com/scala-tessella/ring-seq/actions/workflows/ci.yml/badge.svg)](https://github.com/scala-tessella/ring-seq/actions/workflows/ci.yml)
 [![Scala Steward badge](https://img.shields.io/badge/Scala_Steward-helping-blue.svg?style=flat&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAQCAMAAAARSr4IAAAAVFBMVEUAAACHjojlOy5NWlrKzcYRKjGFjIbp293YycuLa3pYY2LSqql4f3pCUFTgSjNodYRmcXUsPD/NTTbjRS+2jomhgnzNc223cGvZS0HaSD0XLjbaSjElhIr+AAAAAXRSTlMAQObYZgAAAHlJREFUCNdNyosOwyAIhWHAQS1Vt7a77/3fcxxdmv0xwmckutAR1nkm4ggbyEcg/wWmlGLDAA3oL50xi6fk5ffZ3E2E3QfZDCcCN2YtbEWZt+Drc6u6rlqv7Uk0LdKqqr5rk2UCRXOk0vmQKGfc94nOJyQjouF9H/wCc9gECEYfONoAAAAASUVORK5CYII=)](https://scala-steward.org)
 
@@ -21,7 +21,7 @@ Zero runtime dependencies.
 Add the dependency to your `build.sbt`:
 
 ```scala
-libraryDependencies += "io.github.scala-tessella" %% "ring-seq" % "0.7.0"
+libraryDependencies += "io.github.scala-tessella" %% "ring-seq" % "0.8.0"
 // Use %%% instead of %% for Scala.js or Scala Native
 ```
 
@@ -55,6 +55,8 @@ Seq(0, 1, 0, 1).rotationalSymmetry          // 2
 |---|---|
 | `indexFrom(i)` | Normalize a circular index to `[0, n)` |
 | `applyO(i)` | Element at circular index |
+| `liftO(i)` | `Some(element)` at circular index, `None` if empty |
+| `indexOfO(elem, from)` | Circular index of the first occurrence of `elem` |
 
 ### [Rotation and reflection](https://scala-tessella.github.io/ring-seq/categories/rotation-reflection.html)
 
@@ -97,7 +99,7 @@ Seq(0, 1, 0, 1).rotationalSymmetry          // 2
 | `isRotationOf(that)` | Same elements, possibly rotated? |
 | `isReflectionOf(that)` | Same elements, possibly reflected? |
 | `isReversionOf(that)` | Same elements, possibly reversed? |
-| `isRotationOrReflection(that)` | Either of the above? |
+| `isRotationOrReflectionOf(that)` | Either of the above? |
 | `alignTo(that)` | `Some(k)` with `startAt(k) == that`, or `None` |
 | `hammingDistance(that)` | Positional mismatches (same size required) |
 | `minRotationalHammingDistance(that)` | Minimum distance over all rotations |
@@ -106,7 +108,7 @@ Seq(0, 1, 0, 1).rotationalSymmetry          // 2
 
 | Method | Description |
 |---|---|
-| `canonicalIndex` | Index of lex-smallest rotation (Booth's *O(n)*) |
+| `canonicalIndex` | Index of lex-smallest rotation (*O(n)* time, *O(1)* space) |
 | `canonical` | Lex-smallest rotation (necklace form) |
 | `bracelet` | Lex-smallest under rotation *and* reflection |
 

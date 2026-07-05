@@ -4,34 +4,35 @@ import scala.collection.{IndexedSeq, SeqOps}
 
 object NecklaceOps:
 
-  /** Booth's O(n) algorithm: starting index of the lexicographically smallest rotation. */
-  private[ring_seq] def leastRotationBooth[A](s: IndexedSeq[A])(using ord: Ordering[A]): Int =
-    val n               = s.length
-    val len             = 2 * n
-    val f               = Array.fill(len)(-1)
-    var k               = 0
-    var j               = 1
-    def at(idx: Int): A = s(idx % n)
-    while j < len do
-      val sj = at(j)
-      var i  = f(j - k - 1)
-      while i != -1 && !ord.equiv(sj, at(k + i + 1)) do
-        if ord.lt(sj, at(k + i + 1)) then k = j - i - 1
-        i = f(i)
-      if i == -1 && !ord.equiv(sj, at(k + i + 1)) then
-        if ord.lt(sj, at(k + i + 1)) then k = j
-        f(j - k) = -1
+  /** Two-pointer minimal-rotation algorithm: starting index of the lexicographically smallest rotation, in
+    * O(n) time and O(1) extra space.
+    *
+    * Maintains two candidate offsets `i` and `j` with a common matched prefix of length `k`; each mismatch
+    * eliminates `k + 1` candidates at once.
+    */
+  private[ring_seq] def leastRotation[A](s: IndexedSeq[A])(using ord: Ordering[A]): Int =
+    val n = s.length
+    var i = 0
+    var j = 1
+    var k = 0
+    while i < n && j < n && k < n do
+      val a = s((i + k) % n)
+      val b = s((j + k) % n)
+      if ord.equiv(a, b) then k += 1
       else
-        f(j - k) = i + 1
-      j += 1
-    k
+        if ord.gt(a, b) then i += k + 1
+        else j += k + 1
+        if i == j then j += 1
+        k = 0
+    math.min(i, j)
 
 /** Provides canonical-form operations for a `Seq` considered circular. */
 trait NecklaceOps extends ComparingOps:
 
   extension [A, CC[B] <: SeqOps[B, CC, CC[B]]](ring: CC[A])
 
-    /** The starting index of the lexicographically smallest rotation (Booth's algorithm, O(n)).
+    /** The starting index of the lexicographically smallest rotation (two-pointer minimal rotation, O(n)
+      * time, O(1) extra space).
       *
       * @return
       *   the index in `[0, ring.size)` such that `ring.startAt(canonicalIndex)` is the lex-smallest of all
@@ -44,7 +45,7 @@ trait NecklaceOps extends ComparingOps:
         val indexed: IndexedSeq[A] = ring match
           case is: IndexedSeq[A] => is
           case _                 => ring.toVector
-        NecklaceOps.leastRotationBooth(indexed)
+        NecklaceOps.leastRotation(indexed)
 
     /** The lexicographically smallest rotation of this circular sequence (necklace canonical form).
       *

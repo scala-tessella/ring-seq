@@ -4,6 +4,27 @@ All notable changes to this project are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- **`liftO(i)`** — the circular version of `lift`: `Some(element)` at any circular index, `None` only for an empty sequence. Fills the gap with the `get` accessors of ring-seq-rs and ring-seq-py.
+- **`indexOfO(elem, from)`** — the circular version of `indexOf`: the index of the first occurrence of an element, searching circularly from a circular index and wrapping past the end.
+- **`ExhaustiveSmallRingSpec`** — exhaustive reference test in the spirit of ring-seq-rs `tests/algebra.rs`: all 217 rings of length ≤ 4 over `{0, 1, 2}` and length 5–6 over `{0, 1}` are checked against naive, independently derived reference implementations of the symmetry and necklace operations (including the axis geometry of `reflectionalSymmetryAxes`, previously the least-tested method).
+- Scaladoc `@example` for `reflectionalSymmetryAxes`, now also asserted by `ScaladocExampleSpec`.
+
+### Changed
+
+- **`canonicalIndex` / `canonical` / `bracelet` now use the two-pointer minimal-rotation algorithm** instead of Booth's: same O(n) time and identical results, but O(1) extra space (no failure-array allocation). This aligns the implementation with ring-seq-rs 0.3.1 and ring-seq-py.
+- Scala 3 `sliceO` / `containsSliceO` parameter names aligned with the Scala 2.13 tree and the standard library (`until`, `that`); scaladoc `@param` tags now match the actual parameters.
+- `docs/runbook.md` renamed to `docs/benchmarks.md` — it documents the JMH benchmarks; the release runbook remains [`.github/RUNBOOK.md`](.github/RUNBOOK.md).
+
+### Fixed
+
+- README drift: the setup snippet now points to the latest release (was still `0.7.0`), the Scala.js badge shows `1.21.0` (was `1.16.0`), and the comparisons table lists `isRotationOrReflectionOf` under its real name.
+- Stale header comments in `ComparingBench` and `SlicingBench` that still described the pre-0.8.0 implementations (`minRotationalHammingDistance` allocating all rotations, `sliceO` folding with `++`).
+- `.gitignore` now covers sbt/IDE build directories (`target/`, `.bsp/`, `.idea/`, …) and local JMH result snapshots (`benchmarks/*.json`).
+
 ## [0.8.0] - 2026-04-20
 
 ### Added

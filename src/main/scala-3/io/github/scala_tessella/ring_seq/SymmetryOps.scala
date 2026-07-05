@@ -91,6 +91,11 @@ trait SymmetryOps extends TransformingOps:
       *
       * @return
       *   A list where each pair represents the two points on the cycle where the axis passes.
+      * @example
+      *   {{{
+      *   Seq(0, 1, 2, 1).reflectionalSymmetryAxes // List((Vertex(0), Vertex(2)))
+      *   Seq(0, 0, 1, 1).reflectionalSymmetryAxes // List((Edge(0, 1), Edge(2, 3)))
+      *   }}}
       */
     def reflectionalSymmetryAxes: List[(AxisLocation, AxisLocation)] =
       val n = ring.size

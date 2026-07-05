@@ -10,7 +10,8 @@ object NecklaceOps {
       extends Any
       with ComparingOps.ComparingDecorators[A, CC] {
 
-    /** The starting index of the lexicographically smallest rotation (Booth's algorithm, O(n)).
+    /** The starting index of the lexicographically smallest rotation (two-pointer minimal rotation, O(n)
+      * time, O(1) extra space).
       *
       * @return
       *   the index in `[0, ring.size)` such that `ring.startAt(canonicalIndex)` is the lex-smallest of all
@@ -24,7 +25,7 @@ object NecklaceOps {
           case is: IndexedSeq[A] => is
           case _                 => ring.toVector
         }
-        NecklaceOps.leastRotationBooth(indexed)
+        NecklaceOps.leastRotation(indexed)
       }
     }
 
@@ -56,29 +57,29 @@ object NecklaceOps {
     }
   }
 
-  private[ring_seq] def leastRotationBooth[A](s: IndexedSeq[A])(implicit ord: Ordering[A]): Int = {
-    val n               = s.length
-    val len             = 2 * n
-    val f               = Array.fill(len)(-1)
-    var k               = 0
-    var j               = 1
-    def at(idx: Int): A = s(idx % n)
-    while (j < len) {
-      val sj = at(j)
-      var i  = f(j - k - 1)
-      while (i != -1 && !ord.equiv(sj, at(k + i + 1))) {
-        if (ord.lt(sj, at(k + i + 1))) k = j - i - 1
-        i = f(i)
+  /** Two-pointer minimal-rotation algorithm: starting index of the lexicographically smallest rotation, in
+    * O(n) time and O(1) extra space.
+    *
+    * Maintains two candidate offsets `i` and `j` with a common matched prefix of length `k`; each mismatch
+    * eliminates `k + 1` candidates at once.
+    */
+  private[ring_seq] def leastRotation[A](s: IndexedSeq[A])(implicit ord: Ordering[A]): Int = {
+    val n = s.length
+    var i = 0
+    var j = 1
+    var k = 0
+    while (i < n && j < n && k < n) {
+      val a = s((i + k) % n)
+      val b = s((j + k) % n)
+      if (ord.equiv(a, b)) k += 1
+      else {
+        if (ord.gt(a, b)) i += k + 1
+        else j += k + 1
+        if (i == j) j += 1
+        k = 0
       }
-      if (i == -1 && !ord.equiv(sj, at(k + i + 1))) {
-        if (ord.lt(sj, at(k + i + 1))) k = j
-        f(j - k) = -1
-      } else {
-        f(j - k) = i + 1
-      }
-      j += 1
     }
-    k
+    math.min(i, j)
   }
 
   private[ring_seq] def canonicalOf[A, CC[B] <: SeqOps[B, CC, CC[B]]](
@@ -91,7 +92,7 @@ object NecklaceOps {
         case is: IndexedSeq[A] => is
         case _                 => seq.toVector
       }
-      val k                      = leastRotationBooth(indexed)
+      val k                      = leastRotation(indexed)
       if (k == 0) seq else seq.drop(k) ++ seq.take(k)
     }
   }

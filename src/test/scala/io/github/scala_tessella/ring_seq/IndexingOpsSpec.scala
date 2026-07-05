@@ -37,6 +37,34 @@ class IndexingOpsSpec extends AnyFlatSpec with TestHelper with should.Matchers {
   "An empty sequence" must "have no indexed elements" in
     assertThrows[IndexOutOfBoundsException](Seq.empty.apply(0))
 
+  "A non-empty circular sequence" must "optionally return an element at any circular index" in {
+    "ABCDE".liftO(-1) shouldEqual Some('E')
+    "ABCDE".liftO(5) shouldEqual Some('A')
+  }
+
+  "An empty circular sequence" must "optionally return no element" in {
+    Seq.empty[Int].liftO(0) shouldEqual None
+  }
+
+  "A non-empty circular sequence" must "find the circular index of an element" in {
+    "ABCDE".indexOfO('A') shouldEqual 0
+    "ABCDE".indexOfO('E') shouldEqual 4
+  }
+
+  it must "find an element circularly, wrapping past the end" in {
+    "ABCDE".indexOfO('A', 1) shouldEqual 0
+    "ABCDE".indexOfO('C', -2) shouldEqual 2
+  }
+
+  it must "not find an element that is absent" in {
+    "ABCDE".indexOfO('X') shouldEqual -1
+    "ABCDE".indexOfO('X', 3) shouldEqual -1
+  }
+
+  "An empty circular sequence" must "find no element" in {
+    Seq.empty[Int].indexOfO(0) shouldEqual -1
+  }
+
   "Any non empty circular sequence" must "return an element for any index" in {
     val elems                         = "ABC"
     val gen: Gen[(Seq[Char], IndexO)] =
