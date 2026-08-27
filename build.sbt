@@ -3,7 +3,7 @@ enablePlugins(SiteScaladocPlugin)
 enablePlugins(GhpagesPlugin)
 
 ThisBuild / organization       := "io.github.scala-tessella"
-ThisBuild / crossScalaVersions := Seq("3.3.7", "2.13.18")
+ThisBuild / crossScalaVersions := Seq("3.3.8", "2.13.18")
 ThisBuild / scalaVersion       := crossScalaVersions.value.head
 ThisBuild / semanticdbEnabled  := true
 ThisBuild / semanticdbVersion  := scalafixSemanticdb.revision
@@ -74,6 +74,6 @@ lazy val benchmarks =
     .settings(
       name               := "ring-seq-benchmarks",
       publish / skip     := true,
-      crossScalaVersions := Seq("3.3.7"),
-      scalaVersion       := "3.3.7"
+      crossScalaVersions := Seq("3.3.8"),
+      scalaVersion       := "3.3.8"
     )
